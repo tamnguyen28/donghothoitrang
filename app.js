@@ -4,7 +4,7 @@ const conn = require('./models/config/connect');
 //Init app
 const app = express();
 
-// const route = require('./routes');
+const route = require('./routes');
 
 //Connect to DB
 conn.connect();
@@ -16,13 +16,8 @@ app.set('view engine', 'ejs');
 //Set public folder
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', function(req,res){
-    res.render('./layouts/main',{
-        title: 'donghothoitrang',
-    });
-})
 //Routes init
-// route(app);
+route(app);
 
 //Start the server
 const port = 3000;
