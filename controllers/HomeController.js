@@ -1,7 +1,7 @@
 class HomeController {
     //[GET] /
     index(req, res, next) {
-        res.render('./layouts/main',{
+        res.render('client/home/index',{
             title: 'donghothoitrang',
         });
     }
