@@ -1,13 +1,10 @@
 const express = require('express');
 const path = require('path');
-const conn = require('./models/config/connect');
+// const conn = require('./models/config/connect');
 //Init app
 const app = express();
 
 const route = require('./routes');
-
-//Connect to DB
-// conn.connect();
 
 //View engine setup
 app.set('views','./views');
@@ -25,3 +22,6 @@ app.listen(process.env.PORT || port, function(){
 
 //Routes init
 route(app);
+
+//Connect to DB
+// conn.connect();
