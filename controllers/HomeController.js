@@ -1,15 +1,13 @@
 const HomeModel = require('../models/client/HomeModel');
-const conn = require('../models/config/connect');
+// const conn = require('../models/config/connect');
 
 class HomeController {
     //[GET] /
     index(req, res) {
         let listSP = [];
         HomeModel.loadSanPham().then(result =>{
-            listSP = result;
-            res.render('client/home/index', {
-                title: 'donghothoitrang',
-                index: listSP})
+            // listSP = result;
+            res.render('client/home/index') 
         }).catch(err =>{
             res.render('client/home/index');
         });
@@ -18,3 +16,7 @@ class HomeController {
 }
 
 module.exports = new HomeController();
+
+// {
+//     title: 'donghothoitrang',
+//     index: listSP}
