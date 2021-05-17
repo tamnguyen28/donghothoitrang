@@ -64,12 +64,11 @@
                             <div class="tab-pane active" id="newarrival">
                                 <div class="tab-active owl-carousel">
                                     <!-- single-product-start -->
-                                    
+                                    <% index.forEach(function(sp){ %>
                                         <div class="product-wrapper">
                                             <div class="product-img">
-                                                <a href="#">
-                                                   
-                                                    <img src="client/img/product/" alt="book"
+                                                <a href="#">                                            
+                                                    <img src="client/img/product/<%= sp.hinhanh %>" alt="book"
                                                         class="primary" />
                                                 </a>
                                                 <div class="quick-view">
@@ -95,12 +94,12 @@
                                                     </ul>
                                                 </div>
                                                 <h4><a href="#">
-                                                        
+                                                        <%= sp.tensp %>
                                                     </a></h4>
                                                 <div class="product-price">
                                                     <ul>
                                                         <li>
-                                                            
+                                                            <%= sp.giatien %>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -118,7 +117,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    
+                                    <% }); %>
                                     <!-- single-product-end -->    
                                 </div>
                             </div>
