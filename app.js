@@ -4,7 +4,7 @@ const path = require('path');
 //Init app
 const app = express();
 
-const route = require('./routes');
+const route = require('./routes/index');
 
 //View engine setup
 app.set('views','./views');
