@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/adminhead'); -%>
+<body>
+<section id="container">
+<%- include('../partials/adminheader'); -%>
+<%- include('../partials/adminleft'); -%>
+<!--main content start-->
+<section id="main-content">
+	<section class="wrapper">
+		   <div class="clearfix">
+            <div class="table-agile-info">
+                <div class="panel panel-default">
+                   <div class="panel-heading">
+                    SẢN PHẨM
+                   </div>
+                   <div>
+                    
+                     <table class="table" ui-jq="footable" ui-options="{
+                       &quot;paging&quot;: {
+                         &quot;enabled&quot;: true
+                       },
+                       &quot;filtering&quot;: {
+                         &quot;enabled&quot;: true
+                       },
+                       &quot;sorting&quot;: {
+                         &quot;enabled&quot;: true
+                       }}">
+                      
+                       <thead>
+                         <tr>
+                           <th data-breakpoints="xs">ID</th>
+                           <th>Tên sản phẩm</th>
+                           <th>Giá tiền</th>
+                           <th>Trạng thái</th>
+                           <th>Hình ảnh</th>
+                           <td><a href="admin-themsanpham.php">Thêm sản phẩm</a></td>
+                         </tr>
+                       </thead>
+                       <tbody>
+                        <% sanpham.forEach(function(sp){ %>
+                         <tr data-expanded="true">
+                           <td><%= sp.masp %></td>
+                           <td><%= sp.tensp %></td>
+                           <td><%= sp.giatien %></td>
+                           <td><%= sp.trangthai %></td>
+                           <td><img src="client/img/product/<%= sp.hinhanh %>"></td>
+                           <td><a href="admin-capnhatsanpham.php?>">Cập nhật</a> || <a href="?xoa=<?php echo $row['ID']?>">Xóa</a></td>
+                         </tr>
+                        <% }); %>
+                       </tbody>
+                     </table>
+                   
+                   </div>
+                 </div>
+               </div>
+         </div>
+</section>
+<%- include('../partials/adminfooter'); -%>
+</section>
+<!--main content end-->
+</section>
+<%- include('../partials/adminscript_bottom'); -%>
+</body>
+</html>
+
