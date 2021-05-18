@@ -22,6 +22,3 @@ app.listen(process.env.PORT || port, function(){
 
 //Routes init
 route(app);
-
-//Connect to DB
-// conn.connect();
