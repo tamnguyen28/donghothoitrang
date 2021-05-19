@@ -6,23 +6,43 @@ class HomeController {
     let listSP = [];
     homeModel.loadSanPham().then((result) => {
         listSP = result;
-        homeModel.loadSanPhamDealhot().then(resultDH => {
-            let listSPDealHost = resultDH;  
-            //viet them o day ne
-            //giong nhu loadsanphamdealhot a
-            res.render("client/home/index", {
-                title: "donghothoitrang",
-                indexdealhost: listSPDealHost,
-                index: listSP,
+      homeModel.loadSanPhamDealhot().then((resultDH) => {
+        let listSPDealHot = resultDH;
+        homeModel.loadSanPhamFeatured().then((resultFT) => {
+          let listSPFeatured = resultFT;
+          homeModel.loadSanPhamDrew().then((resultDw) => {
+            let listSPDrew = resultDw;
+            homeModel.loadSanPhamWatch().then((resultW) => {
+              let listWatch = resultW;
+              homeModel.loadSanPhamLatest().then((resultLatest) => {
+                let listLatest = resultLatest;
+                res.render("client/home/index", {
+                  title: "donghothoitrang",
+                  indexlatest: listLatest,
+                  indexwatch: listWatch,
+                  indexdrew: listSPDrew,
+                  indexfeature: listSPFeatured,
+                  indexdealhot: listSPDealHot,
+                  index: listSP,
+                });
+              })
+              
+            }).catch((error) => {
+              console.log(err);
             });
-        }).catch(err => {
+          }).catch((err) => {
             console.log(err);
+          });
+        }).catch((err) => {
+          console.log(err);
         });
-      })
-      .catch((err) => {
+      }).catch((err) => {
         console.log(err);
-        res.render("client/home/index");
       });
+    }).catch((err) => {
+      console.log(err);
+      res.render("client/home/index");
+    });
   }
 }
 
