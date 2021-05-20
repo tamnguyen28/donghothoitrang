@@ -34,7 +34,8 @@
                            <th>Giá tiền</th>
                            <th>Trạng thái</th>
                            <th>Hình ảnh</th>
-                           <td><a href="admin-themsanpham.php">Thêm sản phẩm</a></td>
+                           <th>Thương hiệu</th>
+                           <td><a href="/admin/sanpham/create">Thêm sản phẩm</a></td>
                          </tr>
                        </thead>
                        <tbody>
@@ -45,7 +46,8 @@
                            <td><%= sp.giatien %></td>
                            <td><%= sp.trangthai %></td>
                            <td><img src="client/img/product/<%= sp.hinhanh %>"></td>
-                           <td><a href="admin-capnhatsanpham.php?>">Cập nhật</a> || <a href="?xoa=<?php echo $row['ID']?>">Xóa</a></td>
+                           <td><%= sp.id_math %></td>
+                           <td><a href="/admin/sanpham/themsanpham">Cập nhật</a> || <a href="?xoa=<?php echo $row['ID']?>">Xóa</a></td>
                          </tr>
                         <% }); %>
                        </tbody>
