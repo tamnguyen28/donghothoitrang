@@ -19,7 +19,7 @@ class DangKyModel{
                 if(err){
                     reject(err);
                 }else{
-                    if(result.insertId){
+                    if(result.insertId){//insertId là cái id mới add vào(khóa chính tự tăng theo makh)
                         resolve(true)
                     }else{
                         reject(false);

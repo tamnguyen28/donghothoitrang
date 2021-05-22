@@ -27,7 +27,7 @@ class HomeController {
                 });
               })
               
-            }).catch((error) => {
+            }).catch((err) => {
               console.log(err);
             });
           }).catch((err) => {
