@@ -1,6 +1,7 @@
 const homeRouter = require('./home');
 const dangkyRoute = require('./dangky');
 const thuonghieuRoute = require('./thuonghieu');
+const dangnhapRoute = require('./dangnhap');
 
 const adhomeRouter = require('./adhome');
 const adsanphamRoute = require('./adsanpham');
@@ -15,6 +16,7 @@ function route(app){
 
     //client
     app.use('/thuonghieu',thuonghieuRoute);
+    app.use('/dangnhap',dangnhapRoute);
     app.use('/dangky',dangkyRoute);
     app.use('/', homeRouter);
     

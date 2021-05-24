@@ -14,7 +14,6 @@ class DangKyController {
             taikhoan: req.body.username,
             matkhau:req.body.password,
         };
-        console.log(khachhang);
         dangkyModel.dangky(khachhang).then(function(result){
             res.redirect('/');
         }).catch(function(err){
