@@ -13,14 +13,13 @@ const donhangRouter = require('./donhang');
 const timkiemRouter = require('./timkiem');
 
 const adhomeRouter = require('./adhome');
-const adsanphamRoute = require('./adsanpham');
-const addonhangRoute = require('./addonhang');
+const adsanphamRouter = require('./adsanpham');
+
 
 
 function route(app){
 
-    app.use('/admin/donhang',addonhangRoute);
-    app.use('/admin/sanpham',adsanphamRoute);
+    app.use('/admin/sanpham',adsanphamRouter);
     app.use('/admin', adhomeRouter);
 
     //client
