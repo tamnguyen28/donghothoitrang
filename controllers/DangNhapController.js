@@ -13,6 +13,7 @@ class DangNhapController {
         dangnhapModel.dangnhap(tendangnhap, matkhau).then(function (result){
             res.redirect('/');
         }).catch(function (err){
+            console.log(err);
             res.render('client/dangnhap/dangnhap',
             {title: 'Đăng nhập', message:'Đăng nhập thất bại'},
             );

@@ -1525,7 +1525,8 @@ body {
     border-color: transparent transparent #eeb900 #eeb900;
 }
 .tab-content > .tab-pane {
-    display: block;
+    display: flex;
+    flex-wrap: wrap;
     overflow: hidden;
     height: 0;
 }
@@ -3969,6 +3970,12 @@ nav.menu .cr-dropdown ul {
     font-size: 14px;
     line-height: 32px;
 }
+
+.donghonam{
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .pagination-area .page-number {
     float: right;
 }
