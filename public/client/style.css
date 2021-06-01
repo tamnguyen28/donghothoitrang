@@ -1245,10 +1245,10 @@ body {
     visibility: visible;
 }
 .product-wrapper-container{
-    /* display: -webkit-inline-box;
+    display: -webkit-inline-box;
     width: 15%;
     margin-top: 20px;
-    margin-bottom: 50px; */
+    margin-bottom: 50px;
     margin-bottom: 50px;
     display: flex;
     flex-wrap: wrap;
@@ -1259,6 +1259,12 @@ body {
     overflow: hidden;
     width: 100%;
 }
+.product-wrappertranmark{
+    display: block;
+    margin-left: 30px;
+    width: 100%;
+    justify-content:center;
+}
 .product-wrapper-tk {
     position: relative;
     overflow: hidden;
@@ -1268,10 +1274,21 @@ body {
 .product-wrapper-tk img{
     height:260px ;
 }
+.product-imgtranmarks{
+    display: flex;
+    width: 100%;
+    margin-left: 10px;
+    justify-content:center;
+}
+
+.img-product{
+    width: 150px ;
+    height:200px ;
+}
+
 .product-img{
     width: 75%;
-},
-
+}
 .most-product-img {
     position: relative;
     overflow: hidden;
@@ -1298,6 +1315,13 @@ body {
 .product-img a img {
     width: 100%;
 }
+
+/* .product-img-tranmark{
+    display:flex;
+    justify-content:center;
+    width: 80%;
+} */
+
 .quick-view {
     left: 0;
     position: absolute;

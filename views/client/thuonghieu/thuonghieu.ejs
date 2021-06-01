@@ -49,10 +49,14 @@
                                                     </div>
                                                     <div class="single-blog-post">
                                                         <div class="blog-img blog-slider-active owl-carousel mb-30">
-                                                            <a href="#"><img src="client/img/thuonghieu/banner/2.jpg" alt="blog" /></a>
-                                                            <a href="#"><img src="client/img/thuonghieu/banner/3.jpg" alt="blog" /></a>
-                                                            <a href="#"><img src="client/img/thuonghieu/banner/4.jpg" alt="blog" /></a>
-                                                            <a href="#"><img src="client/img/thuonghieu/banner/5.jpg" alt="blog" /></a>
+                                                            <a href="#"><img src="client/img/thuonghieu/banner/2.jpg"
+                                                                    alt="blog" /></a>
+                                                            <a href="#"><img src="client/img/thuonghieu/banner/3.jpg"
+                                                                    alt="blog" /></a>
+                                                            <a href="#"><img src="client/img/thuonghieu/banner/4.jpg"
+                                                                    alt="blog" /></a>
+                                                            <a href="#"><img src="client/img/thuonghieu/banner/5.jpg"
+                                                                    alt="blog" /></a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -67,147 +71,78 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="tab-active owl-carousel watch">
-                                                            <% for(let i = 0; i < indexSP.length; i+=2){ %>
-                                                                <% if (i + 1 < indexSP.length ){ %>
-                                                            <div class="tab-total">
-                                                                <!-- single-product-start -->
-                                                                <div class="product-wrapper mb-40">
-                                                                    <div class="product-img">
-                                                                        <a href="#">
-                                                                            <img src="client/img/product/<%= indexSP[i].hinhanh %>" alt="book"
-                                                                                class="primary" />
-                                                                        </a>
-                                                                        <div class="quick-view">
-                                                                            <a class="action-view" href="#"
-                                                                                data-target="#productModal"
-                                                                                data-toggle="modal" title="Quick View">
-                                                                                <i class="fa fa-search-plus"></i>
-                                                                            </a>
+                                                        <div style="width: 881px;">
+                                                            <div id="productTranmark"  style="display:flex; flex-wrap: wrap;">
+                                                                <% for(let i=0; i < indexSP.length; i++){ %>
+                                                                   
+                                                                        <div class="tab-total" style="width:200px;">
+                                                                            <!-- single-product-start -->
+                                                                            <div class="product-wrappertranmark mb-40">
+                                                                                <div class="product-imgtranmarks">
+                                                                                    <a href="#">
+                                                                                        <img src="client/img/product/<%= indexSP[i].hinhanh %>" alt="book" class="primary img-product" />
+                                                                                    </a>
+                                                                                    <div class="quick-view">
+                                                                                        <a class="action-view" href="#" data-target="#productModal" data-toggle="modal"
+                                                                                            title="Quick View">
+                                                                                            <i class="fa fa-search-plus"></i>
+                                                                                        </a>
+                                                                                    </div>
+                                                                                    <div class="product-flag">
+                                                                                        <ul>
+                                                                                            <li><span class="sale">new</span> </li>
+                                                                                            <li><span class="discount-percentage">-5%</span>
+                                                                                            </li>
+                                                                                        </ul>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="product-details text-center">
+                                                                                    <div class="product-rating">
+                                                                                        <ul>
+                                                                                            <li><a href="#"><i class="fa fa-star"></i></a>
+                                                                                            </li>
+                                                                                            <li><a href="#"><i class="fa fa-star"></i></a>
+                                                                                            </li>
+                                                                                            <li><a href="#"><i class="fa fa-star"></i></a>
+                                                                                            </li>
+                                                                                            <li><a href="#"><i class="fa fa-star"></i></a>
+                                                                                            </li>
+                                                                                            <li><a href="#"><i class="fa fa-star"></i></a>
+                                                                                            </li>
+                                                                                        </ul>
+                                                                                    </div>
+                                                                                    <h4><a href="#">
+                                                                                            <%= indexSP[i].tensp%>
+                                                                                        </a></h4>
+                                                                                    <div class="product-price">
+                                                                                        <ul>
+                                                                                            <li>
+                                                                                                <%= indexSP[i].giatien%>
+                                                                                            </li>
+                                                                                        </ul>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="product-link">
+                                                                                    <div class="product-button">
+                                                                                        <a href="#" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add
+                                                                                            to cart</a>
+                                                                                    </div>
+                                                                                    <div class="add-to-link">
+                                                                                        <ul>
+                                                                                            <li><a href="product-details.html" title="Details"><i class="fa fa-external-link"></i></a>
+                                                                                            </li>
+                                                                                        </ul>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <!-- single-product-end -->
+                                                                            <!-- single-product-start -->
+                                                                            <!-- single-product-end -->
                                                                         </div>
-                                                                        <div class="product-flag">
-                                                                            <ul>
-                                                                                <li><span class="sale">new</span> </li>
-                                                                                <li><span
-                                                                                        class="discount-percentage">-5%</span>
-                                                                                </li>
-                                                                            </ul>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="product-details text-center">
-                                                                        <div class="product-rating">
-                                                                            <ul>
-                                                                                <li><a href="#"><i
-                                                                                            class="fa fa-star"></i></a>
-                                                                                </li>
-                                                                                <li><a href="#"><i
-                                                                                            class="fa fa-star"></i></a>
-                                                                                </li>
-                                                                                <li><a href="#"><i
-                                                                                            class="fa fa-star"></i></a>
-                                                                                </li>
-                                                                                <li><a href="#"><i
-                                                                                            class="fa fa-star"></i></a>
-                                                                                </li>
-                                                                                <li><a href="#"><i
-                                                                                            class="fa fa-star"></i></a>
-                                                                                </li>
-                                                                            </ul>
-                                                                        </div>
-                                                                        <h4><a href="#"><%= indexSP[i].tensp%></a></h4>
-                                                                        <div class="product-price">
-                                                                            <ul>
-                                                                                <li><%= indexSP[i].giatien%></li>
-                                                                            </ul>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="product-link">
-                                                                        <div class="product-button">
-                                                                            <a href="#" title="Add to cart"><i
-                                                                                    class="fa fa-shopping-cart"></i>Add
-                                                                                to cart</a>
-                                                                        </div>
-                                                                        <div class="add-to-link">
-                                                                            <ul>
-                                                                                <li><a href="product-details.html"
-                                                                                        title="Details"><i
-                                                                                            class="fa fa-external-link"></i></a>
-                                                                                </li>
-                                                                            </ul>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <!-- single-product-end -->
-                                                                <!-- single-product-start -->
-                                                                <div class="product-wrapper">
-                                                                    <div class="product-img">
-                                                                        <a href="#">
-                                                                            <img src="client/img/product/<%= indexSP[i+1].hinhanh %>" alt="book"
-                                                                                class="primary" />
-                                                                        </a>
-                                                                        <div class="quick-view">
-                                                                            <a class="action-view" href="#"
-                                                                                data-target="#productModal"
-                                                                                data-toggle="modal" title="Quick View">
-                                                                                <i class="fa fa-search-plus"></i>
-                                                                            </a>
-                                                                        </div>
-                                                                        <div class="product-flag">
-                                                                            <ul>
-                                                                                <li><span class="sale">new</span> <br>
-                                                                                </li>
-                                                                            </ul>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="product-details text-center">
-                                                                        <div class="product-rating">
-                                                                            <ul>
-                                                                                <li><a href="#"><i
-                                                                                            class="fa fa-star"></i></a>
-                                                                                </li>
-                                                                                <li><a href="#"><i
-                                                                                            class="fa fa-star"></i></a>
-                                                                                </li>
-                                                                                <li><a href="#"><i
-                                                                                            class="fa fa-star"></i></a>
-                                                                                </li>
-                                                                                <li><a href="#"><i
-                                                                                            class="fa fa-star"></i></a>
-                                                                                </li>
-                                                                                <li><a href="#"><i
-                                                                                            class="fa fa-star"></i></a>
-                                                                                </li>
-                                                                            </ul>
-                                                                        </div>
-                                                                        <h4><a href="#"><%= indexSP[i+1].tensp%></a></h4>
-                                                                        <div class="product-price">
-                                                                            <ul>
-                                                                                <li><%= indexSP[i+1].giatien%></li>
-                                                                                <li class="old-price">$36.00</li>
-                                                                            </ul>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="product-link">
-                                                                        <div class="product-button">
-                                                                            <a href="#" title="Add to cart"><i
-                                                                                    class="fa fa-shopping-cart"></i>Add
-                                                                                to cart</a>
-                                                                        </div>
-                                                                        <div class="add-to-link">
-                                                                            <ul>
-                                                                                <li><a href="product-details.html"
-                                                                                        title="Details"><i
-                                                                                            class="fa fa-external-link"></i></a>
-                                                                                </li>
-                                                                            </ul>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <!-- single-product-end -->
+                                                                 
+                                                             <% } %>
                                                             </div>
-                                                            <% } %> 
-                                                            <% } %> 
-                                                        </div>
+                                                        </div> 
                                                     </div>
                                                 </div>
                                                 <!-- new-book-area-end -->
@@ -216,7 +151,8 @@
                                         <!--DONGHONAM-->
                                         <div class="product-img">
                                             <a href="#">
-                                                <img src="client/img/thuonghieu/banner/1.jpg" alt="book" class="primary" />
+                                                <img src="client/img/thuonghieu/banner/1.jpg" alt="book"
+                                                    class="primary" />
                                             </a>
                                         </div>
                                     </div>
@@ -226,8 +162,113 @@
                 </div>
                 <!-- blog-main-area-end -->
 
-            <%- include ('../partials/footer'); -%>
+                <%- include ('../partials/footer'); -%>
         </div>
+        <script>
+            // function getProductByProviderId(idproduct) {
+            //     $.ajax({
+            //         method: "GET",
+            //         url: '/thuonghieu/getproductbytranmarkid',
+            //         data: {
+            //             id: idproduct
+            //         },
+            //         success: function (data) {
+
+            //             $('#productTranmark').html('')
+
+            //             if (data && data.length != 0) {
+            //                 let sl = data.length;
+            //                 console.log(data);
+            //                 for(let i = 0; i < sl; i++) {
+                                
+            //                         $('#productTranmark').html( $('#productTranmark').html() +
+            //                             ` <div class="tab-total">
+            //                                 <!-- single-product-start -->
+            //                                 <div class="product-wrapper mb-10">
+            //                                     <div class="product-img">
+            //                                         <a href="#">
+            //                                         <img src="client/img/product/${data[i].hinhanh}"
+            //                                             alt="book" class="primary" width="250"  />
+            //                                         </a>
+            //                                         <div class="quick-view">
+            //                                             <a class="action-view" href="#"
+            //                                                data-target="#productModal"
+            //                                                data-toggle="modal"
+            //                                                title="Quick View">
+            //                                                <i class="fa fa-search-plus"></i>
+            //                                             </a>
+            //                                         </div>
+            //                                         <div class="product-flag">
+            //                                             <ul>
+            //                                             <li><span
+            //                                                 class="sale">new</span>
+            //                                             </li>
+            //                                             <li><span
+            //                                                 class="discount-percentage">-5%</span>
+            //                                             </li>
+            //                                             </ul>
+            //                                         </div>
+            //                                     </div>
+            //                                     <div class="product-details text-center">
+            //                                         <div class="product-rating">
+            //                                             <ul>
+            //                                             <li><a href="#"><i
+            //                                                 class="fa fa-star"></i></a>
+            //                                             </li>
+            //                                             <li><a href="#"><i
+            //                                                 class="fa fa-star"></i></a>
+            //                                             </li>
+            //                                             <li><a href="#"><i
+            //                                                 class="fa fa-star"></i></a>
+            //                                             </li>
+            //                                             <li><a href="#"><i
+            //                                                 class="fa fa-star"></i></a>
+            //                                             </li>
+            //                                             <li><a href="#"><i
+            //                                                 class="fa fa-star"></i></a>
+            //                                             </li>
+            //                                             </ul>
+            //                                         </div>
+            //                                         <h4><a href="#">
+            //                                             ${data[i].tensp}
+            //                                             </a>
+            //                                         </h4>
+            //                                         <div class="product-price">
+            //                                             <ul>
+            //                                             <li>
+            //                                                 ${data[i].giatien}
+            //                                             </li>
+            //                                             </ul>
+            //                                         </div>
+            //                                     </div>
+            //                                     <div class="product-link">
+            //                                         <div class="product-button">
+            //                                             <a href="#" title="Add to cart"><i
+            //                                             class="fa fa-shopping-cart"></i>Add
+            //                                             to cart</a>
+            //                                         </div>
+            //                                         <div class="add-to-link">
+            //                                             <ul>
+            //                                             <li><a href="product-details.html"
+            //                                                 title="Details"><i
+            //                                                 class="fa fa-external-link"></i></a>
+            //                                             </li>
+            //                                             </ul>
+            //                                         </div>
+            //                                     </div>
+            //                                 </div>
+            //                                 <!-- single-product-end -->
+            //                             </div>`
+            //                         )
+            //                 }
+            //             }
+            //         },
+            //         error: function (error) {
+
+            //         }
+            //     })
+            // }
+        </script>
     </body>
 
 </html>

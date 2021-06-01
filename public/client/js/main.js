@@ -34,7 +34,7 @@
         autoplay: false,
         nav: true,
         dots: true,
-        loop: true,
+        loop: false,
         navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
         responsive: {
             0: {
@@ -52,7 +52,7 @@
     
     /* Quickview-active active */
     $('.quickview-active').owlCarousel({
-        loop: true,
+        loop: false,
         autoplay: false,
         autoplayTimeout: 5000,
         navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
