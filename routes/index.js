@@ -4,6 +4,9 @@ const thuonghieuRoute = require('./thuonghieu');
 const dangnhapRoute = require('./dangnhap');
 const donghonamRoute = require('./donghonam');
 const donghonuRoute = require('./donghonu');
+const tintucRoute = require('./tintuc');
+const lienheRoute = require('./lienhe');
+const khuyenmailRoute = require('./khuyenmai');
 
 const adhomeRouter = require('./adhome');
 const adsanphamRoute = require('./adsanpham');
@@ -17,6 +20,9 @@ function route(app){
     app.use('/admin', adhomeRouter);
 
     //client
+    app.use('/khuyenmai',khuyenmailRoute);
+    app.use('/lienhe',lienheRoute);
+    app.use('/tintuc',tintucRoute);
     app.use('/donghonu',donghonuRoute);
     app.use('/donghonam',donghonamRoute);
     app.use('/thuonghieu',thuonghieuRoute);

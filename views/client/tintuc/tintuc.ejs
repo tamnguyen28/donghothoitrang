@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include ('../partials/head'); -%>
+
+    <body>
+        <div class="app">
+            <%- include ('../partials/header'); -%>
+            <br>
+    <br>
+    <!-- about-main-area-start -->
+    <div class="about-main-area mb-70">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <% indextintuc.forEach(function(sp){ %>
+                    <div class="about-img">
+                        <input type="text" name="text" value="<%= sp.tgtao %>"><br><br>
+                        <a href="#"><img src="client/img/tintuc/<%= sp.hinhanh %>" alt="man" /></a><br><br>
+                        <h3><span><%= sp.tieude %></span></h3>
+                        <p><%= sp.noidung %></p><hr><hr>
+                    </div>
+                    <% }) %>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- about-main-area-end -->
+    <!-- team-area-start -->
+    <div class="team-area ptb-70">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="team-title text-center mb-50">
+                        <h2>Sản phẩm thu hút giới trẻ</h2>
+                    </div>
+                </div>
+                    <% indextt.forEach(function(sp){ %>
+                    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
+                        <div class="single-team">
+                            <div class="team-img-area">
+                                <div class="team-img">
+                                    <a href=""><img src="client/img/product/<%= sp.hinhanh %>" alt="man" /></a>
+                                </div>
+                                <div class="team-link">
+                                    <ul>
+                                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="team-content text-center">
+                                <h3><%= sp.tensp %></h3>
+                                <span>Class Master</span>
+                            </div>
+                        </div>
+                    </div>
+                    <% }) %>
+            </div>
+        </div>
+    </div>
+    <!-- team-area-end -->
+    <!-- skill-area-start -->
+    <div class="skill-area mb-70">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="skill-progress">
+                        <div class="progress">
+                            <div class="skill-title">Chiến lược 79%</div>
+                            <div class="progress-bar wow fadeInLeft" data-wow-delay="0.2s" role="progressbar" style="width: 79%;">
+                            </div>
+                        </div>
+                        <div class="progress">
+                            <div class="skill-title">Tiếp thị 96%</div>
+                            <div class="progress-bar wow fadeInLeft" data-wow-delay="0.3s" role="progressbar" style="width: 96%;">
+                            </div>
+                        </div>
+                        <div class="progress">
+                            <div class="skill-title">Quan tâm 65%</div>
+                            <div class="progress-bar wow fadeInLeft" data-wow-delay="0.4s" role="progressbar" style="width: 65%;">
+                            </div>
+                        </div>
+                        <div class="progress mrg-none-xs">
+                            <div class="skill-title">THIẾT KẾ UI/UX 92%</div>
+                            <div class="progress-bar wow fadeInLeft" data-wow-delay="0.3s" role="progressbar" style="width: 89%;">
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#">
+                        <img src="client/img/banner/8.jpg" alt="newarrival" class="primary" />
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- skill-area-end -->
+    
+            <%- include ('../partials/footer'); -%>
+        </div>
+    </body>
+
+</html>

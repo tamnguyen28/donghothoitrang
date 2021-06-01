@@ -1945,7 +1945,7 @@ body {
 /*----------------------------------------*/
 
 .testimonial-area {
-    background: rgba(0, 0, 0, 0) url("img/banner/11.jpg") no-repeat scroll center center;
+    background: rgba(0, 0, 0, 0) url("/client/img/banner/11.jpg") no-repeat scroll center center;
 }
 .testimonial-img a {
     border: 1px solid #fff;
@@ -3402,7 +3402,7 @@ nav.menu .cr-dropdown ul {
     border: 2px solid #22aeac;
 }
 .home-5 .testimonial-area {
-    background: rgba(0, 0, 0, 0) url("img/banner/26.jpg") no-repeat center center;
+    background: rgba(0, 0, 0, 0) url("client/img/banner/4.jpg") no-repeat center center;
 }
 .home-5 .testimonial-img a {
     border: 1px solid #a5a5a5;
@@ -5827,7 +5827,7 @@ p.lost-password a:hover {
     border: medium none;
     border-radius: 0;
     box-shadow: none;
-    color: #fff;
+    color: #f413de;
     display: inline-block;
     float: left;
     font-size: 12px;
@@ -5871,7 +5871,7 @@ p.checkout-coupon input[type="submit"] {
     background: #333 none repeat scroll 0 0;
     border: medium none;
     border-radius: 0;
-    color: #fff;
+    color: #f413de;
     height: 36px;
     margin-left: 6px;
     padding: 5px 10px;
