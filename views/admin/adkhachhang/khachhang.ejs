@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/adminhead'); -%>
+
+    <body>
+        <section id="container">
+            <%- include('../partials/adminheader'); -%>
+                <%- include('../partials/adminleft'); -%>
+                    <!--main content start-->
+                    <section id="main-content">
+                        <section class="wrapper">
+                            <div class="col-md-12">
+                                <h4>Danh sách khách hàng</h4><br>
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <th>Thứ tự</th>
+                                        <th>Tên khách hàng</th>
+                                        <th>Số điện thoại</th>
+                                        <th>Địa chỉ</th>
+                                        <th>Email</th>
+                                        <th>Quản lý</th>
+                                    </tr>
+                                    <% khachhang.forEach(function(kh){ %>
+                                    <tr>
+                                        <td id="customerId"><%= kh.makh %></td>
+                                        <td><%= kh.tenkh %></td>
+                                        <td><%= kh.sodienthoai %></td>
+                                        <td><%= kh.diachi %></td>
+                                        <td><%= kh.email %></td>
+                                        <td><a id="linkShowTransaction" onclick="getOrderByCustomerId('<%= kh.makh %>')" >Xem
+                                                giao dịch </a></td>
+                                    </tr>
+                                    <% }); %>
+                                </table>
+                            </div>
+
+                            <div class="col-md-12">
+                                <h4>Liệt kê lịch sử đơn hàng</h4><br>
+                            
+                                <table id='tblOrder' class="table table-bordered">
+                                                        
+                                </table>
+                            </div>
+                        </section>
+
+                        <%- include('../partials/adminfooter'); -%>
+                            <!--main content end-->
+                    </section>
+        </section>
+        <%- include('../partials/adminscript_bottom'); -%>
+    </body>
+<script>
+    
+    let titleTblOrder = `<tr>
+                            <th>Thứ tự</th>
+                            <th>Mã hàng</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Ngày đặt</th>
+                        </tr>`
+    
+    function getOrderByCustomerId(idcustomer){
+        let j= 1;
+        $('#tblOrder').html('');
+
+        //add tilte
+        $('#tblOrder').html(titleTblOrder);
+
+        $.ajax({
+            method: 'GET',
+            url:'/admin/khachhang/order',
+            data:{
+                id: idcustomer
+            },
+            success: function(data){
+                if(data && data.length != 0){
+                    
+                    let sl = data.length;
+                    for(let i = 0; i < sl ; i++){
+                        $('#tblOrder').html(
+                            $('#tblOrder').html() + `<tr>
+                                                        <td>
+                                                            ${j++}    
+                                                        </td>
+                                                        <td>
+                                                            ${data[i].masp}
+                                                        </td>
+                                                        <td>
+                                                            ${data[i].tensp}
+                                                        </td>
+                                                        <td>
+                                                            ${data[i].tgtao}
+                                                        </td>
+                                                    </tr>`
+                        )
+                    }
+                    
+                }
+            },
+
+            error: function(error){
+
+            }
+        })
+    }
+
+
+   
+</script>
+
+</html>

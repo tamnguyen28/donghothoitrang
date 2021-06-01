@@ -1,44 +1,45 @@
 const AdsanphamModel = require("../models/AdsanphamModel");
 const conn = require('../models/config/connect');
 
+let oldFileName = null;
 class AdsanphamController {
+    
     //[GET] /admin
-    index(req, res,next) {
+    index(req, res, next) {
         let loadSP = [];
-        AdsanphamModel.loadSanPham().then(result =>{
+        AdsanphamModel.loadSanPham().then(result => {
             loadSP = result;
-            res.render('admin/adsanpham/sanpham',{
+            res.render('admin/adsanpham/sanpham', {
                 title: 'sanpham',
-                sanpham : loadSP})
+                sanpham: loadSP
+            })
 
-        }).catch(err =>{
+        }).catch(err => {
             console.log(err);
             res.render('admin/home/index');
         });
     }
     //[GET] /admin/sanpham/create
-    create(req,res,next){
-        AdsanphamModel.loadDanhMuc().then(function(result){
-            
-            AdsanphamModel.loadThuongHieu().then(function(resulttt){
-                res.render('admin/adsanpham/create',{danhmucs: result,thuonghieus: resulttt});
-            }).catch(function(err){
-    
-            });   
-        }).catch(function(err){
-            
+    create(req, res, next) {
+        AdsanphamModel.loadDanhMuc().then(function (result) {
+
+            AdsanphamModel.loadThuongHieu().then(function (resulttt) {
+                res.render('admin/adsanpham/create', { danhmucs: result, thuonghieus: resulttt });
+            }).catch(function (err) {
+
+            });
+        }).catch(function (err) {
+
         });
-            
     }
     //[POST] /admin/sanpham/store
-    store(req,res){
+    store(req, res) {
         let tensp = req.body['tensp'];
         let giatien = req.body['giatien'];
         let trangthai = req.body['trangthai'];
-        console.log( req.file.filename);
         let hinhanh = req.file.filename;
         let mota = req.body['mota'];
-        let thuonghieu =req.body['id_math'];
+        let thuonghieu = req.body['id_math'];
         let loaisanpham = Number(req.body['id_maloai']);
         let newSp = {
             name: tensp,
@@ -47,18 +48,71 @@ class AdsanphamController {
             image: hinhanh,
             mota: mota,
             trademark: thuonghieu,
-            type:loaisanpham
+            type: loaisanpham
         }
         let createSP = [];
-        AdsanphamModel.createSanPham(newSp).then(result =>{
+        AdsanphamModel.createSanPham(newSp).then(result => {
             res.redirect('/admin/sanpham');
-        }).catch(err =>{
+        }).catch(err => {
             console.log(err);
             res.render('/admin');
         });
-        
-    }
-    
-}
 
+    }
+
+    //[GET] /admin/sanpham/update
+    update(req, res, next) {
+        let idsanpham = req.query.id;
+        AdsanphamModel.getProductById(idsanpham).then(function (result) {
+            AdsanphamModel.loadThuongHieu().then(function (resulttt) {
+                AdsanphamModel.loadDanhMuc().then(function (resultdm) {
+                    oldFileName = result[0].hinhanh
+                    res.render('admin/adsanpham/update', { product: result[0], thuonghieus: resulttt, danhmucs: resultdm });
+                })
+            }).catch(function (erro) {
+
+            })
+        }).catch(function (err) {
+
+        });
+    }
+    // [POST] /admin/sanpham/store
+     storeupdate(req, res) {
+        let masp = req.body['masp'];
+        let tensp = req.body['tensp'];
+        let giatien = Number(req.body['giatien']);
+        let trangthai = Number(req.body['trangthai']);
+        let hinhanh = (req.file ? req.file.filename: oldFileName);
+        let mota = req.body['mota'];
+        let thuonghieu = Number(req.body['id_math']);
+        let loaisanpham = Number(req.body['id_maloai']);
+        let newSp = {
+            masp: masp,
+            name: tensp,
+            price: giatien,
+            status: trangthai,
+            image: hinhanh,
+            mota: mota,
+            trademark: thuonghieu,
+            type: loaisanpham
+        }
+        // let updateSP = [];
+        AdsanphamModel.updateSanPham(newSp).then(result => {
+            res.redirect('/admin/sanpham');
+        }).catch(err => {
+            res.render('/admin');
+        });
+    }
+
+    deleteSanpham(req, res){
+        let idsanpham = req.query.id;
+
+        AdsanphamModel.deleteSanPham(idsanpham).then(function(result){
+            res.redirect('/admin/sanpham');
+        }).catch(function(error){
+            // console.log(error);
+            res.redirect('/admin/sanpham');
+        })
+    }
+}
 module.exports = new AdsanphamController();

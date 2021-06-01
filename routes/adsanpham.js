@@ -13,7 +13,7 @@ var storage = multer.diskStorage({
       console.log(file.fieldname);
       cb(null, file.fieldname + '-' + uniqueSuffix+'.jpg')// khong duoc xoa  dong nay
     }
-  })
+})
   
 var upload = multer({ storage: storage })
 
@@ -25,7 +25,9 @@ router.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 router.use(bodyParser.json())
 
-
+router.get('/update', adsanphamController.update);
+router.get('/delete', adsanphamController.deleteSanpham);
+router.post('/storeupdate', upload.single('hinhanh') ,adsanphamController.storeupdate);
 router.get('/create', adsanphamController.create);
 router.post('/store', upload.single('hinhanh') ,adsanphamController.store);
 router.get('/', adsanphamController.index);

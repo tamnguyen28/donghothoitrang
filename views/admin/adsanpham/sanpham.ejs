@@ -49,7 +49,7 @@
                            <td><%= sp.trangthai == 1 ? 'Còn hàng' : 'Sắp Hết hàng' %></td>
                            <td><img src="client/img/product/<%= sp.hinhanh %>"></td>
                            <td><%= sp.id_math %></td>
-                           <td><a href="/admin/sanpham/themsanpham">Cập nhật</a> || <a href="?xoa=<?php echo $row['ID']?>">Xóa</a></td>
+                           <td><a href="/admin/sanpham/update?id=<%= sp.masp %>">Cập nhật</a> || <a href="/admin/sanpham/delete?id=<%= sp.masp %>">Xóa</a></td>
                          </tr>
                         <% }); %>
                        </tbody>
@@ -59,7 +59,7 @@
                  </div>
                </div>
          </div>
-</section>
+  </section>
 <%- include('../partials/adminfooter'); -%>
 </section>
 <!--main content end-->

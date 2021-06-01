@@ -5,7 +5,7 @@
 <div class="log-w3">
 <div class="w3layouts-main">
 	<h2>Sign In Now</h2>
-		<form action="#" method="post">
+		<form action="/admin/login" method="post">
 			<input type="username" class="ggg" name="username" placeholder="USERNAME" required="">
 			<input type="password" class="ggg" name="password" placeholder="PASSWORD" required="">
 			<span><input type="checkbox" />Remember Me</span>
@@ -18,4 +18,10 @@
 </div>
 <%- include('../partials/adminscript_bottom'); -%>
 </body>
+<script>
+	let mess='<%= message %>';
+	if(mess){
+		alert(mess);
+	}
+</script>
 </html>
