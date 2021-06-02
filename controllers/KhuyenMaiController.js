@@ -2,13 +2,9 @@ const khuyenmaiModel = require('../models/KhuyenMaiModel');
 
 class KhuyenMaiController {
     index(req, res){
-        let listsieusale = [];
-        khuyenmaiModel.loadsieusale().then(function(resultss){
-            listsieusale = resultss;
-            khuyenmaiModel.loadbanchay().then(function(resultbc){
-                let listbc = resultbc;
-                khuyenmaiModel.loadhangdau().then(function(resulthd){
-                    let listhd = resulthd;
+        khuyenmaiModel.loadsieusale().then(function(listsieusale){
+            khuyenmaiModel.loadbanchay().then(function(listbc){
+                khuyenmaiModel.loadhangdau().then(function(listhd){
                     res.render('client/khuyenmai/khuyenmai',{
                         title: 'Khuyến mãi',
                         indexss: listsieusale,

@@ -5,18 +5,16 @@ let listRDtemp = []
 class ThuongHieuController {
 
     index(req, res){
-        let listTH = [];
-        thuonghieuModel.loadThuonghieu().then((resultTH) => {
-            listTH = resultTH;
+        thuonghieuModel.loadThuonghieu().then((listTH) => {
             listThtemp = listTH;
-                thuonghieuModel.loadRandom().then((resultRD)=>{
-                    let listRD = resultRD;
+                thuonghieuModel.loadRandom().then((listRD)=>{
                     listRDtemp = listRD;
                     res.render('client/thuonghieu/thuonghieu', {
                         title: 'Thương Hiệu',
                         indexRD: listRD,
                         indexTH: listTH,
-                        indexSP: []
+                        indexSP: [],
+                        motatt:''
                     })
                 }).catch(err => {
                     console.log(err);
@@ -31,7 +29,15 @@ class ThuongHieuController {
         let idTranmark = req.query.id;
 
         thuonghieuModel.loadProductByTranmarkId(idTranmark).then(function(result){
-            res.render('client/thuonghieu/thuonghieu', {indexSP:result , title: 'Thương Hiệu', indexTH: listThtemp, indexRD:listRDtemp });
+            thuonghieuModel.getTransmarkById(idTranmark).then(function(result1){
+                    res.render('client/thuonghieu/thuonghieu', {
+                        indexSP: result , title: 'Thương Hiệu', 
+                        indexTH: listThtemp, indexRD: listRDtemp, 
+                        motatt: result1[0].chitiet,
+                    });
+            }).catch(function(error){
+                console.log(error);
+            })   
         }).catch(function(error){
             res.render('client/thuonghieu/thuonghieu', {indexSP: []});
         });

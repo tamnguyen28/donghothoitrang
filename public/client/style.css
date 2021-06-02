@@ -4062,6 +4062,11 @@ nav.menu .cr-dropdown ul {
     text-transform: uppercase;
     margin-bottom: 0;
 }
+.text-centerthuonghieu{
+    font-size: 15px;
+    color: #000;
+
+}
 .flex-direction-nav a {
     color: rgba(0, 0, 0, 0);
     font-size: 0;
