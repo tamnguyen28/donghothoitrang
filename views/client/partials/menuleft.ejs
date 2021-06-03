@@ -32,7 +32,7 @@
                     <% indexRD.forEach(function(sp){ %>
                         <div class="single-most-product bd mb-18">
                             <div class="most-product-img">
-                                <a href="#"><img src="client/img/product/<%= sp.hinhanh %>" /></a>
+                                <a href="/chitietsp?id=<%= sp.masp %>"><img src="client/img/product/<%= sp.hinhanh %>" /></a>
                             </div>
                             <div class="most-product-content">
                                 <div class="product-rating">
@@ -44,7 +44,7 @@
                                         <li><a href="#"><i class="fa fa-star"></i></a></li>
                                     </ul>
                                 </div>
-                                <h4><a href="#"><%= sp.tensp %></a></h4>
+                                <h4><a href="/chitietsp?id=<%= sp.masp %>"><%= sp.tensp %></a></h4>
                                 <div class="product-price">
                                     <ul>
                                         <li><%= sp.giatien %></li>
@@ -61,9 +61,14 @@
     <div class="row" >
         <div class="col-md-12">
             <h3 class="text-center">MÔ TẢ THƯƠNG HIỆU</h3>
-            <p class="text-centerthuonghieu">
+            <p class="text-centerthuonghieu" style="text-align: justify;">
                 <%= motatt %>
             </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <img src="client/img/thuonghieu/<%= hinhanh %>" width="300" height="500" />
         </div>
     </div>
 </div>

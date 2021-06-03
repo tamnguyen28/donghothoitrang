@@ -14,7 +14,8 @@ class ThuongHieuController {
                         indexRD: listRD,
                         indexTH: listTH,
                         indexSP: [],
-                        motatt:''
+                        motatt:'',
+                        hinhanh: ''
                     })
                 }).catch(err => {
                     console.log(err);
@@ -34,6 +35,7 @@ class ThuongHieuController {
                         indexSP: result , title: 'Thương Hiệu', 
                         indexTH: listThtemp, indexRD: listRDtemp, 
                         motatt: result1[0].chitiet,
+                        hinhanh: result1[0].hinhanh
                     });
             }).catch(function(error){
                 console.log(error);

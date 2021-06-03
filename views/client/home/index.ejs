@@ -67,7 +67,7 @@
                                     <% index.forEach(function(sp){ %>
                                         <div class="product-wrapper">
                                             <div class="product-img">
-                                                <a href="#">
+                                                <a href="/chitietsp?id=<%= sp.masp %>">
                                                     <img src="client/img/product/<%= sp.hinhanh %>" alt="book"
                                                         class="primary" />
                                                 </a>
@@ -93,7 +93,7 @@
                                                         <li><a href="#"><i class="fa fa-star"></i></a></li>
                                                     </ul>
                                                 </div>
-                                                <h4><a href="#">
+                                                <h4><a href="/chitietsp?id=<%= sp.masp %>">
                                                         <%= sp.tensp %>
                                                     </a></h4>
                                                 <div class="product-price">
@@ -127,7 +127,7 @@
                                     <% indexdealhot.forEach(function(sp){ %>
                                         <div class="product-wrapper">
                                             <div class="product-img">
-                                                <a href="#">
+                                                <a href="/chitietsp?id=<%= sp.masp %>">
                                                     <img src="client/img/product/<%= sp.hinhanh %>" alt="book"
                                                         class="primary" />
                                                 </a>
@@ -153,7 +153,7 @@
                                                         <li><a href="#"><i class="fa fa-star"></i></a></li>
                                                     </ul>
                                                 </div>
-                                                <h4><a href="#">
+                                                <h4><a href="/chitietsp?id=<%= sp.masp %>">
                                                         <%= sp.tensp %>
                                                     </a></h4>
                                                 <div class="product-price">
@@ -189,7 +189,7 @@
                                         <!-- single-product-start -->
                                         <div class="product-wrapper">
                                             <div class="product-img">
-                                                <a href="#">
+                                                <a href="/chitietsp?id=<%= sp.masp %>">
                                                     <img src="client/img/product/<%= sp.hinhanh %>" alt="book"
                                                         class="primary" />
                                                 </a>
@@ -216,7 +216,7 @@
                                                         <li><a href="#"><i class="fa fa-star"></i></a></li>
                                                     </ul>
                                                 </div>
-                                                <h4><a href="#">
+                                                <h4><a href="/chitietsp?id=<%= sp.masp %>">
                                                         <%= sp.tensp%>
                                                     </a></h4>
                                                 <div class="product-price">
@@ -297,7 +297,9 @@
                                         <div class="bestseller-total">
                                             <div class="single-bestseller mb-25">
                                                 <div class="bestseller-img">
-                                                    <a href="#"><img src="client/img/product/<%= indexdrew[i].hinhanh %>" alt="book" /></a>
+                                                    <a href="/chitietsp?id=<%= indexdrew[i].masp %>">
+                                                        <img src="client/img/product/<%= indexdrew[i].hinhanh %>" alt="book" />
+                                                    </a>
                                                     <div class="product-flag">
                                                         <ul>
                                                             <li><span class="sale">new</span></li>
@@ -306,7 +308,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="bestseller-text text-center">
-                                                    <h3> <a href="#"><%= indexdrew[i].tensp%></a></h3>
+                                                    <h3> <a href="/chitietsp?id=<%= indexdrew[i].masp %>"><%= indexdrew[i].tensp%></a></h3>
                                                     <div class="price">
                                                         <ul>
                                                             <li><span class="new-price"><%= indexdrew[i].giatien%></span></li>
@@ -316,7 +318,9 @@
                                             </div>
                                             <div class="single-bestseller">
                                                 <div class="bestseller-img">
-                                                    <a href="#"><img src="client/img/product/<%= indexdrew[i+1].hinhanh %>" alt="book" /></a>
+                                                    <a href="/chitietsp?id=<%= indexdrew[i+1].masp %>">
+                                                        <img src="client/img/product/<%= indexdrew[i+1].hinhanh %>" alt="book" />
+                                                    </a>
                                                     <div class="product-flag">
                                                         <ul>
                                                             <li><span class="sale">new</span></li>
@@ -324,7 +328,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="bestseller-text text-center">
-                                                    <h3> <a href="#"> <%= indexdrew[i+1].tensp%></a></h3>
+                                                    <h3> <a href="/chitietsp?id=<%= indexdrew[i+1].masp %>"><%= indexdrew[i+1].tensp%></a></h3>
                                                     <div class="price">
                                                         <ul>
                                                             <li><span class="new-price"><%= indexdrew[i+1].giatien%></span></li>
@@ -357,7 +361,7 @@
                                         <!-- single-product-start -->
                                         <div class="product-wrapper mb-40">
                                             <div class="product-img">
-                                                <a href="#">
+                                                <a href="/chitietsp?id=<%= indexwatch[i].masp %>">
                                                     <img src="client/img/product/<%= indexwatch[i].hinhanh %>" alt="book" class="primary" />
                                                 </a>
                                                 <div class="quick-view">
@@ -382,7 +386,7 @@
                                                         <li><a href="#"><i class="fa fa-star"></i></a></li>
                                                     </ul>
                                                 </div>
-                                                <h4><a href="#"><%= indexwatch[i].tensp%></a></h4>
+                                                <h4><a href="/chitietsp?id=<%= indexwatch[i].masp %>"><%= indexwatch[i].tensp%></a></h4>
                                                 <div class="product-price">
                                                     <ul>
                                                         <li><%= indexwatch[i].giatien%></li>
@@ -404,7 +408,7 @@
                                         <!-- single-product-start -->
                                         <div class="product-wrapper">
                                             <div class="product-img">
-                                                <a href="#">
+                                                <a href="/chitietsp?id=<%= indexwatch[i+1].masp %>">
                                                     <img src="client/img/product/<%= indexwatch[i+1].hinhanh %>" alt="book" class="primary" />
                                                 </a>
                                                 <div class="quick-view">
@@ -428,7 +432,7 @@
                                                         <li><a href="#"><i class="fa fa-star"></i></a></li>
                                                     </ul>
                                                 </div>
-                                                <h4><a href="#"><%= indexwatch[i+1].tensp%></a></h4>
+                                                <h4><a href="/chitietsp?id=<%= indexwatch[i+1].masp %>"><%= indexwatch[i+1].tensp%></a></h4>
                                                 <div class="product-price">
                                                     <ul>
                                                         <li><%= indexwatch[i+1].giatien%></li>
@@ -468,14 +472,14 @@
                                 <div class="col-lg-12">
                                     <div class="single-post">
                                         <div class="post-img">
-                                            <a href="#"><img src="client/img/product/<%= sp.hinhanh %>" alt="post" /></a>
+                                            <a href="/chitietsp?id=<%= sp.masp %>"><img src="client/img/product/<%= sp.hinhanh %>" alt="post" /></a>
                                             <div class="blog-date-time">
                                                 <span class="day-time">01</span>
                                                 <span class="moth-time">Dec</span>
                                             </div>
                                         </div>
                                         <div class="post-content">
-                                            <h3><a href="#">ĐỒNG HỒ NAM TISSOT</a></h3>
+                                            <h3><a href="/chitietsp?id=<%= sp.masp %>">ĐỒNG HỒ NAM TISSOT</a></h3>
                                             <p><%= sp.tensp %></p>
                                         </div>
                                     </div>
