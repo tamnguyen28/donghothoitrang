@@ -3,6 +3,7 @@ const homeModel = require("../models/HomeModel");
 class HomeController {
   //[GET] /
   index(req, res) {
+    // console.log('Cookies: ', req.cookies.user)
     let listSP = [];
     homeModel.loadSanPham().then((result) => {
         listSP = result;

@@ -11,6 +11,7 @@ class DangNhapController {
         let matkhau = req.body.password;
 
         dangnhapModel.dangnhap(tendangnhap, matkhau).then(function (result){
+            res.cookie('user', result);
             res.redirect('/');
         }).catch(function (err){
             console.log(err);

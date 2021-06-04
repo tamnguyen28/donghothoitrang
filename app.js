@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
-// const conn = require('./models/config/connect');
+var cookieParser = require('cookie-parser')
+var createError = require('http-errors');
 //Init app
 const app = express();
 
@@ -9,6 +10,7 @@ const route = require('./routes');
 //View engine setup
 app.set('views','./views');
 app.set('view engine', 'ejs');
+app.use(cookieParser())
 
 //Set public folder
 // app.use(express.static(path.join(__dirname, 'public')));
