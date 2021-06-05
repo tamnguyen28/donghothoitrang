@@ -20,6 +20,11 @@ class DangNhapController {
             );
         })
     }
+    logout(req, res){
+        let user =  req.cookies.user;
+        res.cookie('user', user, {maxAge: 0});
+        res.redirect('/');
+    }
 
 }
 module.exports = new DangNhapController();

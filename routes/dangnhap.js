@@ -1,24 +1,25 @@
 const express = require('express');
 const body = require('body-parser');
 const router = express.Router();
-var passport = require('passport');
-var cookieParser = require('cookie-parser')
+const cookieParser = require('cookie-parser');
 const DangNhapController = require('../controllers/DangNhapController');
 
-var GoogleStrategy = require('passport-google-oauth20').Strategy;
+//Dang nhap google
+const passport = require('passport');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 router.use(cookieParser())
 router.use(body.urlencoded({ extended: false }))
+//Dang nhap google
 router.use(passport.initialize());
 
+//Dang nhap google
 passport.serializeUser(function (user, done) {
     done(null, user);
 });
-
 passport.deserializeUser(function (user, done) {
     done(null, user);
 });
-
 passport.use(new GoogleStrategy({
     clientID: '969464741521-e5205v7a4tvnoqccono6a931htunjpkq.apps.googleusercontent.com',
     clientSecret: 'UImwVcTBe8jEmOIfxDyUwo0E',
@@ -36,8 +37,9 @@ router.use(express.static('public'))
 
 router.get('/', DangNhapController.dangnhap);
 router.post('/dangnhap', DangNhapController.postLogin);
+router.get('/logout', DangNhapController.logout);
 
-
+//Dang nhap google
 router.get('/auth/google',
   passport.authenticate('google', { scope: ['profile', 'email'] }));
 

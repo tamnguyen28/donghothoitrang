@@ -79,5 +79,19 @@ class HomeModel {
         
         });
     }
+
+    getProductBy(idproduct){
+        return new Promise(function(resolve, reject){
+            let query = `select sanpham.masp, sanpham.tensp, sanpham.hinhanh, sanpham.giatien, thuonghieu.tenth
+                         from sanpham join thuonghieu on sanpham.id_math = thuonghieu.math where sanpham.masp = ?`;
+            conn.query(query, [idproduct] ,function(error, result){
+                if(error){
+                    reject(error);
+                }else{
+                    resolve(result[0]);
+                }
+            })
+        })
+    }
 }
 module.exports = new HomeModel();

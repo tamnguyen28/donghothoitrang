@@ -60,25 +60,13 @@
                                                         <span class="old-price">$40.00</span>
                                                     </div>
                                                 </div>
-                                                <!-- <div class="product-add-form">
-                                                    <form action="product-details.php" method="post">
-                                                        <fieldset>
-                                                            <input type="hidden" name="tensanpham" value="<?php echo $row_chitiet['Name'] ?>" />
-                                                            <input type="hidden" name="sanpham_id" value="<?php echo $row_chitiet['ID'] ?>" />
-                                                            <input type="hidden" name="giasanpham" value="<?php echo $row_chitiet['Price'] ?>" />
-                                                            <input type="hidden" name="hinhanh" value="<?php echo $row_chitiet['Image'] ?>" />
-                                                            <input type="hidden" name="soluong" value="1" />
-                                                            <input type="submit" name="themgiohang" value="Thêm giỏ hàng" class="button" />
-                                                        </fieldset>
-                                                    </form>
-                                                </div> -->
                                                 <div class="product-social-links">
                                                     <div class="product-add-form">
                                                         <form action="#">
                                                             <div class="quality-button">
                                                                 <input class="qty" type="number" value="1">
                                                             </div>
-                                                            <a href="/dangnhap">Thêm giỏ hàng</a>
+                                                            <a href="/giohang?id=<%= indexct[0].masp %>">Thêm giỏ hàng</a>
                                                         </form>
                                                     </div>
                                                     <div class="product-addto-links">
