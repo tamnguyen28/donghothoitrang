@@ -6487,6 +6487,14 @@ span.icon {
     height: 42px;
 }
 
+span.icon-facebook {
+    background: url('https://img.icons8.com/cute-clipart/32/000000/facebook-new.png') transparent 5px 50% no-repeat;
+    display: inline-block;
+    vertical-align: middle;
+    width: 42px;
+    height: 42px;
+}
+
 span.buttonText {
     display: inline-block;
     vertical-align: middle;

@@ -7,6 +7,8 @@ const DangNhapController = require('../controllers/DangNhapController');
 //Dang nhap google
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
+//Dang nhap facebook
+const FacebookStrategy  = require('passport-facebook').Strategy;
 
 router.use(cookieParser())
 router.use(body.urlencoded({ extended: false }))
@@ -26,8 +28,18 @@ passport.use(new GoogleStrategy({
     callbackURL: "http://localhost:3000/dangnhap/google/callback"
   },
   function(accessToken, refreshToken, profile, cb) {
-      return cb(null, profile);
+    return cb(null, profile);
   }
+));
+//Dang nhap Facebook
+passport.use(new FacebookStrategy({
+  clientID: '333424968148234',
+  clientSecret: 'ce1cc52be92b9c205c6326ebdd680e1a' ,
+  callbackURL: "http://localhost:3000/dangnhap/facebook/callback"
+  },
+  function(accessToken, refreshToken, profile, done) {
+    return done(null, profile);
+    }
 ));
 
 // parse application/json
@@ -42,15 +54,24 @@ router.get('/logout', DangNhapController.logout);
 //Dang nhap google
 router.get('/auth/google',
   passport.authenticate('google', { scope: ['profile', 'email'] }));
-
 //Khi auth thanh cong se goi cai nay
 router.get('/google/callback', 
   passport.authenticate('google', { failureRedirect: '/' }),
   function(req, res) {
     // Successful authentication, redirect home.
     // lam gi do o day
-    // console.log(req.user);
-    res.redirect('/')
+    res.cookie('user',req.user);
+    res.redirect('/');
+  });
+
+//Dang nhap facebook
+router.get('/auth/facebook', passport.authenticate('facebook'));
+
+router.get('/facebook/callback',
+  passport.authenticate('facebook', { failureRedirect: '/dangnhap' }),
+  function(req, res) {
+    res.cookie('user', req.user)
+    res.redirect('/');
   });
 
 module.exports = router;
