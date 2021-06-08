@@ -25,6 +25,8 @@ class HomeController {
                   indexfeature: listSPFeatured,
                   indexdealhot: listSPDealHot,
                   index: listSP,
+                  mess: req.query.mess ? req.query.mess : '',
+                  giohangs: (req.session && req.session.giohang ? req.session.giohang: [] ) 
                 });
               })
               

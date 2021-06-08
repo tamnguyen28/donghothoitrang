@@ -11,6 +11,7 @@ class TinTucController{
                 {title: 'Tin tức',
                 indextt: listtt,
                 indextintuc: listtintuc,
+                giohangs: (req.session && req.session.giohang ? req.session.giohang: [] )
                 });
             }).catch(err => {
                 console.log(err);

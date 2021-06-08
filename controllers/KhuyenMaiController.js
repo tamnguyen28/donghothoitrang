@@ -10,6 +10,7 @@ class KhuyenMaiController {
                         indexss: listsieusale,
                         indexbc: listbc,
                         indexhd: listhd,
+                        giohangs: (req.session && req.session.giohang ? req.session.giohang: [] )
                     });
                 }).catch(err => {
                     console.log(err);

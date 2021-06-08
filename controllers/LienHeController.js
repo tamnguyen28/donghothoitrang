@@ -3,9 +3,10 @@ const lienheModel = require('../models/LienHeModel');
 class LienHeController{
     index(req, res){
         res.render('client/lienhe/lienhe',{
-            title: 'Liên hệ', message: ''}
-            
-        );
+            title: 'Liên hệ', 
+            message: '',
+            giohangs: (req.session && req.session.giohang ? req.session.giohang: [] )  
+        });
     }
     savemess(req, res){
         let tintuc = {
@@ -16,9 +17,11 @@ class LienHeController{
             noidung: req.body.message
         };
         lienheModel.index(tintuc).then(function(result){
-            res.render('client/lienhe/lienhe',
-            {title: 'Liên hệ', message:'Gửi ý kiến thành công'},
-            );
+            res.render('client/lienhe/lienhe',{
+                title: 'Liên hệ', 
+                message:'Gửi ý kiến thành công',
+                giohangs: (req.session && req.session.giohang ? req.session.giohang: [] )  
+            },);
         }).catch(err => {
             console.log(err);
             res.redirect('/lienhe');

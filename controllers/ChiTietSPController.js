@@ -9,6 +9,7 @@ class ChiTietSPController{
             res.render('client/chitietsp/chitietsp',{
                 title: 'Chi tiết sản phẩm',
                 indexct: listct,
+                giohangs: (req.session && req.session.giohang ? req.session.giohang: [] )
             });
         }).catch(err => {
             console.log(err);

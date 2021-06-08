@@ -3,7 +3,7 @@ const homeModel = require("../models/HomeModel");
 class GioHangController {
   index(req, res) {
     // console.log(req.get('env'));//devlopment hoặc production
-    console.log(req.session.giohang);
+    
     // neu chua danh nhap
     if (!req.cookies.user) {
       res.redirect("/dangnhap");

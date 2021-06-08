@@ -14,6 +14,7 @@ class DongHoNamController {
                         indexnam: resultnam,
                         indexTH: resultTH,
                         indexRD: resultRD,
+                        giohangs: (req.session && req.session.giohang ? req.session.giohang: [] )
                     });
                 }).catch((err) => {
                     console.log(err);

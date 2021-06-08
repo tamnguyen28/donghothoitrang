@@ -6,8 +6,8 @@ class DangNhapModel{
     dangnhap(tendangnhap, matkhau){
         return new Promise(function(resolve, reject){
             matkhau = md5(matkhau);
-              let query = 'SELECT * FROM khachhang where khachhang.tendangnhap = ? and khachhang.matkhau = ?';
-              conn.query(query, [tendangnhap, matkhau], function(err, result){
+              let query = 'SELECT * from khachhang WHERE (khachhang.email = ? OR khachhang.tendangnhap = ?) And khachhang.matkhau = ?';
+              conn.query(query, [tendangnhap, tendangnhap,matkhau], function(err, result){
                 if(err) {
                     reject(err);
                 }else{

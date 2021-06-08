@@ -3,7 +3,11 @@ const dangkyModel = require("../models/DangKyModel");
 
 class DangNhapController {
   dangnhap(req, res) {
-    res.render("client/dangnhap/dangnhap", { title: "Đăng nhập", message: "" });
+    res.render("client/dangnhap/dangnhap", { 
+        title: "Đăng nhập", 
+        message: "",
+        giohangs: (req.session && req.session.giohang ? req.session.giohang: [] )  
+    });
   }
 
   postLogin(req, res) {

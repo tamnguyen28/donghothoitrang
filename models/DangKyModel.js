@@ -8,7 +8,7 @@ class DangKyModel {
         "INSERT INTO khachhang VALUES (NULL,?,?,?,?,?,?,?,1,NULL)";
       let passkh =
         khachhang.matkhau && khachhang.matkhau != ""
-          ? md5(hachhang.matkhau)
+          ? md5(khachhang.matkhau)
           : "";
       conn.query(
         querykhachhang,

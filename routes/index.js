@@ -10,6 +10,7 @@ const khuyenmailRoute = require('./khuyenmai');
 const chitietspRouter = require('./chitietsp');
 const giohangRouter = require('./giohang');
 const donhangRouter = require('./donhang');
+const timkiemRouter = require('./timkiem');
 
 const adhomeRouter = require('./adhome');
 const adsanphamRoute = require('./adsanpham');
@@ -23,6 +24,7 @@ function route(app){
     app.use('/admin', adhomeRouter);
 
     //client
+    app.use('/timkiem', timkiemRouter);
     app.use('/donhang', donhangRouter);
     app.use('/giohang', giohangRouter);
     app.use('/chitietsp',chitietspRouter);

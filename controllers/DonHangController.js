@@ -64,28 +64,27 @@ class DonHangController{
     index(req, res){
         if(req.query.payonline && req.query.message == 'Success'){
             req.session.giohang = [];
-            donhangModel.themthongtin(thongtin).then(function(result) {
-                
+            donhangModel.themthongtin(thongtin).then(function(result) { 
             }).catch(err => {
                 console.log(err);
             })
             return res.render('client/donhang/donhang', {
                 title: 'Đơn hàng',
                 giohangs: [],
-                totalAmount: 0
+                totalAmount: 0,
+                message: req.query.localMessage ? req.query.localMessage : '' 
             });
         }
         let sl = req.session.giohang.length;
         let total = 0;
-
         for(let i = 0; i < sl; i++){
             total += req.session.giohang[i].tongtien
         }
-
         res.render('client/donhang/donhang', {
            title: 'Đơn hàng',
            giohangs:  !req.session.giohang ? [] : req.session.giohang, 
-           totalAmount: total
+           totalAmount: total,
+           message: ''
         });
     }
 
@@ -98,7 +97,6 @@ class DonHangController{
             ghichu: req.body.note,
             phuongthucthanhtoan: req.body.giaohang,
         }
-
         if(req.body.giaohang == 1){
             var request = https.request(options, (respone) => {
                 respone.setEncoding('utf8');
@@ -106,18 +104,15 @@ class DonHangController{
                    return res.redirect(JSON.parse(body).payUrl) 
                 });
                 respone.on('end', () => {
-                  
                 });
               });
-              
               request.on('error', (e) => {
-               
               });
               request.write(body);
               request.end();
         }else{
             donhangModel.themthongtin(thongtin).then(function(result) {
-                res.redirect('/')
+                res.redirect('/?mess=2')
             }).catch(err => {
                 res.redirect('/donhang');
             })

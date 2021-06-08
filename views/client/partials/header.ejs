@@ -63,33 +63,24 @@
                                 <span>2</span>
                                 <div class="mini-cart-sub">
                                     <div class="cart-product">
-                                        <div class="single-cart">
-                                            <div class="cart-img">
-                                                <a href="#"><img src="client/img/product/1.jpg" alt="book" /></a>
+                                        <% giohangs.forEach(function(sp){ %>
+                                            <div class="single-cart">
+                                                <div class="cart-img">
+                                                    <a href="#"><img src="client/img/product/<%= sp.hinhanh %>" alt="book" /></a>
+                                                </div>
+                                                <div class="cart-info">
+                                                    <h5><a href="#"><%= sp.tensp%></a></h5>
+                                                    <p><%= sp.soluong %> x <%= sp.giatien%></p>
+                                                </div>
+                                                <div class="cart-icon">
+                                                    <a href="#"><i class="fa fa-remove"></i></a>
+                                                </div>
                                             </div>
-                                            <div class="cart-info">
-                                                <h5><a href="#">Joust Duffle Bag</a></h5>
-                                                <p>1 x £60.00</p>
-                                            </div>
-                                            <div class="cart-icon">
-                                                <a href="#"><i class="fa fa-remove"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="single-cart">
-                                            <div class="cart-img">
-                                                <a href="#"><img src="img/product/3.jpg" alt="book" /></a>
-                                            </div>
-                                            <div class="cart-info">
-                                                <h5><a href="#">Chaz Kangeroo Hoodie</a></h5>
-                                                <p>1 x £52.00</p>
-                                            </div>
-                                            <div class="cart-icon">
-                                                <a href="#"><i class="fa fa-remove"></i></a>
-                                            </div>
-                                        </div>
+                                       <% })%>
+                                        
                                     </div>
                                     <div class="cart-totals">
-                                        <h5>Total <span>£12.00</span></h5>
+                                        <h5>Tổng tiền: <span><% let totoal = 0; for(let i = 0; i < giohangs.length; i++){totoal += giohangs[i].tongtien;} %> <%= totoal %></span></h5>
                                     </div>
                                     <div class="cart-bottom">
                                         <a class="view-cart" href="/giohang">Giỏ hàng</a>

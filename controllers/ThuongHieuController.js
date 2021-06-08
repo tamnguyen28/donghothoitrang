@@ -15,7 +15,8 @@ class ThuongHieuController {
                         indexTH: listTH,
                         indexSP: [],
                         motatt:'',
-                        hinhanh: ''
+                        hinhanh: '',
+                        giohangs: (req.session && req.session.giohang ? req.session.giohang: [] )
                     })
                 }).catch(err => {
                     console.log(err);
