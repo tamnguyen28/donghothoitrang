@@ -15,15 +15,13 @@ class AdkhachhangModel {
     }
 
     //lấy ra id sản phẩm
-    getOrderByCustomerId(idcustomer) {
+    getOrderByCustomerId(idkh) {
         return new Promise(function (resolve, reject) {
-            let queryCustomer = `SELECT sanpham.masp, sanpham.tensp, hoadon.tgtao from hoadon 
-                JOIN khachhang on hoadon.id_makh = khachhang.makh 
-                JOIN chitiethoadon on chitiethoadon.mahd = hoadon.mahd 
-                JOIN sanpham on sanpham.masp = chitiethoadon.masp
-                WHERE khachhang.makh = ?`;
 
-            conn.query(queryCustomer, [idcustomer], function (error, result) {
+            let queryCustomer =  `SELECT * from hoadon join khachhang on hoadon.id_makh = khachhang.makh 
+                                    WHERE khachhang.makh = ?`;
+            
+            conn.query(queryCustomer, [idkh], function (error, result) {
                 if(error){
                     reject(error)
                 }else{

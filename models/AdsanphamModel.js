@@ -69,7 +69,8 @@ class AdsanphamModel {
             // let b = {tensp: newSp.name, giatien: newSp.price, trangthai: newSp.status, hinhanh: newSp.image, id_math: newSp.trademark, id_maloai: newSp.type, mota: newSp.mota, masp: newSp.masp }
             conn.query(`UPDATE sanpham 
                         SET tensp = ?, giatien = ?, trangthai = ?, hinhanh = ?, id_math = ?, id_maloai = ?, mota = ? 
-                        Where masp = ?`, [newSp.name, newSp.price, newSp.status, newSp.image, newSp.trademark, newSp.type, newSp.mota, newSp.masp], function (err, data) {
+                        Where masp = ?`, [newSp.name, newSp.price, newSp.status, newSp.image, newSp.trademark,
+                                         newSp.type, newSp.mota, newSp.masp], function (err, data) {
                 if (err) throw err;
                 resolve(true);
             });
@@ -90,5 +91,21 @@ class AdsanphamModel {
             });
         })
     }
+    
+    getOrderOfProduct(idsanpham){
+        return new Promise(function(resolve, reject){
+            let queryXoa = `SELECT * from sanpham JOIN chitiethoadon on sanpham.masp = chitiethoadon.masp
+            JOIN hoadon on hoadon.mahd = chitiethoadon.mahd 
+            where sanpham.masp = ? and hoadon.trangthai = 0`;
+            conn.query(queryXoa, [idsanpham], function(error,result){
+                if(error){
+                    reject(error);
+                }else{
+                    resolve(result);
+                }
+            })
+        })
+    }
+
 }
 module.exports = new AdsanphamModel();

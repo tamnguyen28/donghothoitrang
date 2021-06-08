@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/adminhead'); -%>
+
+    <body>
+        <section id="container">
+            <%- include('../partials/adminheader'); -%>
+                <%- include('../partials/adminleft'); -%>
+                    <!--main content start-->
+                    <section id="main-content">
+                        <section class="wrapper">
+                            <div class="clearfix">
+                                <div class="table-agile-info">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            THÊM TIN TỨC
+                                        </div>
+                                        <form method="POST" action="/admin/tintuc/createtintuc" enctype="multipart/form-data">
+                                            <label>Tên tiêu đề</label>
+                                            <input type="text" class="form-control" name="tieude" placeholder="Tên tiêu đề"><br>
+                                            
+                                            <label>Nội dung</label><br />
+                                            <textarea id="mota" name="noidung" rows="4" cols="140"></textarea><br />
+
+                                            <label><img src="">Hình ảnh</label>
+                                            <input type="file" class="form-control" name="hinhanh" placeholder="Hình ảnh"><br>
+
+                                            <label>Trạng thái</label> <br />
+                                            <input name="trangthai" type="radio" value="1" checked="checked"> Bật
+                                            <input name="trangthai" type="radio" value="0"> Tắt <br />
+                                            
+                                            <br />
+                                            
+                                            <input type="submit" name="themtintuc" value="Thêm tin tức"
+                                                class="btn btn-primary"><br/>
+                                            <br/>
+                                            <a href="admin/tintuc">Quay lại?</a>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <%- include('../partials/adminfooter'); -%>
+                    </section>
+                    <!--main content end-->
+        </section>
+        <%- include('../partials/adminscript_bottom'); -%>
+    </body>
+
+</html>

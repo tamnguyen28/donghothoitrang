@@ -16,27 +16,17 @@
                    </div>
                    <div>
                     
-                     <table class="table" ui-jq="footable" ui-options="{
-                       &quot;paging&quot;: {
-                         &quot;enabled&quot;: true
-                       },
-                       &quot;filtering&quot;: {
-                         &quot;enabled&quot;: true
-                       },
-                       &quot;sorting&quot;: {
-                         &quot;enabled&quot;: true
-                       }}">
-                      
+                     <table class="table" ui-jq="footable">
                        <thead>
                          <tr>
-                           <th data-breakpoints="xs">ID</th>
+                           <th data-breakpoints="xs">Mã sản phẩm</th>
                            <th>Tên sản phẩm</th>
                            <th>Giá tiền</th>
                            <th>Loại sản phẩm</th>
                            <th>Trạng thái</th>
                            <th>Hình ảnh</th>
                            <th>Thương hiệu</th>
-                           <td><a href="/admin/sanpham/create">Thêm sản phẩm</a></td>
+                           <td><a href="/admin/sanpham/create" class="btn btn-success">Thêm sản phẩm</a></td>
                          </tr>
                        </thead>
                        <tbody>
@@ -49,7 +39,8 @@
                            <td><%= sp.trangthai == 1 ? 'Còn hàng' : 'Sắp Hết hàng' %></td>
                            <td><img src="client/img/product/<%= sp.hinhanh %>"></td>
                            <td><%= sp.id_math %></td>
-                           <td><a href="/admin/sanpham/update?id=<%= sp.masp %>">Cập nhật</a> || <a href="/admin/sanpham/delete?id=<%= sp.masp %>">Xóa</a></td>
+                           <td><a href="/admin/sanpham/update?id=<%= sp.masp %>" class="btn btn-primary">Cập nhật</a> 
+                              <a href="/admin/sanpham/delete?id=<%= sp.masp %>" class="btn btn-danger">Xóa</a></td>
                          </tr>
                         <% }); %>
                        </tbody>
@@ -57,8 +48,8 @@
                    
                    </div>
                  </div>
-               </div>
-         </div>
+            </div>
+        </div>
   </section>
 <%- include('../partials/adminfooter'); -%>
 </section>
@@ -66,5 +57,11 @@
 </section>
 <%- include('../partials/adminscript_bottom'); -%>
 </body>
+<script>
+   let mess = '<%= mess %>';
+   if(mess && mess == 1){
+      alert('san pham co don hang');
+   }
+</script>
 </html>
 

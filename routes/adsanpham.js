@@ -1,8 +1,8 @@
 const express = require('express');
 var bodyParser = require('body-parser')
 const adsanphamController = require('../controllers/AdsanphamController.js');
-var multer  = require('multer')
-var upload = multer()
+var multer  = require('multer');
+var upload = multer();
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -10,20 +10,20 @@ var storage = multer.diskStorage({
     },
     filename: function (req, file, cb) {
       const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-      console.log(file.fieldname);
+      // console.log(file.fieldname);
       cb(null, file.fieldname + '-' + uniqueSuffix+'.jpg')// khong duoc xoa  dong nay
     }
 })
   
-var upload = multer({ storage: storage })
+var upload = multer({ storage: storage });
 
 const router = express.Router();
 
 // parse application/x-www-form-urlencoded
-router.use(bodyParser.urlencoded({ extended: false }))
+router.use(bodyParser.urlencoded({ extended: false }));
  
 // parse application/json
-router.use(bodyParser.json())
+router.use(bodyParser.json());
 
 router.get('/update', adsanphamController.update);
 router.get('/delete', adsanphamController.deleteSanpham);

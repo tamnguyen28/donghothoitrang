@@ -16,7 +16,7 @@
                                             CẬP NHẬT SẢN PHẨM
                                         </div>
                                         <form method="POST" action="/admin/sanpham/storeupdate" enctype="multipart/form-data">
-                                            <label>Mã san pham</label>
+                                            <label>Mã sản phẩm</label>
                                             <input type="text" class="form-control" name="masp" value="<%= product.masp %>" readonly/>         
                                             <label>Tên sản phẩm</label>
                                             <input type="text" class="form-control" name="tensp" value="<%= product.tensp %>"
@@ -38,7 +38,8 @@
                                             <% } %>
                                             
                                             <label><img src="">Hình ảnh</label>
-                                            <input value= "client/img/product/<%= product.hinhanh%>" type="file" class="form-control" name="hinhanh" onchange="readFileImage(this)">
+                                            <input value= "client/img/product/<%= product.hinhanh%>" type="file" class="form-control" 
+                                            name="hinhanh" onchange="readFileImage(this)">
                                             <br>
                                             <img src="client/img/product/<%= product.hinhanh%>" width="100" height="100" id="imgSanPham"/>
                                             <br/>
@@ -55,7 +56,7 @@
                                             <textarea id="mota" name="mota" rows="4" cols="140"><%= product.mota %></textarea><br /><br />
                                             <label>Loại sản phẩm</label>
                                              <select name="id_maloai" class="form-control">
-                                                <option >------Chọn danh mục-------</option>
+                                                <option value="-1">------Chọn danh mục-------</option>
                                                 <% for(let i=0; i < danhmucs.length; i++) {%>
                                                         <option value="<%= danhmucs[i].maloai %>" <%= danhmucs[i].maloai == product.id_maloai ? 'selected' : '' %> >
                                                             <%= danhmucs[i].tenloai %>
@@ -63,8 +64,9 @@
                                                  <% } %>
                                             </select><br>
                                             <input type="submit" name="capnhatsanpham" value="Cập nhật sản phẩm"
-                                                class="btn btn-primary">
-                                            
+                                                class="btn btn-primary"><br/>
+                                            <br/>
+                                            <a href="admin/sanpham">Quay lại?</a>
                                         </form>
                                     </div>
                                 </div>

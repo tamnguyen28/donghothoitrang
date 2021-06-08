@@ -13,8 +13,8 @@
                                 <h4>Danh sách khách hàng</h4><br>
                                 <table class="table table-bordered">
                                     <tr>
-                                        <th>Thứ tự</th>
-                                        <th>Tên khách hàng</th>
+                                        <th>Mã tài khoản</th>
+                                        <th>Tên tài khoản</th>
                                         <th>Số điện thoại</th>
                                         <th>Địa chỉ</th>
                                         <th>Email</th>
@@ -27,7 +27,7 @@
                                         <td><%= kh.sodienthoai %></td>
                                         <td><%= kh.diachi %></td>
                                         <td><%= kh.email %></td>
-                                        <td><a id="linkShowTransaction" onclick="getOrderByCustomerId('<%= kh.makh %>')" >Xem
+                                        <td><a id="linkShowTransaction" onclick="getOrderByCustomerId('<%= kh.makh %>')" class="btn btn-success">Xem
                                                 giao dịch </a></td>
                                     </tr>
                                     <% }); %>
@@ -35,7 +35,7 @@
                             </div>
 
                             <div class="col-md-12">
-                                <h4>Liệt kê lịch sử đơn hàng</h4><br>
+                                <h4>Liệt kê danh sách đặt hàng</h4><br>
                             
                                 <table id='tblOrder' class="table table-bordered">
                                                         
@@ -53,12 +53,15 @@
     
     let titleTblOrder = `<tr>
                             <th>Thứ tự</th>
-                            <th>Mã hàng</th>
-                            <th>Tên sản phẩm</th>
+                            <th>Mã tài khoản</th>
+                            <th>Mã đơn hàng</th>
+                            <th>Tên người nhận</th>
+                            <th>Số điện thoại</th>
+                            <th>Địa chỉ người nhận</th>
                             <th>Ngày đặt</th>
                         </tr>`
     
-    function getOrderByCustomerId(idcustomer){
+    function getOrderByCustomerId(idkh){
         let j= 1;
         $('#tblOrder').html('');
 
@@ -69,7 +72,7 @@
             method: 'GET',
             url:'/admin/khachhang/order',
             data:{
-                id: idcustomer
+                id: idkh
             },
             success: function(data){
                 if(data && data.length != 0){
@@ -82,10 +85,19 @@
                                                             ${j++}    
                                                         </td>
                                                         <td>
-                                                            ${data[i].masp}
+                                                            ${data[i].makh}
                                                         </td>
                                                         <td>
-                                                            ${data[i].tensp}
+                                                            ${data[i].mahd}
+                                                        </td>
+                                                        <td>
+                                                            ${data[i].tennguoinhan}
+                                                        </td>
+                                                        <td>
+                                                            ${data[i].sdtnguoinhan}
+                                                        </td>
+                                                        <td>
+                                                            ${data[i].diachinguoinhan}
                                                         </td>
                                                         <td>
                                                             ${data[i].tgtao}
