@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include ('../partials/head'); -%>
+    <body>
+        <div class="app">
+            <%- include ('../partials/header'); -%>
+                <!-- checkout-area-start -->
+                <div class="checkout-area mb-70">
+                    <div class="container">
+                        <div class="row">
+                            <form action="/donhang/savethongtin" method="post">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt-20">
+                                    <div class="checkbox-form">
+                                        <h3>Chi tiết hóa đơn</h3>
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                                                <div class="checkout-form-list">
+                                                    <label>Họ và tên <span class="required">*</span></label>
+                                                    <input type="text" placeholder="" id="name" name="name">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <div class="checkout-form-list">
+                                                    <label>Số điện thoại <span class="required">*</span></label>
+                                                    <input type="number" placeholder="0898xxxxxx" id="phone" name="phone">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <div class="checkout-form-list">
+                                                    <label>Địa chỉ <span class="required">*</span></label>
+                                                    <input type="text" placeholder="Địa chỉ cụ thể" id="address" name="address">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <div class="checkout-form-list">
+                                                    <textarea style="resize:none;" class="form-control" placeholder="Ghi chú" id="note" name="note" required=""></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <div class="checkout-form-list">
+                                                    <label>Hình thức giao hàng <span class="required">*</span></label>
+                                                    <select class="form-control" id="giaohang" name="giaohang">
+                                                        <option>Chọn hình thức giao hàng</option>
+                                                        <option value="0" name="checkgiaohang">Thanh toán khi nhận hàng</option>
+                                                        <option value="1" name="checkgiaohang">Thanh toán qua thẻ MOMO</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <div class="your-order">
+                                        <h3>Đơn đặt hàng của bạn</h3>
+                                        <div class="your-order-table table-responsive">
+                                            <table>
+                                                <thead>
+                                                    <tr>
+                                                        <th class="product-name">Sản phẩm</th>
+                                                        <th class="product-total">Tổng</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <% for (let i = 0; i < giohangs.length; i++) {%>
+                                                        <tr class="cart_item">
+                                                            <td class="product-name">
+                                                               <%= giohangs[i].tensp %> <strong class="product-quantity" style="color:darkgoldenrod"> x Số lượng: <%= giohangs[i].soluong %></strong>
+                                                            </td>
+                                                            <td class="product-total">
+                                                                <span class="amount"><%= giohangs[i].tongtien %></span>
+                                                            </td>
+                                                        </tr>
+                                                 <% } %>
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr class="cart-subtotal">
+                                                        <th id="tonggiohang">Tổng giỏ hàng</th>
+                                                        <td><span class="amount"><%= totalAmount %></span></td>
+                                                    </tr>
+                                                    <tr class="shipping">
+                                                        <th>Vận chuyển</th>
+                                                        <td>
+                                                            <ul>
+                                                                <li>
+                                                                    <label>Miễn phí vận chuyển</label>
+                                                                </li>
+                                                            </ul>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class="order-total">
+                                                        <th >Tổng đơn hàng</th>
+                                                        <input type="hidden"  name="tonggiohang" value="<%= totalAmount %>" />
+                                                        <td><strong><span class="amount"><%= totalAmount %></span></strong>
+                                                        </td>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+                                        <div class="payment-method">
+                                            <div class="order-button-payment">
+                                                    <input type="hidden" name="thanhtoan_product_id[]" value="<?php echo $row_thanhtoan['id_product']; ?>">
+                                                    <input type="hidden" name="thanhtoan_soluong[]" value="<?php echo $row_thanhtoan['quantity']; ?>">
+                                                <input type="submit" name="thanhtoan" value="Đặt hàng và thanh toán">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- checkout-area-end -->
+            <%- include ('../partials/footer'); -%>
+        </div>
+    </body>
+</html>

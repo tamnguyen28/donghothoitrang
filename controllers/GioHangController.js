@@ -3,7 +3,7 @@ const homeModel = require("../models/HomeModel");
 class GioHangController {
   index(req, res) {
     // console.log(req.get('env'));//devlopment hoặc production
-    // console.log(req.session.giohang);
+    console.log(req.session.giohang);
     // neu chua danh nhap
     if (!req.cookies.user) {
       res.redirect("/dangnhap");
@@ -26,7 +26,7 @@ class GioHangController {
         //neu ton tai thi cong len 
         if(flag === true){
             product.soluong += 1;
-            product.tongtien  = product.soluong * product.giatien;   
+            product.tongtien = product.soluong * product.giatien;   
         }else{  
             req.session.giohang.push({
                 masp: result.masp,
@@ -62,7 +62,27 @@ class GioHangController {
         title: "Giỏ hàng",
         giohangs: req.session.giohang,
       });
+  }
 
+  tinhslvatongtien(req, res){
+    if(req.session.giohang){
+      let idproduct = req.query.idsp;
+      let spGioHang = req.session.giohang.find(x=>x.masp ==idproduct);
+      let sl = req.session.giohang.length;
+      
+
+      spGioHang.soluong = req.query.sl;
+      spGioHang.tongtien  = spGioHang.soluong * spGioHang.giatien; 
+      
+      let total = 0;
+
+       for(let i = 0; i < sl; i++){
+            total += req.session.giohang[i].tongtien
+        }
+      res.json({total: spGioHang.tongtien, totalAmount: total});
+    }
+
+    res.json({total: 0});
   }
 }
 

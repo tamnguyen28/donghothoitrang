@@ -3,7 +3,7 @@ const conn = require('./config/connect');
 class DongHoNuModel{
     loadspnam(){
         return new Promise(function (resolve, reject) {
-            let sqlquerynu = 'SELECT * FROM sanpham limit 64, 12';
+            let sqlquerynu = 'SELECT * FROM sanpham limit 52, 12';
             conn.query(sqlquerynu, function (err, result){
                 if(err){
                     reject(err);
