@@ -114,6 +114,7 @@ class DonHangController{
             donhangModel.themthongtin(thongtin).then(function(result) {
                 res.redirect('/?mess=2')
             }).catch(err => {
+                console.log(err);
                 res.redirect('/donhang');
             })
         }     

@@ -3,7 +3,7 @@ const conn = require('./config/connect');
 class DonHangModel{
     themthongtin(hoadon){
         return new Promise(function (resolve, reject) {
-            let sqlthongtin = "INSERT INTO hoadon VALUES (NULL, ?, ?, ?, ?, ?, ?, '1', current_timestamp(), '2')";
+            let sqlthongtin = "INSERT INTO hoadon VALUES (NULL, ?, ?, ?, ?, ?, ?, '0', current_timestamp(), '2', '0')";
             conn.query(sqlthongtin,[
                 hoadon.tennguoinhan,
                 hoadon.sdtnguoinhan,
