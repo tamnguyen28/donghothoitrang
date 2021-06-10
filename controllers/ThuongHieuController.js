@@ -36,7 +36,9 @@ class ThuongHieuController {
                         indexSP: result , title: 'Thương Hiệu', 
                         indexTH: listThtemp, indexRD: listRDtemp, 
                         motatt: result1[0].chitiet,
-                        hinhanh: result1[0].hinhanh
+                        hinhanh: result1[0].hinhanh,
+                        giohangs: (req.session && req.session.giohang ? req.session.giohang: [] )
+                        
                     });
             }).catch(function(error){
                 console.log(error);

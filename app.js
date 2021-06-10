@@ -11,7 +11,7 @@ const route = require('./routes');
 //View engine setup
 app.set('views','./views');
 app.set('view engine', 'ejs');
-app.set('trust proxy', 1)
+app.set('trust proxy',1)
 app.use(cookieParser())
 
 

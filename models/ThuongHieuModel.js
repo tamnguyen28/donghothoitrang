@@ -14,18 +14,6 @@ class ThuongHieuModel{
             }) 
         });
     }
-    // loadSPThuonghieu(){
-    //     return new Promise(function(resolve, reject){
-    //         let sqlsp = 'SELECT * FROM sanpham limit 40,12';
-    //         conn.query(sqlsp, function(err, result){
-    //             if(err){
-    //                 reject(err);
-    //             }else{
-    //                 resolve(result);
-    //             }
-    //         })
-    //     })
-    // }
     loadRandom(){
         return new Promise (function (resolve, reject){
             let sqlrandom = 'SELECT * FROM sanpham limit 19, 3';
