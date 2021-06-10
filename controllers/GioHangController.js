@@ -5,8 +5,8 @@ class GioHangController {
     // console.log(req.get('env'));//devlopment hoặc production
     
     // neu chua danh nhap
-    if (!req.cookies.user) {
-      res.redirect("/dangnhap");
+    if (!req.cookies.user) { 
+      res.redirect(`/dangnhap?isgotocart=1&id=${req.query.id}`);
     }
     // neu khong ton tai gio hang
     if (!req.session.giohang) {

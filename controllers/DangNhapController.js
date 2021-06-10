@@ -1,8 +1,12 @@
 const dangnhapModel = require("../models/DangNhapModel");
 const dangkyModel = require("../models/DangKyModel");
 
+let isgotocart = 0;
+let idsp = 0;
 class DangNhapController {
   dangnhap(req, res) {
+    isgotocart = req.query.isgotocart;
+    idsp = req.query.id;
     res.render("client/dangnhap/dangnhap", { 
         title: "Đăng nhập", 
         message: "",
@@ -13,12 +17,17 @@ class DangNhapController {
   postLogin(req, res) {
     let tendangnhap = req.body.username;
     let matkhau = req.body.password;
-
+ 
+    
     dangnhapModel
       .dangnhap(tendangnhap, matkhau)
       .then(function (result) {
         res.cookie("user", result);
-        res.redirect("/");
+        if(isgotocart == 1){
+            res.redirect(`/giohang?id=${idsp}`)
+        }else{
+            res.redirect("/");
+        }   
       })
       .catch(function (err) {
         console.log(err);
@@ -47,7 +56,12 @@ class DangNhapController {
             if(resultLength == 0){//chưa tồn tại
                 dangkyModel.dangky(khachhang).then(function (result) {
                     res.cookie("user", req.user);
-                    res.redirect("/");
+                    console.log(isgotocart);
+                    if(isgotocart == 1){
+                        res.redirect(`/giohang?id=${idsp}`)
+                    }else{
+                        res.redirect("/");
+                    }   
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -55,7 +69,11 @@ class DangNhapController {
                 });
             }else{
                 res.cookie("user", req.user);
-                res.redirect("/");
+                if(isgotocart == 1){
+                    res.redirect(`/giohang?id=${idsp}`)
+                }else{
+                    res.redirect("/");
+                }   
             }
         }).catch(function (error) {
             console.log(error);
@@ -78,14 +96,22 @@ class DangNhapController {
                    
                     res.cookie('user', req.user);
                 
-                     res.redirect('/');
+                    if(isgotocart == 1){
+                        res.redirect(`/giohang?id=${idsp}`)
+                    }else{
+                        res.redirect("/");
+                    } 
                 }).catch(function (error){
                     console.log(error);
                     res.redirect('/');
                 })
             }else{
                 res.cookie('user', req.user)
-                res.redirect('/');
+                if(isgotocart == 1){
+                    res.redirect(`/giohang?id=${idsp}`)
+                }else{
+                    res.redirect("/");
+                }   
             }
         }).catch(function (error){
             console.log(error);
