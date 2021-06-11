@@ -17,24 +17,28 @@
                                             <div class="flexslider">
                                                 <ul class="slides">
                                                     <li data-thumb="client/img/product/<%= indexct[0].hinhanh %>">
-                                                        <img src="client/img/product/<%= indexct[0].hinhanh %>" alt="woman" />
-                                                     </li>  
+                                                        <img src="client/img/product/<%= indexct[0].hinhanh %>"
+                                                            alt="woman" />
+                                                    </li>
                                                     <% indexct.forEach((el)=>{ %>
                                                         <li data-thumb="client/img/product/<%= el.tenha %>">
                                                             <img src="client/img/product/<%= el.tenha %>" alt="woman" />
-                                                         </li>   
-                                                    <% }) %>
-                                                     
+                                                        </li>
+                                                        <% }) %>
+
                                                 </ul>
                                             </div>
                                         </div>
                                         <div class="col-lg-7 col-md-7 col-sm-6 col-xs-12">
                                             <div class="product-info-main">
                                                 <div class="page-title">
-                                                    <h1><%= indexct[0].tensp %></h1>
+                                                    <h1>
+                                                        <%= indexct[0].tensp %>
+                                                    </h1>
                                                 </div>
                                                 <div class="th">
-                                                    <p>Thương hiệu: <%= indexct[0].tenth %></p>
+                                                    <p>Thương hiệu: <%= indexct[0].tenth %>
+                                                    </p>
                                                 </div>
                                                 <div class="product-reviews-summary">
                                                     <div class="rating-summary">
@@ -49,17 +53,20 @@
                                                         <a href="#" class="view">Add Your Review</a>
                                                     </div>
                                                 </div>
-                                                
+
                                                 <div class="product-info-price">
                                                     <div class="price-final">
-                                                        <span><%= indexct[0].giatien %></span>
+                                                        <span>
+                                                            <%= indexct[0].giatien %>
+                                                        </span>
                                                         <span class="old-price">$40.00</span>
                                                     </div>
                                                 </div>
                                                 <div class="product-social-links">
                                                     <div class="product-add-form">
                                                         <form action="#">
-                                                            <a href="/giohang?id=<%= indexct[0].masp %>">Thêm giỏ hàng</a>
+                                                            <a href="/giohang?id=<%= indexct[0].masp %>">Thêm giỏ
+                                                                hàng</a>
                                                         </form>
                                                     </div>
                                                     <div class="product-addto-links">
@@ -68,7 +75,9 @@
                                                         <a href="#"><i class="fa fa-envelope-o"></i></a>
                                                     </div>
                                                     <div class="product-addto-links-text">
-                                                        <p><%= indexct[0].mota %></p>
+                                                        <p>
+                                                            <%= indexct[0].mota %>
+                                                        </p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -98,193 +107,19 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <!-- comments container -->
-                <div class="comment_block">
-                    <!-- 
-                        Comments are structured in the following way:
-            
-                        {ul} defines a new comment (singular)
-                        {li} defines a new reply to the comment {ul}
-            
-                        example:
-            
-                        <ul>
-                            <comment>
-                                
-                            </comment
-            
-                                <li>
-                                    <reply>
-            
-                                    </reply>
-                                </li>
-            
-                                <li>
-                                    <reply>
-            
-                                    </reply>
-                                </li>
-            
-                                <li>
-                                    <reply>
-            
-                                    </reply>
-                                </li>
-                        </ul>
-            
-                    -->
-            
-                    <!-- used by #{user} to create a new comment -->
-                    <div class="create_new_comment">
-                        <!-- current #{user} avatar -->
-                        <div class="user_avatar">
-                            <img src="https://s3.amazonaws.com/uifaces/faces/twitter/BillSKenney/73.jpg">
-                        </div><!-- the input field --><div class="input_comment">
-                            <input type="text" placeholder="Join the conversation..">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div id="fb-root"></div>
+                                <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v11.0&appId=875077256741653&autoLogAppEvents=1" nonce="ikCEyGr9"></script>
+                                <div class="fb-comments" data-href="http://localhost:3000/chitietsp?id=<%= indexct[0].masp %>" data-width="100%" data-numposts="10"></div>
+                            </div>
                         </div>
-            
-                    </div>
-                    <!-- new comment -->
-                    <div class="new_comment">
-                        <!-- build comment -->
-                        <ul class="user_comment">
-                            <!-- current #{user} avatar -->
-                            <div class="user_avatar">
-                                <img src="https://s3.amazonaws.com/uifaces/faces/twitter/dancounsell/73.jpg">
-                            </div><!-- the comment body --><div class="comment_body">
-                                <p>Gastropub cardigan jean shorts, kogi Godard PBR&B lo-fi locavore. Organic chillwave vinyl Neutra. Bushwick Helvetica cred freegan, crucifix Godard craft beer deep v mixtape cornhole Truffaut master cleanse pour-over Odd Future beard. Portland polaroid iPhone.</p>
-                            </div>
-                            <!-- comments toolbar -->
-                            <div class="comment_toolbar">
-                                <!-- inc. date and time -->
-                                <div class="comment_details">
-                                    <ul>
-                                        <li><i class="fa fa-clock-o"></i> 13:94</li>
-                                        <li><i class="fa fa-calendar"></i> 04/01/2015</li>
-                                        <li><i class="fa fa-pencil"></i> <span class="user">John Smith</span></li>
-                                    </ul>
-                                </div><!-- inc. share/reply and love --><div class="comment_tools">
-                                    <ul>
-                                        <li><i class="fa fa-share-alt"></i></li>
-                                        <li><i class="fa fa-reply"></i></li>
-                                        <li><i class="fa fa-heart love"></i></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- start user replies -->
-                        <li> 
-                            <!-- current #{user} avatar -->
-                            <div class="user_avatar">
-                                <img src="https://s3.amazonaws.com/uifaces/faces/twitter/manugamero/73.jpg">
-                            </div><!-- the comment body --><div class="comment_body">
-                                <p><div class="replied_to"><p><span class="user">John Smith:</span>Gastropub cardigan jean shorts, kogi Godard PBR&B lo-fi locavore. Organic chillwave vinyl Neutra. Bushwick Helvetica cred freegan, crucifix Godard craft beer deep v mixtape cornhole Truffaut master cleanse pour-over Odd Future beard. Portland polaroid iPhone.</p></div>That's exactly what I was thinking!</p>
-                            </div>
-                            <!-- comments toolbar -->
-                            <div class="comment_toolbar">
-                                <!-- inc. date and time -->
-                                <div class="comment_details">
-                                    <ul>
-                                        <li><i class="fa fa-clock-o"></i> 14:52</li>
-                                        <li><i class="fa fa-calendar"></i> 04/01/2015</li>
-                                        <li><i class="fa fa-pencil"></i> <span class="user">Andrew Johnson</span></li>
-                                    </ul>
-                                </div><!-- inc. share/reply and love --><div class="comment_tools">
-                                    <ul>
-                                        <li><i class="fa fa-share-alt"></i></li>
-                                        <li><i class="fa fa-reply"></i></li>
-                                        <li><i class="fa fa-heart love"><span class="love_amt"> 4</span></i></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </li>
-                            <!-- start user replies -->
-                        <li>    
-                            <!-- current #{user} avatar -->
-                            <div class="user_avatar">
-                                <img src="https://s3.amazonaws.com/uifaces/faces/twitter/ManikRathee/73.jpg">
-                            </div><!-- the comment body --><div class="comment_body">
-                                <p><div class="replied_to"><p><span class="user">John Smith:</span>Gastropub cardigan jean shorts, kogi Godard PBR&B lo-fi locavore. Organic chillwave vinyl Neutra. Bushwick Helvetica cred freegan, crucifix Godard craft beer deep v mixtape cornhole Truffaut master cleanse pour-over Odd Future beard. Portland polaroid iPhone.</p></div>Finally someone who actually gets it!<div class="replied_to"><p><span class="user">Andrew Johnson:</span>That's exactly what I was thinking!</p></div>That's awesome!</p>
-                            </div>
-                            <!-- comments toolbar -->
-                            <div class="comment_toolbar">
-                                <!-- inc. date and time -->
-                                <div class="comment_details">
-                                    <ul>
-                                        <li><i class="fa fa-clock-o"></i> 14:59</li>
-                                        <li><i class="fa fa-calendar"></i> 04/01/2015</li>
-                                        <li><i class="fa fa-pencil"></i> <span class="user">Simon Gregor</span></li>
-                                    </ul>
-                                </div><!-- inc. share/reply and love --><div class="comment_tools">
-                                    <ul>
-                                        <li><i class="fa fa-share-alt"></i></li>
-                                        <li><i class="fa fa-reply"></i></li>
-                                        <li><i class="fa fa-heart love"><span class="love_amt"> 4039</span></i></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </li>
-                        </ul>
-                    </div>
-                    <!-- new comment -->
-                    <div class="new_comment">
-                        <!-- build comment -->
-                        <ul class="user_comment">
-                            <!-- current #{user} avatar -->
-                            <div class="user_avatar">
-                                <img src="https://s3.amazonaws.com/uifaces/faces/twitter/kfriedson/73.jpg">
-                            </div><!-- the comment body --><div class="comment_body">
-                                <p>Gastropub cardigan jean shorts, kogi Godard PBR&B lo-fi locavore. Organic chillwave vinyl Neutra. Bushwick Helvetica cred freegan, crucifix Godard craft beer deep v mixtape cornhole Truffaut master cleanse pour-over Odd Future beard. Portland polaroid iPhone.</p>
-                            </div>
-                            <!-- comments toolbar -->
-                            <div class="comment_toolbar">
-                                <!-- inc. date and time -->
-                                <div class="comment_details">
-                                    <ul>
-                                        <li><i class="fa fa-clock-o"></i> 13:94</li>
-                                        <li><i class="fa fa-calendar"></i> 04/01/2015</li>
-                                        <li><i class="fa fa-pencil"></i> <span class="user">Sarah Walkman</span></li>
-                                    </ul>
-                                </div><!-- inc. share/reply and love --><div class="comment_tools">
-                                    <ul>
-                                        <li><i class="fa fa-share-alt"></i></li>
-                                        <li><i class="fa fa-reply"></i></li>
-                                        <li><i class="fa fa-heart love"></i></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- start user replies -->
-                        <li>    
-                            <!-- current #{user} avatar -->
-                            <div class="user_avatar">
-                                <img src="https://s3.amazonaws.com/uifaces/faces/twitter/cbillins/73.jpg">
-                            </div><!-- the comment body --><div class="comment_body">
-                                <p><div class="replied_to"><p><span class="user">Sarah Walkman:</span>Pork belly migas flexitarian messenger bag Brooklyn gluten-free. Tilde kitsch skateboard Helvetica, lumbersexual four loko direct trade pour-over. Cronut deep v keffiyeh cornhole food truck</p></div>I'm tired, does anybody know a good place to buy extra strength coffee?</p>
-                            </div>
-                            <!-- comments toolbar -->
-                            <div class="comment_toolbar">
-                                <!-- inc. date and time -->
-                                <div class="comment_details">
-                                    <ul>
-                                        <li><i class="fa fa-clock-o"></i> 19:23</li>
-                                        <li><i class="fa fa-calendar"></i> 14/01/2015</li>
-                                        <li><i class="fa fa-pencil"></i> <span class="user">Blake Anderson</span></li>
-                                    </ul>
-                                </div><!-- inc. share/reply and love --><div class="comment_tools">
-                                    <ul>
-                                        <li><i class="fa fa-share-alt"></i></li>
-                                        <li><i class="fa fa-reply"></i></li>
-                                        <li><i class="fa fa-heart love"><span class="love_amt"> 12</span></i></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </li>
-                        </ul>
                     </div>
                 </div>
-                <!-- product-main-area-end -->
-            <%- include ('../partials/footer'); -%>
+               
+                <%- include ('../partials/footer'); -%>
         </div>
     </body>
+    
+
 </html>
