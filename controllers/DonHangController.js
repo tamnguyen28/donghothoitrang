@@ -95,6 +95,7 @@ class DonHangController{
             diachinguoinhan: req.body.address,
             tonghoadon: req.body.tonggiohang,
             ghichu: req.body.note,
+            giohangs: (req.session && req.session.giohang ? req.session.giohang: [] ), 
             phuongthucthanhtoan: req.body.giaohang,
         }
         if(req.body.giaohang == 1){

@@ -44,7 +44,7 @@ class HomeController {
       });
     }).catch((err) => {
       console.log(err);
-      res.render("client/home/index");
+      res.render("client/home/index", {title: "donghothoitrang", giohangs: (req.session && req.session.giohang ? req.session.giohang: []) });
     });
   }
 }
