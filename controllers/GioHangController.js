@@ -2,16 +2,17 @@ const homeModel = require("../models/HomeModel");
 
 class GioHangController {
   index(req, res) {
-    // console.log(req.get('env'));//devlopment hoặc production
     
     // neu chua danh nhap
     if (!req.cookies.user) { 
       res.redirect(`/dangnhap?isgotocart=1&id=${req.query.id}`);
     }
+
     // neu khong ton tai gio hang
     if (!req.session.giohang) {
       req.session.giohang = [];
     }
+
     homeModel.getProductBy(req.query.id).then(function (result) {
         //kiem tra ton tai va lay doi tuong ton tai
         let flag = false;
@@ -40,15 +41,15 @@ class GioHangController {
               });
         }
         // console.log( req.session.giohang.length);
-        res.render("client/giohang/giohang", {
+        return res.render("client/giohang/giohang", {
           title: "Giỏ hàng",
           giohangs: req.session.giohang,
         });
       })
-      .catch(function (errro) {
-        res.render("client/giohang/giohang", {
+      .catch(function (err) {
+        return res.render("client/giohang/giohang", {
           title: "Giỏ hàng",
-          giohangs: [],
+          giohangs: req.session.giohang ? req.session.giohang: []
         });
       });
   }
