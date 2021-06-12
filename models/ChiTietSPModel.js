@@ -18,36 +18,6 @@ class ChiTietSpModel{
             })
         })
     }
-
-
-    loadBinhLuan(idsp){
-        return new Promise(function(resolve, reject){
-            let query = `SELECT * FROM binhluan where id_masp = ${idsp}`;
-            conn.query(query, function(error, result){
-                if(error){
-                    reject(error);
-                }else{
-                    let slbl = result.length;
-                    for(let i = 0; i < slbl; i++){
-                        let childBinhLuan = `SELECT * FROM binhluan where id_masp = ${idsp} and isParrent = ${result[i].mabl}`;
-                        conn.query(childBinhLuan, function(errorChild, resultchild){
-                            if(errorChild){
-                                console.log(errorChild);
-                            }else{
-                                childbl.push(resultchild)  
-                            }
-                        })
-                    }
-
-                    resolve([result,childbl]);      
-                }
-            })
-        })
-    }
 }
 
-
-
 module.exports = new ChiTietSpModel();
-
-// SELECT * from sanpham JOIN bohinhanh on sanpham.masp = bohinhanh.id_masp WHERE sanpham.masp = ?
