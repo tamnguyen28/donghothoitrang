@@ -4,6 +4,11 @@ const AdtintucModel = require('../models/AdtintucModel');
 let oldFileName = null;
 class AdtintucController{
     tintuc(req, res, next){
+        
+        if(!req.cookies.admin){
+            return res.redirect('/admin/login')
+        }
+
         let loadTT = [];
         AdtintucModel.loadtintuc().then(result => {
             loadTT = result;

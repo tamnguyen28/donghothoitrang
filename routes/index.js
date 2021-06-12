@@ -18,9 +18,11 @@ const adloginRouter = require('./adlogin');
 const adkhachhangRouter = require('./adkhachhang');
 const adtintucRouter = require('./adtintuc');
 const addonhangRouter = require('./addonhang');
+const adnhanvienRouter = require('./adnhanvien');
 
 function route(app){
-
+    
+    app.use('/admin/nhanvien', adnhanvienRouter);
     app.use('/admin/donhang', addonhangRouter);
     app.use('/admin/tintuc', adtintucRouter);
     app.use('/admin/khachhang', adkhachhangRouter);

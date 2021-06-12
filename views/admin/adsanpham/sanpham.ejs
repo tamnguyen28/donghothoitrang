@@ -37,8 +37,10 @@
                            <td><%= sp.giatien %></td>
                            <td><%= sp.id_maloai == 1 ? 'Đồng hồ nam' : 'Đồng hồ nữ' %></td>
                            <td><%= sp.trangthai == 1 ? 'Còn hàng' : 'Sắp Hết hàng' %></td>
-                           <td><img src="client/img/product/<%= sp.hinhanh %>"></td>
-                           <td><%= sp.id_math %></td>
+                           <td>
+                             <img src="client/img/product/<%= sp.hinhanh %>">
+                          </td>
+                           <td><%= sp.tenth %></td>
                            <td><a href="/admin/sanpham/update?id=<%= sp.masp %>" class="btn btn-primary">Cập nhật</a> 
                               <a href="/admin/sanpham/delete?id=<%= sp.masp %>" class="btn btn-danger">Xóa</a></td>
                          </tr>
@@ -60,7 +62,7 @@
 <script>
    let mess = '<%= mess %>';
    if(mess && mess == 1){
-      alert('san pham co don hang');
+      alert('sản phẩm có trong đơn hàng');
    }
 </script>
 </html>

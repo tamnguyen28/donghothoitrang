@@ -4,16 +4,20 @@ const conn = require('../models/config/connect');
 let oldFileName = null;
 let oldSp = null; 
 class AdsanphamController {
-    
     //[GET] /admin
     index(req, res, next) {
+            
+        if(!req.cookies.admin){
+            return res.redirect('/admin/login')
+        }
+
         let loadSP = [];
         AdsanphamModel.loadSanPham().then(result => {
             loadSP = result;
             res.render('admin/adsanpham/sanpham', {
                 title: 'sanpham',
                 sanpham: loadSP,
-                mess: req.query.mess && req.query.mess == 1 ? req.query.mess: ''
+                mess: req.query.mess && req.query.mess == 1 ? req.query.mess : ''
             })
 
         }).catch(err => {
@@ -113,7 +117,6 @@ class AdsanphamController {
                 AdsanphamModel.deleteSanPham(idsanpham).then(function(resultDeleteProduct){
                     res.redirect('/admin/sanpham');
                 }).catch(function(error){
-                    // console.log(error);
                     res.redirect('/admin/sanpham');
                 })
             }else{

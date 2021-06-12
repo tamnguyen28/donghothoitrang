@@ -36,21 +36,18 @@
                                         <td id="<%= donhang.mahd %>"><%= donhang.trangthai == 1 ? 'Đã xử lý': 'Chưa xử lý' %></td>
                                         <td><%= donhang.tgtao %></td>
                                     </tr>
-                                    <!-- <%= donhang.trangthai == 0 ? 'selected': '' %> -->
-
                                 </table>
                                 <br/>
                                 <h4>Cập nhật tình trạng đơn hàng</h4><br>
-                                <select id="<%= donhang.mahd %>" class="form-control" name="xuly" onchange="changeStatus(this)">
+                                <select id="<%= donhang.mahd %>" class="form-control" name="xuly" onchange="changeStatus(this) ">
                                     <option value="-1">--Chọn tình trạng--</option>
                                     <option value="1" >Đã xử lý</option>
                                     <option value="0">Chưa xử lý</option>
                                 </select><br>
-                                <input type="button" onclick="updateStatusBill()" value="Cập nhật đơn hàng" name="capnhatdonhang" class="btn btn-success">
+                                <input type="button" onclick="updateStatusBill()" value="Cập nhật đơn hàng" name="capnhatdonhang" class="btn btn-success"><br/>
+                                <br/>
+                                <a href="admin/donhang">Quay lại?</a>
                             </div>
-                            <br/>
-                            <br/>
-                            <a href="admin/donhang">Quay lại?</a>
                         </section>
 
                         <%- include('../partials/adminfooter'); -%>
@@ -65,7 +62,6 @@
         function changeStatus(elselect){
             status = elselect.value;
             idDH = elselect.id;
-           
         }
 
         function updateStatusBill(){
