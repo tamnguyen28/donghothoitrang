@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/adminhead'); -%>
+<body>
+<section id="container">
+<%- include('../partials/adminheader'); -%>
+<%- include('../partials/adminleft'); -%>
+<!--main content start-->
+<section id="main-content">
+	<section class="wrapper">
+		   <div class="clearfix">
+            <div class="table-agile-info">
+                <div class="panel panel-default">
+                   <div class="panel-heading">
+                    NHÂN VIÊN
+                   </div>
+                   <div>
+                    
+                     <table class="table" ui-jq="footable">
+                       <thead>
+                         <tr>
+                           <th data-breakpoints="xs">Mã nhân viên</th>
+                           <th>Tên nhân viên</th>
+                           <th>Email</th>
+                           <th>Mật khẩu</th>
+                           <th>Số điện thoại</th>
+                           <th>Trạng thái</th>
+                           <th>Quản lý</th>
+                           <td><a href="/admin/nhanvien/createnv" class="btn btn-success">Thêm nhân viên</a></td>
+                         </tr>
+                       </thead>
+                       <tbody>
+                        <% nhanvien.forEach(function(nv){ %>
+                         <tr data-expanded="true">
+                           <td><%= nv.manv %></td>
+                           <td><%= nv.tennv %></td>
+                           <td><%= nv.email %></td>
+                           <td><%= nv.matkhau %></td>
+                           <td><%= nv.sodienthoai %></td>
+                           <td><%= nv.trangthai == 1 ? 'Hoạt động' : 'Không hoạt động' %></td>
+                           <td><%= nv.id_maloainv == 1 ? 'Quản trị viên' : 'Nhân viên'%></td>
+                           <td>
+                              <a href="/admin/nhanvien/deleteNV?id=<%= nv.manv %>" class="btn btn-danger">Xóa</a></td>
+                            </td>
+                            </tr>
+                        <% }); %>
+                       </tbody>
+                     </table>
+                   
+                   </div>
+                 </div>
+            </div>
+        </div>
+  </section>
+<%- include('../partials/adminfooter'); -%>
+</section>
+<!--main content end-->
+</section>
+<%- include('../partials/adminscript_bottom'); -%>
+</body>
+</html>
+

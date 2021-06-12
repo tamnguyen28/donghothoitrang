@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/adminhead'); -%>
+
+    <body>
+        <section id="container">
+            <%- include('../partials/adminheader'); -%>
+                <%- include('../partials/adminleft'); -%>
+                    <!--main content start-->
+                    <section id="main-content">
+                        <section class="wrapper">
+                            <div class="clearfix">
+                                <div class="table-agile-info">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            THÊM NHÂN VIÊN
+                                        </div>
+                                        <form method="POST" action="/admin/nhanvien/createnhanvien">
+                                            <label>Tên nhân viên</label>
+                                            <input type="text" class="form-control" name="tennv"
+                                                placeholder="Tên nhân viên"><br>
+                                            <label>Email</label>
+                                            <input type="email" class="form-control" name="email">
+                                            <br>
+                                            <label>Mật khẩu</label>
+                                            <input type="password" class="form-control" name="matkhau">
+                                            <br>
+                                            <label>Số điện thoại</label>
+                                            <input type="text" class="form-control" name="sodienthoai">
+                                            <br>
+                                            <label>Trạng thái</label> <br />
+                                            <input name="trangthai" type="radio" value="1" checked="checked">
+                                              Hoạt động
+                                            <input name="trangthai" type="radio" value="0"> Không hoạt động <br />
+                                            <br />
+                                      
+                                            <label>Quản lý</label>
+                                            <select name="id_maloainv" class="form-control">
+                                                <option value="0">------Chọn loại quản lý-------</option>
+                                                <% for(let i=0; i < loaiNvs.length; i++) {%>
+                                                    <option value="<%= loaiNvs[i].maloainv %>">
+                                                        <%= loaiNvs[i].tenloainv %>
+                                                    </option>
+                                                    <% } %>
+                                            </select><br>
+                                            
+                                            <input type="submit" name="themnhanvien" value="Thêm nhân viên"
+                                                class="btn btn-primary"><br/>
+                                            <br/>
+                                            <a href="admin/nhanvien">Quay lại?</a>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <%- include('../partials/adminfooter'); -%>
+                    </section>
+                    <!--main content end-->
+        </section>
+        <%- include('../partials/adminscript_bottom'); -%>
+    </body>
+
+</html>

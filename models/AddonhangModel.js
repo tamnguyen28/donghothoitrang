@@ -18,7 +18,8 @@ class AddonhangModel {
     getOrderByOrderId(idhd) {
         return new Promise(function (resolve, reject) {
         
-            let  queryCustomer = `SELECT hoadon.*, sanpham.masp, sanpham.tensp from hoadon JOIN chitiethoadon on hoadon.mahd = chitiethoadon.mahd 
+            let  queryCustomer = `SELECT hoadon.*, sanpham.masp, sanpham.tensp from hoadon 
+                                JOIN chitiethoadon on hoadon.mahd = chitiethoadon.mahd 
                                 JOIN sanpham on sanpham.masp = chitiethoadon.masp where hoadon.mahd = ?`
 
             conn.query(queryCustomer, [idhd], function (error, result) {

@@ -4,6 +4,11 @@ const conn = require('../models/config/connect');
 class AddonhangController{
     //[GET] /admin/donhang
     donhang(req, res, next){
+
+        if(!req.cookies.admin){
+            return res.redirect('/admin/login')
+        }
+
         let loadDH = [];
         AddonhangModel.loadDonHang().then(result =>{
         loadDH = result;
@@ -30,7 +35,7 @@ class AddonhangController{
     deleteOrder(req, res){
         let iddonhang = req.query.id;
         let status = req.query.status;
-        
+        console.log(typeof status);
         if(status != 0){
             AddonhangModel.deleteDonHang(iddonhang).then(function(result){
                 res.redirect('/admin/donhang');
@@ -40,12 +45,9 @@ class AddonhangController{
         }else{
             res.redirect('/admin/donhang?mess=1');
         }
-       
     }
     updateOrder(req, res){
-       
         AddonhangModel.getOrderByOrderId(req.query.id).then(result =>{
-            console.log(result[0]);
         res.render('admin/addonhang/updatestatus',{
             title: 'updateStatus',
             donhang: result[0]})

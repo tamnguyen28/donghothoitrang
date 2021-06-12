@@ -22,9 +22,9 @@
                                             <label>Nội dung</label><br />
                                             <textarea id="mota" name="noidung" rows="4" cols="140"></textarea><br />
 
-                                            <label><img src="">Hình ảnh</label>
-                                            <input type="file" class="form-control" name="hinhanh" placeholder="Hình ảnh"><br>
-
+                                            <label>Hình ảnh</label>
+                                            <input id="imgtintuc" type="file" class="form-control" name="hinhanh" placeholder="Hình ảnh"><br>
+                                            <img id="blah" src="#" alt="your image" width="100" height="100" /><br/>
                                             <label>Trạng thái</label> <br />
                                             <input name="trangthai" type="radio" value="1" checked="checked"> Bật
                                             <input name="trangthai" type="radio" value="0"> Tắt <br />
@@ -46,5 +46,14 @@
         </section>
         <%- include('../partials/adminscript_bottom'); -%>
     </body>
+
+    <script>
+        imgtintuc.onchange = evt => {
+            const [file] = imgtintuc.files
+            if (file) {
+                blah.src = URL.createObjectURL(file)
+            }
+        }
+    </script>
 
 </html>

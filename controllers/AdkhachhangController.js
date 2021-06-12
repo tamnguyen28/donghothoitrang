@@ -4,6 +4,11 @@ const conn = require('../models/config/connect');
 class AdkhachhangController{
     //[GET] /admin/khachhang
     khachhang(req, res, next){
+
+        if(!req.cookies.admin){
+            return res.redirect('/admin/login')
+        }
+
         let loadKH = [];
         AdkhachhangModel.loadKhachHang().then(result =>{
         loadKH = result;

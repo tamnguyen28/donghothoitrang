@@ -33,7 +33,7 @@
                                    <td><%= tt.tieude %></td>
                                    <td><textarea id="tintuc" name="tintuc" rows="6" cols="60"><%= tt.noidung %></textarea></td>
                                    <td><img src="client/img/tintuc/<%= tt.hinhanh %>"></td>
-                                   <td><%= tt.trangthai %></td>
+                                   <td><%= tt.trangthai ==1 ? 'Bật' : 'Tắt' %></td>
                                    <td><%= tt.tgtao %></td>
                                    <td><a href="admin/tintuc/updateblog?id=<%= tt.matt %>" class="btn btn-primary">Cập nhật</a>
                                         <a href="admin/tintuc/deleteblog?id=<%= tt.matt %>" class="btn btn-danger">Xóa</a></td>

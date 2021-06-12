@@ -3,7 +3,9 @@ const conn = require('./config/connect');
 class AdsanphamModel {
     loadSanPham() {
         return new Promise(function (resolve, reject) {
-            let sqlquery = `SELECT * FROM sanpham Where isDelete = 0 ORDER BY masp DESC`;
+            let sqlquery = `SELECT sanpham.*, thuonghieu.tenth FROM sanpham 
+            JOIN thuonghieu on sanpham.id_math = thuonghieu.math
+            Where isDelete = 0 ORDER BY masp DESC`;
             conn.query(sqlquery, function (err, result) {
                 if (err) {
                     reject(err);
