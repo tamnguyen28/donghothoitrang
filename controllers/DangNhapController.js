@@ -90,11 +90,10 @@ class DangNhapController {
             matkhau: "",
             ptdangnhap: req.user.provider,
         }
+        res.cookie('user', req.user);
         dangkyModel.checkKhachHangTonTai(khachhangfb).then(function(resultLength){
             if(resultLength == 0){
                 dangkyModel.dangky(khachhangfb).then(function (resultfb){
-                   
-                    res.cookie('user', req.user);
                 
                     if(isgotocart == 1){
                         res.redirect(`/giohang?id=${idsp}`)
