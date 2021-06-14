@@ -113,6 +113,7 @@ class DonHangController{
               request.end();
         }else{
             donhangModel.themthongtin(thongtin).then(function(result) {
+                req.session.giohang = [];
                 res.redirect('/?mess=2')
             }).catch(err => {
                 console.log(err);
