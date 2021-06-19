@@ -33,7 +33,8 @@ class DangNhapController {
         console.log(err);
         res.render("client/dangnhap/dangnhap", {
           title: "Đăng nhập",
-          message: "Đăng nhập thất bại",
+          message: "Sai tên đăng nhập hoặc mật khẩu. Đăng nhập thất bại",
+          giohangs: (req.session && req.session.giohang ? req.session.giohang: [] ) 
         });
       });
   }
@@ -90,11 +91,10 @@ class DangNhapController {
             matkhau: "",
             ptdangnhap: req.user.provider,
         }
-        res.cookie('user', req.user);
         dangkyModel.checkKhachHangTonTai(khachhangfb).then(function(resultLength){
             if(resultLength == 0){
                 dangkyModel.dangky(khachhangfb).then(function (resultfb){
-                
+                    res.cookie('user', {makh: resultfb});
                     if(isgotocart == 1){
                         res.redirect(`/giohang?id=${idsp}`)
                     }else{
@@ -105,12 +105,17 @@ class DangNhapController {
                     res.redirect('/');
                 })
             }else{
-                res.cookie('user', req.user)
-                if(isgotocart == 1){
-                    res.redirect(`/giohang?id=${idsp}`)
-                }else{
-                    res.redirect("/");
-                }   
+                dangkyModel.getAccountByID(req.user.id).then(function(result){
+                    res.cookie('user', result)
+                    if(isgotocart == 1){
+                        res.redirect(`/giohang?id=${idsp}`)
+                    }else{
+                        res.redirect("/");
+                    }   
+                }).catch(function(error){
+                    console.log(error);
+                })
+              
             }
         }).catch(function (error){
             console.log(error);

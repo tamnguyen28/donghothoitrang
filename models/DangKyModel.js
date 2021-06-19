@@ -27,7 +27,7 @@ class DangKyModel {
           } else {
             if (result.insertId) {
               //insertId là cái id mới add vào(khóa chính tự tăng theo makh)
-              resolve(true);
+              resolve(result.insertId);
             } else {
               reject(false);
             }
@@ -50,6 +50,20 @@ class DangKyModel {
         }
       });
     });
+  }
+
+  getAccountByID(idCustomer){
+    return new Promise(function(resolve, reject){
+        let queryCustomer = `Select * from khachhang where khachhang.tendangnhap = ?`;
+
+        conn.query(queryCustomer, [idCustomer],function(error, result){
+            if(error){
+                reject(error)
+            }else{
+                resolve(result[0])
+            }
+        })
+    })
   }
 }
 

@@ -89,6 +89,7 @@ class DonHangController{
     }
 
     savethongtin(req, res){
+        
         thongtin = {
             tennguoinhan: req.body.name,
             sdtnguoinhan: req.body.phone,
@@ -97,6 +98,7 @@ class DonHangController{
             ghichu: req.body.note,
             giohangs: (req.session && req.session.giohang ? req.session.giohang: [] ), 
             phuongthucthanhtoan: req.body.giaohang,
+            idkh: req.cookies.user.makh
         }
         if(req.body.giaohang == 1){
             var request = https.request(options, (respone) => {

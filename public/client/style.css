@@ -5004,12 +5004,11 @@ nav.menu .cr-dropdown ul {
     font-weight: 400;
 }
 .login-form .single-login input {
-    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
-    border: 1px solid #eceff8;
     padding: 12px 10px;
     width: 100%;
     font-family: 'Rufina', serif;
     font-weight: 400;
+    color: #fff;
 }
 .login-form .single-login a {
     background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
