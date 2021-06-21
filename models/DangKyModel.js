@@ -5,7 +5,7 @@ class DangKyModel {
   dangky(khachhang) {
     return new Promise(function (resolve, reject) {
       let querykhachhang =
-        "INSERT INTO khachhang VALUES (NULL,?,?,?,?,?,?,?,1,NULL)";
+        "INSERT INTO khachhang VALUES (NULL,?,?,?,?,?,?,?,1,current_timestamp())";
       let passkh =
         khachhang.matkhau && khachhang.matkhau != ""
           ? md5(khachhang.matkhau)

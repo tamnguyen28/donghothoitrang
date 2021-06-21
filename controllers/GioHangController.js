@@ -43,7 +43,7 @@ class GioHangController {
         // console.log( req.session.giohang.length);
         return res.render("client/giohang/giohang", {
           title: "Giỏ hàng",
-          giohangs: req.session.giohang,
+          giohangs: req.session.giohang ? req.session.giohang : [] ,
         });
       })
       .catch(function (err) {

@@ -39,6 +39,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                
                                                 <% for (let i = 0; i < giohangs.length; i++) {%>
                                                     <tr>
                                                         <td></td>
@@ -54,7 +55,8 @@
                                                             <a href="/giohang/xoagiohang?id=<%= giohangs[i].masp%>">Xóa</a>
                                                         </td>
                                                     </tr>
-                                             <% }%>
+                                                <% }%>
+                                             
                                             <tr>
                                                 <td colspan="7" >Tổng tiền: <span id="totalAmout"><% let totoal = 0; for(let i = 0; i < giohangs.length; i++){totoal += giohangs[i].tongtien;} %> <%= totoal %></span></td>
                                             </tr>

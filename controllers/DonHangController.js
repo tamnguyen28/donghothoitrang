@@ -75,7 +75,7 @@ class DonHangController{
                 message: req.query.localMessage ? req.query.localMessage : '' 
             });
         }
-        let sl = req.session.giohang.length;
+        let sl = req.session.giohang ? req.session.giohang.length: 0;
         let total = 0;
         for(let i = 0; i < sl; i++){
             total += req.session.giohang[i].tongtien
