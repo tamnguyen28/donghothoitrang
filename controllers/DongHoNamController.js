@@ -14,6 +14,8 @@ class DongHoNamController {
                         indexnam: resultnam,
                         indexTH: resultTH,
                         indexRD: resultRD,
+                        tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
+                        idkh:  req.cookies.user ? req.cookies.user.makh: 0 ,
                         giohangs: (req.session && req.session.giohang ? req.session.giohang: [] )
                     });
                 }).catch((err) => {

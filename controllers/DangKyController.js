@@ -4,6 +4,8 @@ class DangKyController {
     dangky(req, res){
         res.render('client/dangky/dangky', {
             title: 'dang ky',
+            tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
+            idkh:  req.cookies.user ? req.cookies.user.makh: 0 ,
             giohangs: (req.session && req.session.giohang ? req.session.giohang: [] )  
         });
     }

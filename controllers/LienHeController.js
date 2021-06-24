@@ -5,6 +5,8 @@ class LienHeController{
         res.render('client/lienhe/lienhe',{
             title: 'Liên hệ', 
             message: '',
+            tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
+            idkh:  req.cookies.user ? req.cookies.user.makh: 0 ,
             giohangs: (req.session && req.session.giohang ? req.session.giohang: [] )  
         });
     }
@@ -20,6 +22,8 @@ class LienHeController{
             res.render('client/lienhe/lienhe',{
                 title: 'Liên hệ', 
                 message:'Gửi ý kiến thành công',
+                tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
+                idkh:  req.cookies.user ? req.cookies.user.makh: 0 ,
                 giohangs: (req.session && req.session.giohang ? req.session.giohang: [] )  
             },);
         }).catch(err => {

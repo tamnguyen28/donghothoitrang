@@ -72,7 +72,9 @@ class DonHangController{
                 title: 'Đơn hàng',
                 giohangs: [],
                 totalAmount: 0,
-                message: req.query.localMessage ? req.query.localMessage : '' 
+                message: req.query.localMessage ? req.query.localMessage : '' ,
+                tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
+                idkh:  req.cookies.user ? req.cookies.user.makh: 0 ,
             });
         }
         let sl = req.session.giohang ? req.session.giohang.length: 0;
@@ -84,7 +86,9 @@ class DonHangController{
            title: 'Đơn hàng',
            giohangs:  !req.session.giohang ? [] : req.session.giohang, 
            totalAmount: total,
-           message: ''
+           message: '',
+           tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
+           idkh:  req.cookies.user ? req.cookies.user.makh: 0 ,
         });
     }
 

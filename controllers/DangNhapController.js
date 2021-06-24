@@ -10,6 +10,8 @@ class DangNhapController {
     res.render("client/dangnhap/dangnhap", { 
         title: "Đăng nhập", 
         message: "",
+        idkh:0,
+        tenkh: '',
         giohangs: (req.session && req.session.giohang ? req.session.giohang: [] )  
     });
   }
@@ -17,7 +19,6 @@ class DangNhapController {
   postLogin(req, res) {
     let tendangnhap = req.body.username;
     let matkhau = req.body.password;
- 
     
     dangnhapModel
       .dangnhap(tendangnhap, matkhau)
@@ -26,7 +27,8 @@ class DangNhapController {
         if(isgotocart == 1){
             res.redirect(`/giohang?id=${idsp}`)
         }else{
-            res.redirect("/");
+            console.log(result);
+            res.redirect(`/`);
         }   
       })
       .catch(function (err) {
