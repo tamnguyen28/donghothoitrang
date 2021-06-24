@@ -1,4 +1,5 @@
 const donhangModel = require('../models/DonHangModel');
+const mail = require('../models/configmail/configmail')
 
 const uuidv1 = require('uuidv1');
 const https = require('https');
@@ -10,7 +11,7 @@ var partnerCode = "MOMOFIL020210605"
 var accessKey = "BK3xGm6SRVQl9JRE"
 var serectkey = "1dmGQbz6c3JSrgDWjTxvov36XteMoLYO"
 var orderInfo = "pay with MoMo"
-var returnUrl = "https://donghothoitrang.herokuapp.com/donhang?payonline=1"; //
+var returnUrl = "http://localhost:3000/donhang?payonline=1"; //
 var notifyurl = "https://callback.url/notify"
 var amount = "50000"
 var orderId = uuidv1()
@@ -64,6 +65,15 @@ class DonHangController{
     index(req, res){
         if(req.query.payonline && req.query.message == 'Success'){
             req.session.giohang = [];
+            let contentDonhang = `Bạn đã đặt hàng thành công, đơn hàng sẽ vận chuyển đến bạn trong thời gian sớm nhất! Cảm ơn bạn đã mua hàng!
+                Tên người nhận: ${thongtin.tennguoinhan},
+                Số điện thoại người nhận: ${thongtin.sdtnguoinhan},
+                Địa chỉ người nhận: ${thongtin.diachinguoinhan},
+                Email người nhận: ${thongtin.emailnguoinhan},
+                Tổng hóa đơn: ${thongtin.tonghoadon},
+                Ghi chú: ${thongtin.ghichu}`
+                let emailTo = thongtin.emailnguoinhan;
+                mail.sendmail(emailTo, 'FULLTIME', contentDonhang);
             donhangModel.themthongtin(thongtin).then(function(result) { 
             }).catch(err => {
                 console.log(err);
@@ -98,6 +108,7 @@ class DonHangController{
             tennguoinhan: req.body.name,
             sdtnguoinhan: req.body.phone,
             diachinguoinhan: req.body.address,
+            emailnguoinhan: req.body.email,
             tonghoadon: req.body.tonggiohang,
             ghichu: req.body.note,
             giohangs: (req.session && req.session.giohang ? req.session.giohang: [] ), 
@@ -120,6 +131,15 @@ class DonHangController{
         }else{
             donhangModel.themthongtin(thongtin).then(function(result) {
                 req.session.giohang = [];
+                let contentDonhang = `Bạn đã đặt hàng thành công, đơn hàng sẽ vận chuyển đến bạn trong thời gian sớm nhất! Cảm ơn bạn đã mua hàng!
+                Tên người nhận: ${thongtin.tennguoinhan},
+                Số điện thoại người nhận: ${thongtin.sdtnguoinhan},
+                Địa chỉ người nhận: ${thongtin.diachinguoinhan},
+                Email người nhận: ${thongtin.emailnguoinhan},
+                Tổng hóa đơn: ${thongtin.tonghoadon},
+                Ghi chú: ${thongtin.ghichu}`
+                let emailTo = thongtin.emailnguoinhan;
+                mail.sendmail(emailTo, 'SHOP FULLTIME', contentDonhang);
                 res.redirect('/?mess=2')
             }).catch(err => {
                 console.log(err);

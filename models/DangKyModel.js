@@ -40,9 +40,9 @@ class DangKyModel {
   checkKhachHangTonTai(khachhang) {
     return new Promise(function (resolve, reject) {
       let queryExist = `SELECT * FROM khachhang 
-        where khachhang.tenkh = ? AND (khachhang.ptdangnhap ='google' OR khachhang.ptdangnhap = 'facebook')`;
+        where khachhang.tendangnhap = ?`;
 
-      conn.query(queryExist, [khachhang.tenkhachang],function (error, result) {
+      conn.query(queryExist, [khachhang.id],function (error, result) {
         if (error) {
             reject(error);
         } else {
@@ -60,6 +60,7 @@ class DangKyModel {
             if(error){
                 reject(error)
             }else{
+                if(result)
                 resolve(result[0])
             }
         })
