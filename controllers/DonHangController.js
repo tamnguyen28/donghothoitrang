@@ -58,6 +58,7 @@ let thongtin = {
     diachinguoinhan:'',
     tonghoadon: '',
     ghichu: '',
+    trangthai: 0,
     phuongthucthanhtoan: 0,
 }
 
@@ -74,6 +75,7 @@ class DonHangController{
                 Ghi chú: ${thongtin.ghichu}`
                 let emailTo = thongtin.emailnguoinhan;
                 mail.sendmail(emailTo, 'FULLTIME', contentDonhang);
+            thongtin.trangthai = 1;
             donhangModel.themthongtin(thongtin).then(function(result) { 
             }).catch(err => {
                 console.log(err);
@@ -129,6 +131,7 @@ class DonHangController{
               request.write(body);
               request.end();
         }else{
+            thongtin.trangthai = 0;
             donhangModel.themthongtin(thongtin).then(function(result) {
                 req.session.giohang = [];
                 let contentDonhang = `Bạn đã đặt hàng thành công, đơn hàng sẽ vận chuyển đến bạn trong thời gian sớm nhất! Cảm ơn bạn đã mua hàng!

@@ -12,6 +12,7 @@ const giohangRouter = require('./giohang');
 const donhangRouter = require('./donhang');
 const timkiemRouter = require('./timkiem');
 const canhanRouter = require('./canhan');
+const lichsumuahangRouter = require('./lichsumuahang');
 
 const adhomeRouter = require('./adhome');
 const adsanphamRouter = require('./adsanpham');
@@ -32,6 +33,7 @@ function route(app){
     app.use('/admin', adhomeRouter);
     
     //client
+    app.use('/lichsumuahang', lichsumuahangRouter);
     app.use('/canhan', canhanRouter);
     app.use('/timkiem', timkiemRouter);
     app.use('/donhang', donhangRouter);

@@ -3,9 +3,11 @@ const dangkyModel = require("../models/DangKyModel");
 
 let isgotocart = 0;
 let idsp = 0;
+let isgotoLog = 0;
 class DangNhapController {
   dangnhap(req, res) {
     isgotocart = req.query.isgotocart;
+    isgotoLog = req.query.isgotoLog;
     idsp = req.query.id;
     res.render("client/dangnhap/dangnhap", { 
         title: "Đăng nhập", 
@@ -25,11 +27,15 @@ class DangNhapController {
       .then(function (result) {
         res.cookie("user", result);
         if(isgotocart == 1){
-            res.redirect(`/giohang?id=${idsp}`)
-        }else{
-            
-            res.redirect(`/`);
-        }   
+            return res.redirect(`/giohang?id=${idsp}`)
+        }
+           
+        if(isgotoLog == 2){
+           return res.redirect(`/lichsumuahang`);
+        }
+
+        res.redirect(`/`);
+        
       })
       .catch(function (err) {
         console.log(err);
