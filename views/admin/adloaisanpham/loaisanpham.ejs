@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/adminhead'); -%>
+<body>
+<section id="container">
+<%- include('../partials/adminheader'); -%>
+<%- include('../partials/adminleft'); -%>
+<!--main content start-->
+<section id="main-content">
+	<section class="wrapper">
+		   <div class="clearfix">
+            <div class="table-agile-info">
+                <div class="panel panel-default">
+                   <div class="panel-heading">
+                    LOẠI SẢN PHẨM
+                   </div>
+                   <div>
+                    
+                     <table class="table" ui-jq="footable">
+                       <thead>
+                         <tr>
+                           <th data-breakpoints="xs">Mã loại sản phẩm</th>
+                           <th>Tên loại sản phẩm</th>
+                           <th>Thời gian tạo</th>
+                           <td><a href="/admin/loaisanpham/createLSP" class="btn btn-success <%= role && role != 1 ? '' : 'hidden'%>">Thêm loại sản phẩm</a></td>
+                         </tr>
+                       </thead>
+                       <tbody>
+                        <% loaisanpham.forEach(function(loaisp){ %>
+                         <tr data-expanded="true">
+                           <td><%= loaisp.maloai  %></td>
+                           <td><%= loaisp.tenloai %></td>
+                           <td><%= loaisp.tgtao %></td>
+                           <td>
+                            <a href="/admin/loaisanpham/updateLSP?id=<%= loaisp.maloai %>" class="btn btn-primary <%= role && role != 1 ? '' : 'hidden'%>">Cập nhật</a> 
+                            <a href="/admin/loaisanpham/deleteLSP?id=<%= loaisp.maloai %>" class="btn btn-danger <%= role && role != 1 ? '' : 'hidden'%>">Xóa</a>
+                            </td>
+                            </tr>
+                        <% }); %>
+                       </tbody>
+                     </table>
+                   
+                   </div>
+                 </div>
+            </div>
+        </div>
+  </section>
+<%- include('../partials/adminfooter'); -%>
+</section>
+<!--main content end-->
+</section>
+<%- include('../partials/adminscript_bottom'); -%>
+</body>
+</html>
+

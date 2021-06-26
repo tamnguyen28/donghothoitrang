@@ -14,7 +14,10 @@ class AdkhachhangController{
         loadKH = result;
         res.render('admin/adkhachhang/khachhang',{
             title: 'khachhang',
-            khachhang: loadKH})
+            khachhang: loadKH,
+            tennv: req.cookies.admin ? req.cookies.admin.tennv : '',
+            manv: req.cookies.admin ? req.cookies.admin.manv: 0,
+        })
 
         }).catch(err =>{
             res.render('admin/home/index');

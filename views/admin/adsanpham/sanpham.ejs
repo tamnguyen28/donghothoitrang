@@ -2,62 +2,65 @@
 <html lang="en">
 <%- include('../partials/adminhead'); -%>
 <body>
-<section id="container">
-<%- include('../partials/adminheader'); -%>
-<%- include('../partials/adminleft'); -%>
-<!--main content start-->
-<section id="main-content">
-	<section class="wrapper">
-		   <div class="clearfix">
-            <div class="table-agile-info">
-                <div class="panel panel-default">
-                   <div class="panel-heading">
-                    SẢN PHẨM
-                   </div>
-                   <div>
+  <section id="container">
+  <%- include('../partials/adminheader'); -%>
+  <%- include('../partials/adminleft'); -%>
+  <!--main content start-->
+  <section id="main-content">
+    <section class="wrapper">
+        <div class="clearfix">
+              <div class="table-agile-info">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      SẢN PHẨM
+                    </div>
+                    <div>
+                      
+                      <table class="table" ui-jq="footable">
+                        <thead>
+                          <tr>
+                            <th data-breakpoints="xs">Mã sản phẩm</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Giá tiền</th>
+                            <th>Loại sản phẩm</th>
+                            <th>Trạng thái</th>
+                            <th>Hình ảnh</th>
+                            <th>Thương hiệu</th>
+                            <td><a href="/admin/sanpham/create" class="btn btn-success <%= role && role != 1 ? '' : 'hidden'%>">Thêm sản phẩm</a></td>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <% sanpham.forEach(function(sp){ %>
+                          <tr data-expanded="true">
+                            <td><%= sp.masp %></td>
+                            <td><%= sp.tensp %></td>
+                            <td><%= sp.giatien %></td>
+                            <td><%= sp.id_maloai == 1 ? 'Đồng hồ nam' : 'Đồng hồ nữ' %></td>
+                            <td><%= sp.trangthai == 1 ? 'Còn hàng' : 'Sắp Hết hàng' %></td>
+                            <td>
+                              <img src="client/img/product/<%= sp.hinhanh %>">
+                            </td>
+                            <td><%= sp.tenth %></td>
+                            
+                              <td><a href="/admin/sanpham/update?id=<%= sp.masp %>" class="btn btn-primary <%= role && role != 1 ? '' : 'hidden'%>">Cập nhật</a> 
+                                <a href="/admin/sanpham/delete?id=<%= sp.masp %>" class="btn btn-danger <%= role && role != 1 ? '' : 'hidden'%>">Xóa</a></td>
+                          
+                            
+                          </tr>
+                          <% }); %>
+                        </tbody>
+                      </table>
                     
-                     <table class="table" ui-jq="footable">
-                       <thead>
-                         <tr>
-                           <th data-breakpoints="xs">Mã sản phẩm</th>
-                           <th>Tên sản phẩm</th>
-                           <th>Giá tiền</th>
-                           <th>Loại sản phẩm</th>
-                           <th>Trạng thái</th>
-                           <th>Hình ảnh</th>
-                           <th>Thương hiệu</th>
-                           <td><a href="/admin/sanpham/create" class="btn btn-success">Thêm sản phẩm</a></td>
-                         </tr>
-                       </thead>
-                       <tbody>
-                        <% sanpham.forEach(function(sp){ %>
-                         <tr data-expanded="true">
-                           <td><%= sp.masp %></td>
-                           <td><%= sp.tensp %></td>
-                           <td><%= sp.giatien %></td>
-                           <td><%= sp.id_maloai == 1 ? 'Đồng hồ nam' : 'Đồng hồ nữ' %></td>
-                           <td><%= sp.trangthai == 1 ? 'Còn hàng' : 'Sắp Hết hàng' %></td>
-                           <td>
-                             <img src="client/img/product/<%= sp.hinhanh %>">
-                          </td>
-                           <td><%= sp.tenth %></td>
-                           <td><a href="/admin/sanpham/update?id=<%= sp.masp %>" class="btn btn-primary">Cập nhật</a> 
-                              <a href="/admin/sanpham/delete?id=<%= sp.masp %>" class="btn btn-danger">Xóa</a></td>
-                         </tr>
-                        <% }); %>
-                       </tbody>
-                     </table>
-                   
-                   </div>
-                 </div>
-            </div>
-        </div>
+                    </div>
+                  </div>
+              </div>
+          </div>
+    </section>
+  <%- include('../partials/adminfooter'); -%>
   </section>
-<%- include('../partials/adminfooter'); -%>
-</section>
-<!--main content end-->
-</section>
-<%- include('../partials/adminscript_bottom'); -%>
+  <!--main content end-->
+  </section>
+  <%- include('../partials/adminscript_bottom'); -%>
 </body>
 <script>
    let mess = '<%= mess %>';

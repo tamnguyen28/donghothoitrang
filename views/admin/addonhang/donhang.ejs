@@ -38,8 +38,8 @@
                                         <td><%= dh.tgtao %></td>
                                         
                                         <td><a id="linkShowTransaction" onclick="getOrderByOrderId('<%= dh.mahd %>')" class="btn btn-success">Xem giao dịch </a>
-                                            <a href="/admin/donhang/updateOrder?id=<%= dh.mahd %>" class="btn btn-primary">Cập nhật</a>
-                                            <a href="/admin/donhang/deleteOrder?id=<%= dh.mahd %>&status=<%= dh.trangthai %>" class="btn btn-danger">Xóa</a> </td>
+                                            <a href="/admin/donhang/updateOrder?id=<%= dh.mahd %>" class="btn btn-primary <%= role && role != 1 ? '' : 'hidden'%>">Cập nhật</a>
+                                            <a href="/admin/donhang/deleteOrder?id=<%= dh.mahd %>&status=<%= dh.trangthai %>" class="btn btn-danger <%= role && role != 1 ? '' : 'hidden'%>">Xóa</a> </td>
                                     </tr>
                                     <% }); %>
 
@@ -121,7 +121,6 @@
         }
         
         let mess = '<%= mess %>'
-
         if(mess && mess == 1){
             alert('Đơn hàng đang trong trạng thái chưa xử lý');
         }

@@ -14,10 +14,14 @@ class AdsanphamController {
         let loadSP = [];
         AdsanphamModel.loadSanPham().then(result => {
             loadSP = result;
+            // console.log(req.cookies.admin.id_maloainv);
             res.render('admin/adsanpham/sanpham', {
                 title: 'sanpham',
                 sanpham: loadSP,
-                mess: req.query.mess && req.query.mess == 1 ? req.query.mess : ''
+                role: req.cookies.admin.id_maloainv,
+                mess: req.query.mess && req.query.mess == 1 ? req.query.mess : '',
+                tennv: req.cookies.admin ? req.cookies.admin.tennv : '',
+                manv: req.cookies.admin ? req.cookies.admin.manv: 0
             })
 
         }).catch(err => {
@@ -62,7 +66,6 @@ class AdsanphamController {
             // console.log(err);
             res.render('/admin');
         });
-
     }
 
     //[GET] /admin/sanpham/update

@@ -14,7 +14,10 @@ class AdtintucController{
             loadTT = result;
             res.render('admin/adtintuc/tintuc',{
                 title: 'tin tuc',
-                tintuc: loadTT
+                tintuc: loadTT,
+                role: req.cookies.admin.id_maloainv,
+                tennv: req.cookies.admin ? req.cookies.admin.tennv : '',
+                manv: req.cookies.admin ? req.cookies.admin.manv: 0
             })
         }).catch(err => {
             res.render('admin/home/index');

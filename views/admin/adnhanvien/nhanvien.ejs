@@ -26,7 +26,7 @@
                            <th>Số điện thoại</th>
                            <th>Trạng thái</th>
                            <th>Quản lý</th>
-                           <td><a href="/admin/nhanvien/createnv" class="btn btn-success">Thêm nhân viên</a></td>
+                           <td><a href="/admin/nhanvien/createnv" class="btn btn-success <%= role && role == 1 ? '' : 'hidden'%>">Thêm nhân viên</a></td>
                          </tr>
                        </thead>
                        <tbody>
@@ -40,7 +40,8 @@
                            <td><%= nv.trangthai == 1 ? 'Hoạt động' : 'Không hoạt động' %></td>
                            <td><%= nv.id_maloainv == 1 ? 'Quản trị viên' : 'Nhân viên'%></td>
                            <td>
-                              <a href="/admin/nhanvien/deleteNV?id=<%= nv.manv %>" class="btn btn-danger">Xóa</a></td>
+                              <a href="/admin/nhanvien/updateNV?id=<%= nv.manv %>" class="btn btn-primary <%= role && role == 1 ? '' : 'hidden'%>">Cập nhật</a>
+                              <a href="/admin/nhanvien/deleteNV?id=<%= nv.manv %>" class="btn btn-danger <%= role && role == 1 ? '' : 'hidden'%>">Xóa</a></td>
                             </td>
                             </tr>
                         <% }); %>

@@ -12,7 +12,7 @@ class AdloginModel {
             reject(err)
         } else {
             if(result.length != 0){
-                resolve(true)
+                resolve(result[0])
             }else{
                 reject(false)
             }

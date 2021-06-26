@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+    <style>
+        .error{
+            color: #f20;
+            font-style: italic;
+        }
+    </style>
 <%- include('../partials/adminhead'); -%>
-
     <body>
         <section id="container">
             <%- include('../partials/adminheader'); -%>
@@ -15,7 +20,8 @@
                                         <div class="panel-heading">
                                             CẬP NHẬT TIN TỨC
                                         </div>
-                                        <form method="POST" action="/admin/tintuc/updatetintuc" enctype="multipart/form-data">
+                                        <form method="POST" action="/admin/tintuc/updatetintuc" 
+                                                            enctype="multipart/form-data" id="formUpdateProduct">
                                             <label>Mã tin tức</label>
                                             <input type="text" class="form-control" name="matt" value="<%= blog.matt %>" readonly /><br>
 
@@ -58,6 +64,7 @@
         </section>
         <%- include('../partials/adminscript_bottom'); -%>
     </body>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
     <script>
         let isImag = '<%= blog.hinhanh%>'; 
 
@@ -78,5 +85,24 @@
                 reader.readAsDataURL(input.files[0])
             }
         }
+
+        $("#formUpdateProduct").validate({
+                rules: {
+                    tieude: {
+                        required: true,                    
+                    },
+                    noidung: {
+                        required: true,                    
+                    }
+                },
+                messages:{
+                    tieude: {
+                        required: 'Tên tiêu đề không được để trống'
+                    },
+                    noidung: {
+                        required: 'Nội dung tiêu đề không được để trống'
+                    }
+                }
+            });
     </script>
 </html>

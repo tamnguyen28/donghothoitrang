@@ -24,7 +24,7 @@
                                    <th>Hình ảnh</th>
                                    <th>Trạng thái</th>
                                    <th>Thời gian tạo</th>
-                                   <td><a href="admin/tintuc/createblog" class="btn btn-success">Thêm tin tức</a></td>
+                                   <td><a href="admin/tintuc/createblog" class="btn btn-success <%= role && role != 1 ? '' : 'hidden'%>">Thêm tin tức</a></td>
                                  </tr>
                                </thead>
                                <tbody>
@@ -35,8 +35,8 @@
                                    <td><img src="client/img/tintuc/<%= tt.hinhanh %>"></td>
                                    <td><%= tt.trangthai ==1 ? 'Bật' : 'Tắt' %></td>
                                    <td><%= tt.tgtao %></td>
-                                   <td><a href="admin/tintuc/updateblog?id=<%= tt.matt %>" class="btn btn-primary">Cập nhật</a>
-                                        <a href="admin/tintuc/deleteblog?id=<%= tt.matt %>" class="btn btn-danger">Xóa</a></td>
+                                   <td><a href="admin/tintuc/updateblog?id=<%= tt.matt %>" class="btn btn-primary <%= role && role != 1 ? '' : 'hidden'%>">Cập nhật</a>
+                                        <a href="admin/tintuc/deleteblog?id=<%= tt.matt %>" class="btn btn-danger <%= role && role != 1 ? '' : 'hidden'%>">Xóa</a></td>
                                  </tr>
                                  <% }); %>
                                </tbody>
