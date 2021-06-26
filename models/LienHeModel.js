@@ -3,7 +3,7 @@ const conn = require('./config/connect');
 class LienHeModel{
     index(tintuc){
         return new Promise(function (resolve, reject) {
-            let querytintuc = "INSERT INTO lienhe VALUES (NULL,?,?,?,?,?,1,NULL,2)";
+            let querytintuc = "INSERT INTO lienhe VALUES (NULL,?,?,?,?,?,1,current_timestamp(),2)";
             
             conn.query(querytintuc, [
                 tintuc.tennguoilh,

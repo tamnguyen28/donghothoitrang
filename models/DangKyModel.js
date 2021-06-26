@@ -5,7 +5,7 @@ class DangKyModel {
   dangky(khachhang) {
     return new Promise(function (resolve, reject) {
       let querykhachhang =
-        "INSERT INTO khachhang VALUES (NULL,?,?,?,?,?,?,?,1,NULL)";
+        "INSERT INTO khachhang VALUES (NULL,?,?,?,?,?,?,?,1,current_timestamp())";
       let passkh =
         khachhang.matkhau && khachhang.matkhau != ""
           ? md5(khachhang.matkhau)
@@ -27,7 +27,7 @@ class DangKyModel {
           } else {
             if (result.insertId) {
               //insertId là cái id mới add vào(khóa chính tự tăng theo makh)
-              resolve(true);
+              resolve(result.insertId);
             } else {
               reject(false);
             }
@@ -40,9 +40,9 @@ class DangKyModel {
   checkKhachHangTonTai(khachhang) {
     return new Promise(function (resolve, reject) {
       let queryExist = `SELECT * FROM khachhang 
-        where khachhang.tenkh = ? AND (khachhang.ptdangnhap ='google' OR khachhang.ptdangnhap = 'facebook')`;
+        where khachhang.tendangnhap = ?`;
 
-      conn.query(queryExist, [khachhang.tenkhachang],function (error, result) {
+      conn.query(queryExist, [khachhang.id],function (error, result) {
         if (error) {
             reject(error);
         } else {
@@ -50,6 +50,21 @@ class DangKyModel {
         }
       });
     });
+  }
+
+  getAccountByID(idCustomer){
+    return new Promise(function(resolve, reject){
+        let queryCustomer = `Select * from khachhang where khachhang.tendangnhap = ?`;
+
+        conn.query(queryCustomer, [idCustomer],function(error, result){
+            if(error){
+                reject(error)
+            }else{
+                if(result)
+                resolve(result[0])
+            }
+        })
+    })
   }
 }
 

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include ('../partials/head'); -%>
+
+    <body>
+        <div class="app">
+            <%- include ('../partials/header'); -%>
+                <!-- user-login-area-start -->
+                <div class="user-login-area mb-70 mt-40">
+                    <div class="container">
+                        <form action="/canhan/sendinfor" method="post">
+                            <input type="hidden" name="idkh" value="<%= customer ? customer.makh : '' %>" />
+                            <div class="row" class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                <div class="col-lg-12">
+                                    <div class="login-title text-center mb-30">
+                                        <img src="https://icon-library.com/images/profile-icon/profile-icon-22.jpg"/>
+                                        <h2>Quản lý tài khoản</h2>
+                                    </div>
+                                </div>
+                                <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 col-sm-12 col-xs-12">
+                                    <div class="billing-fields">
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <div class="single-register">
+                                                    <p>Họ tên đầy đủ<span>*</span></p>
+                                                        <input class="register-signup-infor" type="text" id="name"
+                                                            name="name" value="<%= customer ? customer.tenkh : '' %>"/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                <div class="single-register">
+                                                    <p>Địa chỉ email<span>*</span></p>
+                                                    <input class="register-emailaddress-phone" type="email" id="email"
+                                                        name="email" value="<%= customer ? customer.email : '' %>" />
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                <div class="single-register">
+                                                    <p>Số điện thoại<span>*</span></p>
+                                                        <input class="register-emailaddress-phone" type="text" id="phone"
+                                                        name="phone" value="<%= customer ? customer.sodienthoai : '' %>"/>   
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p>Địa chỉ<span>*</span></p>
+                                        <input id="diachi" name="address" value="<%= customer ? customer.diachi : '' %>" />
+                                        <br><br>
+                                        <div class="single-register" align="center">
+                                            <input class="btn-login" type="submit" name="btn btn-primary" value="Cập nhật">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- user-login-area-end -->
+                <%- include ('../partials/footer'); -%>
+        </div>
+    </body>
+    <script>
+        let mess = '<%= mess %>';
+        if(mess && mess == 1){
+            alert('Cập nhật thông tin thành công!');
+        }
+    </script>
+
+</html>

@@ -23,6 +23,7 @@ passport.serializeUser(function (user, done) {
 passport.deserializeUser(function (user, done) {
     done(null, user);
 });
+
 passport.use(new GoogleStrategy({
     clientID: '969464741521-e5205v7a4tvnoqccono6a931htunjpkq.apps.googleusercontent.com',
     clientSecret: 'UImwVcTBe8jEmOIfxDyUwo0E',

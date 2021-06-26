@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Padauk|Trirong">
+    <title>Document</title>
+    <style>
+        .container{
+            display: flex;
+            justify-content: center;
+        }
+
+        .row-container{
+           background-color: #131a20;
+        }
+
+        .col-title-container{
+            font-family: 'Trirong', sans-serif;
+            height: 100%;
+            display: flex;
+            padding-left: 3rem; 
+            border-style: none;     
+        }
+        
+        .logo-container{
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .title-container{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .label-title{
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: #E7E7E7;
+        }
+
+        .row-content-container{
+            display: flex;
+            height: 100%;
+        }
+
+        .col-content-email-container{
+            display: flex;
+            justify-content: center;
+            background-color: #F8F8FF;
+            border-style: none;
+            width: 100%;
+        }
+
+        .content-email-container{
+            font-family:'Padauk', sans-serif;
+            padding: 15px;  
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <table width="100%" height="500" class="tbl-email" rules="all">
+            <tr height="150" class="row-container">
+               <td class="col-title-container">
+                   <div class="logo-container">
+                       <img src="http://datvephimstu.herokuapp.com/images/logo.png" height="90" width="125" />
+                   </div>
+                   <div class="title-container">
+                       <span class="label-title">Cinema Plus + xin cám ơn bạn</span>
+                   </div>
+               </td> 
+            </tr>
+            <tr class="row-content-container">
+                <td class="col-content-email-container">
+                    <div class="content-email-container">
+                        <p>Gửi bạn <b>Quang Tín</b></p>
+                        <p>A </p>
+                        <p>Thân chào !</p>
+                    </div>
+                </td> 
+            </tr>
+            <tr class="row-container" height="50">
+               <td class="col-container"></td> 
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
