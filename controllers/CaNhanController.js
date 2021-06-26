@@ -1,4 +1,5 @@
 const canhanModel = require('../models/CaNhanModel');
+const homeModel = require('../models/HomeModel');
 class CaNhanController {
 
     canhan(req, res){
@@ -6,16 +7,21 @@ class CaNhanController {
         let message = req.query.mess ? req.query.mess: '' ; 
        
         canhanModel.getKhachHangById(makh).then(function(result){
-            // console.log(result);
-            res.cookie("user", result);
-            res.render('client/canhan/canhan', {
-                title: 'Quản lý tài khoản',
-                customer: result,
-                tenkh: result.tenkh,
-                idkh : makh,
-                mess: message,
-                giohangs: (req.session && req.session.giohang ? req.session.giohang: [] )  
-            });
+            homeModel.loadloaisp().then(resultloai =>{
+                // console.log(result);
+                res.cookie("user", result);
+                res.render('client/canhan/canhan', {
+                    title: 'Quản lý tài khoản',
+                    customer: result,
+                    tenkh: result.tenkh,
+                    idkh : makh,
+                    mess: message,
+                    giohangs: (req.session && req.session.giohang ? req.session.giohang: [] ),
+                    loai: resultloai,  
+                });
+            }).catch(err =>{
+                console.log(err);
+            })
         }).catch(function(error){
             res.render('client/canhan/canhan', {
                 title: 'Quản lý tài khoản',

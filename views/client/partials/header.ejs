@@ -9,10 +9,12 @@
                         <ul>
                             <li><img src="client/img/product/35phu1.jpg" style="width: 18px; height: 12px;" alt="flag" /><a href="#">Danh mục<i class="fa fa-angle-down"></i></a>
                                 <div class="header-sub">
-                                    <ul>
-                                        <li><a href="/donghonam"><img src="client/img/product/2.jpg" style="width: 18px; height: 12px;" alt="flag" />Đồng hồ nam</a></li>
-                                        <li><a href="/donghonu"><img src="client/img/product/3.jpg" style="width: 18px; height: 12px;" alt="flag" />Đồng hồ nữ</a></li>
-                                    </ul>
+                                    <% loai.forEach(function(loai){ %> 
+                                        <ul>
+                                            <li><a href="/<%= loai.duongdan %>"><img src="client/img/product/2.jpg" style="width: 18px; height: 12px;" alt="flag" /><%= loai.tenloai %></a></li>
+                                        </ul>
+                                    <% }) %>
+                                    
                                 </div>
                             </li>
 

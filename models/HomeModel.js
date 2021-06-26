@@ -93,5 +93,18 @@ class HomeModel {
             })
         })
     }
+
+    loadloaisp(){
+        return new Promise (function(resolve, reject){
+            let queryloai = "SELECT * FROM loaisanpham ";
+            conn.query(queryloai, function(err, result){
+                if(err){
+                    reject(err);
+                }else{
+                    resolve(result);
+                }
+            })
+        })
+    }
 }
 module.exports = new HomeModel();

@@ -1,5 +1,6 @@
 const donhangModel = require('../models/DonHangModel');
-const mail = require('../models/configmail/configmail')
+const mail = require('../models/configmail/configmail');
+const homeModel = require('../models/HomeModel');
 
 const uuidv1 = require('uuidv1');
 const https = require('https');
@@ -64,44 +65,49 @@ let thongtin = {
 
 class DonHangController{
     index(req, res){
-        if(req.query.payonline && req.query.message == 'Success'){
-            req.session.giohang = [];
-            let contentDonhang = `Bạn đã đặt hàng thành công, đơn hàng sẽ vận chuyển đến bạn trong thời gian sớm nhất! Cảm ơn bạn đã mua hàng!
-                Tên người nhận: ${thongtin.tennguoinhan},
-                Số điện thoại người nhận: ${thongtin.sdtnguoinhan},
-                Địa chỉ người nhận: ${thongtin.diachinguoinhan},
-                Email người nhận: ${thongtin.emailnguoinhan},
-                Tổng hóa đơn: ${thongtin.tonghoadon},
-                Ghi chú: ${thongtin.ghichu}`
-                let emailTo = thongtin.emailnguoinhan;
-                mail.sendmail(emailTo, 'FULLTIME', contentDonhang);
-            thongtin.trangthai = 1;
-            donhangModel.themthongtin(thongtin).then(function(result) { 
-            }).catch(err => {
-                console.log(err);
-            })
-            return res.render('client/donhang/donhang', {
-                title: 'Đơn hàng',
-                giohangs: [],
-                totalAmount: 0,
-                message: req.query.localMessage ? req.query.localMessage : '' ,
-                tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
-                idkh:  req.cookies.user ? req.cookies.user.makh: 0 ,
+        homeModel.loadloaisp().then(resultloai =>{
+            if(req.query.payonline && req.query.message == 'Success'){
+                req.session.giohang = [];
+                let contentDonhang = `Bạn đã đặt hàng thành công, đơn hàng sẽ vận chuyển đến bạn trong thời gian sớm nhất! Cảm ơn bạn đã mua hàng!
+                    Tên người nhận: ${thongtin.tennguoinhan},
+                    Số điện thoại người nhận: ${thongtin.sdtnguoinhan},
+                    Địa chỉ người nhận: ${thongtin.diachinguoinhan},
+                    Email người nhận: ${thongtin.emailnguoinhan},
+                    Tổng hóa đơn: ${thongtin.tonghoadon},
+                    Ghi chú: ${thongtin.ghichu}`
+                    let emailTo = thongtin.emailnguoinhan;
+                    mail.sendmail(emailTo, 'FULLTIME', contentDonhang);
+                thongtin.trangthai = 1;
+                donhangModel.themthongtin(thongtin).then(function(result) { 
+                }).catch(err => {
+                    console.log(err);
+                })
+                return res.render('client/donhang/donhang', {
+                    title: 'Đơn hàng',
+                    giohangs: [],
+                    totalAmount: 0,
+                    message: req.query.localMessage ? req.query.localMessage : '' ,
+                    tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
+                    idkh:  req.cookies.user ? req.cookies.user.makh: 0 ,
+                });
+            }
+            let sl = req.session.giohang ? req.session.giohang.length: 0;
+            let total = 0;
+            for(let i = 0; i < sl; i++){
+                total += req.session.giohang[i].tongtien
+            }
+            res.render('client/donhang/donhang', {
+               title: 'Đơn hàng',
+               giohangs:  !req.session.giohang ? [] : req.session.giohang, 
+               totalAmount: total,
+               message: '',
+               tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
+               idkh:  req.cookies.user ? req.cookies.user.makh: 0 ,
+               loai: resultloai,
             });
-        }
-        let sl = req.session.giohang ? req.session.giohang.length: 0;
-        let total = 0;
-        for(let i = 0; i < sl; i++){
-            total += req.session.giohang[i].tongtien
-        }
-        res.render('client/donhang/donhang', {
-           title: 'Đơn hàng',
-           giohangs:  !req.session.giohang ? [] : req.session.giohang, 
-           totalAmount: total,
-           message: '',
-           tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
-           idkh:  req.cookies.user ? req.cookies.user.makh: 0 ,
-        });
+        }).catch(err =>{
+            console.log(err);
+        }) 
     }
 
     savethongtin(req, res){
