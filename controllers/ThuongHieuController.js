@@ -16,6 +16,8 @@ class ThuongHieuController {
                         indexSP: [],
                         motatt:'',
                         hinhanh: '',
+                        tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
+                        idkh:  req.cookies.user ? req.cookies.user.makh: 0 ,
                         giohangs: (req.session && req.session.giohang ? req.session.giohang: [] )
                     })
                 }).catch(err => {
@@ -37,6 +39,8 @@ class ThuongHieuController {
                         indexTH: listThtemp, indexRD: listRDtemp, 
                         motatt: result1[0].chitiet,
                         hinhanh: result1[0].hinhanh,
+                        tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
+                        idkh:  req.cookies.user ? req.cookies.user.makh: 0 ,
                         giohangs: (req.session && req.session.giohang ? req.session.giohang: [] )
                         
                     });

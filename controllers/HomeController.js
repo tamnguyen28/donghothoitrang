@@ -3,7 +3,6 @@ const homeModel = require("../models/HomeModel");
 class HomeController {
   //[GET] /
   index(req, res) {
-    // console.log('Cookies: ', req.cookies.user)
     let listSP = [];
     homeModel.loadSanPham().then((result) => {
         listSP = result;
@@ -25,11 +24,12 @@ class HomeController {
                   indexfeature: listSPFeatured,
                   indexdealhot: listSPDealHot,
                   index: listSP,
+                  tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
+                  idkh:  req.cookies.user ? req.cookies.user.makh: 0 ,
                   mess: req.query.mess ? req.query.mess : '',
                   giohangs: (req.session && req.session.giohang ? req.session.giohang: [] ) 
                 });
               })
-              
             }).catch((err) => {
               console.log(err);
             });
@@ -44,7 +44,9 @@ class HomeController {
       });
     }).catch((err) => {
       console.log(err);
-      res.render("client/home/index", {title: "donghothoitrang", giohangs: (req.session && req.session.giohang ? req.session.giohang: [] )});
+      res.render("client/home/index", {
+        title: "donghothoitrang", 
+        giohangs: (req.session && req.session.giohang ? req.session.giohang: [] )});
     });
   }
 }

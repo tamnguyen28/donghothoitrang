@@ -25,6 +25,7 @@
                             <div class="col-lg-12">
                                 <form action="#" method="post">
                                     <div class="table-content table-responsive">
+                                        <a href="/"><button name="button" type="button" >Tiếp tục mua hàng</button></a>
                                         <table>
                                             <thead>
                                                 <tr>
@@ -39,6 +40,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                
                                                 <% for (let i = 0; i < giohangs.length; i++) {%>
                                                     <tr>
                                                         <td></td>
@@ -54,7 +56,8 @@
                                                             <a href="/giohang/xoagiohang?id=<%= giohangs[i].masp%>">Xóa</a>
                                                         </td>
                                                     </tr>
-                                             <% }%>
+                                                <% }%>
+                                             
                                             <tr>
                                                 <td colspan="7" >Tổng tiền: <span id="totalAmout"><% let totoal = 0; for(let i = 0; i < giohangs.length; i++){totoal += giohangs[i].tongtien;} %> <%= totoal %></span></td>
                                             </tr>
@@ -62,13 +65,15 @@
                                         </table>
                                     </div>
                                 </form>
+                                
                             </div>
                         </div>
-                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                                <div class="wc-proceed-to-checkout">
-                                        <a href="/donhang">Thanh toán</a>
-                                </div>
+                        
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                            <div class="wc-proceed-to-checkout">
+                                    <a href="/donhang">Thanh toán</a>
                             </div>
+                        </div>
                         </div>
                     </div>
                 </div>

@@ -51,20 +51,16 @@
                                                 </div>
                                             </div>
                                         </div>
+                                    
+                                        <p>Địa chỉ<span>*</span></p>
+                                        <input id="diachi" name="address" />
+                                        <br><br>
                                         <div class="single-register">
-                                            <p>Địa chỉ<span>*</span></p>
-                                            <input class="register-signup-infor" type="text" id="address" name="address"
-                                                placeholder="Street address" />
-                                        </div>
-                                        <div class="single-register">
-
                                             <p>Mật khẩu<span>*</span></p>
-                                            <input class="register-signup-infor" type="password" id="password"
-                                                name="password" placeholder="Password" />
-
+                                            <input class="register-signup-infor" type="password" id="password" name="password" />
                                         </div>
                                         <div class="single-register" align="center">
-                                            <input type="submit" name="btn btn-primary" value="Đăng ký">
+                                            <input class="btn-login" type="submit" name="btn btn-primary" value="Đăng ký">
                                         </div>
                                     </div>
                                 </div>
@@ -76,5 +72,35 @@
                 <%- include ('../partials/footer'); -%>
         </div>
     </body>
+    <script src="https://cdn.jsdelivr.net/npm/scriptjs@2.5.9/dist/script.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/places.js@^1.17.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4"></script>
+
+    <script>
+        $script(
+            'https://maps.googleapis.com/maps/api/js?v=weekly&key=AIzaSyBawL8VbstJDdU5397SUX7pEt9DslAwWgQ',
+            () => {
+                const searchClient = algoliasearch(
+                    'latency',
+                    '6be0576ff61c053d5f9a3225e2a90f76'
+                );
+
+                const search = instantsearch({
+                    indexName: 'airports',
+                    searchClient,
+                });
+
+                search.addWidgets([
+                    instantsearch.widgets.places({
+                        container: '#diachi',
+                        placesReference: window.places,
+                    }),
+                ]);
+
+                search.start();
+            }
+        );
+    </script>
 
 </html>

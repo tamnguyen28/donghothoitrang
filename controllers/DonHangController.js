@@ -1,4 +1,5 @@
 const donhangModel = require('../models/DonHangModel');
+const mail = require('../models/configmail/configmail')
 
 const uuidv1 = require('uuidv1');
 const https = require('https');
@@ -10,7 +11,7 @@ var partnerCode = "MOMOFIL020210605"
 var accessKey = "BK3xGm6SRVQl9JRE"
 var serectkey = "1dmGQbz6c3JSrgDWjTxvov36XteMoLYO"
 var orderInfo = "pay with MoMo"
-var returnUrl = "https://donghothoitrang.herokuapp.com/donhang?payonline=1"; //
+var returnUrl = "http://localhost:3000/donhang?payonline=1"; //
 var notifyurl = "https://callback.url/notify"
 var amount = "50000"
 var orderId = uuidv1()
@@ -57,6 +58,7 @@ let thongtin = {
     diachinguoinhan:'',
     tonghoadon: '',
     ghichu: '',
+    trangthai: 0,
     phuongthucthanhtoan: 0,
 }
 
@@ -64,6 +66,16 @@ class DonHangController{
     index(req, res){
         if(req.query.payonline && req.query.message == 'Success'){
             req.session.giohang = [];
+            let contentDonhang = `Bạn đã đặt hàng thành công, đơn hàng sẽ vận chuyển đến bạn trong thời gian sớm nhất! Cảm ơn bạn đã mua hàng!
+                Tên người nhận: ${thongtin.tennguoinhan},
+                Số điện thoại người nhận: ${thongtin.sdtnguoinhan},
+                Địa chỉ người nhận: ${thongtin.diachinguoinhan},
+                Email người nhận: ${thongtin.emailnguoinhan},
+                Tổng hóa đơn: ${thongtin.tonghoadon},
+                Ghi chú: ${thongtin.ghichu}`
+                let emailTo = thongtin.emailnguoinhan;
+                mail.sendmail(emailTo, 'FULLTIME', contentDonhang);
+            thongtin.trangthai = 1;
             donhangModel.themthongtin(thongtin).then(function(result) { 
             }).catch(err => {
                 console.log(err);
@@ -72,10 +84,12 @@ class DonHangController{
                 title: 'Đơn hàng',
                 giohangs: [],
                 totalAmount: 0,
-                message: req.query.localMessage ? req.query.localMessage : '' 
+                message: req.query.localMessage ? req.query.localMessage : '' ,
+                tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
+                idkh:  req.cookies.user ? req.cookies.user.makh: 0 ,
             });
         }
-        let sl = req.session.giohang.length;
+        let sl = req.session.giohang ? req.session.giohang.length: 0;
         let total = 0;
         for(let i = 0; i < sl; i++){
             total += req.session.giohang[i].tongtien
@@ -84,19 +98,24 @@ class DonHangController{
            title: 'Đơn hàng',
            giohangs:  !req.session.giohang ? [] : req.session.giohang, 
            totalAmount: total,
-           message: ''
+           message: '',
+           tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
+           idkh:  req.cookies.user ? req.cookies.user.makh: 0 ,
         });
     }
 
     savethongtin(req, res){
+        
         thongtin = {
             tennguoinhan: req.body.name,
             sdtnguoinhan: req.body.phone,
             diachinguoinhan: req.body.address,
+            emailnguoinhan: req.body.email,
             tonghoadon: req.body.tonggiohang,
             ghichu: req.body.note,
             giohangs: (req.session && req.session.giohang ? req.session.giohang: [] ), 
             phuongthucthanhtoan: req.body.giaohang,
+            idkh: req.cookies.user.makh
         }
         if(req.body.giaohang == 1){
             var request = https.request(options, (respone) => {
@@ -112,8 +131,18 @@ class DonHangController{
               request.write(body);
               request.end();
         }else{
+            thongtin.trangthai = 0;
             donhangModel.themthongtin(thongtin).then(function(result) {
                 req.session.giohang = [];
+                let contentDonhang = `Bạn đã đặt hàng thành công, đơn hàng sẽ vận chuyển đến bạn trong thời gian sớm nhất! Cảm ơn bạn đã mua hàng!
+                Tên người nhận: ${thongtin.tennguoinhan},
+                Số điện thoại người nhận: ${thongtin.sdtnguoinhan},
+                Địa chỉ người nhận: ${thongtin.diachinguoinhan},
+                Email người nhận: ${thongtin.emailnguoinhan},
+                Tổng hóa đơn: ${thongtin.tonghoadon},
+                Ghi chú: ${thongtin.ghichu}`
+                let emailTo = thongtin.emailnguoinhan;
+                mail.sendmail(emailTo, 'SHOP FULLTIME', contentDonhang);
                 res.redirect('/?mess=2')
             }).catch(err => {
                 console.log(err);
