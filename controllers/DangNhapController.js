@@ -1,5 +1,7 @@
 const dangnhapModel = require("../models/DangNhapModel");
 const dangkyModel = require("../models/DangKyModel");
+const homeModel = require('../models/HomeModel');
+const e = require("express");
 
 let isgotocart = 0;
 let idsp = 0;
@@ -9,12 +11,17 @@ class DangNhapController {
     isgotocart = req.query.isgotocart;
     isgotoLog = req.query.isgotoLog;
     idsp = req.query.id;
-    res.render("client/dangnhap/dangnhap", { 
-        title: "Đăng nhập", 
-        message: "",
-        idkh:0,
-        tenkh: '',
-        giohangs: (req.session && req.session.giohang ? req.session.giohang: [] )  
+    homeModel.loadloaisp().then(resultloai =>{
+        res.render("client/dangnhap/dangnhap", { 
+            title: "Đăng nhập", 
+            message: "",
+            idkh:0,
+            tenkh: '',
+            giohangs: (req.session && req.session.giohang ? req.session.giohang: [] ),
+            loai: resultloai,  
+        });
+    }).catch(err =>{
+        console.log();
     });
   }
 
@@ -22,30 +29,29 @@ class DangNhapController {
     let tendangnhap = req.body.username;
     let matkhau = req.body.password;
     
-    dangnhapModel
-      .dangnhap(tendangnhap, matkhau)
-      .then(function (result) {
+    dangnhapModel.dangnhap(tendangnhap, matkhau).then(function (result) {
         res.cookie("user", result);
         if(isgotocart == 1){
             return res.redirect(`/giohang?id=${idsp}`)
-        }
-           
+        } 
         if(isgotoLog == 2){
            return res.redirect(`/lichsumuahang`);
         }
-
         res.redirect(`/`);
-        
-      })
-      .catch(function (err) {
+      }).catch(function (err) {
         console.log(err);
-        res.render("client/dangnhap/dangnhap", {
-          title: "Đăng nhập",
-          message: "Sai tên đăng nhập hoặc mật khẩu. Đăng nhập thất bại",
-          idkh:0,
-          tenkh: '',
-          giohangs: (req.session && req.session.giohang ? req.session.giohang: [] ) 
-        });
+        homeModel.loadloaisp().then(resultloai =>{
+            res.render("client/dangnhap/dangnhap", {
+                title: "Đăng nhập",
+                message: "Sai tên đăng nhập hoặc mật khẩu. Đăng nhập thất bại",
+                idkh:0,
+                tenkh: '',
+                giohangs: (req.session && req.session.giohang ? req.session.giohang: [] ),
+                loai: resultloai, 
+              });
+        }).catch(err =>{
+            console.log(err);
+        })
       });
   }
     logout(req, res) {
@@ -80,18 +86,15 @@ class DangNhapController {
                             res.redirect("/");
                         }   
                     }).catch(function(error){
-
-                    })
-                    
-                })
-                .catch(function (error) {
+                        console.log(error);
+                    });
+                }).catch(function (error) {
                     console.log(error);
                     res.redirect("/");
                 });
             }else{
-               
                 dangkyModel.getAccountByID(req.user.id).then(function(result){
-                    console.log(result);
+                    // console.log(result);
                     res.cookie("user", result);
 
                     if(isgotocart == 1){
@@ -100,9 +103,8 @@ class DangNhapController {
                         res.redirect("/");
                     }   
                 }).catch(function(error){
-
-                })
-                
+                    console.log(error);
+                });
             }
         }).catch(function (error) {
             console.log(error);
@@ -143,12 +145,11 @@ class DangNhapController {
                     }   
                 }).catch(function(error){
                     console.log(error);
-                })
-              
+                });
             }
         }).catch(function (error){
             console.log(error);
-        })
+        });
     }
 }
 module.exports = new DangNhapController();

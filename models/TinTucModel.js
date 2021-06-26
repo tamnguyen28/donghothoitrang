@@ -15,7 +15,7 @@ class TinTucModel{
     }
     loadtintuc(){
         return new Promise (function (resolve, reject){
-            let sqltintuc = "SELECT * FROM tintuc ";
+            let sqltintuc = "SELECT *, DATE_FORMAT(tintuc.tgtao, '%d/%m/%Y') as 'tgtao' FROM tintuc ";
             conn.query(sqltintuc, function (err,result){
                 if(err){
                     reject(err);

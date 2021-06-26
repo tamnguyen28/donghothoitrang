@@ -14,10 +14,23 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <% indextintuc.forEach(function(sp){ %>
                     <div class="about-img">
-                        <input type="text" name="text" value="<%= sp.tgtao %>"><br><br>
+                        <input type="text" name="text" value="<%= sp.tgtao %>" style="text-align: center;"><br><br>
                         <a href="#"><img src="client/img/tintuc/<%= sp.hinhanh %>" alt="man" /></a><br><br>
                         <h3><span><%= sp.tieude %></span></h3>
-                        <pre><%= sp.noidung %></pre><hr><hr>
+                        <p style="   width: 100%; 
+                                    text-align: justify;
+                                    background-color: transparent;
+                                    border: none; overflow: hidden; 
+                                    word-wrap: break-word;
+                                    white-space: pre-wrap;
+                                    white-space: -moz-pre-wrap !important;
+                                    white-space: -pre-wrap;
+                                    white-space: -o-pre-wrap;
+                                    font-family: 'times new roman', times, serif;
+                                    font-size: 17px;
+                                    color: #000;
+                                    line-height: 25px;"><%= sp.noidung %></p>
+                        <hr><hr>
                     </div>
                     <% }) %>
                 </div>
