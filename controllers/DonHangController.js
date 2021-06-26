@@ -11,7 +11,7 @@ var partnerCode = "MOMOFIL020210605"
 var accessKey = "BK3xGm6SRVQl9JRE"
 var serectkey = "1dmGQbz6c3JSrgDWjTxvov36XteMoLYO"
 var orderInfo = "pay with MoMo"
-var returnUrl = "http://localhost:3000/donhang?payonline=1"; //
+var returnUrl = "https://donghothoitrang.herokuapp.com/donhang?payonline=1"; //
 var notifyurl = "https://callback.url/notify"
 var amount = "50000"
 var orderId = uuidv1()

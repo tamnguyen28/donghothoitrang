@@ -27,7 +27,7 @@ passport.deserializeUser(function (user, done) {
 passport.use(new GoogleStrategy({
     clientID: '969464741521-e5205v7a4tvnoqccono6a931htunjpkq.apps.googleusercontent.com',
     clientSecret: 'UImwVcTBe8jEmOIfxDyUwo0E',
-    callbackURL: "http://localhost:3000/dangnhap/google/callback"
+    callbackURL: "https://donghothoitrang.herokuapp.com/dangnhap/google/callback"
   },
   function(accessToken, refreshToken, profile, cb) {
     return cb(null, profile);
@@ -37,7 +37,7 @@ passport.use(new GoogleStrategy({
 passport.use(new FacebookStrategy({
   clientID: '333424968148234',
   clientSecret: 'ce1cc52be92b9c205c6326ebdd680e1a' ,
-  callbackURL: "http://localhost:3000/dangnhap/facebook/callback",
+  callbackURL: "https://donghothoitrang.herokuapp.com/dangnhap/facebook/callback",
   profileFields : ['id','displayName','name','gender','email']
   },
   function(accessToken, refreshToken, profile, done) {
