@@ -3,7 +3,9 @@ const conn = require ('../models/config/connect');
 class AdtintucModel{
     loadtintuc(){
         return new Promise(function(resolve, reject){
-            let sqlquery = `SELECT * FROM tintuc where isDelete = 0 ORDER BY matt DESC`;
+            let sqlquery = `SELECT *,
+                            DATE_FORMAT(tintuc.tgtao, '%d/%m/%Y') as 'tgtao'
+            FROM tintuc where isDelete = 0 ORDER BY matt DESC`;
             conn.query(sqlquery, function(err, result){
                 if(err){
                     reject(err);
@@ -43,7 +45,8 @@ class AdtintucModel{
         return new Promise(function(resolve, reject){
             conn.query(`UPDATE tintuc
                         SET tieude = ?, noidung = ?, trangthai = ?, hinhanh = ?
-                        Where matt = ?`, [newTt.name, newTt.noidung, newTt.status, newTt.image, newTt.matt], function(err,data){
+                        Where matt = ?`, [newTt.name, newTt.noidung, newTt.status,
+                                         newTt.image, newTt.matt], function(err,data){
                             if(err) throw err;
                             resolve(true);
                         });

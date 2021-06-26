@@ -1,7 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+    <style>
+        .error{
+            color: #f20;
+            font-style: italic;
+        }
+    </style>
 <%- include('../partials/adminhead'); -%>
-
+    
     <body>
         <section id="container">
             <%- include('../partials/adminheader'); -%>
@@ -15,27 +21,27 @@
                                         <div class="panel-heading">
                                             THÊM SẢN PHẨM
                                         </div>
-                                        <form method="POST" action="/admin/sanpham/store" enctype="multipart/form-data">
+                                        <form method="POST" action="/admin/sanpham/store" enctype="multipart/form-data"
+                                            id="formAddProduct">
                                             <label>Tên sản phẩm</label>
                                             <input type="text" class="form-control" name="tensp"
                                                 placeholder="Tên sản phẩm"><br>
                                             <label>Giá tiền</label>
                                             <input type="text" class="form-control" name="giatien"
-                                                placeholder="Giá sản phẩm"><br>
-                                                
+                                                placeholder="Giá sản phẩm" ><br>
                                             <label>Trạng thái</label> <br />
-                                            <input name="trangthai" type="radio" value="1" checked="checked">
-                                              Còn Hàng
+                                            <input name="trangthai" type="radio" value="1" checked="checked" >
+                                            Còn Hàng
                                             <input name="trangthai" type="radio" value="0"> Sắp Hết Hàng <br />
                                             <br />
-                         
+
                                             <label><img src="">Hình ảnh</label>
                                             <input type="file" class="form-control" name="hinhanh"
                                                 placeholder="Hình ảnh"><br>
-                                            
+
                                             <label>Thương hiệu</label>
-                                            <select name="id_math" class="form-control">
-                                                <option value="0">------Chọn thương hiệu-------</option>
+                                            <select name="id_math" class="form-control" >
+                                                <option value="">------Chọn thương hiệu-------</option>
                                                 <% for(let i=0; i < thuonghieus.length; i++) {%>
                                                     <option value="<%= thuonghieus[i].math %>">
                                                         <%= thuonghieus[i].tenth %>
@@ -45,8 +51,8 @@
                                             <label>Mô tả</label><br />
                                             <textarea id="mota" name="mota" rows="4" cols="140"></textarea><br /><br />
                                             <label>Loại sản phẩm</label>
-                                            <select name="id_maloai" class="form-control">
-                                                <option value="0">------Chọn danh mục-------</option>
+                                            <select name="id_maloai" class="form-control" >
+                                                <option value="">------Chọn danh mục-------</option>
                                                 <% for(let i=0; i < danhmucs.length; i++) {%>
                                                     <option value="<%= danhmucs[i].maloai %>">
                                                         <%= danhmucs[i].tenloai %>
@@ -54,8 +60,8 @@
                                                     <% } %>
                                             </select><br>
                                             <input type="submit" name="themsanpham" value="Thêm sản phẩm"
-                                                class="btn btn-primary"><br/>
-                                            <br/>
+                                                 class="btn btn-primary"><br />
+                                            <br />
                                             <a href="admin/sanpham">Quay lại?</a>
                                         </form>
                                     </div>
@@ -68,5 +74,46 @@
         </section>
         <%- include('../partials/adminscript_bottom'); -%>
     </body>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+    <script>
+            $("#formAddProduct").validate({
+                rules: {
+                    tensp: {
+                        required: true,                    
+                    },
+                    giatien: {
+                        required: true,                    
+                    },
+                    id_math:{
+                        required: true
+                    },
+                    hinhanh:{
+                        required: true
+                    },
+                    id_maloai:{
+                        required: true
+                    },
+                },
+                messages:{
+                    tensp: {
+                        required: 'Tên sản phẩm không được để trống'
+                    },
+                    giatien: {
+                        required: 'Giá sản phẩm không được để trống'
+                    },
+                    id_math:{
+                        required: 'Thương hiệu không được để trống'
+                    },
+                    hinhanh:{
+                        required: 'Hình ảnh không được để trống'
+                    },
+                    id_maloai:{
+                        required: 'Loại sản phẩm không được để trống'
+                    },
+                }
+            });
+      
+
+    </script>
 
 </html>

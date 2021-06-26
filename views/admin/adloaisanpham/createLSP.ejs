@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <style>
+        .error{
+            color: red;
+            font-style: italic;
+        }
+    </style>
+<%- include('../partials/adminhead'); -%>
+    <body>
+        <section id="container">
+            <%- include('../partials/adminheader'); -%>
+                <%- include('../partials/adminleft'); -%>
+                    <!--main content start-->
+                    <section id="main-content">
+                        <section class="wrapper">
+                            <div class="clearfix">
+                                <div class="table-agile-info">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            THÊM LOẠI SẢN PHẨM
+                                        </div>
+                                        <form method="POST" action="/admin/loaisanpham/createloaisp" id="formAddProduct">
+                                            <label>Tên loại sản phẩm</label>
+                                            <input type="text" class="form-control" name="tenloai"
+                                                placeholder="Tên loại"><br>
+                                            <input type="submit" name="themloaisp" value="Thêm loại sản phẩm"
+                                                class="btn btn-primary"><br/>
+                                            <br/>
+                                            <a href="admin/loaisanpham">Quay lại?</a>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <%- include('../partials/adminfooter'); -%>
+                    </section>
+                    <!--main content end-->
+        </section>
+        <%- include('../partials/adminscript_bottom'); -%>
+    </body>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+    <script>
+            $("#formAddProduct").validate({
+                rules: {
+                    tenloai: {
+                        required: true,                    
+                    }
+                },
+                messages:{
+                    tenloai: {
+                        required: 'Tên Loại sản phẩm không được để trống',
+                    }
+                }
+            });
+      
+
+    </script>
+</html>

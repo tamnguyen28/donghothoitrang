@@ -18,6 +18,8 @@
                                         <th>Số điện thoại</th>
                                         <th>Địa chỉ</th>
                                         <th>Email</th>
+                                        <th>Phương thức đăng nhập</th>
+                                        <th>Ngày đăng ký</th>
                                         <th>Quản lý</th>
                                     </tr>
                                     <% khachhang.forEach(function(kh){ %>
@@ -27,6 +29,8 @@
                                         <td><%= kh.sodienthoai %></td>
                                         <td><%= kh.diachi %></td>
                                         <td><%= kh.email %></td>
+                                        <td><%= kh.ptdangnhap %></td>
+                                        <td><%= kh.tgtao %></td>
                                         <td><a id="linkShowTransaction" onclick="getOrderByCustomerId('<%= kh.makh %>')" class="btn btn-success">Xem
                                                 giao dịch </a></td>
                                     </tr>

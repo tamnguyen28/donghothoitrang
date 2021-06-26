@@ -1,5 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+    <style>
+        .error{
+            color: #f20;
+            font-style: italic;
+        }
+    </style>
 <%- include('../partials/adminhead'); -%>
 
     <body>
@@ -15,58 +21,68 @@
                                         <div class="panel-heading">
                                             CẬP NHẬT SẢN PHẨM
                                         </div>
-                                        <form method="POST" action="/admin/sanpham/storeupdate" enctype="multipart/form-data">
+                                        <form method="POST" action="/admin/sanpham/storeupdate"
+                                            enctype="multipart/form-data" id="formUpdateProduct">
                                             <label>Mã sản phẩm</label>
-                                            <input type="text" class="form-control" name="masp" value="<%= product.masp %>" readonly/>         
+                                            <input type="text" class="form-control" name="masp"
+                                                value="<%= product.masp %>" readonly />
                                             <label>Tên sản phẩm</label>
-                                            <input type="text" class="form-control" name="tensp" value="<%= product.tensp %>"
-                                                placeholder="Tên sản phẩm"><br>
+                                            <input type="text" class="form-control" name="tensp"
+                                                value="<%= product.tensp %>" placeholder="Tên sản phẩm"><br>
                                             <label>Giá tiền</label>
-                                            <input type="text" class="form-control" name="giatien" value="<%= product.giatien %>"
-                                                placeholder="Giá sản phẩm"><br>
+                                            <input type="text" class="form-control" name="giatien"
+                                                value="<%= product.giatien %>" placeholder="Giá sản phẩm"><br>
                                             <label>Trạng thái</label> <br />
                                             <% if(product.trangthai){ %>
                                                 <input name="trangthai" type="radio" value="1" checked="checked">
-                                                    Còn Hàng
-                                                <input name="trangthai" type="radio" value="0"> Sắp Hết Hàng <br />
-                                                    <br />
-                                            <% } else { %>        
-                                                <input name="trangthai" type="radio" value="1" >
                                                 Còn Hàng
-                                                <input name="trangthai" type="radio" value="0" checked="checked"> Sắp Hết Hàng <br />
+                                                <input name="trangthai" type="radio" value="0"> Sắp Hết Hàng <br />
+                                                <br />
+                                                <% } else { %>
+                                                    <input name="trangthai" type="radio" value="1">
+                                                    Còn Hàng
+                                                    <input name="trangthai" type="radio" value="0" checked="checked">
+                                                    Sắp Hết Hàng <br />
                                                     <br />
-                                            <% } %>
-                                            
-                                            <label><img src="">Hình ảnh</label>
-                                            <input value= "client/img/product/<%= product.hinhanh%>" type="file" class="form-control" 
-                                            name="hinhanh" onchange="readFileImage(this)">
-                                            <br>
-                                            <img src="client/img/product/<%= product.hinhanh%>" width="100" height="100" id="imgSanPham"/>
-                                            <br/>
-                                            <label>Thương hiệu</label>
-                                              <select name="id_math" class="form-control">
-                                                <option value="0">------Chọn thương hiệu-------</option>
-                                                <% for(let i=0; i < thuonghieus.length; i++) {%>
-                                                    <option value="<%= thuonghieus[i].math %>" <%= thuonghieus[i].math == product.id_math ? 'selected' : '' %> >
-                                                        <%= thuonghieus[i].tenth %>
-                                                    </option>
                                                     <% } %>
-                                            </select><br>
-                                            <label>Mô tả</label><br />
-                                            <textarea id="mota" name="mota" rows="4" cols="140"><%= product.mota %></textarea><br /><br />
-                                            <label>Loại sản phẩm</label>
-                                             <select name="id_maloai" class="form-control">
-                                                <option value="-1">------Chọn danh mục-------</option>
-                                                <% for(let i=0; i < danhmucs.length; i++) {%>
-                                                        <option value="<%= danhmucs[i].maloai %>" <%= danhmucs[i].maloai == product.id_maloai ? 'selected' : '' %> >
-                                                            <%= danhmucs[i].tenloai %>
-                                                        </option>
-                                                 <% } %>
-                                            </select><br>
-                                            <input type="submit" name="capnhatsanpham" value="Cập nhật sản phẩm"
-                                                class="btn btn-primary"><br/>
-                                            <br/>
-                                            <a href="admin/sanpham">Quay lại?</a>
+
+                                                        <label><img src="">Hình ảnh</label>
+                                                        <input value="client/img/product/<%= product.hinhanh%>"
+                                                            type="file" class="form-control" name="hinhanh"
+                                                            onchange="readFileImage(this)">
+                                                        <br>
+                                                        <img src="client/img/product/<%= product.hinhanh%>" width="100"
+                                                            height="100" id="imgSanPham" />
+                                                        <br />
+                                                        <label>Thương hiệu</label>
+                                                        <select name="id_math" class="form-control">
+                                                            <option value="">------Chọn thương hiệu-------</option>
+                                                            <% for(let i=0; i < thuonghieus.length; i++) {%>
+                                                                <option value="<%= thuonghieus[i].math %>"
+                                                                    <%=thuonghieus[i].math==product.id_math ? 'selected'
+                                                                    : '' %> >
+                                                                    <%= thuonghieus[i].tenth %>
+                                                                </option>
+                                                                <% } %>
+                                                        </select><br>
+                                                        <label>Mô tả</label><br />
+                                                        <textarea id="mota" name="mota" rows="4"
+                                                            cols="140"><%= product.mota %></textarea><br /><br />
+                                                        <label>Loại sản phẩm</label>
+                                                        <select name="id_maloai" class="form-control">
+                                                            <option value="-1">------Chọn danh mục-------</option>
+                                                            <% for(let i=0; i < danhmucs.length; i++) {%>
+                                                                <option value="<%= danhmucs[i].maloai %>"
+                                                                    <%=danhmucs[i].maloai==product.id_maloai
+                                                                    ? 'selected' : '' %> >
+                                                                    <%= danhmucs[i].tenloai %>
+                                                                </option>
+                                                                <% } %>
+                                                        </select><br>
+                                                        <input type="submit" name="capnhatsanpham"
+                                                            value="Cập nhật sản phẩm" class="btn btn-primary"><br />
+                                                        <br />
+                                                        <a href="admin/sanpham">Quay lại?</a>
                                         </form>
                                     </div>
                                 </div>
@@ -78,26 +94,55 @@
         </section>
         <%- include('../partials/adminscript_bottom'); -%>
     </body>
-
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
     <script>
-        let isImag = '<%= product.hinhanh%>'; 
+        let isImag = '<%= product.hinhanh%>';
 
-        if(!isImag){
+        if (!isImag) {
             $('#imgSanPham').hide();
         }
 
-        function readFileImage(input){
+        function readFileImage(input) {
             // Neu co upload file va co file dau tien 
-        
-            if(input.files && input.files[0]){
+
+            if (input.files && input.files[0]) {
                 var reader = new FileReader();
 
-                reader.onload = function(e){
+                reader.onload = function (e) {
                     $('#imgSanPham').show().attr('src', e.target.result);
                 }
 
                 reader.readAsDataURL(input.files[0])
             }
         }
+
+        $("#formUpdateProduct").validate({
+            rules: {
+                tensp: {
+                    required: true,
+                },
+                giatien: {
+                    required: true,
+                },
+                id_math: {
+                    required:true,
+                }
+        
+            },
+            messages: {
+                tensp: {
+                    required: 'Tên sản phẩm không được để trống'
+                },
+                giatien: {
+                    required: 'Giá sản phẩm không được để trống'
+                },
+                id_math: {
+                    required: 'Thương hiệu sản phẩm không được để trống'
+                }
+            }
+        });
+
+
     </script>
+
 </html>

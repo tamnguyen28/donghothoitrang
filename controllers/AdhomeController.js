@@ -8,6 +8,9 @@ class AdhomeController {
 
         res.render('admin/home/index',{
             title: 'admin',
+            roleAdmin: req.cookies.admin.id_maloainv,
+            tennv: req.cookies.admin ? req.cookies.admin.tennv : '',
+            manv: req.cookies.admin ? req.cookies.admin.manv: 0,
         });
     }
 }

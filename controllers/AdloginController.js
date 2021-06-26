@@ -2,9 +2,9 @@ const AdloginModel = require('../models/AdloginModel');
 
 class AdloginController {
     login(req, res) {
-      res.render('admin/adlogin/login',
-      {title: 'Đăng nhập', message:'',
-
+      res.render('admin/adlogin/login',{
+        title: 'Đăng nhập',
+        message:'',
     });
     }
 

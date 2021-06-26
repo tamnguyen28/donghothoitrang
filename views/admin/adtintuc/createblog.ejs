@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+    <style>
+        .error{
+            color: #f20;
+            font-style: italic;
+        }
+    </style>
 <%- include('../partials/adminhead'); -%>
-
     <body>
         <section id="container">
             <%- include('../partials/adminheader'); -%>
@@ -15,7 +20,7 @@
                                         <div class="panel-heading">
                                             THÊM TIN TỨC
                                         </div>
-                                        <form method="POST" action="/admin/tintuc/createtintuc" enctype="multipart/form-data">
+                                        <form method="POST" action="/admin/tintuc/createtintuc" enctype="multipart/form-data" id="formAddProduct">
                                             <label>Tên tiêu đề</label>
                                             <input type="text" class="form-control" name="tieude" placeholder="Tên tiêu đề"><br>
                                             
@@ -28,9 +33,8 @@
                                             <label>Trạng thái</label> <br />
                                             <input name="trangthai" type="radio" value="1" checked="checked"> Bật
                                             <input name="trangthai" type="radio" value="0"> Tắt <br />
-                                            
+
                                             <br />
-                                            
                                             <input type="submit" name="themtintuc" value="Thêm tin tức"
                                                 class="btn btn-primary"><br/>
                                             <br/>
@@ -46,7 +50,7 @@
         </section>
         <%- include('../partials/adminscript_bottom'); -%>
     </body>
-
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
     <script>
         imgtintuc.onchange = evt => {
             const [file] = imgtintuc.files
@@ -54,6 +58,31 @@
                 blah.src = URL.createObjectURL(file)
             }
         }
+
+        $("#formAddProduct").validate({
+                rules: {
+                    tieude: {
+                        required: true,                    
+                    },
+                    noidung: {
+                        required: true,                    
+                    },
+                    hinhanh: {
+                        required: true,                    
+                    }
+                },
+                messages:{
+                    tieude: {
+                        required: 'Tên tiêu đề không được để trống'
+                    },
+                    noidung: {
+                        required: 'Nội dung tiêu đề không được để trống'
+                    },
+                    hinhanh: {
+                        required: 'Hình ảnh không được để trống'
+                    },
+                }
+            });
     </script>
 
 </html>
