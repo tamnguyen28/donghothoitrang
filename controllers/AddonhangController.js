@@ -15,7 +15,11 @@ class AddonhangController{
         res.render('admin/addonhang/donhang',{
             title: 'donhang',
             mess: req.query.mess == 1 ? req.query.mess : '',
-            donhang: loadDH})
+            role: req.cookies.admin.id_maloainv,
+            donhang: loadDH,
+            tennv: req.cookies.admin ? req.cookies.admin.tennv : '',
+            manv: req.cookies.admin ? req.cookies.admin.manv: 0,
+        })
 
         }).catch(err =>{
             res.render('admin/home/index');
@@ -35,7 +39,7 @@ class AddonhangController{
     deleteOrder(req, res){
         let iddonhang = req.query.id;
         let status = req.query.status;
-        console.log(typeof status);
+        // console.log(typeof status);
         if(status != 0){
             AddonhangModel.deleteDonHang(iddonhang).then(function(result){
                 res.redirect('/admin/donhang');

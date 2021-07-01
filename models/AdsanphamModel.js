@@ -43,7 +43,8 @@ class AdsanphamModel {
 
     createSanPham(newSp) {
         return new Promise(function (resolve, reject) {
-            let b = { tensp: newSp.name, giatien: newSp.price, trangthai: newSp.status, hinhanh: newSp.image, id_math: newSp.trademark, id_maloai: newSp.type, mota: newSp.mota }
+            let b = { tensp: newSp.name, giatien: newSp.price, trangthai: newSp.status, hinhanh: newSp.image,
+                    id_math: newSp.trademark, id_maloai: newSp.type, mota: newSp.mota}
             conn.query('insert into sanpham SET ?', b, function (err, data) {
                 if (err) throw err;
                 resolve(true);

@@ -22,9 +22,11 @@ const adkhachhangRouter = require('./adkhachhang');
 const adtintucRouter = require('./adtintuc');
 const addonhangRouter = require('./addonhang');
 const adnhanvienRouter = require('./adnhanvien');
+const adloaisanphamRouter = require('./adloaisanpham');
 
 function route(app){
     
+    app.use('/admin/loaisanpham', adloaisanphamRouter);
     app.use('/admin/nhanvien', adnhanvienRouter);
     app.use('/admin/donhang', addonhangRouter);
     app.use('/admin/tintuc', adtintucRouter);

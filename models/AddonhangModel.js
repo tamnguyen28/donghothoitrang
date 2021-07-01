@@ -3,7 +3,9 @@ const conn = require('./config/connect');
 class AddonhangModel {
     loadDonHang() {
         return new Promise(function (resolve, reject) {
-            let sqlquery = `SELECT * FROM hoadon where isDelete = 0 ORDER BY mahd DESC`;
+            let sqlquery = `SELECT *,
+                            DATE_FORMAT(hoadon.tgtao, '%d/%m/%Y') as 'tgtao'
+                            FROM hoadon where isDelete = 0 ORDER BY mahd DESC`;
             conn.query(sqlquery, function (err, result) {
                 if (err) {
                     reject(err);
@@ -18,7 +20,9 @@ class AddonhangModel {
     getOrderByOrderId(idhd) {
         return new Promise(function (resolve, reject) {
         
-            let  queryCustomer = `SELECT hoadon.*, sanpham.masp, sanpham.tensp from hoadon 
+            let  queryCustomer = `SELECT hoadon.*, sanpham.masp, sanpham.tensp,
+                                DATE_FORMAT(sanpham.tgtao, '%d/%m/%Y') as 'tgtao'
+                                FROM hoadon 
                                 JOIN chitiethoadon on hoadon.mahd = chitiethoadon.mahd 
                                 JOIN sanpham on sanpham.masp = chitiethoadon.masp where hoadon.mahd = ?`
 
