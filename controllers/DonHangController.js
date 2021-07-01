@@ -8,9 +8,9 @@ const https = require('https');
 var endpoint = "https://test-payment.momo.vn/gw_payment/transactionProcessor"
 var hostname = "https://test-payment.momo.vn"
 var path = "/gw_payment/transactionProcessor"
-var partnerCode = "MOMOFIL020210605"
-var accessKey = "BK3xGm6SRVQl9JRE"
-var serectkey = "1dmGQbz6c3JSrgDWjTxvov36XteMoLYO"
+var partnerCode = "MOMOVYVS20210701"
+var accessKey = "3nDJ9k3snnTneEaQ"
+var serectkey = "h2D40FcZmLcJmGp2mCH6dfMVQVB0dlm8"
 var orderInfo = "pay with MoMo"
 var returnUrl = "http://localhost:3000/donhang?payonline=1"; //
 var notifyurl = "https://callback.url/notify"
@@ -89,6 +89,7 @@ class DonHangController{
                     message: req.query.localMessage ? req.query.localMessage : '' ,
                     tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
                     idkh:  req.cookies.user ? req.cookies.user.makh: 0 ,
+                    loai: resultloai,
                 });
             }
             let sl = req.session.giohang ? req.session.giohang.length: 0;
