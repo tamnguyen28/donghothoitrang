@@ -79,7 +79,7 @@ class HomeModel {
         
         });
     }
-
+    // lay san pham theo id
     getProductBy(idproduct){
         return new Promise(function(resolve, reject){
             let query = `select sanpham.masp, sanpham.tensp, sanpham.hinhanh, sanpham.giatien, thuonghieu.tenth

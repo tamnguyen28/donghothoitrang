@@ -13,54 +13,111 @@ class GioHangController {
       req.session.giohang = [];
     }
 
-    homeModel.getProductBy(req.query.id).then(function (result) {
-      homeModel.loadloaisp().then(resultloai =>{
-        //kiem tra ton tai va lay doi tuong ton tai
-        let flag = false;
-        let product = {};
-        for(let i = 0; i < req.session.giohang.length; i++){
-            let temp = req.session.giohang[i];
-            if(temp.masp == result.masp){
-                flag = true;
-                product = temp;
-            }
-        }
-        //neu ton tai thi cong len 
-        if(flag === true){
-            product.soluong += 1;
-            product.tongtien = product.soluong * product.giatien;   
-        }else{  
-            req.session.giohang.push({
-                masp: result.masp,
-                tensp: result.tensp,
-                soluong: 1,
-                hinhanh: result.hinhanh,
-                giatien: result.giatien,
-                tenthuonghieu: result.tenth,
-                tongtien: result.giatien,
-                
+    if(!req.query.id){
+        for (let i = 0; i <  req.session.giohang.length; i++) {
+          homeModel.getProductBy(req.session.giohang[i].masp).then(function (result) {
+      
+            homeModel.loadloaisp().then(resultloai =>{
+              //kiem tra ton tai va lay doi tuong ton tai
+              let flag = false;
+              let product = {};
+              for(let i = 0; i < req.session.giohang.length; i++){
+                  let temp = req.session.giohang[i];
+                  if(temp.masp == result.masp){
+                      flag = true;
+                      product = temp;
+                  }
+              }
+              //neu ton tai thi cong len 
+              if(flag === true){
+                  product.soluong += 1;
+                  product.tongtien = product.soluong * product.giatien;   
+              }else{  
+                  req.session.giohang.push({
+                      masp: result.masp,
+                      tensp: result.tensp,
+                      soluong: 1,
+                      hinhanh: result.hinhanh,
+                      giatien: result.giatien,
+                      tenthuonghieu: result.tenth,
+                      tongtien: result.giatien,
+                      
+                    });
+              }
+              // console.log( req.session.giohang.length);
+              return res.render("client/giohang/giohang", {
+                title: "Giỏ hàng",
+                tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
+                idkh:  req.cookies.user ? req.cookies.user.makh: 0 ,
+                giohangs: req.session.giohang ? req.session.giohang : [] ,
+                loai: resultloai,
               });
+            }).catch(err => {
+              console.log(err);
+            });
+          }).catch(function (err) {
+              return res.render("client/giohang/giohang", {
+                title: "Giỏ hàng",
+                tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
+                idkh:  req.cookies.user ? req.cookies.user.makh: 0 ,
+                giohangs: req.session.giohang ? req.session.giohang: [],
+                loai: resultloai,
+              });
+            });
+          
         }
-        // console.log( req.session.giohang.length);
-        return res.render("client/giohang/giohang", {
-          title: "Giỏ hàng",
-          tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
-          idkh:  req.cookies.user ? req.cookies.user.makh: 0 ,
-          giohangs: req.session.giohang ? req.session.giohang : [] ,
-          loai: resultloai,
+    }else{
+      homeModel.getProductBy(req.query.id).then(function (result) {
+      
+        homeModel.loadloaisp().then(resultloai =>{
+          //kiem tra ton tai va lay doi tuong ton tai
+          let flag = false;
+          let product = {};
+          for(let i = 0; i < req.session.giohang.length; i++){
+              let temp = req.session.giohang[i];
+              if(temp.masp == result.masp){
+                  flag = true;
+                  product = temp;
+              }
+          }
+          //neu ton tai thi cong len 
+          if(flag === true){
+              product.soluong += 1;
+              product.tongtien = product.soluong * product.giatien;   
+          }else{  
+              req.session.giohang.push({
+                  masp: result.masp,
+                  tensp: result.tensp,
+                  soluong: 1,
+                  hinhanh: result.hinhanh,
+                  giatien: result.giatien,
+                  tenthuonghieu: result.tenth,
+                  tongtien: result.giatien,
+                  
+                });
+          }
+          // console.log( req.session.giohang.length);
+          return res.render("client/giohang/giohang", {
+            title: "Giỏ hàng",
+            tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
+            idkh:  req.cookies.user ? req.cookies.user.makh: 0 ,
+            giohangs: req.session.giohang ? req.session.giohang : [] ,
+            loai: resultloai,
+          });
+        }).catch(err => {
+          console.log(err);
         });
-      }).catch(err => {
-        console.log(err);
-      });
-    }).catch(function (err) {
-        return res.render("client/giohang/giohang", {
-          title: "Giỏ hàng",
-          tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
-          idkh:  req.cookies.user ? req.cookies.user.makh: 0 ,
-          giohangs: req.session.giohang ? req.session.giohang: [],
-          loai: resultloai,
+      }).catch(function (err) {
+          return res.render("client/giohang/giohang", {
+            title: "Giỏ hàng",
+            tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
+            idkh:  req.cookies.user ? req.cookies.user.makh: 0 ,
+            giohangs: req.session.giohang ? req.session.giohang: [],
+            loai: resultloai,
+          });
         });
-      });
+    }
+    
   }
   xoagiohang(req, res) {
     homeModel.loadloaisp().then(resultloai =>{

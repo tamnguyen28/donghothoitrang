@@ -6632,3 +6632,66 @@ span.buttonText {
     background-color: #EB088A;
     color: #E7E7E7;
 }
+
+.progress{
+    height: 0px;
+    margin: 150px auto;
+    margin-top: 0px;
+    color: #01ab97;
+    font-family: sans-serif;
+}
+.progress img{
+    width: 80px;
+    height: 70px;
+    margin-bottom: 20px;
+}
+.progress ul{
+    text-align: center;
+}
+.progress ul li{
+    display: inline-block;
+    width: 200px;
+    position: relative;
+}
+.progress ul li .fa{
+    background: #ccc;
+    width: 24px;
+    height: 24px;
+    color: #fff;
+    border-radius: 50%;
+    padding: 5px;
+}
+.progress ul li .fa::after{
+    content: '';
+    background: #ccc;
+    height: 5px;
+    width: 205px;
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 100px;
+    z-index: -1;
+}
+.progress ul li:nth-child(3) .fa{
+    background: #148e14;
+}
+.progress ul li:nth-child(3) .fa::after{
+    background: #148e14;
+}
+.progress ul li:nth-child(1) .fa,
+.progress ul li:nth-child(2) .fa
+{
+    background: #60aa97;
+}
+.progress ul li:nth-child(1) .fa::after,
+.progress ul li:nth-child(2) .fa::after
+{
+    background: #60aa97;
+}
+.progress ul li:first-child .fa::after{
+    width: 105px;
+    left: 100px;
+}
+.progress ul li:last-child .fa::after{
+    width: 105px;
+}
