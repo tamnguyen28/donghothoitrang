@@ -7,23 +7,34 @@ class AdloaisanphamController{
         if(!req.cookies.admin){
             return res.redirect('/admin/login')
         }
-
+       
         AdloaisanphamModel.loadLoaiSP().then(result =>{
             res.render('admin/adloaisanpham/loaisanpham',{
                 title: 'loaisanpham',
                 loaisanpham: result,
                 role: req.cookies.admin.id_maloainv,
                 tennv: req.cookies.admin ? req.cookies.admin.tennv : '',
-                manv: req.cookies.admin ? req.cookies.admin.manv: 0
+                manv: req.cookies.admin ? req.cookies.admin.manv: 0,
+                idnv: req.cookies.admin.manv
             });
         }).catch(err =>{
-            res.render('admin/home/index');
+            res.render('admin/home/index', {
+                title: 'loaisanpham',
+                role: req.cookies.admin.id_maloainv,
+                tennv: req.cookies.admin ? req.cookies.admin.tennv : '',
+                manv: req.cookies.admin ? req.cookies.admin.manv: 0,
+                idnv: req.cookies.admin.manv
+            });
         });
     }
 
     //[GET] /admin/loaisanpham/createLSP
     createLSP(req, res){
-        res.render('admin/adloaisanpham/createLSP');
+        res.render('admin/adloaisanpham/createLSP',{
+            tennv: req.cookies.admin ? req.cookies.admin.tennv : '',
+            manv: req.cookies.admin ? req.cookies.admin.manv: 0,
+            idnv: req.cookies.admin.manv
+        });
     }
     createloaisp(req, res){
         let tenloai = req.body['tenloai'];
@@ -49,7 +60,12 @@ class AdloaisanphamController{
     updateLSP(req, res){
         let idloaiSP = req.query.id;
         AdloaisanphamModel.getLoaispById(idloaiSP).then(function(result){
-            res.render('admin/adloaisanpham/updateLSP', {LoaiSP: result[0] });
+            res.render('admin/adloaisanpham/updateLSP',{
+                LoaiSP: result[0],
+                tennv: req.cookies.admin ? req.cookies.admin.tennv : '',
+                manv: req.cookies.admin ? req.cookies.admin.manv: 0,
+                idnv: req.cookies.admin.manv
+            });
         }).catch(function(err){
 
         });

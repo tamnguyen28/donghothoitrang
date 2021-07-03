@@ -66,9 +66,8 @@ class AdnhanvienModel{
     updateNhanVien(newNV){
         return new Promise(function(resolve, reject){
             conn.query(`UPDATE nhanvien 
-                        SET tennv = ?, email = ?, matkhau = ?, sodienthoai = ?, trangthai = ?,id_maloainv = ?
-                        Where manv = ?`, [newNV.name, newNV.email, newNV.password,
-                                        newNV.phone, newNV.status, newNV.type, newNV.manv] , function(err, data){
+                        SET trangthai = ?
+                        Where manv = ?`, [ newNV.status, newNV.manv] , function(err, data){
                         if(err) throw err;
                         resolve(true);
             });

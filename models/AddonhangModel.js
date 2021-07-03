@@ -30,6 +30,7 @@ class AddonhangModel {
                 if(error){
                     reject(error)
                 }else{
+                    console.log(result);
                     resolve(result);
                 }
             });
@@ -44,7 +45,7 @@ class AddonhangModel {
                 if(error){
                     reject(error);
                 }else{
-                    resolve(true);
+                    resolve(result);
                 }
             })
         })
@@ -61,11 +62,27 @@ class AddonhangModel {
                     // console.log(error);
                     reject(error);
                 }else{
-                    console.log(result);
-                    resolve(true);
+                    // console.log(result);
+                    resolve(result);
                 }
             })
         })    
+    }
+
+    DoanhThu(namhientai){
+        return new Promise(function(resolve, result){
+            let querynamhientai = `SELECT SUM(hoadon.tonghoadon) as 'doanhthu' , MONTH(hoadon.tgtao) as 'thang' 
+                                    FROM hoadon 
+                                    WHERE MONTH(hoadon.tgtao) BETWEEN 1 and 12 And YEAR(hoadon.tgtao) = ?
+                                    GROUP by MONTH(hoadon.tgtao)`;
+            conn.query(querynamhientai, [namhientai], function(error, result){
+                if(error){
+                    reject(error);
+                }else{
+                    resolve(result);
+                }
+            })
+        })
     }
 }
 

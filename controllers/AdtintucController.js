@@ -17,16 +17,27 @@ class AdtintucController{
                 tintuc: loadTT,
                 role: req.cookies.admin.id_maloainv,
                 tennv: req.cookies.admin ? req.cookies.admin.tennv : '',
-                manv: req.cookies.admin ? req.cookies.admin.manv: 0
+                manv: req.cookies.admin ? req.cookies.admin.manv: 0,
+                idnv: req.cookies.admin.manv
             })
         }).catch(err => {
-            res.render('admin/home/index');
+            res.render('admin/home/index',{
+                title: 'tin tuc',
+                role: req.cookies.admin.id_maloainv,
+                tennv: req.cookies.admin ? req.cookies.admin.tennv : '',
+                manv: req.cookies.admin ? req.cookies.admin.manv: 0,
+                idnv: req.cookies.admin.manv
+            });
         });
     }
 
     //[GET] /admin/tintuc/createblog
     createblog(req, res){
-        res.render('admin/adtintuc/createblog');
+        res.render('admin/adtintuc/createblog',{
+            tennv: req.cookies.admin ? req.cookies.admin.tennv : '',
+            manv: req.cookies.admin ? req.cookies.admin.manv: 0,
+            idnv: req.cookies.admin.manv
+        });
     }
 
     //[POST] /admin/tintuc/createtintuc
@@ -55,7 +66,12 @@ class AdtintucController{
         let idtintuc = req.query.id;
         AdtintucModel.getBlogById(idtintuc).then(function(result){
             oldFileName = result[0].hinhanh
-            res.render('admin/adtintuc/updateblog', { blog: result[0]});
+            res.render('admin/adtintuc/updateblog', { 
+                blog: result[0],
+                tennv: req.cookies.admin ? req.cookies.admin.tennv : '',
+                manv: req.cookies.admin ? req.cookies.admin.manv: 0,
+                idnv: req.cookies.admin.manv
+            });
         }).catch(function(err){
 
         });

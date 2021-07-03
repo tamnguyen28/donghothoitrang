@@ -21,11 +21,18 @@ class AdsanphamController {
                 role: req.cookies.admin.id_maloainv,
                 mess: req.query.mess && req.query.mess == 1 ? req.query.mess : '',
                 tennv: req.cookies.admin ? req.cookies.admin.tennv : '',
-                manv: req.cookies.admin ? req.cookies.admin.manv: 0
+                manv: req.cookies.admin ? req.cookies.admin.manv: 0,
+                idnv: req.cookies.admin.manv
             })
 
         }).catch(err => {
-            res.render('admin/home/index');
+            res.render('admin/home/index',{
+                title: 'sanpham',
+                role: req.cookies.admin.id_maloainv,
+                tennv: req.cookies.admin ? req.cookies.admin.tennv : '',
+                manv: req.cookies.admin ? req.cookies.admin.manv: 0,
+                idnv: req.cookies.admin.manv
+            });
         });
     }
     //[GET] /admin/sanpham/create
@@ -33,7 +40,12 @@ class AdsanphamController {
         AdsanphamModel.loadDanhMuc().then(function (result) {
 
             AdsanphamModel.loadThuongHieu().then(function (resulttt) {
-                res.render('admin/adsanpham/create', { danhmucs: result, thuonghieus: resulttt });
+                res.render('admin/adsanpham/create', { 
+                    danhmucs: result, thuonghieus: resulttt,
+                    tennv: req.cookies.admin ? req.cookies.admin.tennv : '',
+                    manv: req.cookies.admin ? req.cookies.admin.manv: 0,
+                    idnv: req.cookies.admin.manv
+                });
             }).catch(function (err) {
 
             });
@@ -76,7 +88,12 @@ class AdsanphamController {
                 AdsanphamModel.loadDanhMuc().then(function (resultdm) {
                     oldFileName = result[0].hinhanh
                     oldSp = result;
-                    res.render('admin/adsanpham/update', { product: result[0], thuonghieus: resulttt, danhmucs: resultdm });
+                    res.render('admin/adsanpham/update', {
+                        product: result[0], thuonghieus: resulttt, danhmucs: resultdm,
+                        tennv: req.cookies.admin ? req.cookies.admin.tennv : '',
+                        manv: req.cookies.admin ? req.cookies.admin.manv: 0,
+                        idnv: req.cookies.admin.manv
+                    });
                 })
             }).catch(function (erro) {
 
