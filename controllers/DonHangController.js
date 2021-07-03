@@ -186,7 +186,7 @@ class DonHangController{
         var tmnCode = 'DWRT5XO9';
         var secretKey = 'TCUVHDKLHACPURHHOUNPMFZWKTVTDGPF';
         var vnpUrl = 'http://sandbox.vnpayment.vn/paymentv2/vpcpay.html';
-        var returnUrl = 'http://localhost:3000/donhang?payonline=1';
+        var returnUrl = 'https://donghothoitrang.herokuapp.com/donhang?payonline=1';
 
         var date = new Date();
 
