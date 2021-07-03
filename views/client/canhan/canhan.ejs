@@ -45,9 +45,15 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <p>Địa chỉ<span>*</span></p>
-                                        <input id="diachi" name="address" value="<%= customer ? customer.diachi : '' %>" />
-                                        <br><br>
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <div class="single-register">
+                                                    <p>Địa chỉ<span>*</span></p>
+                                                    <input class="register-signup-infor" id="diachi" name="address" value="<%= customer ? customer.diachi : '' %>" />
+                                                    <br><br>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="single-register" align="center">
                                             <input class="btn-login" type="submit" name="btn btn-primary" value="Cập nhật">
                                         </div>
@@ -67,5 +73,4 @@
             alert('Cập nhật thông tin thành công!');
         }
     </script>
-
 </html>

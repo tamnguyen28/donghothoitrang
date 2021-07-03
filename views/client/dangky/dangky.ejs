@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+<style>
+    .error {
+        color: red;
+    }
+</style>
 <%- include ('../partials/head'); -%>
 
     <body>
@@ -8,7 +13,7 @@
                 <!-- user-login-area-start -->
                 <div class="user-login-area mb-70 mt-40">
                     <div class="container">
-                        <form action="/dangky/sendinfor" method="post">
+                        <form action="/dangky/sendinfor" method="post" id="formDangKy">
                             <div class="row" class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                 <div class="col-lg-12">
                                     <div class="login-title text-center mb-30">
@@ -19,48 +24,43 @@
                                     <div class="billing-fields">
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <div class="single-register">
-                                                    <p>Tên đăng nhập<span>*</span></p>
-                                                    <input class="register-signup-infor" type="text" id="username"
-                                                        name="username" />
-                                                </div>
+                                                <p>Tên đăng nhập<span>*</span></p>
+                                                <input class="register-signup-infor" type="text" id="username"
+                                                    name="username" /><br><br>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                <div class="single-register">
-                                                    <p>Địa chỉ email<span>*</span></p>
-                                                    <input class="register-emailaddress-phone" type="email" id="email"
-                                                        name="email" />
-                                                </div>
+                                                <p>Địa chỉ email<span>*</span></p>
+                                                <input class="register-emailaddress-phone" type="text" id="email"
+                                                    name="email" /><br><br>
+                                                <span id="messemail" style="color: red; font-weight: bold;" ></span>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                <div class="single-register">
-                                                    <p>Số điện thoại<span>*</span></p>
-                                                    <input class="register-emailaddress-phone" type="text" id="phone"
-                                                        name="phone" />
-                                                </div>
+                                                <p>Số điện thoại<span>*</span></p>
+                                                <input class="register-emailaddress-phone" type="text" id="phone"
+                                                    name="phone" /><br><br>
+                                                <span id="messphone" style="color: red; font-weight: bold;"></span>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <div class="single-register">
-                                                    <p>Họ tên đầy đủ<span>*</span></p>
-                                                    <input class="register-signup-infor" type="text" id="name"
-                                                        name="name" />
-                                                </div>
+                                                <p>Họ tên đầy đủ<span>*</span></p>
+                                                <input class="register-signup-infor" type="text" id="name"
+                                                    name="name" /><br><br>
                                             </div>
                                         </div>
-                                    
                                         <p>Địa chỉ<span>*</span></p>
                                         <input id="diachi" name="address" />
                                         <br><br>
-                                        <div class="single-register">
+                                        <div class="">
                                             <p>Mật khẩu<span>*</span></p>
-                                            <input class="register-signup-infor" type="password" id="password" name="password" />
+                                            <input class="register-signup-infor" type="password" id="password"
+                                                name="password" /><br><br>
                                         </div>
                                         <div class="single-register" align="center">
-                                            <input class="btn-login" type="submit" name="btn btn-primary" value="Đăng ký">
+                                            <input class="btn-login" type="submit" name="btn btn-primary"
+                                                value="Đăng ký">
                                         </div>
                                     </div>
                                 </div>
@@ -101,6 +101,73 @@
                 search.start();
             }
         );
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+    <script>
+        $("#formDangKy").validate({
+            rules: {
+                username: {
+                    required: true,
+                },
+                email: {
+                    required: true,
+                    email: function (elmail) {
+                        var vnf_regexmail = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+                        var email = elmail.value;
+                        if (email !== '') {
+                            if (vnf_regexmail.test(email) == false) {
+                                $('#messemail').html('Email không hợp lệ');
+                            } else {
+                                $('#messemail').html('');
+                            }
+                        }
+                    }
+                },
+                phone: {
+                    required: true,
+                    phone: function (el) {
+                        var vnf_regex = /((09|03|07|08|05)+([0-9]{8})\b)/g;
+                        var phone = el.value;
+                        if (phone !== '') {
+                            if (vnf_regex.test(phone) == false) {
+                                $('#messphone').html('Số điện thoại không hợp lệ')
+                            } else {
+                                $('#messphone').html('');
+                            }
+                        }
+                    }
+                },
+                name: {
+                    required: true,
+                },
+                address: {
+                    required: true,
+                },
+                password: {
+                    required: true,
+                },
+            },
+            messages: {
+                username: {
+                    required: 'Tên đăng nhập không được để trống',
+                },
+                email: {
+                    required: 'Địa chỉ email không được để trống',
+                },
+                phone: {
+                    required: 'Số điện thoại không được để trống',
+                },
+                name: {
+                    required: 'Họ và tên không được để trống',
+                },
+                address: {
+                    required: 'Địa chỉ không được để trống',
+                },
+                password: {
+                    required: 'Mật khẩu không được để trống',
+                },
+            }
+        });
     </script>
 
 </html>

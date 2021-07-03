@@ -13,5 +13,6 @@ router.use(express.static('public'));
 
 router.get('/', donhangController.index);
 router.post('/savethongtin', donhangController.savethongtin);
+router.get('/create_payment_url', donhangController.thanhtoanVNP);
 
 module.exports = router;
