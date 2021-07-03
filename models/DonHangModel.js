@@ -23,7 +23,9 @@ class DonHangModel{
                     // console.log(result.insertId);
                     if(result.insertId){
                         let slsp = hoadon.giohangs.length;
+
                         let queryChiTietHoaDon = `Insert into chitiethoadon values (Null, ? , ?, ?,current_timestamp())`;
+                        
                         for(let i = 0; i < slsp; i++){
                             conn.query(queryChiTietHoaDon, [hoadon.giohangs[i].masp, result.insertId,hoadon.giohangs[i].soluong], function(error,result){
                                 if(error){

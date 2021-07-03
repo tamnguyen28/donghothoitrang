@@ -44,7 +44,7 @@
                                                         <td><%= sp.tensp %></td>
                                                         <td><%= sp.tennguoinhan %></td>
                                                         <td><%= sp.tonghoadon %></td>
-                                                        <td><%= sp.phuongthucthanhtoan == 1 ? 'Thanh toán online': 'Thanh toán cod'%></td>
+                                                        <td><%= (sp.phuongthucthanhtoan == 1 || sp.phuongthucthanhtoan == 2) ? 'Thanh toán online': 'Thanh toán cod'%></td>
                                                         <td><%= sp.trangthai == 1 ? 'Đã thanh toán' : 'Chưa thanh toán' %></td>
                                                         <td><%= sp.tgtao %></td>
                                                     </tr>
