@@ -5,7 +5,7 @@ class AdnhanvienModel{
         return new Promise(function(resolve, reject){
             let sqlquery = `SELECT * FROM nhanvien JOIN loainhanvien 
                             on nhanvien.id_maloainv = loainhanvien.maloainv 
-                            where isDelete = 0 ORDER BY manv DESC`;
+                            where nhanvien.isDelete = 0 ORDER BY manv DESC`;
             conn.query(sqlquery, function(err, result){
                 if(err){
                     reject(err);
@@ -30,7 +30,7 @@ class AdnhanvienModel{
     createNhanVien(newNV){
         return new Promise(function(resolve, reject){
             let b = { tennv: newNV.name, email: newNV.email, matkhau: newNV.password, 
-                        sodienthoai: newNV.phone, trangthai: newNV.status, id_maloainv: newNV.type}
+                        sodienthoai: newNV.phone, trangthai: newNV.status, id_maloainv: newNV.type, isDelete:0}
             conn.query('insert into nhanvien SET ?', b , function(err, data){
                 if(err) throw err;
                 resolve(true);

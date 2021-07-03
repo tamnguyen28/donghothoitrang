@@ -18,7 +18,7 @@ class AdloaisanphamModel{
 
     createLoaiSanPham(newLSP){
         return new Promise(function(resolve, reject){
-            let b = {tenloai: newLSP.name};
+            let b = {tenloai: newLSP.name, duongdan: '', isDelete: 0};
             conn.query('insert into loaisanpham SET ?', b, function(err, data){
                 if(err) throw err;
                 resolve(true);

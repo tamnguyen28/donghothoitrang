@@ -18,7 +18,7 @@ class AdtintucModel{
 
     createTinTuc(newTt) {
         return new Promise(function (resolve, reject) {
-            let b = { tieude: newTt.name, noidung: newTt.noidung, hinhanh: newTt.image, trangthai: newTt.status,}
+            let b = { tieude: newTt.name, noidung: newTt.noidung, hinhanh: newTt.image, trangthai: newTt.status,isDelete: 0}
             conn.query('insert into tintuc SET ?', b, function (err, data) {
                 if (err) throw err;
                 resolve(true);
