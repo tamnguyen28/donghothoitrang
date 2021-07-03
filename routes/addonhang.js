@@ -3,7 +3,9 @@ const router = express.Router();
 
 const addonhangController = require('../controllers/AddonhangController');
 
-router.get('/updateStatus', addonhangController.updateStatus)
+router.get('/doanhthunam', addonhangController.doanhthunam);
+router.get('/doanhthu', addonhangController.doanhthu);
+router.get('/updateStatus', addonhangController.updateStatus);
 router.get('/updateOrder', addonhangController.updateOrder);
 router.get('/deleteOrder', addonhangController.deleteOrder);
 router.get('/', addonhangController.donhang);

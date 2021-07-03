@@ -1,6 +1,7 @@
 const express = require('express');
 var bodyParser = require('body-parser')
-const adsanphamController = require('../controllers/AdsanphamController.js');
+const adsanphamController = require('../controllers/AdsanphamController');
+
 var multer  = require('multer');
 var upload = multer();
 

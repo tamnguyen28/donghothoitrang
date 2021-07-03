@@ -19,7 +19,7 @@ class AdloginController {
           res.redirect('/admin');
         })
         .catch(function (err) {
-          res.render('admin/adlogin/login', {title:'Đăng nhập', message: "SAI MẬT KHẨU: Đăng nhập thất bại" });
+          res.render('admin/adlogin/login', {title:'Đăng nhập', message: "Tài khoản không hợp lệ" });
         });
     }
 
