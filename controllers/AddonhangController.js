@@ -19,10 +19,17 @@ class AddonhangController{
             donhang: loadDH,
             tennv: req.cookies.admin ? req.cookies.admin.tennv : '',
             manv: req.cookies.admin ? req.cookies.admin.manv: 0,
+            idnv: req.cookies.admin.manv
         })
 
         }).catch(err =>{
-            res.render('admin/home/index');
+            res.render('admin/home/index',{
+                title: 'donhang',
+                role: req.cookies.admin.id_maloainv,
+                tennv: req.cookies.admin ? req.cookies.admin.tennv : '',
+                manv: req.cookies.admin ? req.cookies.admin.manv: 0,
+                idnv: req.cookies.admin.manv
+            });
         })
     }
 
@@ -54,7 +61,11 @@ class AddonhangController{
         AddonhangModel.getOrderByOrderId(req.query.id).then(result =>{
         res.render('admin/addonhang/updatestatus',{
             title: 'updateStatus',
-            donhang: result[0]})
+            donhang: result[0],
+            tennv: req.cookies.admin ? req.cookies.admin.tennv : '',
+            manv: req.cookies.admin ? req.cookies.admin.manv: 0,
+            idnv: req.cookies.admin.manv
+        })
 
         }).catch(err =>{
             res.render('admin/home/index');
@@ -71,7 +82,20 @@ class AddonhangController{
         }).catch(function(error){
 
         })
-        
+    }
+    doanhthu(req, res){
+        res.render('admin/addonhang/doanhthu',{
+            tennv: req.cookies.admin ? req.cookies.admin.tennv : '',
+            manv: req.cookies.admin ? req.cookies.admin.manv: 0,
+            idnv: req.cookies.admin.manv
+        });
+    }
+
+    doanhthunam(req, res){
+        let namhientai = req.query.namhientai;
+        AddonhangModel.DoanhThu(namhientai).then(function(result){
+            res.json({doanhthus: result})
+        })
     }
 }
 

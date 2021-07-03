@@ -24,18 +24,6 @@
                                             <label>Mã nhân viên</label>
                                             <input type="text" class="form-control" name="manv"
                                                 placeholder="Tên nhân viên" value="<%= nhanvien.manv%>" readonly><br>
-                                            <label>Tên nhân viên</label>
-                                            <input type="text" class="form-control" name="tennv"
-                                                placeholder="Tên nhân viên" value="<%= nhanvien.tennv %>"><br>
-                                            <label>Email</label>
-                                            <input type="email" class="form-control" name="email" value="<%= nhanvien.email %>">
-                                            <br>
-                                            <label>Mật khẩu</label>
-                                            <input type="password" class="form-control" name="matkhau" value="<%= nhanvien.matkhau %>">
-                                            <br>
-                                            <label>Số điện thoại</label>
-                                            <input type="text" class="form-control" name="sodienthoai" value="<%= nhanvien.sodienthoai %>">
-                                            <br>
                                             <label>Trạng thái</label> <br />
                                             <% if(nhanvien.trangthai){ %>
                                             <input name="trangthai" type="radio" value="1" checked="checked">
@@ -48,17 +36,6 @@
                                             <input name="trangthai" type="radio" value="0" checked="checked"> Không hoạt động <br />
                                             <br />
                                             <% } %>
-                                            <label>Quản lý</label>
-                                            <select name="id_maloainv" class="form-control">
-                                                <option value="">------Chọn loại quản lý-------</option>
-                                                <% for(let i=0; i < loaiNvs.length; i++) {%>
-                                                    <option value="<%= loaiNvs[i].maloainv %>"
-                                                        <%=loaiNvs[i].maloainv==nhanvien.id_maloainv 
-                                                        ? 'selected' : '' %> >
-                                                        <%= loaiNvs[i].tenloainv %>
-                                                    </option>
-                                                    <% } %>
-                                            </select><br>
                                             <input type="submit" name="capnhatnhanvien" value="Cập nhật nhân viên"
                                                 class="btn btn-primary"><br/>
                                             <br/>
@@ -74,7 +51,7 @@
         </section>
         <%- include('../partials/adminscript_bottom'); -%>
     </body>
-    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
     <script>
             $("#formAddProduct").validate({
                 rules: {
@@ -114,5 +91,5 @@
             });
       
 
-    </script>
+    </script> -->
 </html>
