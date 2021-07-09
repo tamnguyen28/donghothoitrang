@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/adminhead'); -%>
+<body>
+<section id="container">
+<%- include('../partials/adminheader'); -%>
+<%- include('../partials/adminleft'); -%>
+<!--main content start-->
+<section id="main-content">
+	<section class="wrapper">
+		   <div class="clearfix">
+            <div class="table-agile-info">
+                <div class="panel panel-default">
+                   <div class="panel-heading">
+                    LIÊN HỆ
+                   </div>
+                   <div>
+                     <table class="table" ui-jq="footable">
+                       <thead>
+                         <tr>
+                           <th data-breakpoints="xs">Mã liên hệ</th>
+                           <th>Tên người liên hệ </th>
+                           <th>Số điện thoại </th>
+                           <th>Email </th>
+                           <th>Tiêu đề </th>
+                           <th>Nội dung</th>
+                           <th>Thời gian tạo</th>
+                         </tr>
+                       </thead>
+                       <tbody>
+                        <% lienhe.forEach(function(lh){ %>
+                         <tr data-expanded="true">
+                           <td><%= lh.malh  %></td>
+                           <td><%= lh.tennguoilh %></td>
+                           <td><%= lh.sodienthoai %></td>
+                           <td><%= lh.email  %></td>
+                           <td><%= lh.tieude %></td>
+                           <td><textarea><%= lh.noidung %></textarea></td>
+                           <td><%= lh.tgtao %></td>
+                           <td>            
+                            <a href="/admin/lienhe/deleteLH?id=<%= lh.malh %>" class="btn btn-danger <%= role && role != 1 ? '' : 'hidden'%>">Xóa</a>
+                            </td>
+                            </tr>
+                        <% }); %>
+                       </tbody>
+                     </table>
+                   
+                   </div>
+                 </div>
+            </div>
+        </div>
+  </section>
+<%- include('../partials/adminfooter'); -%>
+</section>
+<!--main content end-->
+</section>
+<%- include('../partials/adminscript_bottom'); -%>
+</body>
+</html>
+

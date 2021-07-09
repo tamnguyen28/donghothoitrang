@@ -87,7 +87,9 @@ class AddonhangModel {
     }
     loadChitiet(iddonhang){
         return new Promise(function(resolve, reject){
-            let queryChitiet = "SELECT * from hoadon where hoadon.mahd = ?";
+            let queryChitiet = `SELECT *, 
+                                DATE_FORMAT(hoadon.tgtao, '%d/%m/%Y') as 'tgtao'
+                                FROM hoadon where hoadon.mahd = ?`;
             conn.query(queryChitiet, [iddonhang], function(err, result){
                 if(err){
                     reject(err);
