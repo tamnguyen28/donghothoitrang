@@ -28,9 +28,9 @@ router.use(bodyParser.json());
 
 router.get('/update', adsanphamController.update);
 router.get('/delete', adsanphamController.deleteSanpham);
-router.post('/storeupdate', upload.single('hinhanh'), adsanphamController.storeupdate);
+router.post('/storeupdate', upload.array('hinhanh', 4), adsanphamController.storeupdate);
 router.get('/create', adsanphamController.create);
-router.post('/store', upload.single('hinhanh'), adsanphamController.store);
+router.post('/store', upload.array('hinhanh', 4), adsanphamController.store);
 router.get('/', adsanphamController.index);
 
 module.exports = router;

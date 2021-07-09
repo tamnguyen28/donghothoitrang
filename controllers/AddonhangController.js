@@ -97,6 +97,26 @@ class AddonhangController{
             res.json({doanhthus: result})
         })
     }
+    //xem chi tiết đơn hàng
+    detailOrder(req, res){
+        let iddonhang = req.query.id;
+        AddonhangModel.loadChitiet(iddonhang).then(function(resultChitiet){
+            AddonhangModel.getOrderByOrderId(iddonhang).then(function(resultsp){
+                res.render('admin/addonhang/chitietdonhang',{
+                    tennv: req.cookies.admin ? req.cookies.admin.tennv : '',
+                    manv: req.cookies.admin ? req.cookies.admin.manv: 0,
+                    idnv: req.cookies.admin.manv,
+                    chitiet: resultChitiet,
+                    chitietsp: resultsp,
+                });
+            }).catch(err =>{
+                console.log(err);
+            })
+            
+        }).catch(err =>{
+            console.log(err);
+        });
+    }
 }
 
 

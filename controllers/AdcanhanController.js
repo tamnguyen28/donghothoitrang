@@ -1,4 +1,5 @@
 const AdcanhanModel = require('../models/AdcanhanModel');
+const md5 = require('md5');
 const conn = require('../models/config/connect');
 
 class AdcanhanController{
@@ -28,7 +29,7 @@ class AdcanhanController{
             });
         })
     }
-
+    //luu thong tin ca nhan
     saveCanhan(req, res){
         let nv = {
             manv: req.body.idnv,
@@ -36,7 +37,7 @@ class AdcanhanController{
             email: req.body.email,
             sodienthoai: req.body.phone,
         };
-        console.log(nv);
+        // console.log(nv);
         AdcanhanModel.updateCanhan(nv).then(function(result){
             res.redirect(`/admin/canhan?idnv=${nv.manv}&mess=1`);
         }).catch(function(err){
@@ -44,6 +45,66 @@ class AdcanhanController{
             res.redirect(`/admin/canhan?idnv=${nv.manv}&mess=0`);
         })
     }
+    doimatkhau(req, res){
+        res.render('admin/adcanhan/doimatkhau',{
+            tennv: req.cookies.admin ? req.cookies.admin.tennv : '',
+            manv: req.cookies.admin ? req.cookies.admin.manv: 0,
+            idnv: req.cookies.admin.manv,
+            mess: ''
+        });   
+    }
+
+    doimatkhauPost(req, res){
+        let oldpass = md5(req.body.mkcu);
+        let newPass = md5(req.body.mkmoi);
+        let idnhanvien = req.cookies.admin.manv;
+
+        if(oldpass != newPass){
+            AdcanhanModel.checkOldPassword(oldpass, idnhanvien).then(function(result){
+                if(result == true){
+                    AdcanhanModel.updateNewPass(newPass, idnhanvien).then(function(result){
+                        res.render('admin/adcanhan/doimatkhau',{
+                            tennv: req.cookies.admin ? req.cookies.admin.tennv : '',
+                            manv: req.cookies.admin ? req.cookies.admin.manv: 0,
+                            idnv: req.cookies.admin.manv,
+                            mess: 'Đổi mật khẩu thành công'
+                        });
+                    }).catch(function(error){
+                        res.render('admin/adcanhan/doimatkhau',{
+                            tennv: req.cookies.admin ? req.cookies.admin.tennv : '',
+                            manv: req.cookies.admin ? req.cookies.admin.manv: 0,
+                            idnv: req.cookies.admin.manv,
+                            mess: 'Mật khẩu cũ không đúng'
+                        });   
+                    });
+                }else{
+                    res.render('admin/adcanhan/doimatkhau',{
+                        tennv: req.cookies.admin ? req.cookies.admin.tennv : '',
+                        manv: req.cookies.admin ? req.cookies.admin.manv: 0,
+                        idnv: req.cookies.admin.manv,
+                        mess: 'Mật khẩu cũ không đúng'
+                    });   
+                }
+            }).catch(function(){
+                res.render('admin/adcanhan/doimatkhau',{
+                    tennv: req.cookies.admin ? req.cookies.admin.tennv : '',
+                    manv: req.cookies.admin ? req.cookies.admin.manv: 0,
+                    idnv: req.cookies.admin.manv,
+                    mess: 'Mật khẩu cũ không đúng'
+                });   
+            })
+        }else{
+            res.render('admin/adcanhan/doimatkhau',{
+                tennv: req.cookies.admin ? req.cookies.admin.tennv : '',
+                manv: req.cookies.admin ? req.cookies.admin.manv: 0,
+                idnv: req.cookies.admin.manv,
+                mess: 'Mật khẩu cũ không được trùng mật khẩu mới'
+            });  
+        }
+       
+    }
+
+
 
 }
 

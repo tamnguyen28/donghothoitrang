@@ -20,7 +20,8 @@ class AddonhangModel {
     getOrderByOrderId(idhd) {
         return new Promise(function (resolve, reject) {
         
-            let  queryCustomer = `SELECT hoadon.*, sanpham.masp, sanpham.tensp,
+            let  queryCustomer = `SELECT hoadon.*, sanpham.masp, sanpham.tensp, sanpham.giatien,
+                                chitiethoadon.soluong,
                                 DATE_FORMAT(sanpham.tgtao, '%d/%m/%Y') as 'tgtao'
                                 FROM hoadon 
                                 JOIN chitiethoadon on hoadon.mahd = chitiethoadon.mahd 
@@ -30,7 +31,7 @@ class AddonhangModel {
                 if(error){
                     reject(error)
                 }else{
-                    console.log(result);
+                    // console.log(result);
                     resolve(result);
                 }
             });
@@ -78,6 +79,18 @@ class AddonhangModel {
             conn.query(querynamhientai, [namhientai], function(error, result){
                 if(error){
                     reject(error);
+                }else{
+                    resolve(result);
+                }
+            })
+        })
+    }
+    loadChitiet(iddonhang){
+        return new Promise(function(resolve, reject){
+            let queryChitiet = "SELECT * from hoadon where hoadon.mahd = ?";
+            conn.query(queryChitiet, [iddonhang], function(err, result){
+                if(err){
+                    reject(err);
                 }else{
                     resolve(result);
                 }

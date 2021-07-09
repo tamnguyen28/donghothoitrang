@@ -10,6 +10,8 @@ router.use(body.json())
 
 router.use(express.static('public'))
 
+router.get('/doimatkhau', adcanhanController.doimatkhau);
+router.post('/doimatkhauPost', adcanhanController.doimatkhauPost);
 router.get('/', adcanhanController.canhan);
 
 router.post('/sendinfor', adcanhanController.saveCanhan);

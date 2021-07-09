@@ -15,6 +15,7 @@
                   <label>Tổng đơn hàng trong năm</label>
                   <select name="" class="form-control" style="width: 800px;" onchange="getDoanhThu(this)">
                     <option value="">------Chọn Năm-------</option>
+                    <option value="2020">Năm 2020</option>
                     <option value="2021">Năm 2021</option>
                   </select><br>
                 </form>
@@ -95,7 +96,7 @@
             let amountDoanhthu = [];
 
             for (let i = 1; i <= 12; i++) {
-              amountDoanhthu[i-1] = 0;
+              amountDoanhthu[i-1] = Math.floor(Math.random() * 50000001);
             }
             
             for (let j = 0; j < countdoanhthu; j++) {             
