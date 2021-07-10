@@ -19,6 +19,7 @@ class AdnhanvienController{
                 idnv: req.cookies.admin.manv
             });
         }).catch(err => {
+            console.log(err);
             res.render('admin/home/index',{
                 title: 'nhanvien',
                 role: req.cookies.admin.id_maloainv,
