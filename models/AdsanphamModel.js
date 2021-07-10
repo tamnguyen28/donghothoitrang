@@ -43,11 +43,13 @@ class AdsanphamModel {
 
     createSanPham(newSp) {
         return new Promise(function (resolve, reject) {
-            let b = { tensp: newSp.name, giatien: newSp.price, trangthai: newSp.status, hinhanh: newSp.image,
-                    id_math: newSp.trademark, id_maloai: newSp.type, mota: newSp.mota, isDelete: 0}
+            let b = {
+                tensp: newSp.name, giatien: newSp.price, trangthai: newSp.status, hinhanh: newSp.image,
+                id_math: newSp.trademark, id_maloai: newSp.type, mota: newSp.mota, isDelete: 0
+            }
             conn.query('insert into sanpham SET ?', b, function (err, data) {
                 if (err) throw err;
-                resolve(true);
+                resolve(data.insertId);
             });
         });
     }
@@ -67,15 +69,31 @@ class AdsanphamModel {
         })
     }
 
+    //lấy id sanpham có hình ảnh trong bosuutap
+    getImageProduct(idproduct) {
+        return new Promise(function (resolve, reject) {
+            let queryProduct = `Select * from bohinhanh where bohinhanh.id_masp = ?`;
+
+            conn.query(queryProduct, [idproduct], function (err, result) {
+                if (err) {
+                    reject(err)
+                } else {
+
+                    resolve(result);
+                }
+            })
+        })
+
+    }
+
     updateSanPham(newSp) {
         return new Promise(function (resolve, reject) {
-            // let b = {tensp: newSp.name, giatien: newSp.price, trangthai: newSp.status, hinhanh: newSp.image, id_math: newSp.trademark, id_maloai: newSp.type, mota: newSp.mota, masp: newSp.masp }
             conn.query(`UPDATE sanpham 
                         SET tensp = ?, giatien = ?, trangthai = ?, hinhanh = ?, id_math = ?, id_maloai = ?, mota = ? 
                         Where masp = ?`, [newSp.name, newSp.price, newSp.status, newSp.image, newSp.trademark,
-                                         newSp.type, newSp.mota, newSp.masp], function (err, data) {
+            newSp.type, newSp.mota, newSp.masp], function (err, data) {
                 if (err) throw err;
-                resolve(true);
+                resolve(data.insertId);
             });
         });
     }
@@ -85,30 +103,70 @@ class AdsanphamModel {
             let queryDelete = `UPDATE sanpham
                             SET isDelete = 1
                             WHERE masp = ?`;
-            conn.query(queryDelete, [idsanpham], function(error, result){
-                if(error){
+            conn.query(queryDelete, [idsanpham], function (error, result) {
+                if (error) {
                     reject(error);
-                }else{
+                } else {
                     resolve(true);
                 }
             });
         })
     }
-    
-    getOrderOfProduct(idsanpham){
-        return new Promise(function(resolve, reject){
+
+    //lấy ra đơn hàng có trong sanpham
+    getOrderOfProduct(idsanpham) {
+        return new Promise(function (resolve, reject) {
             let queryXoa = `SELECT * from sanpham JOIN chitiethoadon on sanpham.masp = chitiethoadon.masp
             JOIN hoadon on hoadon.mahd = chitiethoadon.mahd 
             where sanpham.masp = ? and hoadon.trangthai = 0`;
-            conn.query(queryXoa, [idsanpham], function(error,result){
-                if(error){
+            conn.query(queryXoa, [idsanpham], function (error, result) {
+                if (error) {
                     reject(error);
-                }else{
+                } else {
                     resolve(result);
                 }
             })
         })
     }
+    //luu san pham vao bohinhanh
+    insertCollectImag(newIdProduct, dataImage) {
+        return new Promise(function (resolve, reject) {
+            let insert = `Insert into bohinhanh values (NULL,?,?)`;
+            let lengthImagas = dataImage.length;
 
+            for (let i = 1; i < lengthImagas; i++) {
+                conn.query(insert, [dataImage[i].filename, newIdProduct], function (error) {
+                    if (error) {
+                        // console.log(error);
+                        reject(false);
+                    }
+                })
+            }
+            resolve(true);
+        })
+    }
+    //thay đổi ảnh đã lưu trong bohinhanh
+    updateCollectImag(newIdProductup, dataImageup, reusltImag) {
+        return new Promise(function (resolve, reject) {
+            let update = `update bohinhanh 
+                          set bohinhanh.tenha = ?
+                          where bohinhanh.id_masp = ? and bohinhanh.maha = ?`;
+
+            let lengthImagas = dataImageup.length;
+            let lengthCollectionImag = reusltImag.length;
+            let j = 0;
+            for (let i = 1; i < lengthImagas; i++) {
+                conn.query(update, [dataImageup[i].filename, newIdProductup, reusltImag[j++].maha], function (error) {
+                    if (error) {
+                        console.log(error);
+                        reject(false);
+                    }
+                })
+            }
+
+            resolve(true);
+
+        })
+    }
 }
 module.exports = new AdsanphamModel();

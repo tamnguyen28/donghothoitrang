@@ -58,7 +58,7 @@ class AdsanphamController {
         let tensp = req.body['tensp'];
         let giatien = req.body['giatien'];
         let trangthai = req.body['trangthai'];
-        let hinhanh = req.file.filename;
+        let hinhanh = req.files[0].filename;
         let mota = req.body['mota'];
         let thuonghieu = req.body['id_math'];
         let loaisanpham = Number(req.body['id_maloai']);
@@ -71,9 +71,15 @@ class AdsanphamController {
             trademark: thuonghieu,
             type: loaisanpham
         }
-        // let createSP = [];
-        AdsanphamModel.createSanPham(newSp).then(result => {
-            res.redirect('/admin/sanpham');
+        // console.log(hinhanh);
+        let createSP = [];
+        AdsanphamModel.createSanPham(newSp).then(resultProduct => {
+            AdsanphamModel.insertCollectImag(resultProduct,req.files).then(function(result){
+                res.redirect('/admin/sanpham');
+            }).catch(function(error){
+
+            })
+            
         }).catch(err => {
             // console.log(err);
             res.render('/admin');
@@ -86,14 +92,21 @@ class AdsanphamController {
         AdsanphamModel.getProductById(idsanpham).then(function (result) {
             AdsanphamModel.loadThuongHieu().then(function (resulttt) {
                 AdsanphamModel.loadDanhMuc().then(function (resultdm) {
-                    oldFileName = result[0].hinhanh
-                    oldSp = result;
-                    res.render('admin/adsanpham/update', {
-                        product: result[0], thuonghieus: resulttt, danhmucs: resultdm,
-                        tennv: req.cookies.admin ? req.cookies.admin.tennv : '',
-                        manv: req.cookies.admin ? req.cookies.admin.manv: 0,
-                        idnv: req.cookies.admin.manv
-                    });
+                    AdsanphamModel.getImageProduct(idsanpham).then(function(resultBohinhanh){
+                        oldFileName = result[0].hinhanh
+                        oldSp = result;
+                       
+                        res.render('admin/adsanpham/update', {
+                            product: result[0], thuonghieus: resulttt, danhmucs: resultdm,
+                            tennv: req.cookies.admin ? req.cookies.admin.tennv : '',
+                            manv: req.cookies.admin ? req.cookies.admin.manv: 0,
+                            idnv: req.cookies.admin.manv,
+                            bohinhanh:resultBohinhanh
+                        });
+                    }).catch(function(error){
+
+                    })
+                   
                 })
             }).catch(function (erro) {
 
@@ -102,17 +115,17 @@ class AdsanphamController {
 
         });
     }
-    // [POST] /admin/sanpham/store
+    // [POST] /admin/sanpham/store (update)
      storeupdate(req, res) {
         let masp = req.body['masp'];
         let tensp = req.body['tensp'];
         let giatien = Number(req.body['giatien']);
         let trangthai = Number(req.body['trangthai']);
-        let hinhanh = (req.file ? req.file.filename: oldFileName);
+        let hinhanh = (req.files[0] ? req.files[0].filename: oldFileName);
         let mota = req.body['mota'];
         let thuonghieu = Number(req.body['id_math']);
         let loaisanpham = req.body['id_maloai'] == -1 ? oldSp[0].id_maloai : req.body['id_maloai'] ;
-        
+            
         let newSp = {
             masp: masp,
             name: tensp,
@@ -123,8 +136,17 @@ class AdsanphamController {
             trademark: thuonghieu,
             type: loaisanpham
         }
-        AdsanphamModel.updateSanPham(newSp).then(result => {
-            res.redirect('/admin/sanpham');
+        AdsanphamModel.updateSanPham(newSp).then(resultProduct => {
+            AdsanphamModel.getImageProduct(masp).then(function(reusltImag){
+                AdsanphamModel.updateCollectImag(masp,req.files,reusltImag).then(function(result){
+                    res.redirect('/admin/sanpham');
+                }).catch(function(error){
+                    console.log(error);
+                })
+            }).catch(function(error){
+
+            })
+            
         }).catch(err => {
             res.render('/admin');
         });
@@ -143,9 +165,10 @@ class AdsanphamController {
                 res.redirect('/admin/sanpham?mess=1');
             }
         }).catch(function(error){
-
+           
         })
         
     }
 }
+
 module.exports = new AdsanphamController();

@@ -32,6 +32,43 @@ class AdcanhanModel {
       })
     })
   }
+//check đúng password cũ
+  checkOldPassword(oldPass, idEm){
+    return new Promise(function(resolve, reject){
+      let query = `Select * from nhanvien where nhanvien.matkhau = ? and nhanvien.manv = ?`;
+
+      conn.query(query, [oldPass, idEm], function(errorEmployee, result){
+        if(errorEmployee){
+          // console.log(errorEmployee);
+          reject(false);    
+        }else{
+            if(result.length != 0){
+              resolve(true);
+            }else{
+              reject(false);
+            }
+        }
+      });
+    })
+  }
+//cập nhật password mới
+  updateNewPass(newPass, idEmployee) {
+    return new Promise(function (resolve, reject) {
+      let query = `update nhanvien
+                 set nhanvien.matkhau = ? 
+                 where nhanvien.manv = ?`
+      // console.log("ABC");
+      conn.query(query, [newPass, idEmployee], function (error, result) {
+        if (error) {
+          // console.log(error);
+          reject(false);
+        } else {
+          // console.log( result);
+          resolve(true)
+        }
+      });
+    })
+  }
 }
 
 module.exports = new AdcanhanModel();

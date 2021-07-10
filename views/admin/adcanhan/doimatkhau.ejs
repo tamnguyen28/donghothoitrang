@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    .error{
+        color: red;
+        font-style: italic;
+    }
+</style>
+<%- include('../partials/adminhead'); -%>
+    <body>
+        <section id="container">
+            <%- include('../partials/adminheader'); -%>
+                <%- include('../partials/adminleft'); -%>
+                    <!--main content start-->
+                    <section id="main-content">
+                        <section class="wrapper">
+                            <div class="clearfix">
+                                <div class="table-agile-info">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            ĐỔI MẬT KHẨU
+                                        </div>
+                                        <form id="formChangePass" method="POST" action="/admin/canhan/doimatkhauPost" >
+                                            <label>Mật khẩu cũ</label>
+                                            <input type="text" class="form-control" name="mkcu"
+                                                placeholder="Mật khẩu cũ"><br>
+                                                <label>Mật khẩu mới</label>
+                                            <input type="text" id="oldpass" class="form-control" name="mkmoi"
+                                                placeholder="Mật khẩu mới"><br>
+                                                <label>Xác nhận mật khẩu</label>
+                                            <input type="text" class="form-control" name="xacnhanmk"><br>
+                                            <input type="submit" name="xacnhan" value="Xác nhận"
+                                                class="btn btn-primary"><br/>
+                                            <br/>
+                                            <a href="admin">Quay lại?</a>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <%- include('../partials/adminfooter'); -%>
+                    </section>
+                    <!--main content end-->
+        </section>
+        <%- include('../partials/adminscript_bottom'); -%>
+    </body>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+    <script>
+            $("#formChangePass").validate({
+                rules: {
+                    mkcu:{
+                        required: true
+                    },
+                    mkmoi:{
+                        required: true
+                    },
+                    xacnhanmk:{
+                        required: true,
+                        equalTo: '#oldpass'
+                    }
+
+
+                },
+                messages:{
+                    mkcu: {
+                        required: 'Mật khẩu cũ không được để trống'
+                    },
+                    mkmoi:{
+                        required: 'Mật khẩu mới không được để trống'
+                    },
+                    xacnhanmk: {
+                        required: ' Không được để trống',
+                        equalTo: 'Mật khẩu và Mật khẩu xác nhận không giống nhau'
+                    }
+                   
+                }
+            });
+
+
+            let mess = `<%= mess %>`
+
+            if(mess && mess != ''){
+                alert(mess);
+
+                if(mess == 'Đổi mật khẩu thành công'){
+                    window.location.replace('/admin/login');
+                }
+                
+            }
+      
+
+    </script>
+
+</html>
