@@ -6673,20 +6673,20 @@ span.buttonText {
     z-index: -1;
 }
 .progress ul li:nth-child(3) .fa{
-    background: #148e14;
+    background: #ccc;
 }
 .progress ul li:nth-child(3) .fa::after{
-    background: #148e14;
+    background: #ccc;
 }
 .progress ul li:nth-child(1) .fa,
 .progress ul li:nth-child(2) .fa
 {
-    background: #60aa97;
+    background: #ccc;
 }
 .progress ul li:nth-child(1) .fa::after,
 .progress ul li:nth-child(2) .fa::after
 {
-    background: #60aa97;
+    background: #ccc;
 }
 .progress ul li:first-child .fa::after{
     width: 105px;
@@ -6694,4 +6694,37 @@ span.buttonText {
 }
 .progress ul li:last-child .fa::after{
     width: 105px;
+}
+
+.card-infor{
+    width: 100%; 
+    border: 1px solid #A9A9A9; 
+    border-radius: 5px; 
+    padding: 15px;
+    height: 140px;
+    max-height: 140px;
+}
+.card-info-product{
+    width: 100%; 
+    border: 1px solid #A9A9A9; 
+    border-radius: 5px; 
+    padding: 15px;
+    /* height: 500px; */
+}
+.card-info-product > div{
+    position: relative;
+    top: 30%;
+}
+.btn-outline-primary{
+    background-color: transparent;
+    border: 1px solid #6495ED !important;
+    color: #6495ED ;
+}
+.btn-outline-primary:hover{
+    background-color:#1E90FF  !important;
+    color: #FFFFFF !important ;
+}
+.tilte-receiver{
+    font-size: 15px;
+    text-transform: uppercase;
 }
