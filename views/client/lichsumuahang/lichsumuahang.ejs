@@ -27,26 +27,24 @@
                                                 <tr>
                                                     <th class="product-stt">STT</th>
                                                     <th class="product-thumbnail">Mã hóa đơn</th>
-                                                    <th class="product-name">Mã sản phẩm</th>
+                                                    <th class="product-quantity">Ngày mua</th>
                                                     <th class="product-name">Tên sản phẩm</th>
-                                                    <th class="product-name">Họ tên khách hàng</th>
                                                     <th class="product-name">Tổng hóa đơn</th>
-                                                    <th class="product-name">Phương thức thanh toán</th>
-                                                    <th class="product-price">Trạng thái</th>
-                                                    <th class="product-quantity">Thời gian đặt</th>
+                                                    <th class="product-quantity">Đơn hàng</th>
                                                 </tr>
                                                 <% let  i = 1 %>
                                                 <% donhang.forEach(function(sp){ %>
                                                     <tr>
                                                         <td><%= i++ %></td>
                                                         <td><%= sp.mahd %></td>
-                                                        <td><%= sp.masp %></td>
-                                                        <td><%= sp.tensp %></td>
-                                                        <td><%= sp.tennguoinhan %></td>
-                                                        <td><%= sp.tonghoadon %></td>
-                                                        <td><%= (sp.phuongthucthanhtoan == 1 || sp.phuongthucthanhtoan == 2) ? 'Thanh toán online': 'Thanh toán cod'%></td>
-                                                        <td><%= sp.trangthai == 1 ? 'Đã thanh toán' : 'Chưa thanh toán' %></td>
                                                         <td><%= sp.tgtao %></td>
+                                                        <td>
+                                                            <% sp.sanphams.forEach(function(el) { %>
+                                                                <%= el.tensp %> <br/>
+                                                           <% }) %>  
+                                                        </td>
+                                                        <td><%= sp.tonghoadon %></td>
+                                                        <td><a href="/lichsumuahang/chitietdonhang?id=<%= sp.mahd%>">Xem chi tiết </a><a href="/lichsumuahang/huydonhang?id=<%= sp.mahd%>&idghtk=<%= sp.id_ghtk%>">| Hủy đơn hàng</a></td>
                                                     </tr>
                                                 <% }) %>
                                             </thead>
@@ -55,15 +53,20 @@
                                         </table>
                                     </div>
                                 </form>
-                                
                             </div>
                         </div>
                         </div>
                     </div>
                 </div>
             </form>
-
             <%- include ('../partials/footer'); -%>
         </div>
     </body>
+    <script>
+        let mess  = '<%= message %>';
+
+        if(mess && mess != ''){
+            alert(mess);
+        }
+    </script>
 </html>

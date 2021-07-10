@@ -6,5 +6,7 @@ const lichsumuahangController = require('../controllers/LichSuMuaHangController.
 router.use(express.static('public'))
 
 router.get('/', lichsumuahangController.index);
+router.get('/chitietdonhang', lichsumuahangController.xemdonhang);
+router.get('/huydonhang', lichsumuahangController.huydonhang);
 
 module.exports = router;
