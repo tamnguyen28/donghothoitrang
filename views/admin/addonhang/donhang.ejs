@@ -20,43 +20,34 @@
                                                 <tr>
                                                     <th>Mã đơn hàng</th>
                                                     <th>Tên người nhận</th>
-                                                    <!-- <th>Số điện thoại</th>
-                                                    <th>Địa chỉ</th> -->
-                                                    <!-- <th>Tổng hóa đơn</th> -->
-                                                    <!-- <th>Ghi chú</th> -->
                                                     <th>Phương thức thanh toán</th>
                                                     <th>Trạng thái</th>
-                                                    <!-- <th>Ngày đặt</th> -->
                                                     <th>Quản lý</th>
                                                 </tr>
                                                 <% donhang.forEach(function(dh){ %>
                                                 <tr>
                                                     <td id="customerId"><%= dh.mahd %></td>
                                                     <td><%= dh.tennguoinhan %></td>
-                                                    <!-- <td><%= dh.sdtnguoinhan %></td>
-                                                    <td><%= dh.diachinguoinhan %></td> -->
-                                                    <!-- <td><%= dh.tonghoadon %></td> -->
-                                                    <!-- <td><%= dh.ghichu %></td> -->
                                                     <td><%= dh.phuongthucthanhtoan == 1 ? 'Đã thanh toán': 'Chưa thanh toán' %></td>
-                                                    <td><%= dh.trangthai ==1 ? 'Đã xử lý' : 'Chưa xử lý' %></td>
-                                                    <!-- <td><%= dh.tgtao %></td> -->
+                                                    <td><% if(dh.trangthai == 1) {%>
+                                                            <%= 'Đã xử lý' %>
+                                                        <% }else if(dh.trangthai == 2) { %>
+                                                            <%= 'Đơn hàng đã hủy' %>
+                                                        <% }else if(dh.trangthai == 3) {%>
+                                                            <%= 'Đang xử lý' %>
+                                                        <%} else {%>
+                                                            <%= 'Chưa xử lý'%>
+                                                        <% } %>
+                                                    </td>
                                                     <td>
-                                                        <!-- <a id="linkShowTransaction" onclick="getOrderByOrderId('<%= dh.mahd %>')" class="btn btn-success">Xem giao dịch </a> -->
                                                         <a href="/admin/donhang/detailOrder?id=<%= dh.mahd %>" class="btn btn-success ">Chi tiết đơn hàng</a>
-                                                        <a href="/admin/donhang/updateOrder?id=<%= dh.mahd %>" class="btn btn-primary <%= role && role != 1 ? '' : 'hidden'%>">Cập nhật</a>
+                                                        <a href="/admin/donhang/updateOrder?id=<%= dh.mahd %>" class="btn btn-primary <%= (role && role != 1) ? '' : 'hidden'%>">Cập nhật</a>
                                                         <a href="/admin/donhang/deleteOrder?id=<%= dh.mahd %>&status=<%= dh.trangthai %>" class="btn btn-danger <%= role && role != 1 ? '' : 'hidden'%>">Xóa</a> 
                                                     </td>
                                                 </tr>
                                                 <% }); %>
 
                                             </table>
-                                            <!-- <div class="col-md-12">
-                                <h4>Liệt kê sản phẩm đơn hàng</h4><br>
-                            
-                                <table id='tblOrder' class="table table-bordered">
-                                                        
-                                </table>
-                            </div> -->
                                         </div>
                                     </div>
                                  </div>    
@@ -70,69 +61,9 @@
         <%- include('../partials/adminscript_bottom'); -%>
     </body>
     <script>
-    
-        // let titleTblOrder = `<tr>
-        //                         <th>Thứ tự</th>
-        //                         <th>Mã đơn hàng</th>
-        //                         <th>Mã sản phẩm</th>
-        //                         <th>Tên sản phẩm</th>
-        //                         <th>Ngày đặt</th>
-        //                     </tr>`
-        
-        // function getOrderByOrderId(idhd){
-        //     let j= 1;
-        //     $('#tblOrder').html('');
-    
-        //     //add tilte
-        //     $('#tblOrder').html(titleTblOrder);
-    
-        //     $.ajax({
-        //         method: 'GET',
-        //         url:'/admin/donhang/order',
-        //         data:{
-        //             id: idhd
-        //         },
-        //         success: function(data){
-        //             if(data && data.length != 0){
-                        
-        //                 let sl = data.length;
-        //                 for(let i = 0; i < sl ; i++){
-        //                     $('#tblOrder').html(
-        //                         $('#tblOrder').html() + `<tr>
-        //                                                     <td>
-        //                                                         ${j++}    
-        //                                                     </td>
-        //                                                     <td>
-        //                                                         ${data[i].mahd}
-        //                                                     </td>
-        //                                                     <td>
-        //                                                         ${data[i].masp}
-        //                                                     </td>
-        //                                                     <td>
-        //                                                         ${data[i].tensp}
-        //                                                     </td>
-        //                                                     <td>
-        //                                                         ${data[i].tgtao}
-        //                                                     </td>
-                                                          
-        //                                                 </tr>`
-        //                     )
-        //                 }
-                        
-        //             }
-        //         },
-    
-        //         error: function(error){
-    
-        //         }
-        //     })
-        // }
-        
         let mess = '<%= mess %>'
         if(mess && mess == 1){
             alert('Đơn hàng đang trong trạng thái chưa xử lý');
         }
-    
-       
     </script>
 </html>

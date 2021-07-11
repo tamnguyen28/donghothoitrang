@@ -78,7 +78,7 @@ class AddonhangController{
         // console.log(status)
         AddonhangModel.updateStatusModel(status, iddh).then(function(result){
             
-            res.json({mess: 'thanh cong roi', statusCode: 1});
+            res.json({mess: 'thanh cong roi', statusCode: 1 });
         }).catch(function(error){
 
         })
