@@ -14,4 +14,8 @@ router.get('/', canhanController.canhan);
 
 router.post('/sendinfor', canhanController.saveKhachhang);
 
+router.get('/doimatkhau', canhanController.doimatkhau);
+
+router.post('/doimatkhauPost', canhanController.doimatkhauPost);
+
 module.exports = router;
