@@ -11,7 +11,7 @@ class HomeController {
               homeModel.loadSanPhamLatest().then((listLatest) => {
                 homeModel.loadloaisp().then(function(resultloai){
                   res.render("client/home/index", {
-                    title: "donghothoitrang",
+                    title: "Đồng hồ thời trang",
                     indexlatest: listLatest,
                     indexwatch: listWatch,
                     indexdrew: listSPDrew,

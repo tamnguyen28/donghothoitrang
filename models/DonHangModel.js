@@ -1,10 +1,10 @@
 const conn = require('./config/connect');
 class DonHangModel{
     
-    themthongtin(hoadon){
+    themthongtin(hoadon, labelid_ghtk){
         // console.log(hoadon.trangthai);
         return new Promise(function (resolve, reject) {
-            let sqlthongtin = "INSERT INTO hoadon VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, current_timestamp(), ?, '0')";
+            let sqlthongtin = "INSERT INTO hoadon VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, current_timestamp(), ?, ?,'0')";
             conn.query(sqlthongtin,[
                 hoadon.tennguoinhan,
                 hoadon.sdtnguoinhan,
@@ -14,7 +14,8 @@ class DonHangModel{
                 hoadon.ghichu,
                 hoadon.phuongthucthanhtoan,
                 hoadon.trangthai,
-                hoadon.idkh
+                hoadon.idkh,
+                labelid_ghtk
             ], function (err, result){
                 if (err) {
                     console.log(err);

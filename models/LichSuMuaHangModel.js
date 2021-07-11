@@ -4,19 +4,13 @@ class LichSuMuaHangModel{
     loadDonhang(idCustomer){
         // console.log(idCustomer);
         return new Promise (function(resolve, reject){
-            let queryDonhang = `SELECT hoadon.mahd,
-                                        sanpham.masp,
-                                        sanpham.tensp,
-                                        hoadon.tennguoinhan,
-                                        hoadon.tonghoadon,
-                                        hoadon.phuongthucthanhtoan,
-                                        hoadon.trangthai,
-                                        DATE_FORMAT(hoadon.tgtao, '%d/%m/%Y') as 'tgtao' 
+            let queryDonhang = `SELECT hoadon.mahd, sanpham.tensp, hoadon.tonghoadon, DATE_FORMAT(hoadon.tgtao, '%d/%m/%Y') as 'tgtao'  
                                 FROM hoadon JOIN khachhang on khachhang.makh = hoadon.id_makh
                                 JOIN chitiethoadon on chitiethoadon.mahd = hoadon.mahd 
                                 JOIN sanpham on sanpham.masp = chitiethoadon.masp WHERE khachhang.makh = ?`;
             conn.query(queryDonhang, [idCustomer],function(err, result){
                 if(err){
+                    console.log(err);
                     reject(err);
                 }else{
                     resolve(result);
@@ -24,5 +18,53 @@ class LichSuMuaHangModel{
             });
         });
     }
+
+    getChiTietDonHang(mahd, idkhachhang) {
+        return new Promise(function(resolve, reject){
+            let queryChitiet = `SELECT hoadon.mahd,
+                                sanpham.masp,
+                                sanpham.tensp,
+                                sanpham.hinhanh,
+                                sanpham.mota,
+                                sanpham.giatien,
+                                hoadon.tennguoinhan,
+                                hoadon.sdtnguoinhan,
+                                hoadon.diachinguoinhan,
+                                hoadon.tonghoadon,
+                                hoadon.phuongthucthanhtoan,
+                                hoadon.trangthai,
+                                hoadon.id_ghtk,
+                                DATE_FORMAT(hoadon.tgtao, '%d/%m/%Y') as 'tgtao',
+                                chitiethoadon.soluong      
+                        FROM hoadon JOIN khachhang on khachhang.makh = hoadon.id_makh
+                        JOIN chitiethoadon on chitiethoadon.mahd = hoadon.mahd 
+                        JOIN sanpham on sanpham.masp = chitiethoadon.masp WHERE khachhang.makh = ? And hoadon.mahd = ?`;
+            conn.query(queryChitiet, [idkhachhang, mahd], function(error, result){
+                if(error){
+                    reject(error)
+                }else{
+                    resolve(result);
+                }
+            })
+        })
+    }
+
+    updateStatusHuyDonHang(idmd){
+        return new Promise(function(resolve, reject){
+            let update = `update hoadon set hoadon.trangthai = 2 where hoadon.mahd = ?`;
+
+            conn.query(update, [idmd], function(error, result){
+                if(error){
+                    reject(false);
+                }else{
+                    resolve(true);
+                }
+            })
+        });
+        
+    }
 }
+
+
+
 module.exports = new LichSuMuaHangModel();
