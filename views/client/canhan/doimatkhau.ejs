@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include ('../partials/head'); -%>
+
+    <body>
+        <div class="app">
+            <%- include ('../partials/header'); -%>
+
+            <div class="user-login-area mb-70 mt-40">
+                <div class="container">
+                        <div class="row" class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="col-lg-12">
+                                <div class="login-title text-center mb-30">
+                                    <h2>Đổi mật khẩu</h2>
+                                </div>
+                            </div>
+                            <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 col-sm-12 col-xs-12">
+                                <div class="billing-fields mb-30">
+                                    <form id="formChangePass" method="POST" action="/canhan/doimatkhauPost" >
+                                        <label>Mật khẩu cũ</label>
+                                        <input type="text" class="form-control" name="mkcu" placeholder="Mật khẩu cũ"><br>
+                                        <label>Mật khẩu mới</label>
+                                        <input type="text" id="oldpass" class="form-control" name="mkmoi" placeholder="Mật khẩu mới"><br>
+                                        <label>Xác nhận mật khẩu</label>
+                                        <input type="text" class="form-control" name="xacnhanmk"><br>
+                                        <input type="submit" name="xacnhan" value="Xác nhận" class="btn btn-primary"><br/>
+                                        <br/>
+                                        <a href="canhan">Quay lại?</a>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+
+            <%- include ('../partials/footer'); -%>
+        </div>
+    </body>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+    <script>
+            $("#formChangePass").validate({
+                rules: {
+                    mkcu:{
+                        required: true
+                    },
+                    mkmoi:{
+                        required: true
+                    },
+                    xacnhanmk:{
+                        required: true,
+                        equalTo: '#oldpass'
+                    }
+                },
+                messages:{
+                    mkcu: {
+                        required: 'Mật khẩu cũ không được để trống'
+                    },
+                    mkmoi:{
+                        required: 'Mật khẩu mới không được để trống'
+                    },
+                    xacnhanmk: {
+                        required: ' Không được để trống',
+                        equalTo: 'Mật khẩu và Mật khẩu xác nhận không giống nhau'
+                    }
+                }
+            });
+            let mess = `<%= mess %>`
+            if(mess && mess != ''){
+                alert(mess);
+
+                if(mess == 'Đổi mật khẩu thành công'){
+                    window.location.replace('/dangnhap');
+                }
+            }
+    </script>
+</html>

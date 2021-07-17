@@ -1,4 +1,5 @@
 const conn = require("./config/connect");
+const md5 = require("md5");
 
 class CaNhanModel {
 
@@ -29,6 +30,43 @@ class CaNhanModel {
           resolve(result[0]);
         }
       })
+    })
+  }
+
+  //Đổi mật khẩu
+  //check đúng password cũ
+  checkOldPassword(oldPass, idEm){
+    return new Promise(function(resolve, reject){
+      let query = `Select * from khachhang where khachhang.matkhau = ? and khachhang.makh = ?`;
+
+      conn.query(query, [oldPass, idEm], function(errorEmployee, result){
+        if(errorEmployee){
+          // console.log(errorEmployee);
+          reject(false);    
+        }else{
+            if(result.length != 0){
+              resolve(true);
+            }else{
+              reject(false);
+            }
+        }
+      });
+    })
+  }
+//cập nhật password mới
+  updateNewPass(newPass, idEmployee) {
+    return new Promise(function (resolve, reject) {
+      let query = `update khachhang set khachhang.matkhau = ? where khachhang.makh = ?`
+      // console.log("ABC");
+      conn.query(query, [newPass, idEmployee], function (error, result) {
+        if (error) {
+          // console.log(error);
+          reject(false);
+        } else {
+          // console.log( result);
+          resolve(true)
+        }
+      });
     })
   }
 }

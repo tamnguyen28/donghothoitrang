@@ -2,10 +2,10 @@
 -- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jun 24, 2021 at 06:30 PM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.5
+-- Máy chủ: 127.0.0.1
+-- Thời gian đã tạo: Th7 11, 2021 lúc 02:59 PM
+-- Phiên bản máy phục vụ: 10.4.11-MariaDB
+-- Phiên bản PHP: 7.4.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `donghothoitrang`
+-- Cơ sở dữ liệu: `donghothoitrang`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bohinhanh`
+-- Cấu trúc bảng cho bảng `bohinhanh`
 --
 
 CREATE TABLE `bohinhanh` (
@@ -34,7 +34,7 @@ CREATE TABLE `bohinhanh` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `bohinhanh`
+-- Đang đổ dữ liệu cho bảng `bohinhanh`
 --
 
 INSERT INTO `bohinhanh` (`maha`, `tenha`, `id_masp`) VALUES
@@ -234,7 +234,7 @@ INSERT INTO `bohinhanh` (`maha`, `tenha`, `id_masp`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `chitiethoadon`
+-- Cấu trúc bảng cho bảng `chitiethoadon`
 --
 
 CREATE TABLE `chitiethoadon` (
@@ -246,18 +246,35 @@ CREATE TABLE `chitiethoadon` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `chitiethoadon`
+-- Đang đổ dữ liệu cho bảng `chitiethoadon`
 --
 
 INSERT INTO `chitiethoadon` (`macthd`, `masp`, `mahd`, `soluong`, `tgtao`) VALUES
-(1, 20, 17, 1, '2021-06-11 08:08:19'),
-(2, 3, 18, 1, '2021-06-24 16:23:48'),
-(3, 20, 19, 1, '2021-06-24 16:28:41');
+(27, 3, 45, 1, '2021-07-06 11:54:14'),
+(28, 5, 45, 2, '2021-07-06 11:54:14'),
+(29, 2, 46, 1, '2021-07-06 11:56:19'),
+(30, 5, 46, 2, '2021-07-06 11:56:19'),
+(31, 3, 47, 1, '2021-07-06 11:57:40'),
+(32, 1, 47, 2, '2021-07-06 11:57:40'),
+(33, 27, 48, 1, '2021-07-06 12:00:38'),
+(34, 32, 48, 2, '2021-07-06 12:00:38'),
+(35, 3, 49, 1, '2021-07-06 12:42:20'),
+(36, 29, 49, 2, '2021-07-06 12:42:21'),
+(37, 1, 50, 1, '2021-07-06 12:47:51'),
+(38, 4, 51, 1, '2021-07-06 13:40:48'),
+(39, 1, 52, 3, '2021-07-07 07:14:19'),
+(40, 19, 53, 2, '2021-07-07 08:58:09'),
+(41, 2, 54, 1, '2021-07-07 09:45:32'),
+(42, 3, 55, 2, '2021-07-07 09:47:32'),
+(43, 2, 56, 1, '2021-07-09 16:16:35'),
+(44, 1, 57, 1, '2021-07-11 02:44:43'),
+(45, 2, 57, 1, '2021-07-11 02:44:43'),
+(46, 1, 58, 1, '2021-07-11 03:09:45');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `hoadon`
+-- Cấu trúc bảng cho bảng `hoadon`
 --
 
 CREATE TABLE `hoadon` (
@@ -272,38 +289,34 @@ CREATE TABLE `hoadon` (
   `trangthai` tinyint(1) NOT NULL,
   `tgtao` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `id_makh` int(11) NOT NULL,
+  `id_ghtk` varchar(50) NOT NULL,
   `isDelete` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `hoadon`
+-- Đang đổ dữ liệu cho bảng `hoadon`
 --
 
-INSERT INTO `hoadon` (`mahd`, `tennguoinhan`, `sdtnguoinhan`, `diachinguoinhan`, `emailnguoinhan`, `tonghoadon`, `ghichu`, `phuongthucthanhtoan`, `trangthai`, `tgtao`, `id_makh`, `isDelete`) VALUES
-(1, 'Minh Tâm', '0898391560', 'TP HCM', '', 2000000, 'Giao hàng thứ 7', 1, 1, '2021-06-05 14:11:14', 2, 0),
-(2, 'dasd', '', 'Ha noi', '', 2929000, 'dsadsad', 0, 1, '2021-06-05 16:20:50', 2, 0),
-(3, 'dsadds', '1234567123', 'TP-HCM', '', 8334000, 'sdsad', 0, 1, '2021-06-05 16:22:07', 2, 0),
-(4, 'hello', '1234567123', 'TP-HCM', '', 4025000, 'llllllllllllll', 1, 1, '2021-06-05 17:00:39', 2, 0),
-(5, 'dadsadssda', '1234567123', 'dsadsad', '', 4025000, 'dsadas', 1, 1, '2021-06-05 17:29:25', 2, 0),
-(6, 'hello', '1234567123', 'TP-HCM', '', 4025000, 'aaaaa', 0, 1, '2021-06-08 13:18:25', 2, 0),
-(7, 'Nguyễn Van A', '1234567123', 'TP-HCM', '', 5405000, '1111111111111', 0, 1, '2021-06-08 13:25:50', 2, 0),
-(8, 'Nguyễn Van A', '1234567123', 'TP-HCM', '', 1600000, '11112', 0, 1, '2021-06-08 13:41:35', 2, 0),
-(9, 'TamNguyen', '1234567123', 'TP-HCM', '', 4025000, 'rrrrrr', 0, 1, '2021-06-08 13:43:39', 2, 0),
-(10, 'Tamtam', '0898391560', 'TP-HCM', '', 2929000, 'ddddddđ', 0, 1, '2021-06-08 13:45:04', 2, 0),
-(11, 'Nguyễn Huỳnh Minh Thơ', '1234567123', 'TP-HCM', '', 2929000, '1111111111111', 0, 1, '2021-06-08 15:18:34', 2, 0),
-(12, 'ád', '1234567123', 'fdsfdsdfs', '', 4025000, 'aaaaaaaaaa', 1, 1, '2021-06-08 15:23:26', 2, 0),
-(13, 'hello', '1234567123000', 'Ha noi', '', 2929000, 'qqqqqqqqq', 0, 1, '2021-06-08 15:23:49', 2, 0),
-(14, 'TamNguyen', '0898391560', 'TP-HCM', '', 4025000, 'aaaaaaaaaaa', 1, 1, '2021-06-08 15:28:03', 2, 0),
-(15, 'Nguyễn Huỳnh Minh Tâm11111111111', '', 'sdsa', '', 2929000, 'dsasad', 0, 1, '2021-06-09 03:48:30', 2, 0),
-(16, 'Ngoc Mai', '0898391560', 'TP-HCM', '', 4025000, 'qqqqqq', 0, 0, '2021-06-09 03:53:47', 2, 0),
-(17, 'Nguyễn Van A', '1234567123', 'Ha noi', '', 1600000, '11111', 0, 0, '2021-06-11 08:08:19', 2, 0),
-(18, 'Tâm Tâm', '01254879526', 'Chaudok City, Tỉnh An Giang, Vietnam', 'quangtin131299@gmail.com', 5405000, 'Giao hàng chủ nhật', 0, 0, '2021-06-24 16:23:48', 14, 0),
-(19, 'hello', '0702389478', 'Quảng Hiệp, Lâm Đồng, Vietnam', 'nhmtam.c3tqcap.a3@gmail.com', 1600000, 'Giao hàng thứ 7', 1, 0, '2021-06-24 16:28:41', 3, 0);
+INSERT INTO `hoadon` (`mahd`, `tennguoinhan`, `sdtnguoinhan`, `diachinguoinhan`, `emailnguoinhan`, `tonghoadon`, `ghichu`, `phuongthucthanhtoan`, `trangthai`, `tgtao`, `id_makh`, `id_ghtk`, `isDelete`) VALUES
+(45, 'hello', '0843331299', 'Sewri Koliwada, Maharashtra, India', 'tamthokha99@gmail.com', 14375000, 'aaaaaaaa', 0, 2, '2021-07-07 10:44:45', 20, 'S9144499.SGA8.A7.513786236', 0),
+(46, 'hello', '0843331299', 'Xã Di Trạch, Hà Nội, Việt Nam', 'tamthokha99@gmail.com', 12995000, 'aaaaaaaaa', 0, 0, '2021-07-06 11:56:18', 20, 'S9144499.SGA8.A1.579589349', 0),
+(47, 'hello', '0843331299', 'Appapada, Maharashtra, India', 'tamthokha99@gmail.com', 11263000, 'aaaaaa', 0, 0, '2021-07-06 11:57:40', 20, 'S9144499.SGA8.E4.647489190', 0),
+(48, 'Nguyễn Huỳnh Minh Thơ', '0702389478', 'Xianrentan, 浙江省, 中华人民共和国', 'tamthokha99@gmail.com', 11000000, 'aaaaa', 0, 0, '2021-07-06 12:00:38', 20, 'S9144499.SGA8.A8.796495496', 0),
+(49, 'Nguyễn Van A', '0843331299', 'Xianrentan, 浙江省, 中华人民共和国', 'tamthokha99@gmail.com', 16605000, 'aaaaa', 0, 0, '2021-07-06 12:42:20', 20, 'S9144499.SG8.A2.BC.300058378', 0),
+(50, 'Nguyễn Huỳnh Minh Tâm', '0843331299', 'Đà Lạt, Lâm Đồng, Việt Nam', 'nhmtam.c3tqcap.a3@gmail.com', 2929000, 'sdafsa', 0, 0, '2021-07-06 12:47:51', 20, 'S9144499.SG8.A2.BC.300058369', 0),
+(51, 'Nguyễn Van Anhs', '0843331299', 'Appapada, Maharashtra, India', 'tamthokha99@gmail.com', 4025000, 'ccccc', 0, 0, '2021-07-06 13:40:48', 20, 'S9144499.SG8.A2.BC.300054495', 0),
+(52, 'Minh Hoa', '0843331299', 'Sewri Koliwada, Maharashtra, India', 'tamthokha99@gmail.com', 8787000, 'aaaa', 0, 0, '2021-07-07 07:14:19', 20, 'S9144499.SG8.A2.BC.300059966', 0),
+(53, 'Hà', '0898391560', 'Sewri Koliwada, Maharashtra, India', 'nhmtam.c3tqcap.a3@gmail.com', 5800000, 'aaaa', 2, 2, '2021-07-07 10:43:32', 20, 'S9144499.SG8.A2.BC.300058271', 0),
+(54, 'Nguyễn Huỳnh Minh Tâm', '0843331299', 'Sóc Sơn, Hà Nội, Việt Nam', 'nhmtam.c3tqcap.a3@gmail.com', 4025000, 'sd', 0, 2, '2021-07-07 10:35:35', 20, 'S9144499.SG8.A2.BC.300054169', 0),
+(55, 'Nguyễn Huỳnh Minh Tâm', '0843331299', 'Sadaramangala, Karnataka, India', 'nhmtam.c3tqcap.a3@gmail.com', 10810000, 'ds', 2, 2, '2021-07-07 10:44:33', 20, 'S9144499.SG8.A2.BC.300058115', 0),
+(56, 'Nguyễn Van A', '0898391560', 'Sóc Sơn, Hà Nội, Việt Nam', 'tamthokha99@gmail.com', 4025000, 'aaa', 0, 0, '2021-07-09 16:16:35', 20, 'S9144499.SG8.A2.BC.300054160', 0),
+(57, 'An', '0789231567', 'Phạm Văn Hai, Thành phố Hồ Chí Minh, Việt Nam', 'tamthokha99@gmail.com', 6954000, 'aaa', 0, 0, '2021-07-11 02:44:42', 3, 'S9144499.SG8.A2.BC.300054756', 0),
+(58, 'Nguyễn Huỳnh Minh Tâm', '0898391560', 'Phạm Văn Hai, Thành phố Hồ Chí Minh, Việt Nam', 'tamthokha99@gmail.com', 2929000, 'aaaa', 0, 0, '2021-07-11 03:09:45', 3, 'S9144499.SG8.A2.BC.300051910', 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `khachhang`
+-- Cấu trúc bảng cho bảng `khachhang`
 --
 
 CREATE TABLE `khachhang` (
@@ -320,12 +333,12 @@ CREATE TABLE `khachhang` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `khachhang`
+-- Đang đổ dữ liệu cho bảng `khachhang`
 --
 
 INSERT INTO `khachhang` (`makh`, `tenkh`, `diachi`, `email`, `sodienthoai`, `tendangnhap`, `matkhau`, `ptdangnhap`, `trangthai`, `tgtao`) VALUES
 (2, 'Nguyễn Huỳnh Minh Tâm', 'TP-HCM', 'nhmtam.c3tqcap.a3@gmail.com', '1234567123', 'tamnguyen', 'b59c67bf196a4758191e42f76670ceba', '', 1, '2021-05-22 17:10:53'),
-(3, 'Nguyễn Huỳnh Minh Tâm', 'Ha noi', 'tamthokha99@gmail.com', '0898391560', 'nguyenhuynhminhtam', 'b59c67bf196a4758191e42f76670ceba', '', 1, '2021-05-24 06:07:32'),
+(3, 'Nguyễn Huỳnh Minh Tâm', 'Ha noi', 'tamthokha99@gmail.com', '0898391560', 'nguyenhuynhminhtam', '4a7d1ed414474e4033ac29ccb8653d9b', '', 1, '2021-07-11 03:12:35'),
 (4, 'Nguyễn Van A', 'Ha noi', 'admin@gmail.com', '0789231567', 'tamnguyen28', 'b0baee9d279d34fa1dfd71aadb908c3f', '', 1, '2021-05-24 06:14:13'),
 (5, 'TamNguyen', 'TP-HCM', 'tamthokha99@gmail.com', '1234567123', 'kha', 'b59c67bf196a4758191e42f76670ceba', '', 1, '2021-05-26 08:57:48'),
 (7, 'Tam Nguyen Huynh Minh', '', 'dh51701611@student.stu.edu.vn', '', 'dh51701611@student.stu.edu.vn', '', 'google', 1, '2021-06-07 09:59:16'),
@@ -333,13 +346,16 @@ INSERT INTO `khachhang` (`makh`, `tenkh`, `diachi`, `email`, `sodienthoai`, `ten
 (10, 'thơ minh', '', 'nhmtho.c3tqcap.a3@gmail.com', '', 'nhmtho.c3tqcap.a3@gmail.com', '', 'google', 1, '2021-06-08 13:59:08'),
 (11, 'hello', 'TP-HCM', 'tamthokha99@gmail.com', '0898391560', 'minhtam', 'b59c67bf196a4758191e42f76670ceba', NULL, 1, '2021-06-08 15:09:20'),
 (12, 'TamNguyen', 'Ha noi', 'tamthokha99@gmail.com', '0898391560', 'tamnguyen', 'b59c67bf196a4758191e42f76670ceba', NULL, 1, '2021-06-08 15:14:48'),
-(14, 'Tâm Nguyễn', '', '', '', '1457181187962439', '', 'facebook', 1, '2021-06-24 16:10:07'),
-(15, 'Tâm Nguyễn', '', 'nhmtam.c3tqcap.a3@gmail.com', '', '116623908724855998698', '', 'google', 1, '2021-06-24 16:10:18');
+(17, 'Tâm Nguyễn', '', 'nhmtam.c3tqcap.a3@gmail.com', '', '1457181187962439', '', 'facebook', 1, '2021-06-26 15:40:43'),
+(18, 'Nguyễn Kha', 'Cam Ranh, Tỉnh Khánh Hòa, Việt Nam', 'tamthokha99@gmail.com', '1234567123', 'kha', 'b59c67bf196a4758191e42f76670ceba', NULL, 1, '2021-06-26 15:45:14'),
+(19, 'Tam Nguyen Huynh Minh', '', 'dh51701611@student.stu.edu.vn', '', '111872256820446910964', '', 'google', 1, '2021-06-28 15:40:54'),
+(20, 'Tâm Nguyễn', '', 'nhmtam.c3tqcap.a3@gmail.com', '', '116623908724855998698', '', 'google', 1, '2021-07-01 07:30:20'),
+(28, 'Nguyễn Ngọc Thương', 'Cam Ranh', 'tamthokha99@gmail.com', '0922132132', 'nguyenngocthuong', 'b59c67bf196a4758191e42f76670ceba', NULL, 1, '2021-07-03 15:06:32');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `lienhe`
+-- Cấu trúc bảng cho bảng `lienhe`
 --
 
 CREATE TABLE `lienhe` (
@@ -351,67 +367,73 @@ CREATE TABLE `lienhe` (
   `noidung` mediumtext NOT NULL,
   `trangthai` tinyint(1) NOT NULL,
   `tgtao` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `id_manv` int(11) NOT NULL
+  `id_manv` int(11) NOT NULL,
+  `isDelete` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `lienhe`
+-- Đang đổ dữ liệu cho bảng `lienhe`
 --
 
-INSERT INTO `lienhe` (`malh`, `tennguoilh`, `sodienthoai`, `email`, `tieude`, `noidung`, `trangthai`, `tgtao`, `id_manv`) VALUES
-(1, 'Tâm', '0898391560', 'a@gmai.com', 'Sản phẩm tồn tại', 'Nhiều', 1, '2021-05-26 05:05:18', 2),
-(2, 'Nguyễn Van A', '0898391560', 'nhmtam.c3tqcap.a3@gmail.com', 'Đơn hàng', 'aaaaaa', 1, '2021-05-26 16:13:44', 2),
-(3, 'Nguyễn Huỳnh Minh Thơ', '+84123456789', 'abc@gmail.com', 'Đơn hàng', 'eeeeee', 1, '2021-05-26 16:28:25', 2),
-(4, 'Nguyễn Huỳnh Minh Thơ', '+84123456789', 'abc@gmail.com', 'Đơn hàng', 'eeeeee', 1, '2021-05-26 16:29:27', 2),
-(5, 'hello', '+84123456789', 'quangtin131299@gmail.com', 'Đơn hàng', 'tttttt', 1, '2021-05-26 16:30:00', 2),
-(6, 'hello', '1234567123000', 'tamthokha99@gmail.com', 'Đơn hàng', 'Hết hà', 1, '2021-06-01 08:13:44', 2),
-(7, 'Nguyễn Van A', '1234567123', 'tamthokha99@gmail.com', 'Đơn hàng', '11111111111111111111111', 1, '2021-06-08 13:49:42', 2),
-(8, 'Nguyễn Van A', '1234567123', 'tamthokha99@gmail.com', 'Đơn hàng', '11111111111111111111111', 1, '2021-06-08 13:50:20', 2);
+INSERT INTO `lienhe` (`malh`, `tennguoilh`, `sodienthoai`, `email`, `tieude`, `noidung`, `trangthai`, `tgtao`, `id_manv`, `isDelete`) VALUES
+(1, 'Tâm', '0898391560', 'a@gmai.com', 'Sản phẩm tồn tại', 'Nhiều', 1, '2021-05-26 05:05:18', 2, 0),
+(2, 'Nguyễn Van A', '0898391560', 'nhmtam.c3tqcap.a3@gmail.com', 'Đơn hàng', 'aaaaaa', 1, '2021-05-26 16:13:44', 2, 0),
+(3, 'Nguyễn Huỳnh Minh Thơ', '+84123456789', 'abc@gmail.com', 'Đơn hàng', 'eeeeee', 1, '2021-05-26 16:28:25', 2, 0),
+(4, 'Nguyễn Huỳnh Minh Thơ', '+84123456789', 'abc@gmail.com', 'Đơn hàng', 'eeeeee', 1, '2021-05-26 16:29:27', 2, 0),
+(5, 'hello', '+84123456789', 'quangtin131299@gmail.com', 'Đơn hàng', 'tttttt', 1, '2021-05-26 16:30:00', 2, 0),
+(6, 'hello', '1234567123000', 'tamthokha99@gmail.com', 'Đơn hàng', 'Hết hà', 1, '2021-06-01 08:13:44', 2, 0),
+(7, 'Nguyễn Van A', '1234567123', 'tamthokha99@gmail.com', 'Đơn hàng', '11111111111111111111111', 1, '2021-06-08 13:49:42', 2, 0),
+(8, 'Nguyễn Van A', '1234567123', 'tamthokha99@gmail.com', 'Đơn hàng', '11111111111111111111111', 1, '2021-06-08 13:50:20', 2, 0),
+(9, 'Minh Tam', '0898391560', 'nhmtam.c3tqcap.a3@gmail.com', 'Sản phẩm', 'aaaaaaa', 1, '2021-06-26 14:30:01', 2, 0),
+(12, 'Nguyễn Huỳnh Minh Tâm', '0923456712', 'nhmtam.c3tqcap.a3@gmail.com', 'Đơn hàng', '1111', 1, '2021-07-03 16:46:11', 2, 0),
+(13, 'Hoa', '0702389478', 'tamthokha99@gmail.com', 'Đơn hàng', 'aaaaa', 1, '2021-07-11 12:00:12', 2, 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `loainhanvien`
+-- Cấu trúc bảng cho bảng `loainhanvien`
 --
 
 CREATE TABLE `loainhanvien` (
   `maloainv` int(11) NOT NULL,
-  `tenloainv` varchar(200) NOT NULL
+  `tenloainv` varchar(200) NOT NULL,
+  `isDelete` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `loainhanvien`
+-- Đang đổ dữ liệu cho bảng `loainhanvien`
 --
 
-INSERT INTO `loainhanvien` (`maloainv`, `tenloainv`) VALUES
-(1, 'Quản trị viên'),
-(2, 'Nhân viên');
+INSERT INTO `loainhanvien` (`maloainv`, `tenloainv`, `isDelete`) VALUES
+(1, 'Quản trị viên', 0),
+(2, 'Nhân viên', 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `loaisanpham`
+-- Cấu trúc bảng cho bảng `loaisanpham`
 --
 
 CREATE TABLE `loaisanpham` (
   `maloai` int(11) NOT NULL,
   `tenloai` varchar(200) NOT NULL,
-  `trangthai` tinyint(1) NOT NULL,
-  `tgtao` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `duongdan` varchar(100) NOT NULL,
+  `tgtao` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `isDelete` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `loaisanpham`
+-- Đang đổ dữ liệu cho bảng `loaisanpham`
 --
 
-INSERT INTO `loaisanpham` (`maloai`, `tenloai`, `trangthai`, `tgtao`) VALUES
-(1, 'Đồng hồ nam', 1, '2021-05-15 16:19:30'),
-(2, 'Đồng hồ nữ', 0, '2021-05-15 16:18:11');
+INSERT INTO `loaisanpham` (`maloai`, `tenloai`, `duongdan`, `tgtao`, `isDelete`) VALUES
+(1, 'Đồng hồ nam', 'donghonam', '2021-06-26 13:28:01', 0),
+(2, 'Đồng hồ nữ', 'donghonu', '2021-06-26 13:28:10', 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `nhanvien`
+-- Cấu trúc bảng cho bảng `nhanvien`
 --
 
 CREATE TABLE `nhanvien` (
@@ -422,20 +444,22 @@ CREATE TABLE `nhanvien` (
   `sodienthoai` varchar(50) NOT NULL,
   `trangthai` tinyint(1) NOT NULL,
   `tgtao` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `id_maloainv` int(11) NOT NULL
+  `id_maloainv` int(11) NOT NULL,
+  `isDelete` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `nhanvien`
+-- Đang đổ dữ liệu cho bảng `nhanvien`
 --
 
-INSERT INTO `nhanvien` (`manv`, `tennv`, `email`, `matkhau`, `sodienthoai`, `trangthai`, `tgtao`, `id_maloainv`) VALUES
-(1, 'Tho', 'nhmtho.c3tqcap.a3@gmail.com', '1111', '0898391560', 0, '2021-06-11 08:21:20', 2);
+INSERT INTO `nhanvien` (`manv`, `tennv`, `email`, `matkhau`, `sodienthoai`, `trangthai`, `tgtao`, `id_maloainv`, `isDelete`) VALUES
+(1, 'Tho', 'nhmtho.c3tqcap.a3@gmail.com', 'b59c67bf196a4758191e42f76670ceba', '0898391560', 0, '2021-06-25 08:13:58', 2, 0),
+(2, 'minhtam', 'nhmtam.c3tqcap.a3@gmail.com', 'b59c67bf196a4758191e42f76670ceba', '0898391560', 1, '2021-06-25 08:14:08', 2, 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sanpham`
+-- Cấu trúc bảng cho bảng `sanpham`
 --
 
 CREATE TABLE `sanpham` (
@@ -448,12 +472,12 @@ CREATE TABLE `sanpham` (
   `tgtao` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `id_math` int(11) NOT NULL,
   `id_maloai` int(11) NOT NULL,
-  `id_manv` int(10) NOT NULL,
+  `id_manv` int(10) DEFAULT NULL,
   `isDelete` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `sanpham`
+-- Đang đổ dữ liệu cho bảng `sanpham`
 --
 
 INSERT INTO `sanpham` (`masp`, `tensp`, `hinhanh`, `mota`, `giatien`, `trangthai`, `tgtao`, `id_math`, `id_maloai`, `id_manv`, `isDelete`) VALUES
@@ -476,8 +500,8 @@ INSERT INTO `sanpham` (`masp`, `tensp`, `hinhanh`, `mota`, `giatien`, `trangthai
 (17, 'Đồng Hồ Nam FNGEEN FE2081 Doanh Nhân 2019 Cao Cấp', '17.jpg', 'Thương hiệu: FNGEEN\r\nSản xuất tại: Hồng Kông\r\nKiểu máy: Quartz, \r\nDành cho: Nam\r\nKích thước mặt: 40 mm x 10 mm\r\nKích thước dây: Dài x rộng: 24 x 2.0 cm\r\nSố kim: 3 kim chạy,  (có Lịch xem ngày)\r\nChịu nước: 3ATM đi mưa rửa tay', 1115000, 1, '2021-06-24 15:57:17', 7, 1, 1, 0),
 (18, 'Đồng hồ nam dây kim loại Casio Standard MTP-VT01D-1BUDF', '18.jpg', 'Kích thước vỏ: 46mm x 40mm x 8,2mm\r\nTổng trọng lượng: 88g\r\nChốt gập ba\r\nDây đeo bằng thép không gỉ\r\nMặt kính khoáng\r\nChống nước\r\nGiờ hiện hành thông thường\r\nĐồng hồ kim: 3 kim (giờ, phút, giây)\r\nĐộ chính xác: ±20 giây một tháng\r\nTuổi thọ pin xấp xỉ: 3 năm với pin SR626SW', 1846000, 1, '2021-06-24 15:57:17', 13, 1, 1, 0),
 (19, 'Đồng hồ kim dây da giản dị thời trang cho nữ', '19.jpg', 'Dành cho: Phụ nữ\r\nPhong cách hợp thời trang\r\nMáy đồng hồ: Quartz\r\nHình dạng mặt đồng hồ: Tròn\r\nĐường kính mặt đồng hồ: 3.5CM\r\nChiều dài dây đeo: 24cm\r\nChiều rộng dây: 1.6 cm\r\nĐộ dày vỏ: 8 mm\r\nChất liệu dây đeo: da\r\nChất liệu vỏ: Inox\r\nKhông thấm nước: Không thấm nước\r\nGói hàng bao gồm: 1 Chiếc Đồng hồ đeo tay nữ', 2900000, 1, '2021-06-24 15:57:17', 9, 2, 1, 0),
-(20, 'Dồng hồ kim dây da DI5698H giản dị thời trang cho nữ', '20.jpg', 'Dành cho: Phụ nữ\r\nPhong cách hợp thời trang\r\nMáy đồng hồ: Quartz\r\nHình dạng mặt đồng hồ: Tròn\r\nĐường kính mặt đồng hồ: 3.5CM\r\nChiều dài dây đeo: 24cm\r\nChiều rộng dây: 1.6 cm\r\nĐộ dày vỏ: 8 mm\r\nChất liệu dây đeo: da\r\nChất liệu vỏ: Inox\r\nKhông thấm nước: Không thấm nước\r\nGói hàng bao gồm: 1 Chiếc Đồng hồ đeo tay nữ', 1600000, 1, '2021-06-24 15:57:17', 9, 2, 1, 0),
-(21, 'Dồng hồ kim dây da DI58942 giản dị thời trang cho nữ', '21.jpg', 'Dành cho: Phụ nữ\r\nPhong cách hợp thời trang\r\nMáy đồng hồ: Quartz\r\nHình dạng mặt đồng hồ: Tròn\r\nĐường kính mặt đồng hồ: 3.5CM\r\nChiều dài dây đeo: 24cm\r\nChiều rộng dây: 1.6 cm\r\nĐộ dày vỏ: 8 mm\r\nChất liệu dây đeo: da\r\nChất liệu vỏ: Inox\r\nKhông thấm nước: Không thấm nước\r\nGói hàng bao gồm: 1 Chiếc Đồng hồ đeo tay nữ', 1890000, 1, '2021-06-24 15:57:17', 9, 2, 1, 0),
+(20, 'Đồng hồ kim dây da DI5698H giản dị thời trang cho nữ', '20.jpg', 'Dành cho: Phụ nữ\r\nPhong cách hợp thời trang\r\nMáy đồng hồ: Quartz\r\nHình dạng mặt đồng hồ: Tròn\r\nĐường kính mặt đồng hồ: 3.5CM\r\nChiều dài dây đeo: 24cm\r\nChiều rộng dây: 1.6 cm\r\nĐộ dày vỏ: 8 mm\r\nChất liệu dây đeo: da\r\nChất liệu vỏ: Inox\r\nKhông thấm nước: Không thấm nước\r\nGói hàng bao gồm: 1 Chiếc Đồng hồ đeo tay nữ', 1600000, 1, '2021-06-25 16:25:37', 9, 2, 1, 0),
+(21, 'Đồng hồ kim dây da DI58942 giản dị thời trang cho nữ', '21.jpg', 'Dành cho: Phụ nữ\r\nPhong cách hợp thời trang\r\nMáy đồng hồ: Quartz\r\nHình dạng mặt đồng hồ: Tròn\r\nĐường kính mặt đồng hồ: 3.5CM\r\nChiều dài dây đeo: 24cm\r\nChiều rộng dây: 1.6 cm\r\nĐộ dày vỏ: 8 mm\r\nChất liệu dây đeo: da\r\nChất liệu vỏ: Inox\r\nKhông thấm nước: Không thấm nước\r\nGói hàng bao gồm: 1 Chiếc Đồng hồ đeo tay nữ', 1890000, 1, '2021-06-25 16:25:54', 9, 2, 1, 0),
 (22, 'Đồng hồ thạch anh V329 có dây đeo thép siêu mỏng', '22.jpg', 'Kiểu chuyển động: thạch anh\r\nChất liệu vỏ: Thép không gỉ \r\nChất liệu mặt kính: Thủy tinh cứng \r\nĐường kính mặt số: 33mm \r\nĐộ dày mặt số: 8mm \r\nChất liệu dây đeo: Thép không gỉ \r\nLoại khóa cài: Nam châm \r\nĐộ dài dây đeo: 230mm \r\nĐộ rộng dây đeo: 14mm \r\nChống nước: Đi mưa, Rửa tay ', 1599000, 1, '2021-06-24 15:57:17', 10, 2, 1, 0),
 (23, 'Đồng hồ nam cao cấp Citizen dây thép lưới đen cao cấp', '23.jpg', 'Đồng Hồ Nam: Citizen\r\nĐộ chống nước:  cơ bản: đi mưa nhỏ, rửa tay ok\r\nDây thép mành đen\r\nKhoá bấm cao cấp\r\nKích thước mặt: đường kính 40mm\r\nChiều dày: ~10mm\r\nKích thước dây: dài 24 cm \r\nĐộ rộng dây: 2 cm\r\nSố Kim: Chạy 3 kim (giờ, phút, giầy) và lịch ngày\r\nMáy: Quartz\r\nMặt kính: cường lực cao cấp', 1690000, 1, '2021-06-24 15:57:17', 11, 1, 1, 0),
 (24, 'Đồng hồ mặt kim loại nhã nhặn dành cho nữ DIMINI', '24.jpg', 'Kiểu chuyển động: thạch anh\r\nChất liệu vỏ: Thép không gỉ \r\nChất liệu mặt kính: Thủy tinh cứng \r\nĐường kính mặt số: 33mm \r\nĐộ dày mặt số: 8mm \r\nChất liệu dây đeo: Thép không gỉ \r\nLoại khóa cài: Nam châm \r\nĐộ dài dây đeo: 230mm \r\nĐộ rộng dây đeo: 14mm \r\nChống nước: Đi mưa, Rửa tay ', 2590000, 1, '2021-06-24 15:57:17', 4, 2, 1, 0),
@@ -525,7 +549,7 @@ INSERT INTO `sanpham` (`masp`, `tensp`, `hinhanh`, `mota`, `giatien`, `trangthai
 -- --------------------------------------------------------
 
 --
--- Table structure for table `thuonghieu`
+-- Cấu trúc bảng cho bảng `thuonghieu`
 --
 
 CREATE TABLE `thuonghieu` (
@@ -536,7 +560,7 @@ CREATE TABLE `thuonghieu` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `thuonghieu`
+-- Đang đổ dữ liệu cho bảng `thuonghieu`
 --
 
 INSERT INTO `thuonghieu` (`math`, `tenth`, `hinhanh`, `chitiet`) VALUES
@@ -558,7 +582,7 @@ INSERT INTO `thuonghieu` (`math`, `tenth`, `hinhanh`, `chitiet`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tintuc`
+-- Cấu trúc bảng cho bảng `tintuc`
 --
 
 CREATE TABLE `tintuc` (
@@ -573,26 +597,26 @@ CREATE TABLE `tintuc` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `tintuc`
+-- Đang đổ dữ liệu cho bảng `tintuc`
 --
 
 INSERT INTO `tintuc` (`matt`, `tieude`, `noidung`, `hinhanh`, `trangthai`, `tgtao`, `id_manv`, `isDelete`) VALUES
-(1, 'Đồng hồ cho phái đẹp', 'Ngày nay, chọn một chiếc đồng hồ hoàn hảo cho phụ nữ sẽ giúp bạn hoàn thiện trang phục của mình và phản ánh rằng bạn có gu thời trang hay phong cách tuyệt vời. Có hàng trăm loại đồng hồ để bạn lựa chọn và có thể khá khó khăn để chọn chúng nên đeo trong những dịp và bữa tiệc nào.\r\nNgày nay, có rất nhiều kiểu dáng đồng hồ trên mạng. Đồng hồ của họ thường sẽ đắt hơn. Để mua những chiếc đồng hồ thời trang này, hầu hết phụ nữ chọn phương án tốt nhất và đó là mua sắm trực tuyến. Bạn có thể tìm thấy có rất nhiều bộ sưu tập đồng hồ dành cho phụ nữ. Phụ nữ hãy thử một chiếc đồng hồ sang trọng có kiểu dáng rất đơn giản nhưng truyền thống.\r\nĐối với những phụ nữ yêu thích xu hướng về phong cách táo bạo, những chiếc đồng hồ thời trang và phong cách là lựa chọn tốt cho họ. Những chiếc đồng hồ này có thể có vỏ và mặt có hình dạng độc đáo cũng như nhiều màu sắc đang thịnh hành.\r\nNếu bạn quyết định mua đồng hồ nữ thì trước khi mua đồng hồ, hãy nghĩ xem bạn sẽ đeo đồng hồ ở đâu và bạn sẽ kết hợp với trang phục nào. Và điều thứ hai, bạn chọn đúng trang web trực tuyến để mua được những chiếc đồng hồ nữ đẹp chất lượng và sành điệu.\r\nBạn có thể chọn trang web trực tuyến tốt nhất fulltime, nơi cung cấp đồng hồ thời trang và thiết kế cho phụ nữ với giá cả hợp lý . Tại đây bạn có thể tìm thấy những chiếc đồng hồ sang trọng với đủ kiểu dáng và nhiều thương hiệu.\r\nNếu như phụ nữ làm đẹp cần phải lỉnh kỉnh đủ thứ phụ kiện, trang sức, mỹ phẩm thì đàn ông chỉ cần một chiếc đồng hồ đeo tay là đủ. Với dân sành đồng hồ, đặc biệt là phái nam, họ coi những chiếc đồng hồ đeo tay không chỉ là một công cụ xem giờ thông thường mà còn là những món trang sức cao cấp, bao hàm nghệ thuật cơ khí bậc thầy, sự tỉ mỉ, niềm đam mê và sức sáng tạo kì khôi ẩn chứa trong những cỗ máy bé nhỏ.', '1.jpg', 1, '2021-05-26 04:17:59', 2, 0),
+(1, 'Đồng hồ cho phái đẹp', 'Ngày nay, chọn một chiếc đồng hồ hoàn hảo cho phụ nữ sẽ giúp bạn hoàn thiện trang phục của mình và phản ánh rằng bạn có gu thời trang hay phong cách tuyệt vời. Có hàng trăm loại đồng hồ để bạn lựa chọn và có thể khá khó khăn để chọn chúng nên đeo trong những dịp và bữa tiệc nào.\r\nNgày nay, có rất nhiều kiểu dáng đồng hồ trên mạng. Đồng hồ của họ thường sẽ đắt hơn. Để mua những chiếc đồng hồ thời trang này, hầu hết phụ nữ chọn phương án tốt nhất và đó là mua sắm trực tuyến. Bạn có thể tìm thấy có rất nhiều bộ sưu tập đồng hồ dành cho phụ nữ. Phụ nữ hãy thử một chiếc đồng hồ sang trọng có kiểu dáng rất đơn giản nhưng truyền thống.\r\nĐối với những phụ nữ yêu thích xu hướng về phong cách táo bạo, những chiếc đồng hồ thời trang và phong cách là lựa chọn tốt cho họ. Những chiếc đồng hồ này có thể có vỏ và mặt có hình dạng độc đáo cũng như nhiều màu sắc đang thịnh hành.\r\nNếu bạn quyết định mua đồng hồ nữ thì trước khi mua đồng hồ, hãy nghĩ xem bạn sẽ đeo đồng hồ ở đâu và bạn sẽ kết hợp với trang phục nào. Và điều thứ hai, bạn chọn đúng trang web trực tuyến để mua được những chiếc đồng hồ nữ đẹp chất lượng và sành điệu.\r\nBạn có thể chọn trang web trực tuyến tốt nhất fulltime, nơi cung cấp đồng hồ thời trang và thiết kế cho phụ nữ với giá cả hợp lý . Tại đây bạn có thể tìm thấy những chiếc đồng hồ sang trọng với đủ kiểu dáng và nhiều thương hiệu.\r\nNếu như phụ nữ làm đẹp cần phải lỉnh kỉnh đủ thứ phụ kiện, trang sức, mỹ phẩm thì đàn ông chỉ cần một chiếc đồng hồ đeo tay là đủ. Với dân sành đồng hồ, đặc biệt là phái nam, họ coi những chiếc đồng hồ đeo tay không chỉ là một công cụ xem giờ thông thường mà còn là những món trang sức cao cấp, bao hàm nghệ thuật cơ khí bậc thầy, sự tỉ mỉ, niềm đam mê và sức sáng tạo kì khôi ẩn chứa trong những cỗ máy bé nhỏ.', '1.jpg', 1, '2021-06-26 07:53:04', 2, 0),
 (2, '10 MÓN QUÀ TẶNG CHA, TẶNG BỐ Ý NGHĨA NGÀY FATHER’S DAY', '“Cha là người yêu lý tưởng đầu tiên với con gái, và là người anh hùng đầu tiên đối với con trai” đó là hình tượng người cha trong mắt trẻ thơ. Còn đối với mỗi một người con đã trưởng thành, Cha là người đã dành tặng cả cuộc đời để hi sinh trong âm thầm lặng lẽ dõi theo từng bước chân của chúng ta. Vậy hãy dành cho người yêu lý tưởng đó, người anh hùng đó một ngày Father’s Day thật sự ý nghĩa.\r\nAi cũng đã từng trải qua cái thời trẻ con ham chơi đến nổi bị mắng, bị đánh đòn, còn nhớ ánh mắt tức giận của cha ôi sao cảm giác nó sợ hãi. Cái cảm giác lúc bé khi bị đánh đòn nó đau rần rần..nhiều lúc còn xưng tấy, ửng đỏ cả lên… Thế rồi thời gian trôi, sau bao nhiêu năm tháng khó nhọc vất vả nuôi con giờ đây Cha đã già hơn trước.\r\nCó bao giờ bạn tự hỏi bản thân đã làm được gì để đáp lại những hi sinh khó nhọc của Cha trong suốt nhiều năm tháng qua chưa? \r\nÔm và hôn lên má của Cha là hành động rất thiết thực, rất đơn giản để thể hiện tình cảm của một đứa trẻ thơ. Và chắc chắn là tất cả chúng ta đã từng làm một cách rất thành thục, thế nhưng chắc hẳn rằng có rất ít người còn giữ lại thói quen đó. Vậy món quà tặng Cha, quà tặng Bố đơn giản nhất mà ai cũng có thể làm được đó chính là “một cái ôm, một nụ hôn”.\r\nCó những điều tự nhiên thật sự rất khó nói ra bằng lời, “con yêu bố” đơn giản là thế đấy nhưng mấy ai đủ can đảm và đã từng nói điều này với người Cha của mình. Vậy những lời khó nói hãy dành để viết thành một bức thư để bày tỏ tình yêu với người anh hùng đó, người yêu lý tưỡng đó. Bức thư bày tỏ tình yêu là món quà tặng Cha, quà tặng Bố đơn giản nhưng hết sức ý nghĩa.\r\nNhư lúc bé Cha vẫn thường đưa ta đi đến nơi này nơi kia ăn những món này món kia, vậy hãy dành thời gian để đưa Cha đến những nơi mà ngày xưa ông thường đưa ta tới và cùng ông điểm danh lại sự thay đổi theo thời gian của nơi đã đi qua. Đó sẽ là những khoảnh khắc thật sự đáng nhớ mà bạn có thể xem đó là món quà tặng Cha, quà tặng Bố mang ý nghĩa tinh thần sâu sắc.\r\nNếu như bạn không thể tự tay nấu một bữa ăn với các món ngon mà Bố/ Cha yêu thích thì hãy dẫn ông đến một nhà hàng nơi mà cả gia đình có thể cùng nhau trải qua những giây phút tuyệt vời, vừa ăn vừa ôn lại chuyện khi còn trẻ con đó sẽ là một món quà tặng cha, quà tặng bố hết sức ý nghĩa cho ngày Father’s Day săp tới.\r\nMột chiếc đồng hồ đeo tay dành tặng bố trong ngày Father’s Day chắc chắn sẽ mang đến cho ông những giây phút thật sự đặc biệt. Thật vậy một chiếc đồng hồ đeo tay không chỉ là món quà tặng Cha, quà tặng Bố ý nghĩa mà nó còn mang đến sự trẻ trung, sang trọng cho ông. ', '2.jpg', 1, '2021-05-26 04:18:17', 2, 0);
 
 --
--- Indexes for dumped tables
+-- Chỉ mục cho các bảng đã đổ
 --
 
 --
--- Indexes for table `bohinhanh`
+-- Chỉ mục cho bảng `bohinhanh`
 --
 ALTER TABLE `bohinhanh`
   ADD PRIMARY KEY (`maha`),
   ADD KEY `id_masp` (`id_masp`);
 
 --
--- Indexes for table `chitiethoadon`
+-- Chỉ mục cho bảng `chitiethoadon`
 --
 ALTER TABLE `chitiethoadon`
   ADD PRIMARY KEY (`macthd`,`masp`,`mahd`),
@@ -600,46 +624,46 @@ ALTER TABLE `chitiethoadon`
   ADD KEY `masp` (`masp`);
 
 --
--- Indexes for table `hoadon`
+-- Chỉ mục cho bảng `hoadon`
 --
 ALTER TABLE `hoadon`
   ADD PRIMARY KEY (`mahd`),
   ADD KEY `hoadon_ibfk_1` (`id_makh`);
 
 --
--- Indexes for table `khachhang`
+-- Chỉ mục cho bảng `khachhang`
 --
 ALTER TABLE `khachhang`
   ADD PRIMARY KEY (`makh`);
 
 --
--- Indexes for table `lienhe`
+-- Chỉ mục cho bảng `lienhe`
 --
 ALTER TABLE `lienhe`
   ADD PRIMARY KEY (`malh`),
   ADD KEY `lienhe_ibfk_1` (`id_manv`);
 
 --
--- Indexes for table `loainhanvien`
+-- Chỉ mục cho bảng `loainhanvien`
 --
 ALTER TABLE `loainhanvien`
   ADD PRIMARY KEY (`maloainv`);
 
 --
--- Indexes for table `loaisanpham`
+-- Chỉ mục cho bảng `loaisanpham`
 --
 ALTER TABLE `loaisanpham`
   ADD PRIMARY KEY (`maloai`);
 
 --
--- Indexes for table `nhanvien`
+-- Chỉ mục cho bảng `nhanvien`
 --
 ALTER TABLE `nhanvien`
   ADD PRIMARY KEY (`manv`),
   ADD KEY `nhanvien_ibfk_1` (`id_maloainv`);
 
 --
--- Indexes for table `sanpham`
+-- Chỉ mục cho bảng `sanpham`
 --
 ALTER TABLE `sanpham`
   ADD PRIMARY KEY (`masp`),
@@ -648,125 +672,125 @@ ALTER TABLE `sanpham`
   ADD KEY `id_manv` (`id_manv`);
 
 --
--- Indexes for table `thuonghieu`
+-- Chỉ mục cho bảng `thuonghieu`
 --
 ALTER TABLE `thuonghieu`
   ADD PRIMARY KEY (`math`);
 
 --
--- Indexes for table `tintuc`
+-- Chỉ mục cho bảng `tintuc`
 --
 ALTER TABLE `tintuc`
   ADD PRIMARY KEY (`matt`),
   ADD KEY `tintuc_ibfk_1` (`id_manv`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT cho các bảng đã đổ
 --
 
 --
--- AUTO_INCREMENT for table `bohinhanh`
+-- AUTO_INCREMENT cho bảng `bohinhanh`
 --
 ALTER TABLE `bohinhanh`
   MODIFY `maha` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=193;
 
 --
--- AUTO_INCREMENT for table `chitiethoadon`
+-- AUTO_INCREMENT cho bảng `chitiethoadon`
 --
 ALTER TABLE `chitiethoadon`
-  MODIFY `macthd` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `macthd` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
--- AUTO_INCREMENT for table `hoadon`
+-- AUTO_INCREMENT cho bảng `hoadon`
 --
 ALTER TABLE `hoadon`
-  MODIFY `mahd` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `mahd` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
--- AUTO_INCREMENT for table `khachhang`
+-- AUTO_INCREMENT cho bảng `khachhang`
 --
 ALTER TABLE `khachhang`
-  MODIFY `makh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `makh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
--- AUTO_INCREMENT for table `lienhe`
+-- AUTO_INCREMENT cho bảng `lienhe`
 --
 ALTER TABLE `lienhe`
-  MODIFY `malh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `malh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT for table `loainhanvien`
+-- AUTO_INCREMENT cho bảng `loainhanvien`
 --
 ALTER TABLE `loainhanvien`
   MODIFY `maloainv` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `loaisanpham`
+-- AUTO_INCREMENT cho bảng `loaisanpham`
 --
 ALTER TABLE `loaisanpham`
   MODIFY `maloai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `nhanvien`
+-- AUTO_INCREMENT cho bảng `nhanvien`
 --
 ALTER TABLE `nhanvien`
-  MODIFY `manv` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `manv` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `sanpham`
+-- AUTO_INCREMENT cho bảng `sanpham`
 --
 ALTER TABLE `sanpham`
   MODIFY `masp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
 
 --
--- AUTO_INCREMENT for table `thuonghieu`
+-- AUTO_INCREMENT cho bảng `thuonghieu`
 --
 ALTER TABLE `thuonghieu`
   MODIFY `math` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
--- AUTO_INCREMENT for table `tintuc`
+-- AUTO_INCREMENT cho bảng `tintuc`
 --
 ALTER TABLE `tintuc`
   MODIFY `matt` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- Constraints for dumped tables
+-- Các ràng buộc cho các bảng đã đổ
 --
 
 --
--- Constraints for table `bohinhanh`
+-- Các ràng buộc cho bảng `bohinhanh`
 --
 ALTER TABLE `bohinhanh`
   ADD CONSTRAINT `bohinhanh_ibfk_1` FOREIGN KEY (`id_masp`) REFERENCES `sanpham` (`masp`);
 
 --
--- Constraints for table `chitiethoadon`
+-- Các ràng buộc cho bảng `chitiethoadon`
 --
 ALTER TABLE `chitiethoadon`
   ADD CONSTRAINT `chitiethoadon_ibfk_1` FOREIGN KEY (`masp`) REFERENCES `sanpham` (`masp`),
   ADD CONSTRAINT `chitiethoadon_ibfk_2` FOREIGN KEY (`mahd`) REFERENCES `hoadon` (`mahd`);
 
 --
--- Constraints for table `hoadon`
+-- Các ràng buộc cho bảng `hoadon`
 --
 ALTER TABLE `hoadon`
   ADD CONSTRAINT `hoadon_ibfk_1` FOREIGN KEY (`id_makh`) REFERENCES `khachhang` (`makh`);
 
 --
--- Constraints for table `lienhe`
+-- Các ràng buộc cho bảng `lienhe`
 --
 ALTER TABLE `lienhe`
   ADD CONSTRAINT `lienhe_ibfk_1` FOREIGN KEY (`id_manv`) REFERENCES `loainhanvien` (`maloainv`);
 
 --
--- Constraints for table `nhanvien`
+-- Các ràng buộc cho bảng `nhanvien`
 --
 ALTER TABLE `nhanvien`
   ADD CONSTRAINT `nhanvien_ibfk_1` FOREIGN KEY (`id_maloainv`) REFERENCES `loainhanvien` (`maloainv`);
 
 --
--- Constraints for table `sanpham`
+-- Các ràng buộc cho bảng `sanpham`
 --
 ALTER TABLE `sanpham`
   ADD CONSTRAINT `sanpham_ibfk_1` FOREIGN KEY (`id_math`) REFERENCES `thuonghieu` (`math`),
@@ -774,7 +798,7 @@ ALTER TABLE `sanpham`
   ADD CONSTRAINT `sanpham_ibfk_3` FOREIGN KEY (`id_manv`) REFERENCES `nhanvien` (`manv`);
 
 --
--- Constraints for table `tintuc`
+-- Các ràng buộc cho bảng `tintuc`
 --
 ALTER TABLE `tintuc`
   ADD CONSTRAINT `tintuc_ibfk_1` FOREIGN KEY (`id_manv`) REFERENCES `loainhanvien` (`maloainv`);
