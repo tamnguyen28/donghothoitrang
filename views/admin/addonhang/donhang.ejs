@@ -30,14 +30,16 @@
                                                     <td><%= dh.tennguoinhan %></td>
                                                     <td><%= dh.phuongthucthanhtoan == 1 ? 'Đã thanh toán': 'Chưa thanh toán' %></td>
                                                     <td><% if(dh.trangthai == 1) {%>
-                                                            <%= 'Đã xử lý' %>
+                                                            <%= 'Chờ lấy hàng' %>
                                                         <% }else if(dh.trangthai == 2) { %>
                                                             <%= 'Đơn hàng đã hủy' %>
                                                         <% }else if(dh.trangthai == 3) {%>
-                                                            <%= 'Đang xử lý' %>
+                                                            <%= 'Đang giao' %>
+                                                        <% }else if(dh.trangthai == 4) {%>
+                                                            <%= 'Đã giao' %>
                                                         <%} else {%>
-                                                            <%= 'Chưa xử lý'%>
-                                                        <% } %>
+                                                            <%= 'Đã tiếp nhận'%>
+                                                        <% } %>    
                                                     </td>
                                                     <td>
                                                         <a href="/admin/donhang/detailOrder?id=<%= dh.mahd %>" class="btn btn-success ">Chi tiết đơn hàng</a>
@@ -63,7 +65,7 @@
     <script>
         let mess = '<%= mess %>'
         if(mess && mess == 1){
-            alert('Đơn hàng đang trong trạng thái chưa xử lý');
+            alert('Không thể xóa! Đơn hàng trong trạng thái đã tiếp nhận');
         }
     </script>
 </html>
