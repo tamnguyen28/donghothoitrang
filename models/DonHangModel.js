@@ -4,7 +4,7 @@ class DonHangModel{
     themthongtin(hoadon, labelid_ghtk){
         // console.log(hoadon.trangthai);
         return new Promise(function (resolve, reject) {
-            let sqlthongtin = "INSERT INTO hoadon VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, current_timestamp(), ?, ?,'0')";
+            let sqlthongtin = "INSERT INTO hoadon VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, current_timestamp(), ?, ?,'0',?)";
             conn.query(sqlthongtin,[
                 hoadon.tennguoinhan,
                 hoadon.sdtnguoinhan,
@@ -15,7 +15,8 @@ class DonHangModel{
                 hoadon.phuongthucthanhtoan,
                 hoadon.trangthai,
                 hoadon.idkh,
-                labelid_ghtk
+                labelid_ghtk,
+                hoadon.phivanchuyen
             ], function (err, result){
                 if (err) {
                     console.log(err);

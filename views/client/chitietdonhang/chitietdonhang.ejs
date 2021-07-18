@@ -41,7 +41,7 @@
                                     <div class="card-body">
                                         <img src="https://s.giaohangtietkiem.vn/customer/img/logo-slogan.png" />
                                         <p class="card-text">Giao hàng vào: <%= statusOrder.order && statusOrder.order.deliver_date  ? statusOrder.order.deliver_date : 'Chưa có ngày giao hàng'%></p>
-                                        <p class="card-text">Phí vận chuyển: <%= statusOrder.order && statusOrder.order.ship_money ? statusOrder.order.ship_money : '0' %>đ</p>
+                                        <p class="card-text">Phí vận chuyển: <%= chitiet[0].phivanchuyen %>đ</p>
                                     </div>
                                 </div>
                     
@@ -112,11 +112,11 @@
                                             </div>
                                             <div style="display: flex; justify-content: flex-end; margin-top: 10px;">
                                                 <span style="margin-right: 70px;">Phí vận chuyển</span>
-                                                <span><%= statusOrder.order && statusOrder.order.ship_money ? statusOrder.order.ship_money : '0'  %>đ</span>
+                                                <span><%= chitiet[0].phivanchuyen %>đ</span>
                                             </div>
                                             <div style="display: flex; justify-content: flex-end; margin-top: 10px;">
                                                 <span style="margin-right: 50px;">Tổng cộng</span>
-                                                <span style="font-size: 20px; color: red;"><%= chitiet[0].tonghoadon + (statusOrder.order && statusOrder.order.ship_money ? statusOrder.order.ship_money : 0) %>đ</span>
+                                                <span style="font-size: 20px; color: red;"><%= chitiet[0].tonghoadon + chitiet[0].phivanchuyen %>đ</span>
                                             </div>
                                         </div>
                                     </div>

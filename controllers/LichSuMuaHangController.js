@@ -24,6 +24,7 @@ class LichSuMuaHangController{
             list = result;
             // console.log(list);
             homeModel.loadloaisp().then(resultloai =>{
+                // console.log(groupSanPham(list))
                 res.render('client/lichsumuahang/lichsumuahang', {
                     donhang : groupSanPham(list),
                     title : 'Lịch sử mua hàng',
@@ -92,6 +93,7 @@ async function getTinhTrangDonHang(idGHTK){
 }
 
 function groupSanPham(resultSP){
+    // console.log(resultSP);
     let results = []; // mang ket qua cuoi cung
     let sp = []; // san pham chua trong mot don hang
     let mahoadonduyetroi = 0; //danh danh hoa don da duyet roi
@@ -110,7 +112,9 @@ function groupSanPham(resultSP){
                 tgtao: resultSP[i].tgtao,
                 id_ghtk: resultSP[i].id_ghtk,
                 tonghoadon: resultSP[i].tonghoadon,
-                sanphams: sp
+                sanphams: sp,
+                phivanchuyen: resultSP[i].phivanchuyen
+
             })
             mahoadonduyetroi = resultSP[i].mahd;
             sp = []
