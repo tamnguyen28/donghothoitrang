@@ -34,13 +34,15 @@
                                         <td><%= donhang.phuongthucthanhtoan == 1 ? 'Đã thanh toán': 'Chưa thanh toán' %></td>
                                         <td id="<%= donhang.mahd %>">
                                             <% if(donhang.trangthai == 1) {%>
-                                                <%= 'Đã xử lý' %>
+                                                <%= 'Chờ lấy hàng' %>
                                             <% }else if(donhang.trangthai == 2) { %>
                                                 <%= 'Đơn hàng đã hủy' %>
                                             <% }else if(donhang.trangthai == 3) {%>
-                                                <%= 'Đang xử lý' %>
+                                                <%= 'Đang giao' %>
+                                            <% }else if(donhang.trangthai == 4) {%>
+                                                <%= 'Đã giao' %>
                                              <%} else {%>
-                                                <%= 'Chưa xử lý'%>
+                                                <%= 'Đã tiếp nhận'%>
                                             <% } %>      
                                         </td>
                                         <td><%= donhang.tgtao %></td>
@@ -50,9 +52,10 @@
                                 <h4>Cập nhật tình trạng đơn hàng</h4><br>
                                 <select id="<%= donhang.mahd %>" class="form-control" name="xuly" onchange="changeStatus(this) ">
                                     <option value="-1">--Chọn tình trạng--</option>
-                                    <option value="1" <%= donhang.trangthai == 1 ? 'selected' : '' %> >Đã xử lý</option>
-                                    <option value="3" <%= donhang.trangthai == 3 ? 'selected' : '' %> >Đang xử lý</option>
-                                    <option value="0" <%= donhang.trangthai == 0 ? 'selected' : '' %>>Chưa xử lý</option>
+                                    <option value="0" <%= donhang.trangthai == 0 ? 'selected' : '' %> >Đã tiếp nhận</option>
+                                    <option value="1" <%= donhang.trangthai == 1 ? 'selected' : '' %> >Chờ lấy hàng</option>
+                                    <option value="3" <%= donhang.trangthai == 3 ? 'selected' : '' %> >Đang giao</option>
+                                    <option value="4" <%= donhang.trangthai == 4 ? 'selected' : '' %> >Đã giao</option>
                                 </select><br>
                                 <input type="button" onclick="updateStatusBill()" value="Cập nhật đơn hàng" name="capnhatdonhang" class="btn btn-success <%= donhang.trangthai == 2 ? 'hidden' : '' %> %>"><br/>
                                 <br/>
@@ -86,11 +89,13 @@
                     success: function(data){
                         if(data && data.statusCode == 1){
                             if(status == 0){
-                                $(`#${idDH}`).html('Chưa xử lý');
+                                $(`#${idDH}`).html('Đã tiếp nhận');
                             }else if(status == 3){
-                                $(`#${idDH}`).html('Đang xử lý');
+                                $(`#${idDH}`).html('Đang giao');
+                            }else if(status == 4){
+                                $(`#${idDH}`).html('Đã giao');
                             }else{
-                                $(`#${idDH}`).html('Đã xử lý');
+                                $(`#${idDH}`).html('Chờ lấy hàng');
                             }
                         }
                     },

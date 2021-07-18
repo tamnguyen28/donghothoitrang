@@ -1,126 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
 <%- include('../partials/adminhead'); -%>
-
-    <body>
-        <section id="container">
-            <%- include('../partials/adminheader'); -%>
-                <%- include('../partials/adminleft'); -%>
-                    <!--main content start-->
-                    <section id="main-content">
-                        <section class="wrapper">
-                            <div class="col-md-12">
-                                <h4>Danh sách khách hàng</h4><br>
-                                <table class="table table-bordered">
-                                    <tr>
-                                        <th>Mã tài khoản</th>
-                                        <th>Tên tài khoản</th>
-                                        <th>Số điện thoại</th>
-                                        <th>Địa chỉ</th>
-                                        <th>Email</th>
-                                        <th>Phương thức đăng nhập</th>
-                                        <th>Ngày đăng ký</th>
-                                        <th>Quản lý</th>
-                                    </tr>
-                                    <% khachhang.forEach(function(kh){ %>
-                                    <tr>
-                                        <td id="customerId"><%= kh.makh %></td>
-                                        <td><%= kh.tenkh %></td>
-                                        <td><%= kh.sodienthoai %></td>
-                                        <td><%= kh.diachi %></td>
-                                        <td><%= kh.email %></td>
-                                        <td><%= kh.ptdangnhap %></td>
-                                        <td><%= kh.tgtao %></td>
-                                        <td><a id="linkShowTransaction" onclick="getOrderByCustomerId('<%= kh.makh %>')" class="btn btn-success">Xem
-                                                giao dịch </a></td>
-                                    </tr>
-                                    <% }); %>
-                                </table>
-                            </div>
-
-                            <div class="col-md-12">
-                                <h4>Liệt kê danh sách đặt hàng</h4><br>
-                            
-                                <table id='tblOrder' class="table table-bordered">
-                                                        
-                                </table>
-                            </div>
-                        </section>
-
-                        <%- include('../partials/adminfooter'); -%>
-                            <!--main content end-->
-                    </section>
-        </section>
-        <%- include('../partials/adminscript_bottom'); -%>
-    </body>
-<script>
-    
-    let titleTblOrder = `<tr>
-                            <th>Thứ tự</th>
+<body>
+<section id="container">
+<%- include('../partials/adminheader'); -%>
+<%- include('../partials/adminleft'); -%>
+<!--main content start-->
+<section id="main-content">
+	<section class="wrapper">
+		   <div class="clearfix">
+            <div class="table-agile-info">
+                <!--search start-->
+                <div class="header-search">
+                    <form action="/admin/timkiem" method="get" id="formsearch">
+                        <input type="text" name="searchkh" placeholder="Nhập từ khóa cần tìm ..."/>
+                        <a onclick="onSubmitSearch()"><i class="fa fa-search"></i></a>
+                    </form>
+                    <p id="countSP"></p>
+                </div>
+                <!--search end-->
+                <div class="panel panel-default">
+                   <div class="panel-heading">
+                    DANH SÁCH KHÁCH HÀNG
+                   </div>
+                   <div>
+                     <table class="table" ui-jq="footable">
+                       <thead>
+                         <tr>
                             <th>Mã tài khoản</th>
-                            <th>Mã đơn hàng</th>
-                            <th>Tên người nhận</th>
+                            <th>Tên tài khoản</th>
                             <th>Số điện thoại</th>
-                            <th>Địa chỉ người nhận</th>
-                            <th>Ngày đặt</th>
-                        </tr>`
-    
-    function getOrderByCustomerId(idkh){
-        let j= 1;
-        $('#tblOrder').html('');
-
-        //add tilte
-        $('#tblOrder').html(titleTblOrder);
-
-        $.ajax({
-            method: 'GET',
-            url:'/admin/khachhang/order',
-            data:{
-                id: idkh
-            },
-            success: function(data){
-                if(data && data.length != 0){
-                    
-                    let sl = data.length;
-                    for(let i = 0; i < sl ; i++){
-                        $('#tblOrder').html(
-                            $('#tblOrder').html() + `<tr>
-                                                        <td>
-                                                            ${j++}    
-                                                        </td>
-                                                        <td>
-                                                            ${data[i].makh}
-                                                        </td>
-                                                        <td>
-                                                            ${data[i].mahd}
-                                                        </td>
-                                                        <td>
-                                                            ${data[i].tennguoinhan}
-                                                        </td>
-                                                        <td>
-                                                            ${data[i].sdtnguoinhan}
-                                                        </td>
-                                                        <td>
-                                                            ${data[i].diachinguoinhan}
-                                                        </td>
-                                                        <td>
-                                                            ${data[i].tgtao}
-                                                        </td>
-                                                    </tr>`
-                        )
-                    }
-                    
-                }
-            },
-
-            error: function(error){
-
+                            <th>Địa chỉ</th>
+                            <th>Email</th>
+                            <th>Tên đăng nhập</th>
+                            <th>Phương thức đăng nhập</th>
+                            <th>Ngày đăng ký</th>
+                         </tr>
+                       </thead>
+                       <tbody id="tblbody">
+                        <% khachhang.forEach(function(kh){ %>
+                         <tr data-expanded="true">
+                            <td id="customerId"><%= kh.makh %></td>
+                            <td><%= kh.tenkh %></td>
+                            <td><%= kh.sodienthoai %></td>
+                            <td><%= kh.diachi %></td>
+                            <td><%= kh.email %></td>
+                            <td><%= kh.tendangnhap %></td>
+                            <td><%= kh.ptdangnhap %></td>
+                            <td><%= kh.tgtao %></td>
+                            </tr>
+                        <% }); %>
+                       </tbody>
+                     </table>
+                   </div>
+                 </div>
+            </div>
+        </div>
+  </section>
+<%- include('../partials/adminfooter'); -%>
+</section>
+<!--main content end-->
+</section>
+<%- include('../partials/adminscript_bottom'); -%>
+</body>
+<script>
+    function onSubmitSearch(){
+       $.ajax({
+         method: 'GET',
+         data: {
+            search: $('input[name=searchkh]').val().trim()
+         },
+         url:'/admin/timkiem/searchCustomer',
+         success: function(data){
+            $('#tblbody').html('');
+            if(data){
+              let dataSearchkh = data.dataSearchkh;
+              let countDataSearch = dataSearchkh.length;
+              
+              if(countDataSearch != 0){
+                $('#countSP').html('Kết quả tìm kiếm: ' + countDataSearch + ' khách hàng');
+              }else{
+                $('#countSP').html('Không tìm thấy khách hàng')
+              }
+              
+              for (let i = 0; i < countDataSearch; i++) {
+                $('#tblbody').html(
+                  $('#tblbody').html() + `<tr data-expanded="true">
+                                              <td> ${dataSearchkh[i].makh}</td>
+                                              <td> ${dataSearchkh[i].tenkh}</td>
+                                              <td> ${dataSearchkh[i].sodienthoai}</td>
+                                              <td> ${dataSearchkh[i].diachi}</td>
+                                              <td> ${dataSearchkh[i].email}</td>
+                                              <td> ${dataSearchkh[i].tendangnhap}</td>
+                                              <td> ${dataSearchkh[i].ptdangnhap}</td>
+                                              <td> ${dataSearchkh[i].tgtao}</td>                                           
+                                          </tr>`
+                )
+              }
+              
             }
-        })
+         },
+         error: function(error){
+  
+         }
+       })
     }
-
-
-   
-</script>
-
+  </script>
 </html>
+

@@ -3162,4 +3162,41 @@ div#graph1, div#graph4, div#graph5, div#graph6, div#graph7, div#graph8, div#grap
 .canhan{
     background:#eb088c;
 }
+.table-agile-info .header-search {
+    margin-top: 7px;
+}
+.table-agile-info .header-search form {
+    position: relative;
+}
+.table-agile-info .header-search form input {
+    background: #ededed none repeat scroll 0 0;
+    border: 0 none;
+    color: #333;
+    font-size: 14px;
+    height: 42px;
+    line-height: 40px;
+    margin: 0;
+    padding-left: 10px;
+    width: 100%;
+    border-radius: 5px;
+    padding-right: 47px;
+}
+.table-agile-info .header-search form a {
+    background: rgb(235, 8, 140) none repeat scroll 0 0;
+    color: #fff;
+    display: inline-block;
+    font-size: 18px;
+    height: 42px;
+    line-height: 40px;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    top: 0;
+    width: 42px;
+    border-radius: 0 5px 5px 0px;
+}
+.table-agile-info .header-search form a:hover {
+    background: #232323 none repeat scroll 0 0;
+}
+
 }
