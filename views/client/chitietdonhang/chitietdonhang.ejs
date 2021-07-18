@@ -14,9 +14,15 @@
                                     if(statusOrder.order && statusOrder.order.status_text) {
                                         if(chitiet[0].trangthai == 2) { %>
                                             <%= '- Đã hủy đơn' %>
-                                        <% } else { %>
+                                        <% } else if(chitiet[0].trangthai == 1) { %>
+                                            <%= '- Chờ lấy hàng' %>
+                                        <% } else if(chitiet[0].trangthai == 3) { %>
+                                            <%= '- Đang giao' %>
+                                        <% } else if(chitiet[0].trangthai == 4) { %>
+                                            <%= '- Đã giao' %>
+                                      <% } else {%>   
                                             <%= '-' + statusOrder.order.status_text %>
-                                      <% } %>   
+                                    <% } %>
                                <%  } %>
                             </h3>
                         </div>
