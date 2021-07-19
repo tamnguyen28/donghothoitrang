@@ -37,21 +37,6 @@ class AddonhangModel {
             });
         })
     }
-    deleteDonHang(iddonhang){
-        return new Promise(function(resolve, reject){
-            let queryDelete = `UPDATE hoadon
-                                SET isDelete = 1
-                                WHERE mahd = ?`;
-            conn.query(queryDelete, [iddonhang], function(error, result){
-                if(error){
-                    reject(error);
-                }else{
-                    resolve(result);
-                }
-            })
-        })
-    }
-
     updateStatusModel(status, idDh){
       return new Promise(function(resolve, reject){
             let queryUpdateDH =`update hoadon 

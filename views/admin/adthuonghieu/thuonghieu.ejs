@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/adminhead'); -%>
+<body>
+<section id="container">
+<%- include('../partials/adminheader'); -%>
+<%- include('../partials/adminleft'); -%>
+<!--main content start-->
+      <section id="main-content">
+	      <section class="wrapper">
+		        <div class="clearfix">
+                    <div class="table-agile-info">
+                        <div class="panel panel-default">
+                           <div class="panel-heading">
+                            THƯƠNG HIỆU
+                           </div>
+                           <div>
+                             <table class="table" ui-jq="footable" >
+                               <thead>
+                                 <tr>
+                                   <th data-breakpoints="xs">Mã thương hiệu</th>
+                                   <th>Tên thương hiệu</th>
+                                   <th>Hình ảnh</th>
+                                   <th>Chi tiết</th>
+                                   <td><a href="admin/thuonghieu/createthuonghieu" class="btn btn-success <%= role && role != 1 ? '' : 'hidden'%>">Thêm thương hiệu</a></td>
+                                 </tr>
+                               </thead>
+                               <tbody>
+                                <% thuonghieu.forEach(function(th){ %>
+                                   <td><%= th.math %></td>
+                                   <td><%= th.tenth %></td>
+                                   <td><img src="client/img/thuonghieu/<%= th.hinhanh %>"></td>
+                                   <td><textarea id="tintuc" name="thuonghieu" rows="6" cols="60"><%= th.chitiet %></textarea></td>
+                                   <td><a href="admin/thuonghieu/updatethuonghieu?id=<%= th.math %>" class="btn btn-primary <%= role && role != 1 ? '' : 'hidden'%>">Cập nhật</a>
+                                        <a href="admin/thuonghieu/deletetrademark?id=<%= th.math %>" class="btn btn-danger <%= role && role != 1 ? '' : 'hidden'%>">Xóa</a></td>
+                                 </tr>
+                                 <% }); %>
+                               </tbody>
+                             </table>  
+                           </div>
+                         </div>
+                    </div>    
+                </div>
+            </section>
+<%- include('../partials/adminfooter'); -%>
+      </section>
+<!--main content end-->
+</section>
+<%- include('../partials/adminscript_bottom'); -%>
+</body>
+</html>

@@ -89,6 +89,12 @@
                     <% chitietsp.forEach(function(dh){ %>
                       <table class="table" ui-jq="footable">
                         <tr>
+                          <th data-breakpoints="xs" class="col-xs-3">Mã sản phẩm</th>
+                          <td class="col-xs-9">
+                            <%= dh.masp %>
+                          </td>
+                        </tr>
+                        <tr>
                           <th data-breakpoints="xs" class="col-xs-3">Tên sản phẩm</th>
                           <td class="col-xs-9">
                             <%= dh.tensp %>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+    <style>
+        .error{
+            color: #f20;
+            font-style: italic;
+        }
+    </style>
+<%- include('../partials/adminhead'); -%>
+    <body>
+        <section id="container">
+            <%- include('../partials/adminheader'); -%>
+                <%- include('../partials/adminleft'); -%>
+                    <!--main content start-->
+                    <section id="main-content">
+                        <section class="wrapper">
+                            <div class="clearfix">
+                                <div class="table-agile-info">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            THÊM THƯƠNG HIỆU
+                                        </div>
+                                        <form method="POST" action="/admin/thuonghieu/createThuongHieu" enctype="multipart/form-data" id="formAddProduct">
+                                            <label>Tên thương hiệu</label>
+                                            <input type="text" class="form-control" name="tenth" placeholder="Tên thương hiệu"><br>
+                                            
+                                            <label>Hình ảnh</label>
+                                            <input id="imgthuonghieu" type="file" class="form-control" name="hinhanh" placeholder="Hình ảnh"><br>
+                                            <img id="blah" src="#" alt="your image" width="100" height="100" /><br/>
+                                            
+                                            <label>Chi tiết</label><br />
+                                            <textarea id="mota" name="chitiet" rows="4" cols="140"></textarea><br />
+
+                                            <br />
+                                            <input type="submit" name="themthuonghieu" value="Thêm thương hiệu"
+                                                class="btn btn-primary"><br/>
+                                            <br/>
+                                            <a href="admin/thuonghieu">Quay lại?</a>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <%- include('../partials/adminfooter'); -%>
+                    </section>
+                    <!--main content end-->
+        </section>
+        <%- include('../partials/adminscript_bottom'); -%>
+    </body>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+    <script>
+        imgthuonghieu.onchange = evt => {
+            const [file] = imgthuonghieu.files
+            if (file) {
+                blah.src = URL.createObjectURL(file)
+            }
+        }
+
+        $("#formAddProduct").validate({
+                rules: {
+                    tenth: {
+                        required: true,                    
+                    },
+                    chitiet: {
+                        required: true,                    
+                    },
+                    hinhanh: {
+                        required: true,                    
+                    }
+                },
+                messages:{
+                    tenth: {
+                        required: 'Tên thương hiệu không được để trống'
+                    },
+                    chitiet: {
+                        required: 'Chi tiết thương hiệu không được để trống'
+                    },
+                    hinhanh: {
+                        required: 'Hình ảnh không được để trống'
+                    },
+                }
+            });
+    </script>
+
+</html>
