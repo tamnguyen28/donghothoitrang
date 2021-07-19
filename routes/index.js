@@ -26,9 +26,11 @@ const adloaisanphamRouter = require('./adloaisanpham');
 const adcanhanRouter = require('./adcanhan');
 const adlienheRouter = require('./adlienhe');
 const adtimkiemRouter = require('./adtimkiem');
+const adthuonghieuRouter = require('./adthuonghieu');
 function route(app){
     
-    app.use('/admin/timkiem', adtimkiemRouter)
+    app.use('/admin/thuonghieu', adthuonghieuRouter);
+    app.use('/admin/timkiem', adtimkiemRouter);
     app.use('/admin/lienhe', adlienheRouter);
     app.use('/admin/canhan', adcanhanRouter);
     app.use('/admin/loaisanpham', adloaisanphamRouter);
