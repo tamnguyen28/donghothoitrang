@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th7 11, 2021 lúc 02:59 PM
+-- Thời gian đã tạo: Th7 18, 2021 lúc 07:01 PM
 -- Phiên bản máy phục vụ: 10.4.11-MariaDB
 -- Phiên bản PHP: 7.4.5
 
@@ -269,7 +269,11 @@ INSERT INTO `chitiethoadon` (`macthd`, `masp`, `mahd`, `soluong`, `tgtao`) VALUE
 (43, 2, 56, 1, '2021-07-09 16:16:35'),
 (44, 1, 57, 1, '2021-07-11 02:44:43'),
 (45, 2, 57, 1, '2021-07-11 02:44:43'),
-(46, 1, 58, 1, '2021-07-11 03:09:45');
+(46, 1, 58, 1, '2021-07-11 03:09:45'),
+(47, 2, 59, 3, '2021-07-18 15:54:44'),
+(48, 3, 60, 1, '2021-07-18 16:17:20'),
+(49, 2, 61, 1, '2021-07-18 16:24:09'),
+(50, 2, 62, 1, '2021-07-18 16:24:33');
 
 -- --------------------------------------------------------
 
@@ -290,28 +294,33 @@ CREATE TABLE `hoadon` (
   `tgtao` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `id_makh` int(11) NOT NULL,
   `id_ghtk` varchar(50) NOT NULL,
-  `isDelete` tinyint(4) NOT NULL
+  `isDelete` tinyint(1) NOT NULL,
+  `phivanchuyen` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Đang đổ dữ liệu cho bảng `hoadon`
 --
 
-INSERT INTO `hoadon` (`mahd`, `tennguoinhan`, `sdtnguoinhan`, `diachinguoinhan`, `emailnguoinhan`, `tonghoadon`, `ghichu`, `phuongthucthanhtoan`, `trangthai`, `tgtao`, `id_makh`, `id_ghtk`, `isDelete`) VALUES
-(45, 'hello', '0843331299', 'Sewri Koliwada, Maharashtra, India', 'tamthokha99@gmail.com', 14375000, 'aaaaaaaa', 0, 2, '2021-07-07 10:44:45', 20, 'S9144499.SGA8.A7.513786236', 0),
-(46, 'hello', '0843331299', 'Xã Di Trạch, Hà Nội, Việt Nam', 'tamthokha99@gmail.com', 12995000, 'aaaaaaaaa', 0, 0, '2021-07-06 11:56:18', 20, 'S9144499.SGA8.A1.579589349', 0),
-(47, 'hello', '0843331299', 'Appapada, Maharashtra, India', 'tamthokha99@gmail.com', 11263000, 'aaaaaa', 0, 0, '2021-07-06 11:57:40', 20, 'S9144499.SGA8.E4.647489190', 0),
-(48, 'Nguyễn Huỳnh Minh Thơ', '0702389478', 'Xianrentan, 浙江省, 中华人民共和国', 'tamthokha99@gmail.com', 11000000, 'aaaaa', 0, 0, '2021-07-06 12:00:38', 20, 'S9144499.SGA8.A8.796495496', 0),
-(49, 'Nguyễn Van A', '0843331299', 'Xianrentan, 浙江省, 中华人民共和国', 'tamthokha99@gmail.com', 16605000, 'aaaaa', 0, 0, '2021-07-06 12:42:20', 20, 'S9144499.SG8.A2.BC.300058378', 0),
-(50, 'Nguyễn Huỳnh Minh Tâm', '0843331299', 'Đà Lạt, Lâm Đồng, Việt Nam', 'nhmtam.c3tqcap.a3@gmail.com', 2929000, 'sdafsa', 0, 0, '2021-07-06 12:47:51', 20, 'S9144499.SG8.A2.BC.300058369', 0),
-(51, 'Nguyễn Van Anhs', '0843331299', 'Appapada, Maharashtra, India', 'tamthokha99@gmail.com', 4025000, 'ccccc', 0, 0, '2021-07-06 13:40:48', 20, 'S9144499.SG8.A2.BC.300054495', 0),
-(52, 'Minh Hoa', '0843331299', 'Sewri Koliwada, Maharashtra, India', 'tamthokha99@gmail.com', 8787000, 'aaaa', 0, 0, '2021-07-07 07:14:19', 20, 'S9144499.SG8.A2.BC.300059966', 0),
-(53, 'Hà', '0898391560', 'Sewri Koliwada, Maharashtra, India', 'nhmtam.c3tqcap.a3@gmail.com', 5800000, 'aaaa', 2, 2, '2021-07-07 10:43:32', 20, 'S9144499.SG8.A2.BC.300058271', 0),
-(54, 'Nguyễn Huỳnh Minh Tâm', '0843331299', 'Sóc Sơn, Hà Nội, Việt Nam', 'nhmtam.c3tqcap.a3@gmail.com', 4025000, 'sd', 0, 2, '2021-07-07 10:35:35', 20, 'S9144499.SG8.A2.BC.300054169', 0),
-(55, 'Nguyễn Huỳnh Minh Tâm', '0843331299', 'Sadaramangala, Karnataka, India', 'nhmtam.c3tqcap.a3@gmail.com', 10810000, 'ds', 2, 2, '2021-07-07 10:44:33', 20, 'S9144499.SG8.A2.BC.300058115', 0),
-(56, 'Nguyễn Van A', '0898391560', 'Sóc Sơn, Hà Nội, Việt Nam', 'tamthokha99@gmail.com', 4025000, 'aaa', 0, 0, '2021-07-09 16:16:35', 20, 'S9144499.SG8.A2.BC.300054160', 0),
-(57, 'An', '0789231567', 'Phạm Văn Hai, Thành phố Hồ Chí Minh, Việt Nam', 'tamthokha99@gmail.com', 6954000, 'aaa', 0, 0, '2021-07-11 02:44:42', 3, 'S9144499.SG8.A2.BC.300054756', 0),
-(58, 'Nguyễn Huỳnh Minh Tâm', '0898391560', 'Phạm Văn Hai, Thành phố Hồ Chí Minh, Việt Nam', 'tamthokha99@gmail.com', 2929000, 'aaaa', 0, 0, '2021-07-11 03:09:45', 3, 'S9144499.SG8.A2.BC.300051910', 0);
+INSERT INTO `hoadon` (`mahd`, `tennguoinhan`, `sdtnguoinhan`, `diachinguoinhan`, `emailnguoinhan`, `tonghoadon`, `ghichu`, `phuongthucthanhtoan`, `trangthai`, `tgtao`, `id_makh`, `id_ghtk`, `isDelete`, `phivanchuyen`) VALUES
+(45, 'hello', '0843331299', 'Sewri Koliwada, Maharashtra, India', 'tamthokha99@gmail.com', 14375000, 'aaaaaaaa', 0, 2, '2021-07-07 10:44:45', 20, 'S9144499.SGA8.A7.513786236', 0, 0),
+(46, 'hello', '0843331299', 'Xã Di Trạch, Hà Nội, Việt Nam', 'tamthokha99@gmail.com', 12995000, 'aaaaaaaaa', 0, 0, '2021-07-06 11:56:18', 20, 'S9144499.SGA8.A1.579589349', 0, 0),
+(47, 'hello', '0843331299', 'Appapada, Maharashtra, India', 'tamthokha99@gmail.com', 11263000, 'aaaaaa', 0, 0, '2021-07-06 11:57:40', 20, 'S9144499.SGA8.E4.647489190', 0, 0),
+(48, 'Nguyễn Huỳnh Minh Thơ', '0702389478', 'Xianrentan, 浙江省, 中华人民共和国', 'tamthokha99@gmail.com', 11000000, 'aaaaa', 0, 0, '2021-07-06 12:00:38', 20, 'S9144499.SGA8.A8.796495496', 0, 0),
+(49, 'Nguyễn Van A', '0843331299', 'Xianrentan, 浙江省, 中华人民共和国', 'tamthokha99@gmail.com', 16605000, 'aaaaa', 0, 0, '2021-07-06 12:42:20', 20, 'S9144499.SG8.A2.BC.300058378', 0, 0),
+(50, 'Nguyễn Huỳnh Minh Tâm', '0843331299', 'Đà Lạt, Lâm Đồng, Việt Nam', 'nhmtam.c3tqcap.a3@gmail.com', 2929000, 'sdafsa', 0, 0, '2021-07-06 12:47:51', 20, 'S9144499.SG8.A2.BC.300058369', 0, 0),
+(51, 'Nguyễn Van Anhs', '0843331299', 'Appapada, Maharashtra, India', 'tamthokha99@gmail.com', 4025000, 'ccccc', 0, 0, '2021-07-06 13:40:48', 20, 'S9144499.SG8.A2.BC.300054495', 0, 0),
+(52, 'Minh Hoa', '0843331299', 'Sewri Koliwada, Maharashtra, India', 'tamthokha99@gmail.com', 8787000, 'aaaa', 0, 0, '2021-07-07 07:14:19', 20, 'S9144499.SG8.A2.BC.300059966', 0, 0),
+(53, 'Hà', '0898391560', 'Sewri Koliwada, Maharashtra, India', 'nhmtam.c3tqcap.a3@gmail.com', 5800000, 'aaaa', 2, 2, '2021-07-07 10:43:32', 20, 'S9144499.SG8.A2.BC.300058271', 0, 0),
+(54, 'Nguyễn Huỳnh Minh Tâm', '0843331299', 'Sóc Sơn, Hà Nội, Việt Nam', 'nhmtam.c3tqcap.a3@gmail.com', 4025000, 'sd', 0, 2, '2021-07-07 10:35:35', 20, 'S9144499.SG8.A2.BC.300054169', 0, 0),
+(55, 'Nguyễn Huỳnh Minh Tâm', '0843331299', 'Sadaramangala, Karnataka, India', 'nhmtam.c3tqcap.a3@gmail.com', 10810000, 'ds', 2, 2, '2021-07-07 10:44:33', 20, 'S9144499.SG8.A2.BC.300058115', 0, 0),
+(56, 'Nguyễn Van A', '0898391560', 'Sóc Sơn, Hà Nội, Việt Nam', 'tamthokha99@gmail.com', 4025000, 'aaa', 0, 0, '2021-07-09 16:16:35', 20, 'S9144499.SG8.A2.BC.300054160', 0, 0),
+(57, 'An', '0789231567', 'Phạm Văn Hai, Thành phố Hồ Chí Minh, Việt Nam', 'tamthokha99@gmail.com', 6954000, 'aaa', 0, 0, '2021-07-11 02:44:42', 3, 'S9144499.SG8.A2.BC.300054756', 0, 0),
+(58, 'Nguyễn Huỳnh Minh Tâm', '0898391560', 'Phạm Văn Hai, Thành phố Hồ Chí Minh, Việt Nam', 'tamthokha99@gmail.com', 2929000, 'aaaa', 0, 2, '2021-07-14 16:12:39', 3, 'S9144499.SG8.A2.BC.300051910', 0, 0),
+(59, 'hello', '0898391560', 'Phạm Văn Hai, Thành phố Hồ Chí Minh, Việt Nam', 'tamthokha99@gmail.com', 12075000, 'qqqq', 0, 0, '2021-07-18 15:54:44', 20, 'S9144499.SG8.A2.BC.300051873', 0, 0),
+(60, 'Nguyễn Huỳnh Minh Tâm', '0898391560', 'Nha Trang, Tỉnh Khánh Hòa, Việt Nam', 'tamthokha99@gmail.com', 5405000, '11111', 0, 0, '2021-07-18 16:17:20', 20, 'S9144499.SG8.A2.BC.300058196', 0, 45000),
+(61, 'Nguyễn Van A', '0898391560', 'Phạm Ngũ Lão, Thành phố Hồ Chí Minh, Việt Nam', 'tamthokha99@gmail.com', 4025000, 'aaa', 1, 0, '2021-07-18 16:24:09', 20, 'S9144499.SG8.A2.BC.300055437', 0, 46000),
+(62, 'Nguyễn Van A', '0898391560', 'Phạm Ngũ Lão, Thành phố Hồ Chí Minh, Việt Nam', 'tamthokha99@gmail.com', 4025000, 'aaa', 1, 1, '2021-07-18 16:24:33', 20, 'S9144499.SG8.A2.BC.300051603', 0, 46000);
 
 -- --------------------------------------------------------
 
@@ -338,7 +347,7 @@ CREATE TABLE `khachhang` (
 
 INSERT INTO `khachhang` (`makh`, `tenkh`, `diachi`, `email`, `sodienthoai`, `tendangnhap`, `matkhau`, `ptdangnhap`, `trangthai`, `tgtao`) VALUES
 (2, 'Nguyễn Huỳnh Minh Tâm', 'TP-HCM', 'nhmtam.c3tqcap.a3@gmail.com', '1234567123', 'tamnguyen', 'b59c67bf196a4758191e42f76670ceba', '', 1, '2021-05-22 17:10:53'),
-(3, 'Nguyễn Huỳnh Minh Tâm', 'Ha noi', 'tamthokha99@gmail.com', '0898391560', 'nguyenhuynhminhtam', '4a7d1ed414474e4033ac29ccb8653d9b', '', 1, '2021-07-11 03:12:35'),
+(3, 'Nguyễn Huỳnh Minh Tâm', 'Ha noi', 'tamthokha99@gmail.com', '0898391560', 'nguyenhuynhminhtam', 'b59c67bf196a4758191e42f76670ceba', '', 1, '2021-07-11 13:01:10'),
 (4, 'Nguyễn Van A', 'Ha noi', 'admin@gmail.com', '0789231567', 'tamnguyen28', 'b0baee9d279d34fa1dfd71aadb908c3f', '', 1, '2021-05-24 06:14:13'),
 (5, 'TamNguyen', 'TP-HCM', 'tamthokha99@gmail.com', '1234567123', 'kha', 'b59c67bf196a4758191e42f76670ceba', '', 1, '2021-05-26 08:57:48'),
 (7, 'Tam Nguyen Huynh Minh', '', 'dh51701611@student.stu.edu.vn', '', 'dh51701611@student.stu.edu.vn', '', 'google', 1, '2021-06-07 09:59:16'),
@@ -368,7 +377,7 @@ CREATE TABLE `lienhe` (
   `trangthai` tinyint(1) NOT NULL,
   `tgtao` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `id_manv` int(11) NOT NULL,
-  `isDelete` tinyint(4) NOT NULL
+  `isDelete` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -419,7 +428,7 @@ CREATE TABLE `loaisanpham` (
   `tenloai` varchar(200) NOT NULL,
   `duongdan` varchar(100) NOT NULL,
   `tgtao` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `isDelete` tinyint(4) NOT NULL
+  `isDelete` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -467,13 +476,13 @@ CREATE TABLE `sanpham` (
   `tensp` varchar(200) NOT NULL,
   `hinhanh` varchar(100) NOT NULL,
   `mota` mediumtext NOT NULL,
-  `giatien` int(11) NOT NULL,
+  `giatien` int(50) NOT NULL,
   `trangthai` tinyint(1) NOT NULL,
   `tgtao` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `id_math` int(11) NOT NULL,
   `id_maloai` int(11) NOT NULL,
-  `id_manv` int(10) DEFAULT NULL,
-  `isDelete` tinyint(4) NOT NULL
+  `id_manv` int(11) DEFAULT NULL,
+  `isDelete` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -556,7 +565,7 @@ CREATE TABLE `thuonghieu` (
   `math` int(11) NOT NULL,
   `tenth` varchar(200) NOT NULL,
   `hinhanh` varchar(100) NOT NULL,
-  `chitiet` varchar(1000) NOT NULL
+  `chitiet` mediumtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -593,7 +602,7 @@ CREATE TABLE `tintuc` (
   `trangthai` tinyint(1) NOT NULL,
   `tgtao` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `id_manv` int(11) DEFAULT NULL,
-  `isDelete` tinyint(4) NOT NULL
+  `isDelete` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -698,13 +707,13 @@ ALTER TABLE `bohinhanh`
 -- AUTO_INCREMENT cho bảng `chitiethoadon`
 --
 ALTER TABLE `chitiethoadon`
-  MODIFY `macthd` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `macthd` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT cho bảng `hoadon`
 --
 ALTER TABLE `hoadon`
-  MODIFY `mahd` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `mahd` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT cho bảng `khachhang`

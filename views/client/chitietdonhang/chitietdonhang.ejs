@@ -14,9 +14,15 @@
                                     if(statusOrder.order && statusOrder.order.status_text) {
                                         if(chitiet[0].trangthai == 2) { %>
                                             <%= '- Đã hủy đơn' %>
-                                        <% } else { %>
+                                        <% } else if(chitiet[0].trangthai == 1) { %>
+                                            <%= '- Chờ lấy hàng' %>
+                                        <% } else if(chitiet[0].trangthai == 3) { %>
+                                            <%= '- Đang giao' %>
+                                        <% } else if(chitiet[0].trangthai == 4) { %>
+                                            <%= '- Đã giao' %>
+                                      <% } else {%>   
                                             <%= '-' + statusOrder.order.status_text %>
-                                      <% } %>   
+                                    <% } %>
                                <%  } %>
                             </h3>
                         </div>
@@ -41,7 +47,7 @@
                                     <div class="card-body">
                                         <img src="https://s.giaohangtietkiem.vn/customer/img/logo-slogan.png" />
                                         <p class="card-text">Giao hàng vào: <%= statusOrder.order && statusOrder.order.deliver_date  ? statusOrder.order.deliver_date : 'Chưa có ngày giao hàng'%></p>
-                                        <p class="card-text">Phí vận chuyển: <%= statusOrder.order && statusOrder.order.ship_money ? statusOrder.order.ship_money : '0' %>đ</p>
+                                        <p class="card-text">Phí vận chuyển: <%= chitiet[0].phivanchuyen %>đ</p>
                                     </div>
                                 </div>
                     
@@ -50,15 +56,7 @@
                                 <h4>Hình thức thanh toán</h4>
                                 <div class="card card-infor">
                                     <div class="card-body">
-                                        <p class="card-text"><%= (chitiet[0].phuongthucthanhtoan == 1 || chitiet[0].phuongthucthanhtoan == 2) ? 'Thanh toán online': 'Thanh toán tiền mặt khi nhận hàng' %> - 
-                                            <% 
-                                                if(chitiet[0].trangthai == 1) { %>
-                                                    <%='Đã thanh toán' %>
-                                                <% }else if(chitiet[0].trangthai == 2) {%>
-                                                    <%= 'Đã hủy' %>
-                                                <% }else{ %>
-                                                    <%='Chưa thanh toán' %>
-                                            <% } %>
+                                        <p class="card-text"><%= (chitiet[0].phuongthucthanhtoan == 1 || chitiet[0].phuongthucthanhtoan == 2) ? 'Thanh toán online - Đã thanh toán': 'Thanh toán tiền mặt khi nhận hàng - Chưa thanh toán' %>
                                         </p>
                                     </div>
                                 </div>
@@ -112,11 +110,11 @@
                                             </div>
                                             <div style="display: flex; justify-content: flex-end; margin-top: 10px;">
                                                 <span style="margin-right: 70px;">Phí vận chuyển</span>
-                                                <span><%= statusOrder.order && statusOrder.order.ship_money ? statusOrder.order.ship_money : '0'  %>đ</span>
+                                                <span><%= chitiet[0].phivanchuyen %>đ</span>
                                             </div>
                                             <div style="display: flex; justify-content: flex-end; margin-top: 10px;">
                                                 <span style="margin-right: 50px;">Tổng cộng</span>
-                                                <span style="font-size: 20px; color: red;"><%= chitiet[0].tonghoadon + (statusOrder.order && statusOrder.order.ship_money ? statusOrder.order.ship_money : 0) %>đ</span>
+                                                <span style="font-size: 20px; color: red;"><%= chitiet[0].tonghoadon + chitiet[0].phivanchuyen %>đ</span>
                                             </div>
                                         </div>
                                     </div>

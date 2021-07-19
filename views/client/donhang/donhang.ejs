@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-    <style>
-        .checkout-form-list .error {
-            color: red;
-        }
-    </style>
+<style>
+    .checkout-form-list .error {
+        color: red;
+    }
+</style>
 <%- include ('../partials/head'); -%>
+
     <body>
         <div class="app">
             <%- include ('../partials/header'); -%>
@@ -34,21 +35,22 @@
                                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                 <div class="checkout-form-list">
                                                     <label>Địa chỉ <span class="required">*</span></label>
-                                                    <input type="text" id="address" name="address">
-                                                    
+                                                    <input type="text" id="address" name="address" onblur="getFee()">
+
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                 <div class="checkout-form-list">
                                                     <label>Email <span class="required">*</span></label>
                                                     <input type="text" id="email" name="email">
-                                                    <span id="messemail" style="color: red;" ></span>
+                                                    <span id="messemail" style="color: red;"></span>
                                                 </div>
-                                               
+
                                             </div>
                                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                 <div class="checkout-form-list">
-                                                    <textarea style="resize:none;" class="form-control" placeholder="Ghi chú" id="note" name="note" ></textarea>
+                                                    <textarea style="resize:none;" class="form-control"
+                                                        placeholder="Ghi chú" id="note" name="note"></textarea>
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -56,9 +58,12 @@
                                                     <label>Hình thức giao hàng <span class="required">*</span></label>
                                                     <select class="form-control" id="giaohang" name="giaohang">
                                                         <option value="">Chọn hình thức giao hàng</option>
-                                                        <option value="0" name="checkgiaohang">Thanh toán khi nhận hàng</option>
-                                                        <option value="1" name="checkgiaohang">Thanh toán qua thẻ MOMO</option>
-                                                        <option value="2" name="checkgiaohang">Thanh toán qua thẻ VNPAY</option>
+                                                        <option value="0" >Thanh toán khi nhận hàng
+                                                        </option>
+                                                        <option value="1" >Thanh toán qua thẻ MOMO
+                                                        </option>
+                                                        <option value="2" >Thanh toán qua thẻ VNPAY
+                                                        </option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -77,36 +82,47 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <% for (let i = 0; i < giohangs.length; i++) {%>
+                                                    <% for (let i=0; i < giohangs.length; i++) {%>
                                                         <tr class="cart_item">
                                                             <td class="product-name">
-                                                               <%= giohangs[i].tensp %> <strong class="product-quantity" style="color:darkgoldenrod"> x Số lượng: <%= giohangs[i].soluong %></strong>
+                                                                <%= giohangs[i].tensp %> <strong
+                                                                        class="product-quantity"
+                                                                        style="color:darkgoldenrod"> x Số lượng: <%=
+                                                                            giohangs[i].soluong %></strong>
                                                             </td>
                                                             <td class="product-total">
-                                                                <span class="amount"><%= giohangs[i].tongtien %></span>
+                                                                <span class="amount">
+                                                                    <%= giohangs[i].tongtien %>
+                                                                </span>
                                                             </td>
                                                         </tr>
-                                                 <% } %>
+                                                        <% } %>
                                                 </tbody>
                                                 <tfoot>
                                                     <tr class="cart-subtotal">
                                                         <th id="tonggiohang">Tổng giỏ hàng</th>
-                                                        <td><span class="amount"><%= totalAmount %></span></td>
+                                                        <td><span class="amount">
+                                                                <%= totalAmount %>
+                                                            </span></td>
                                                     </tr>
-                                                    <!-- <tr class="shipping">
+                                                    <tr class="shipping">
                                                         <th>Vận chuyển</th>
                                                         <td>
                                                             <ul>
                                                                 <li>
-                                                                    <label>Miễn phí vận chuyển</label>
+                                                                    <input type="hidden" id="inputphivanchuyen" name="phivanchuyen">
+                                                                    <label id="labelFee"></label>
                                                                 </li>
                                                             </ul>
                                                         </td>
-                                                    </tr> -->
+                                                    </tr>
                                                     <tr class="order-total">
-                                                        <th >Tổng đơn hàng</th>
-                                                        <input type="hidden"  name="tonggiohang" value="<%= totalAmount %>" />
-                                                        <td><strong><span class="amount"><%= totalAmount %></span></strong>
+                                                        <th>Tổng đơn hàng</th>
+                                                        <input type="hidden" name="tonggiohang"
+                                                            value="<%= totalAmount %>" />
+                                                        <td><strong><span class="amount" id="amount">
+                                                                    <%= totalAmount  %>
+                                                                </span></strong>
                                                         </td>
                                                     </tr>
                                                 </tfoot>
@@ -114,8 +130,6 @@
                                         </div>
                                         <div class="payment-method">
                                             <div class="order-button-payment">
-                                                    <input type="hidden" name="thanhtoan_product_id[]" value="<?php echo $row_thanhtoan['id_product']; ?>">
-                                                    <input type="hidden" name="thanhtoan_soluong[]" value="<?php echo $row_thanhtoan['quantity']; ?>">
                                                 <input type="submit" name="thanhtoan" value="Đặt hàng và thanh toán">
                                             </div>
                                         </div>
@@ -126,7 +140,7 @@
                     </div>
                 </div>
                 <!-- checkout-area-end -->
-            <%- include ('../partials/footer'); -%>
+                <%- include ('../partials/footer'); -%>
         </div>
     </body>
     <script>
@@ -201,28 +215,52 @@
     <script src="https://cdn.jsdelivr.net/npm/places.js@^1.17.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4"></script>
     <script>
-                $script(
-        'https://maps.googleapis.com/maps/api/js?v=weekly&key=AIzaSyBawL8VbstJDdU5397SUX7pEt9DslAwWgQ',
-        () => {
-            const searchClient = algoliasearch(
-            'latency',
-            '6be0576ff61c053d5f9a3225e2a90f76'
-            );
+        $script(
+            'https://maps.googleapis.com/maps/api/js?v=weekly&key=AIzaSyBawL8VbstJDdU5397SUX7pEt9DslAwWgQ',
+            () => {
+                const searchClient = algoliasearch(
+                    'latency',
+                    '6be0576ff61c053d5f9a3225e2a90f76'
+                );
 
-            const search = instantsearch({
-            indexName: 'airports',
-            searchClient,
-            });
+                const search = instantsearch({
+                    indexName: 'airports',
+                    searchClient,
+                });
 
-            search.addWidgets([
-            instantsearch.widgets.places({
-                container: '#address',
-                placesReference: window.places,
-            }),
-            ]);
+                search.addWidgets([
+                    instantsearch.widgets.places({
+                        container: '#address',
+                        placesReference: window.places,
+                    }),
+                ]);
 
-            search.start();
-        }
+                search.start();
+            }
         );
+
+        function getFee() {
+            $.ajax({
+                method: 'GET',
+                data:{
+                    address: $('#address').val()
+                },
+                url: '/donhang/getFee',
+                success: function (data) {
+                    $('#inputphivanchuyen').val(data.feeOrder.fee);
+                   $('#labelFee').text(data.feeOrder.fee);
+
+                   let totalAmount = parseInt(`<%= totalAmount %>`);
+
+                   totalAmount += data.feeOrder.fee;
+
+                   $('#amount').text(totalAmount);
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            })
+        }
     </script>
+
 </html>
