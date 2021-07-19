@@ -113,6 +113,7 @@ function groupSanPham(resultSP){
                 id_ghtk: resultSP[i].id_ghtk,
                 tonghoadon: resultSP[i].tonghoadon,
                 sanphams: sp,
+                ptthanhtoan: resultSP[i].phuongthucthanhtoan,
                 phivanchuyen: resultSP[i].phivanchuyen
 
             })

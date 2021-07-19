@@ -74,24 +74,11 @@ let thongtin = {
 let arraySP = [];
 class DonHangController {
     index(req, res) {
+       
         homeModel.loadloaisp().then(resultloai => {
             if (req.query.payonline && (req.query.message == 'Success' || req.query.vnp_ResponseCode == '00')) {
                 req.session.giohang = [];
-                let contentDonhang = `Bạn đã đặt hàng thành công, đơn hàng sẽ vận chuyển đến bạn trong thời gian sớm nhất! Cảm ơn bạn đã mua hàng!
-                    Tên người nhận: ${thongtin.tennguoinhan},
-                    Số điện thoại người nhận: ${thongtin.sdtnguoinhan},
-                    Địa chỉ người nhận: ${thongtin.diachinguoinhan},
-                    Email người nhận: ${thongtin.emailnguoinhan},
-                    Tổng hóa đơn: ${thongtin.tonghoadon},
-                    Ghi chú: ${thongtin.ghichu}`
-                let emailTo = thongtin.emailnguoinhan;
-                mail.sendmail(emailTo, 'FULLTIME', contentDonhang);
-                thongtin.trangthai = 1;
-                // donhangModel.themthongtin(thongtin).then(function(result) { 
-                //     // console.log("ABC");
-                // }).catch(err => {
-                //     console.log(err);
-                // })
+                thongtin.trangthai = 0;
 
                 let arrsp = [];
                 let countsp = arraySP.length;
@@ -105,15 +92,6 @@ class DonHangController {
                     })
                 }
 
-                taoDongHangGHTK(arrsp
-                    , thongtin.tennguoinhan
-                    , thongtin.diachinguoinhan
-                    , thongtin.emailnguoinhan
-                    , thongtin.sdtnguoinhan
-                    , thongtin.tonghoadon
-                    , getNgayHienTai()
-                    , thongtin, req, res);
-
                 let mess = ``
 
                 //VnPay
@@ -125,32 +103,65 @@ class DonHangController {
                     mess = `Thanh toán MoMo thành công`
                 }
 
-                return res.render('client/donhang/donhang', {
+                taoDongHangGHTK(arrsp
+                    , thongtin.tennguoinhan
+                    , thongtin.diachinguoinhan
+                    , thongtin.emailnguoinhan
+                    , thongtin.sdtnguoinhan
+                    , thongtin.tonghoadon
+                    , getNgayHienTai()
+                    , thongtin, req, res).then(function (responeGHTK) {
+                        // console.log(res.data); //res.data.order: order sau khi đăng hàng được giao hàng tiết kiệm trả về
+                        // res.data.order.label: Id don hàng của giao hàng tiết kiệm
+                        // console.log(res.data);
+                        donhangModel.themthongtin(thongtin, responeGHTK.data.order.label).then(function (result) {
+                            
+                            req.session.giohang = [];
+                            let contentDonhang = `Bạn đã đặt hàng thành công, đơn hàng sẽ vận chuyển đến bạn trong thời gian sớm nhất! Cảm ơn bạn đã mua hàng!
+                                Tên người nhận: ${thongtin.tennguoinhan},
+                                Số điện thoại người nhận: ${thongtin.sdtnguoinhan},
+                                Địa chỉ người nhận: ${thongtin.diachinguoinhan},
+                                Email người nhận: ${thongtin.emailnguoinhan},
+                                Tổng hóa đơn: ${thongtin.tonghoadon},
+                                Ghi chú: ${thongtin.ghichu}`
+                            let emailTo = thongtin.emailnguoinhan;
+                            mail.sendmail(emailTo, 'SHOP FULLTIME', contentDonhang);  
+                            
+                            res.render('client/donhang/donhang', {
+                                title: 'Đơn hàng',
+                                giohangs: [],
+                                totalAmount: 0,
+                                message: mess,
+                                tenkh: req.cookies.user ? req.cookies.user.tenkh : '',
+                                idkh: req.cookies.user ? req.cookies.user.makh : 0,
+                                loai: resultloai,
+                            });
+
+                        }).catch(err => {
+                            console.log(err);      
+                        })
+                    }).catch(function (error) {
+                        console.log(error);
+                    })
+                
+            }else{
+                let sl = req.session.giohang ? req.session.giohang.length : 0;
+                let total = 0;
+                for (let i = 0; i < sl; i++) {
+                    total += req.session.giohang[i].tongtien
+                }
+    
+                res.render('client/donhang/donhang', {
                     title: 'Đơn hàng',
-                    giohangs: [],
-                    totalAmount: 0,
-                    message: mess,
+                    giohangs: !req.session.giohang ? [] : req.session.giohang,
+                    totalAmount: total,
+                    message: '',
                     tenkh: req.cookies.user ? req.cookies.user.tenkh : '',
                     idkh: req.cookies.user ? req.cookies.user.makh : 0,
                     loai: resultloai,
-                    statusOrder: resultStatus.data,
-                    chitiet: result,
                 });
             }
-            let sl = req.session.giohang ? req.session.giohang.length : 0;
-            let total = 0;
-            for (let i = 0; i < sl; i++) {
-                total += req.session.giohang[i].tongtien
-            }
-            res.render('client/donhang/donhang', {
-                title: 'Đơn hàng',
-                giohangs: !req.session.giohang ? [] : req.session.giohang,
-                totalAmount: total,
-                message: '',
-                tenkh: req.cookies.user ? req.cookies.user.tenkh : '',
-                idkh: req.cookies.user ? req.cookies.user.makh : 0,
-                loai: resultloai,
-            });
+           
         }).catch(err => {
             console.log(err);
         })
@@ -169,21 +180,21 @@ class DonHangController {
             idkh: req.cookies.user.makh,
             phivanchuyen: req.body.phivanchuyen
         }
+
         if (req.body.giaohang == 1) {
             arraySP = req.session.giohang;
             var request = https.request(options, (respone) => {
                 respone.setEncoding('utf8');
                 respone.on('data', (body) => {
-                    return res.redirect(JSON.parse(body).payUrl)
+                    return res.redirect(JSON.parse(body).payUrl);
                 });
+
                 respone.on('end', () => {
                 });
             });
-            request.on('error', (e) => {
-            });
             request.write(body);
             request.end();
-        } if (req.body.giaohang == 2) {
+        }else if (req.body.giaohang == 2) {
             arraySP = req.session.giohang;
             return res.redirect('/donhang/create_payment_url');
         } else {
@@ -201,6 +212,7 @@ class DonHangController {
                     "product_code": 1241
                 })
             }
+
             taoDongHangGHTK(arrsp
                 , thongtin.tennguoinhan
                 , thongtin.diachinguoinhan
@@ -208,9 +220,32 @@ class DonHangController {
                 , thongtin.sdtnguoinhan
                 , thongtin.tonghoadon
                 , getNgayHienTai()
-                , thongtin, req, res);
+                , thongtin, req, res).then(function(responeGHTK){
+                    donhangModel.themthongtin(thongtin, responeGHTK.data.order.label).then(function (result) {
+                            
+                        req.session.giohang = [];
+                        let contentDonhang = `Bạn đã đặt hàng thành công, đơn hàng sẽ vận chuyển đến bạn trong thời gian sớm nhất! Cảm ơn bạn đã mua hàng!
+                            Tên người nhận: ${thongtin.tennguoinhan},
+                            Số điện thoại người nhận: ${thongtin.sdtnguoinhan},
+                            Địa chỉ người nhận: ${thongtin.diachinguoinhan},
+                            Email người nhận: ${thongtin.emailnguoinhan},
+                            Tổng hóa đơn: ${thongtin.tonghoadon},
+                            Ghi chú: ${thongtin.ghichu}`
+                        let emailTo = thongtin.emailnguoinhan;
+                        mail.sendmail(emailTo, 'SHOP FULLTIME', contentDonhang);  
+                        
+                       res.redirect('/?mess=2')
+
+                    }).catch(err => {
+                        console.log(err);      
+                    })
+                }).catch(function(error){
+
+                });
+      
         }
     }
+
     thanhtoanVNP(req, res) {
         var ipAddr = req.headers['x-forwarded-for'] ||
             req.connection.remoteAddress ||
@@ -302,7 +337,7 @@ function getNgayHienTai() {
 
 //tenps: mảng sản phẩm
 function taoDongHangGHTK(tensp, tenguoinhanhang, diachi, email, sdt, tonghoadon, tgtao, thongtindonhang, req, responsehttp) {
-    axios.post("https://services.ghtklab.com/services/shipment/order", {
+   return axios.post("https://services.ghtklab.com/services/shipment/order", {
         "products": tensp,
         "order": {
             "id": Math.floor(Math.random() * 1000000) + 1 + "", //random ma don hang bat ky () 
@@ -330,29 +365,7 @@ function taoDongHangGHTK(tensp, tenguoinhanhang, diachi, email, sdt, tonghoadon,
             "deliver_option": "xteam", // nếu lựa chọn kiểu vận chuyển xfast    
             "pick_session": 2 // Phiên lấy xfast 
         }
-    }, { headers }).then(function (res) {
-        // console.log(res.data); //res.data.order: order sau khi đăng hàng được giao hàng tiết kiệm trả về
-        //res.data.order.label: Id don hàng của giao hàng tiết kiệm
-        // console.log(res.data);
-        donhangModel.themthongtin(thongtindonhang, res.data.order.label).then(function (result) {
-            req.session.giohang = [];
-            let contentDonhang = `Bạn đã đặt hàng thành công, đơn hàng sẽ vận chuyển đến bạn trong thời gian sớm nhất! Cảm ơn bạn đã mua hàng!
-                Tên người nhận: ${thongtin.tennguoinhan},
-                Số điện thoại người nhận: ${thongtin.sdtnguoinhan},
-                Địa chỉ người nhận: ${thongtin.diachinguoinhan},
-                Email người nhận: ${thongtin.emailnguoinhan},
-                Tổng hóa đơn: ${thongtin.tonghoadon},
-                Ghi chú: ${thongtin.ghichu}`
-            let emailTo = thongtin.emailnguoinhan;
-            mail.sendmail(emailTo, 'SHOP FULLTIME', contentDonhang);
-            responsehttp.redirect('/?mess=2')
-        }).catch(err => {
-            console.log(err);
-            res.redirect('/donhang');
-        })
-    }).catch(function (error) {
-        console.log(error);
-    })
+    }, { headers });
 }
 
 function getFee(address) {

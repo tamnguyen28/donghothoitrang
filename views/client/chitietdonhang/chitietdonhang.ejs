@@ -56,15 +56,7 @@
                                 <h4>Hình thức thanh toán</h4>
                                 <div class="card card-infor">
                                     <div class="card-body">
-                                        <p class="card-text"><%= (chitiet[0].phuongthucthanhtoan == 1 || chitiet[0].phuongthucthanhtoan == 2) ? 'Thanh toán online': 'Thanh toán tiền mặt khi nhận hàng' %> - 
-                                            <% 
-                                                if(chitiet[0].trangthai == 1) { %>
-                                                    <%='Đã thanh toán' %>
-                                                <% }else if(chitiet[0].trangthai == 2) {%>
-                                                    <%= 'Đã hủy' %>
-                                                <% }else{ %>
-                                                    <%='Chưa thanh toán' %>
-                                            <% } %>
+                                        <p class="card-text"><%= (chitiet[0].phuongthucthanhtoan == 1 || chitiet[0].phuongthucthanhtoan == 2) ? 'Thanh toán online - Đã thanh toán': 'Thanh toán tiền mặt khi nhận hàng - Chưa thanh toán' %>
                                         </p>
                                     </div>
                                 </div>
