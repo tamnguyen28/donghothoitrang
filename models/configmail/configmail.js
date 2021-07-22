@@ -5,7 +5,9 @@ var nodemailer = require('nodemailer');
 const emailDefaul = 'nhmtam.c3tqcap.a3@gmail.com';
 
 const option = {
-    service: 'gmail',
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
     auth: {
         user: emailDefaul, // email hoặc username
         pass: 'tamthokha99' // password
