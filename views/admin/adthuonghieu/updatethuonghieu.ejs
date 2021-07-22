@@ -18,41 +18,30 @@
                                 <div class="table-agile-info">
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
-                                            CẬP NHẬT TIN TỨC
+                                            CẬP NHẬT THƯƠNG HIỆU
                                         </div>
-                                        <form method="POST" action="/admin/tintuc/updatetintuc" 
-                                                            enctype="multipart/form-data" id="formUpdateProduct">
-                                            <label>Mã tin tức</label>
-                                            <input type="text" class="form-control" name="matt" value="<%= blog.matt %>" readonly /><br>
+                                        <form method="POST" action="/admin/thuonghieu/updatetrademark" enctype="multipart/form-data" id="formUpdateProduct">
+                                            <label>Mã thương hiệu</label>
+                                            <input type="text" class="form-control" name="math" value="<%= trademark.math %>" readonly /><br>
 
-                                            <label>Tên tiêu đề</label>
-                                            <input type="text" class="form-control" name="tieude" value="<%= blog.tieude %>"
-                                            placeholder="Tên tiêu đề"><br>
+                                            <label>Tên thương hiệu</label>
+                                            <input type="text" class="form-control" name="tenth" value="<%= trademark.tenth %>"
+                                            placeholder="Tên thương hiệu"><br>
                                             
-                                            <label>Nội dung</label><br />
-                                            <textarea id="mota" name="noidung" rows="4" cols="140"> <%= blog.noidung %> </textarea><br />
+                                            <label>Chi tiết</label><br />
+                                            <textarea id="mota" name="chitiet" rows="4" cols="140"> <%= trademark.chitiet %> </textarea><br />
 
                                             <label><img src="">Hình ảnh</label>
-                                            <input accept="image/*" value= "client/img/tintuc/<%= blog.hinhanh%>" type="file" class="form-control" 
+                                            <input accept="image/*" value= "client/img/thuonghieu/<%= trademark.hinhanh%>" type="file" class="form-control" 
                                             name="hinhanh" onchange="readFileImage(this)">
                                             <br>
-                                            <img src="client/img/tintuc/<%= blog.hinhanh%>" width="100" height="100" id="imgTinTuc"/>
+                                            <img src="client/img/thuonghieu/<%= trademark.hinhanh%>" width="100" height="100" id="imgthuonghieu"/>
 
                                             <br/>
-                                            <label>Trạng thái</label> <br />
-                                            <% if(blog.trangthai){ %>
-                                            <input name="trangthai" type="radio" value="1" checked="checked"> Bật
-                                            <input name="trangthai" type="radio" value="0"> Tắt <br />
-                                            <% } else { %>
-                                                <input name="trangthai" type="radio" value="1"/> Bật
-                                                <input name="trangthai" type="radio" value="0" checked="checked" /> Tắt <br/>
-                                            <% } %>
-                                            <br />
-                                            
-                                            <input type="submit" name="capnhattintuc" value="Cập nhật tin tức"
+                                            <input type="submit" name="capnhatthuonghieu" value="Cập nhật thương hiệu"
                                                 class="btn btn-primary"><br/>
                                             <br/>
-                                            <a href="admin/tintuc">Quay lại?</a>
+                                            <a href="admin/thuonghieu">Quay lại?</a>
                                         </form>
                                     </div>
                                 </div>
@@ -67,20 +56,21 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
     <script>
         let files = [];
-        let isImag = '<%= blog.hinhanh%>'; 
+        let isImag = '<%= trademark.hinhanh%>'; 
 
         if(!isImag){
-            $('#imgTinTuc').hide();
+            $('#imgthuonghieu').hide();
         }
 
         function readFileImage(input){
             files = input.files;
+
             // Neu co upload file va co file dau tien 
             if(input.files && input.files[0]){
                 var reader = new FileReader();
 
                 reader.onload = function(e){
-                    $('#imgTinTuc').show().attr('src', e.target.result);
+                    $('#imgthuonghieu').show().attr('src', e.target.result);
                 }
 
                 reader.readAsDataURL(input.files[0])
@@ -89,24 +79,24 @@
 
         $("#formUpdateProduct").validate({
                 rules: {
-                    tieude: {
+                    tenth: {
                         required: true,                    
                     },
-                    noidung: {
+                    chitiet: {
                         required: true,                    
                     }
                 },
                 messages:{
-                    tieude: {
-                        required: 'Tên tiêu đề không được để trống'
+                    tenth: {
+                        required: 'Tên thương hiệu không được để trống'
                     },
-                    noidung: {
-                        required: 'Nội dung tiêu đề không được để trống'
+                    chitiet: {
+                        required: 'Chi tiết thương hiệu không được để trống'
                     }
                 }
             });
             const count = files.length;
-        $('input[name=capnhattintuc]').click(function () {
+        $('input[name=capnhatthuonghieu]').click(function () {
             let count = files.length;
             for (let i = 0; i < count; i++) {
                 if (!files[i].type.includes('image')) {

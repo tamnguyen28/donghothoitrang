@@ -49,8 +49,8 @@
                                     </tr>
                                 </table>
                                 <br/>
-                                <h4>Cập nhật tình trạng đơn hàng</h4><br>
-                                <select id="<%= donhang.mahd %>" class="form-control" name="xuly" onchange="changeStatus(this) ">
+                                <h4 class="<%= donhang.trangthai == 2 ? 'hidden' : '' %>">Cập nhật tình trạng đơn hàng</h4><br>
+                                <select id="<%= donhang.mahd %>" class="form-control <%= donhang.trangthai == 2 ? 'hidden' : '' %>" name="xuly" onchange="changeStatus(this) ">
                                     <option value="-1">--Chọn tình trạng--</option>
                                     <option value="0" <%= donhang.trangthai == 0 ? 'selected' : '' %> >Đã tiếp nhận</option>
                                     <option value="1" <%= donhang.trangthai == 1 ? 'selected' : '' %> >Chờ lấy hàng</option>

@@ -18,27 +18,24 @@
                                 <div class="table-agile-info">
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
-                                            THÊM TIN TỨC
+                                            THÊM THƯƠNG HIỆU
                                         </div>
-                                        <form method="POST" action="/admin/tintuc/createtintuc" enctype="multipart/form-data" id="formAddProduct">
-                                            <label>Tên tiêu đề</label>
-                                            <input type="text" class="form-control" name="tieude" placeholder="Tên tiêu đề"><br>
+                                        <form method="POST" action="/admin/thuonghieu/createThuongHieu" enctype="multipart/form-data" id="formAddProduct">
+                                            <label>Tên thương hiệu</label>
+                                            <input type="text" class="form-control" name="tenth" placeholder="Tên thương hiệu"><br>
                                             
-                                            <label>Nội dung</label><br />
-                                            <textarea id="mota" name="noidung" rows="4" cols="140"></textarea><br />
-
                                             <label>Hình ảnh</label>
-                                            <input accept="image/*" id="imgtintuc" type="file" class="form-control" name="hinhanh" placeholder="Hình ảnh"><br>
+                                            <input accept="image/*" id="imgthuonghieu" type="file" class="form-control" name="hinhanh" placeholder="Hình ảnh"><br>
                                             <img id="blah" src="#" alt="your image" width="100" height="100" /><br/>
-                                            <label>Trạng thái</label> <br />
-                                            <input name="trangthai" type="radio" value="1" checked="checked"> Bật
-                                            <input name="trangthai" type="radio" value="0"> Tắt <br />
+                                            
+                                            <label>Chi tiết</label><br />
+                                            <textarea id="mota" name="chitiet" rows="4" cols="140"></textarea><br />
 
                                             <br />
-                                            <input type="submit" name="themtintuc" value="Thêm tin tức"
+                                            <input type="submit" name="themthuonghieu" value="Thêm thương hiệu"
                                                 class="btn btn-primary"><br/>
                                             <br/>
-                                            <a href="admin/tintuc">Quay lại?</a>
+                                            <a href="admin/thuonghieu">Quay lại?</a>
                                         </form>
                                     </div>
                                 </div>
@@ -53,9 +50,11 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
     <script>
         let file = null;
+
         let blah = document.getElementById('blah');
-        imgtintuc.onchange = evt => {
-            file = imgtintuc.files[0];
+
+        imgthuonghieu.onchange = evt => {
+            file = imgthuonghieu.files[0];
             if (file) {
                 blah.src = URL.createObjectURL(file)
             }
@@ -63,10 +62,10 @@
 
         $("#formAddProduct").validate({
                 rules: {
-                    tieude: {
+                    tenth: {
                         required: true,                    
                     },
-                    noidung: {
+                    chitiet: {
                         required: true,                    
                     },
                     hinhanh: {
@@ -74,25 +73,24 @@
                     }
                 },
                 messages:{
-                    tieude: {
-                        required: 'Tên tiêu đề không được để trống'
+                    tenth: {
+                        required: 'Tên thương hiệu không được để trống'
                     },
-                    noidung: {
-                        required: 'Nội dung tiêu đề không được để trống'
+                    chitiet: {
+                        required: 'Chi tiết thương hiệu không được để trống'
                     },
                     hinhanh: {
                         required: 'Hình ảnh không được để trống'
                     },
                 }
             });
-           
-        $('input[name=themtintuc]').click(function () {
-
+        $('input[name=themthuonghieu]').click(function () {
+       
             if (!file.type.includes('image')) {
                 alert('Hình ảnh không hợp lệ');
                 return false;
             }
-           
+    
             return true;
         })
     </script>

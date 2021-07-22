@@ -44,7 +44,6 @@
                                                     <td>
                                                         <a href="/admin/donhang/detailOrder?id=<%= dh.mahd %>" class="btn btn-success ">Chi tiết đơn hàng</a>
                                                         <a href="/admin/donhang/updateOrder?id=<%= dh.mahd %>" class="btn btn-primary <%= (role && role != 1) ? '' : 'hidden'%>">Cập nhật</a>
-                                                        <a href="/admin/donhang/deleteOrder?id=<%= dh.mahd %>&status=<%= dh.trangthai %>" class="btn btn-danger <%= role && role != 1 ? '' : 'hidden'%>">Xóa</a> 
                                                     </td>
                                                 </tr>
                                                 <% }); %>
@@ -62,10 +61,10 @@
         </section>
         <%- include('../partials/adminscript_bottom'); -%>
     </body>
-    <script>
+    <!-- <script>
         let mess = '<%= mess %>'
         if(mess && mess == 1){
-            alert('Không thể xóa! Đơn hàng trong trạng thái đã tiếp nhận');
+            alert('Không thể xóa! Đơn hàng trong trạng thái đang giao');
         }
-    </script>
+    </script> -->
 </html>

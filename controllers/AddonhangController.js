@@ -43,20 +43,6 @@ class AddonhangController{
         });
     }
 
-    deleteOrder(req, res){
-        let iddonhang = req.query.id;
-        let status = req.query.status;
-        // console.log(typeof status);
-        if(status != 0){
-            AddonhangModel.deleteDonHang(iddonhang).then(function(result){
-                res.redirect('/admin/donhang');
-            }).catch(function(error){
-                res.redirect('/admin/donhang');
-            });
-        }else{
-            res.redirect('/admin/donhang?mess=1');
-        }
-    }
     updateOrder(req, res){
         AddonhangModel.getOrderByOrderId(req.query.id).then(result =>{
         res.render('admin/addonhang/updatestatus',{
