@@ -1,30 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <%- include('../partials/adminhead'); -%>
-<body>
-  <section id="container">
-  <%- include('../partials/adminheader'); -%>
-  <%- include('../partials/adminleft'); -%>
-  <!--main content start-->
-  <section id="main-content">
-    <section class="wrapper">
-        <div class="clearfix">
-              <div class="table-agile-info">
-                <!--search start-->
+
+  <body>
+    <section id="container">
+      <%- include('../partials/adminheader'); -%>
+        <%- include('../partials/adminleft'); -%>
+          <!--main content start-->
+          <section id="main-content">
+            <section class="wrapper">
+              <div class="clearfix">
+                <div class="table-agile-info">
+                  <!--search start-->
                   <div class="header-search">
-                      <form action="/admin/timkiem" method="get" id="formsearch">
-                          <input type="text" name="search" placeholder="Nhập từ khóa cần tìm ..."/>
-                          <a onclick="onSubmitSearch()"><i class="fa fa-search"></i></a>
-                      </form>
-                      <p id="countSP"></p>
+                    <input type="text" name="search" placeholder="Nhập từ khóa cần tìm ..." />
+                    <a onclick="onSubmitSearch()"><i class="fa fa-search"></i></a>
+                    <p id="countSP"></p>
+                    <a class="btn btn-info" href="admin/sanpham">Quay lại?</a>
                   </div>
-                <!--search end-->
+                  <!--search end-->
                   <div class="panel panel-default">
                     <div class="panel-heading">
                       SẢN PHẨM
                     </div>
                     <div>
-                      
+
                       <table class="table" ui-jq="footable">
                         <thead>
                           <tr>
@@ -35,68 +35,128 @@
                             <th>Trạng thái</th>
                             <th>Hình ảnh</th>
                             <th>Thương hiệu</th>
-                            <td><a href="/admin/sanpham/create" class="btn btn-success <%= role && role != 1 ? '' : 'hidden'%>">Thêm sản phẩm</a></td>
+                            <td><a href="/admin/sanpham/create"
+                                class="btn btn-success <%= role && role != 1 ? '' : 'hidden'%>">Thêm sản phẩm</a></td>
                           </tr>
                         </thead>
                         <tbody id="tblbody">
                           <% sanpham.forEach(function(sp){ %>
                             <tr data-expanded="true">
-                              <td><%= sp.masp %></td>
-                              <td><%= sp.tensp %></td>
-                              <td><%= sp.giatien %></td>
-                              <td><%= sp.id_maloai == 1 ? 'Đồng hồ nam' : 'Đồng hồ nữ' %></td>
-                              <td><%= sp.trangthai == 1 ? 'Còn hàng' : 'Sắp Hết hàng' %></td>
+                              <td>
+                                <%= sp.masp %>
+                              </td>
+                              <td>
+                                <%= sp.tensp %>
+                              </td>
+                              <td>
+                                <%= sp.giatien %>
+                              </td>
+                              <td>
+                                <%= sp.id_maloai==1 ? 'Đồng hồ nam' : 'Đồng hồ nữ' %>
+                              </td>
+                              <td>
+                                <%= sp.trangthai==1 ? 'Còn hàng' : 'Sắp Hết hàng' %>
+                              </td>
                               <td>
                                 <img src="client/img/product/<%= sp.hinhanh %>">
                               </td>
-                              <td><%= sp.tenth %></td>
-                              
-                                <td><a href="/admin/sanpham/update?id=<%= sp.masp %>" class="btn btn-primary <%= role && role != 1 ? '' : 'hidden'%>">Cập nhật</a> 
-                                  <a href="/admin/sanpham/delete?id=<%= sp.masp %>" class="btn btn-danger <%= role && role != 1 ? '' : 'hidden'%>">Xóa</a></td>
-                            
-                              
+                              <td>
+                                <%= sp.tenth %>
+                              </td>
+
+                              <td><a href="/admin/sanpham/update?id=<%= sp.masp %>"
+                                  class="btn btn-primary <%= role && role != 1 ? '' : 'hidden'%>">Cập nhật</a>
+                                <a href="/admin/sanpham/delete?id=<%= sp.masp %>"
+                                  class="btn btn-danger <%= role && role != 1 ? '' : 'hidden'%>">Xóa</a>
+                              </td>
                             </tr>
-                          <% }); %>
+                            <% }); %>
                         </tbody>
                       </table>
-                    
                     </div>
                   </div>
+                </div>
               </div>
-          </div>
+            </section>
+            <%- include('../partials/adminfooter'); -%>
+          </section>
+          <!--main content end-->
     </section>
-  <%- include('../partials/adminfooter'); -%>
-  </section>
-  <!--main content end-->
-  </section>
-  <%- include('../partials/adminscript_bottom'); -%>
-</body>
-<script>
-   let mess = '<%= mess %>';
-   if(mess && mess == 1){
+    <%- include('../partials/adminscript_bottom'); -%>
+  </body>
+  <script>
+    let mess = '<%= mess %>';
+    if (mess && mess == 1) {
       alert('sản phẩm có trong đơn hàng');
-   }
-</script>
-<script>
-  function onSubmitSearch(){
-     $.ajax({
-       method: 'GET',
-       data: {
+    }
+  </script>
+  <script>
+    $('input[name=search]').on('keyup', function (e) {
+      if (e.key === 'Enter' || e.keyCode === 13) {
+        $.ajax({
+          method: 'GET',
+          data: {
+            search: $('input[name=search]').val().trim()
+          },
+          url: '/admin/timkiem',
+          success: function (data) {
+            $('#tblbody').html('');
+            if (data) {
+              let dataSearch = data.dataSearch;
+              let countDataSearch = dataSearch.length;
+
+              if (countDataSearch != 0) {
+                $('#countSP').html('Kết quả tìm kiếm: ' + countDataSearch + ' sản phẩm');
+              } else {
+                $('#countSP').html('Không tìm thấy sản phẩm')
+              }
+
+              for (let i = 0; i < countDataSearch; i++) {
+                $('#tblbody').html(
+                  $('#tblbody').html() + `<tr data-expanded="true">
+                                            <td> ${dataSearch[i].masp}</td>
+                                            <td>${dataSearch[i].tensp}</td>
+                                            <td> ${dataSearch[i].giatien}</td>
+                                            <td> ${dataSearch[i].id_maloai == 1 ? 'Đồng hồ nam' : 'Đồng hồ nữ'} </td>
+                                            <td>${dataSearch[i].trangthai == 1 ? 'Còn hàng' : 'Sắp Hết hàng'} </td>
+                                            <td>
+                                              <img src="client/img/product/${dataSearch[i].hinhanh}">
+                                            </td>
+                                            <td>${dataSearch[i].tenth}</td>                                            
+                                            <td><a href="/admin/sanpham/update?id=${dataSearch[i].masp}" class="btn btn-primary ${data.role && data.role != 1 ? '' : 'hidden'}">Cập nhật</a> 
+                                              <a href="/admin/sanpham/delete?id=${dataSearch[i].masp}" class="btn btn-danger ${data.role && data.role != 1 ? '' : 'hidden'}">Xóa</a></td>
+                                        </tr>`
+                )
+              }
+
+            }
+          },
+          error: function (error) {
+
+          }
+        })
+      }
+    })
+
+    function onSubmitSearch() {
+      $.ajax({
+        method: 'GET',
+        data: {
           search: $('input[name=search]').val().trim()
-       },
-       url:'/admin/timkiem',
-       success: function(data){
+        },
+        url: '/admin/timkiem',
+        success: function (data) {
           $('#tblbody').html('');
-          if(data){
+          if (data) {
             let dataSearch = data.dataSearch;
             let countDataSearch = dataSearch.length;
-            
-            if(countDataSearch != 0){
+
+            if (countDataSearch != 0) {
               $('#countSP').html('Kết quả tìm kiếm: ' + countDataSearch + ' sản phẩm');
-            }else{
+            } else {
               $('#countSP').html('Không tìm thấy sản phẩm')
             }
-            
+
             for (let i = 0; i < countDataSearch; i++) {
               $('#tblbody').html(
                 $('#tblbody').html() + `<tr data-expanded="true">
@@ -114,15 +174,14 @@
                                         </tr>`
               )
             }
-            
-          }
-       },
-       error: function(error){
 
-       }
-     })
-  }
-</script>
+          }
+        },
+        error: function (error) {
+
+        }
+      })
+    }
+  </script>
 
 </html>
-
