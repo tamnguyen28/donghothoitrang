@@ -6,8 +6,8 @@ const emailDefaul = 'nhmtam.c3tqcap.a3@gmail.com';
 
 const option = {
     host: 'smtp.gmail.com',
-    port: 465,
-    secure: true,
+    port: 587,
+    secure: false,
     auth: {
         user: emailDefaul, // email hoặc username
         pass: 'tamthokha99' // password
