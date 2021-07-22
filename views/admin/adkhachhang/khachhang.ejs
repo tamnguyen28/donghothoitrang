@@ -12,11 +12,10 @@
             <div class="table-agile-info">
                 <!--search start-->
                 <div class="header-search">
-                    <form action="/admin/timkiem" method="get" id="formsearch">
-                        <input type="text" name="searchkh" placeholder="Nhập từ khóa cần tìm ..."/>
-                        <a onclick="onSubmitSearch()"><i class="fa fa-search"></i></a>
-                    </form>
+                    <input type="text" name="searchkh" placeholder="Nhập từ khóa cần tìm ..."/>
+                    <a onclick="onSubmitSearch()"><i class="fa fa-search"></i></a>
                     <p id="countSP"></p>
+                    <a class="btn btn-info" href="admin/khachhang">Quay lại?</a>
                 </div>
                 <!--search end-->
                 <div class="panel panel-default">
@@ -64,6 +63,49 @@
 <%- include('../partials/adminscript_bottom'); -%>
 </body>
 <script>
+  $('input[name=searchkh]').on('keyup', function (e) {
+      if (e.key === 'Enter' || e.keyCode === 13) {
+        $.ajax({
+         method: 'GET',
+         data: {
+            search: $('input[name=searchkh]').val().trim()
+         },
+         url:'/admin/timkiem/searchCustomer',
+         success: function(data){
+            $('#tblbody').html('');
+            if(data){
+              let dataSearchkh = data.dataSearchkh;
+              let countDataSearch = dataSearchkh.length;
+              
+              if(countDataSearch != 0){
+                $('#countSP').html('Kết quả tìm kiếm: ' + countDataSearch + ' khách hàng');
+              }else{
+                $('#countSP').html('Không tìm thấy khách hàng')
+              }
+              
+              for (let i = 0; i < countDataSearch; i++) {
+                $('#tblbody').html(
+                  $('#tblbody').html() + `<tr data-expanded="true">
+                                              <td> ${dataSearchkh[i].makh}</td>
+                                              <td> ${dataSearchkh[i].tenkh}</td>
+                                              <td> ${dataSearchkh[i].sodienthoai}</td>
+                                              <td> ${dataSearchkh[i].diachi}</td>
+                                              <td> ${dataSearchkh[i].email}</td>
+                                              <td> ${dataSearchkh[i].tendangnhap}</td>
+                                              <td> ${dataSearchkh[i].ptdangnhap}</td>
+                                              <td> ${dataSearchkh[i].tgtao}</td>                                           
+                                          </tr>`
+                )
+              }
+              
+            }
+         },
+         error: function(error){
+  
+         }
+       })
+    }
+  })
     function onSubmitSearch(){
        $.ajax({
          method: 'GET',
