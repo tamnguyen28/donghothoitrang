@@ -25,7 +25,7 @@
                                             <input type="text" class="form-control" name="tenth" placeholder="Tên thương hiệu"><br>
                                             
                                             <label>Hình ảnh</label>
-                                            <input id="imgthuonghieu" type="file" class="form-control" name="hinhanh" placeholder="Hình ảnh"><br>
+                                            <input accept="image/*" id="imgthuonghieu" type="file" class="form-control" name="hinhanh" placeholder="Hình ảnh"><br>
                                             <img id="blah" src="#" alt="your image" width="100" height="100" /><br/>
                                             
                                             <label>Chi tiết</label><br />
@@ -49,8 +49,12 @@
     </body>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
     <script>
+        let file = null;
+
+        let blah = document.getElementById('blah');
+
         imgthuonghieu.onchange = evt => {
-            const [file] = imgthuonghieu.files
+            file = imgthuonghieu.files[0];
             if (file) {
                 blah.src = URL.createObjectURL(file)
             }
@@ -80,6 +84,15 @@
                     },
                 }
             });
+        $('input[name=themthuonghieu]').click(function () {
+       
+            if (!file.type.includes('image')) {
+                alert('Hình ảnh không hợp lệ');
+                return false;
+            }
+    
+            return true;
+        })
     </script>
 
 </html>

@@ -28,7 +28,7 @@
                                             <textarea id="mota" name="noidung" rows="4" cols="140"></textarea><br />
 
                                             <label>Hình ảnh</label>
-                                            <input id="imgtintuc" type="file" class="form-control" name="hinhanh" placeholder="Hình ảnh"><br>
+                                            <input accept="image/*" id="imgtintuc" type="file" class="form-control" name="hinhanh" placeholder="Hình ảnh"><br>
                                             <img id="blah" src="#" alt="your image" width="100" height="100" /><br/>
                                             <label>Trạng thái</label> <br />
                                             <input name="trangthai" type="radio" value="1" checked="checked"> Bật
@@ -52,8 +52,10 @@
     </body>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
     <script>
+        let file = null;
+        let blah = document.getElementById('blah');
         imgtintuc.onchange = evt => {
-            const [file] = imgtintuc.files
+            file = imgtintuc.files[0];
             if (file) {
                 blah.src = URL.createObjectURL(file)
             }
@@ -83,6 +85,16 @@
                     },
                 }
             });
+           
+        $('input[name=themtintuc]').click(function () {
+
+            if (!file.type.includes('image')) {
+                alert('Hình ảnh không hợp lệ');
+                return false;
+            }
+           
+            return true;
+        })
     </script>
 
 </html>
