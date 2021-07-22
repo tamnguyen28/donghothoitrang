@@ -32,7 +32,7 @@
                                             <textarea id="mota" name="chitiet" rows="4" cols="140"> <%= trademark.chitiet %> </textarea><br />
 
                                             <label><img src="">Hình ảnh</label>
-                                            <input value= "client/img/thuonghieu/<%= trademark.hinhanh%>" type="file" class="form-control" 
+                                            <input accept="image/*" value= "client/img/thuonghieu/<%= trademark.hinhanh%>" type="file" class="form-control" 
                                             name="hinhanh" onchange="readFileImage(this)">
                                             <br>
                                             <img src="client/img/thuonghieu/<%= trademark.hinhanh%>" width="100" height="100" id="imgthuonghieu"/>
@@ -55,6 +55,7 @@
     </body>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
     <script>
+        let files = [];
         let isImag = '<%= trademark.hinhanh%>'; 
 
         if(!isImag){
@@ -62,8 +63,9 @@
         }
 
         function readFileImage(input){
+            files = input.files;
+
             // Neu co upload file va co file dau tien 
-        
             if(input.files && input.files[0]){
                 var reader = new FileReader();
 
@@ -93,5 +95,16 @@
                     }
                 }
             });
+            const count = files.length;
+        $('input[name=capnhatthuonghieu]').click(function () {
+            let count = files.length;
+            for (let i = 0; i < count; i++) {
+                if (!files[i].type.includes('image')) {
+                    alert('Hình ảnh không hợp lệ');
+                    return false;
+                }
+            }
+            return true;
+        })
     </script>
 </html>
