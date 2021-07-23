@@ -52,7 +52,8 @@
                         required: true
                     },
                     mkmoi:{
-                        required: true
+                        required: true,
+                        minlength: 4,
                     },
                     xacnhanmk:{
                         required: true,
@@ -66,7 +67,8 @@
                         required: 'Mật khẩu cũ không được để trống'
                     },
                     mkmoi:{
-                        required: 'Mật khẩu mới không được để trống'
+                        required: 'Mật khẩu mới không được để trống',
+                        minlength: 'Mật khẩu không được dưới 4 kí tự'
                     },
                     xacnhanmk: {
                         required: ' Không được để trống',
