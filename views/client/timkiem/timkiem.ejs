@@ -48,7 +48,7 @@
                                                     <div class="product-price">
                                                         <ul>
                                                             <li>
-                                                                <%= sp.giatien %>
+                                                                <%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(sp.giatien) %>
                                                             </li>
                                                             <li class="old-price">40.00</li>
                                                         </ul>
@@ -57,8 +57,7 @@
                                                 <div class="product-link">
                                                     <div class="product-button">
                                                         <a href="/giohang?id=<%= sp.masp %>" title="Add to cart"><i
-                                                                class="fa fa-shopping-cart"></i>Add
-                                                            to cart</a>
+                                                                class="fa fa-shopping-cart"></i>Thêm giỏ hàng</a>
                                                     </div>
                                                     <div class="add-to-link">
                                                         <ul>

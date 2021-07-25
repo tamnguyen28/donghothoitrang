@@ -161,7 +161,7 @@
                                                 <div class="product-price">
                                                     <ul>
                                                         <li>
-                                                            <%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(sp.giatien).split('₫')[1] + " VND" %>
+                                                            <%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(sp.giatien)%>
                                                         </li>
                                                         <li class="old-price">$32.00</li>
                                                     </ul>
@@ -223,7 +223,7 @@
                                                 <div class="product-price">
                                                     <ul>
                                                         <li>
-                                                            <%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(sp.giatien).split('₫')[1] + " VND" %>
+                                                            <%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(sp.giatien) %>
                                                         </li>
                                                         <li class="old-price">40.00</li>
                                                     </ul>
@@ -313,7 +313,7 @@
                                                         <ul>
                                                             <li>
                                                                 <span class="new-price">
-                                                                    <%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(indexdrew[i].giatien).split('₫')[1] + " VND" %>
+                                                                    <%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(indexdrew[i].giatien)%>
                                                                 </span>
                                                             </li>
                                                         </ul>
@@ -337,7 +337,7 @@
                                                         <ul>
                                                             <li>
                                                                 <span class="new-price">
-                                                                    <%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(indexdrew[i+1].giatien).split('₫')[1] + " VND" %>
+                                                                    <%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(indexdrew[i+1].giatien)%>
                                                                 </span>
                                                             </li>
                                                         </ul>
@@ -397,7 +397,7 @@
                                                 <h4><a href="/chitietsp?id=<%= indexwatch[i].masp %>"><%= indexwatch[i].tensp%></a></h4>
                                                 <div class="product-price">
                                                     <ul>
-                                                        <li><%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(indexwatch[i].giatien).split('₫')[1] + " VND" %></li>
+                                                        <li><%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(indexwatch[i].giatien)%></li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -443,7 +443,7 @@
                                                 <h4><a href="/chitietsp?id=<%= indexwatch[i+1].masp %>"><%= indexwatch[i+1].tensp%></a></h4>
                                                 <div class="product-price">
                                                     <ul>
-                                                        <li><%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(indexwatch[i+1].giatien).split('₫')[1] + " VND" %></li>
+                                                        <li><%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(indexwatch[i+1].giatien)%></li>
                                                     </ul>
                                                 </div>
                                             </div>

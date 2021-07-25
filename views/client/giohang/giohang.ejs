@@ -49,13 +49,13 @@
                                                         <td class="product-name"><a href="#"><%= giohangs[i].tensp%></a></td>
                                                         <td id="price" class="product-price">
                                                             <span id="price<%= giohangs[i].masp %>" class="amount">
-                                                                <%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(giohangs[i].giatien).split('₫')[1] + " VND" %>
+                                                                <%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(giohangs[i].giatien)%>
                                                             </span>
                                                         </td>
                                                         <td class="product-quantity">
                                                             <input id="<%= giohangs[i].masp%>" min="1" max="10" type="number" onChange="changeCount(this)" value="<%= giohangs[i].soluong%>"/>
                                                         </td>
-                                                        <td id="total<%= giohangs[i].masp %>" class="product-subtotal"><%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(giohangs[i].tongtien).split('₫')[1] + " VND" %></td>
+                                                        <td id="total<%= giohangs[i].masp %>" class="product-subtotal"><%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(giohangs[i].tongtien)%></td>
                                                         <td class="product-remove">
                                                             <a href="/giohang/xoagiohang?id=<%= giohangs[i].masp%>">Xóa</a>
                                                         </td>
@@ -63,7 +63,7 @@
                                                 <% }%>
                                              
                                             <tr>
-                                                <td colspan="7" >Tổng tiền: <span id="totalAmout"><% let totoal = 0; for(let i = 0; i < giohangs.length; i++){totoal += giohangs[i].tongtien;} %> <%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(totoal).split('₫')[1] + " VND" %></span></td>
+                                                <td colspan="7" >Tổng tiền: <span id="totalAmout"><% let totoal = 0; for(let i = 0; i < giohangs.length; i++){totoal += giohangs[i].tongtien;} %> <%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(totoal)%></span></td>
                                             </tr>
                                             </tbody>
                                         </table>
@@ -101,8 +101,8 @@
             success: function(data){
                 
                 // console.log(new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(data.total).split('₫'));
-                $(`#total${input.id}`).html(new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(data.total).split('₫')[0] + " VND");
-                $(`#totalAmout`).html(new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(data.totalAmount).split('₫')[0] + " VND")
+                $(`#total${input.id}`).html(new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(data.total));
+                $(`#totalAmout`).html(new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(data.totalAmount))
                 
             }, 
             error: function(){
