@@ -5,9 +5,9 @@ class TinTucController{
     index(req, res){
         tintucModel.loadSPTT().then(listtt => {
             tintucModel.loadtintuc().then(listtintuc => {
-                homeModel.loadloaisp().then(resultloai =>{
-                    res.render('client/tintuc/tintuc',
-                    {title: 'Tin tức',
+                homeModel.loadloaisp().then(resultloai =>{ 
+                    res.render('client/tintuc/tintuc',{
+                    title: 'Tin tức',
                     indextt: listtt,
                     indextintuc: listtintuc,
                     tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',

@@ -57,7 +57,7 @@
                                                 <div class="product-info-price">
                                                     <div class="price-final">
                                                         <span>
-                                                            <%= indexct[0].giatien %>
+                                                            <%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(indexct[0].giatien).split('₫')[1] + " VND" %>
                                                         </span>
                                                         <span class="old-price">$40.00</span>
                                                     </div>
