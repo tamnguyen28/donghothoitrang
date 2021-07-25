@@ -28,7 +28,14 @@
                                                 <tr>
                                                     <td id="customerId"><%= dh.mahd %></td>
                                                     <td><%= dh.tennguoinhan %></td>
-                                                    <td><%= dh.phuongthucthanhtoan == 1 ? 'Đã thanh toán': 'Chưa thanh toán' %></td>
+                                                    <td><% if(dh.phuongthucthanhtoan == 1) {%>
+                                                            <%= 'Thanh toán bằng ví MOMO' %>
+                                                        <% }else if(dh.phuongthucthanhtoan == 2) { %>
+                                                            <%= 'Thanh toán bằng ví VNPAY' %>
+                                                        <%} else {%>
+                                                            <%= 'Thanh toán khi nhận hàng'%>
+                                                        <% } %>
+                                                    </td>
                                                     <td><% if(dh.trangthai == 1) {%>
                                                             <%= 'Chờ lấy hàng' %>
                                                         <% }else if(dh.trangthai == 2) { %>
