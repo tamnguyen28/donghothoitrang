@@ -61,7 +61,13 @@
                         <tr>
                           <th data-breakpoints="xs" class="col-xs-3">Phương thức thanh toán</th>
                           <td class="col-xs-9">
-                            <%= sp.phuongthucthanhtoan %>
+                            <% if(sp.phuongthucthanhtoan == 1) {%>
+                              <%= 'Thanh toán bằng ví MOMO' %>
+                          <% }else if(sp.phuongthucthanhtoan == 2) { %>
+                              <%= 'Thanh toán bằng ví VNPAY' %>
+                          <%} else {%>
+                              <%= 'Thanh toán khi nhận hàng'%>
+                          <% } %>
                           </td>
                         </tr>
                         <tr>
@@ -73,7 +79,17 @@
                         <tr>
                           <th data-breakpoints="xs" class="col-xs-3">Trạng thái</th>
                           <td class="col-xs-9">
-                            <%= sp.trangthai %>
+                            <% if(sp.trangthai == 1) {%>
+                              <%= 'Chờ lấy hàng' %>
+                          <% }else if(sp.trangthai == 2) { %>
+                              <%= 'Đơn hàng đã hủy' %>
+                          <% }else if(sp.trangthai == 3) {%>
+                              <%= 'Đang giao' %>
+                          <% }else if(sp.trangthai == 4) {%>
+                              <%= 'Đã giao' %>
+                          <%} else {%>
+                              <%= 'Đã tiếp nhận'%>
+                          <% } %>
                           </td>
                         </tr>
                       </table>
