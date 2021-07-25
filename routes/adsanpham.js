@@ -7,14 +7,12 @@ var upload = multer();
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, './public/client/img/product'); //lat nua cho nay se co new file va khong duoc xoa dong nay
+      cb(null, './public/client/img/product'); //se co new file va khong duoc xoa dong nay
     },
-    filename: function (req, file, cb) {
-      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-      // console.log(file.fieldname);
-      cb(null, file.fieldname + '-' + uniqueSuffix+'.jpg')// khong duoc xoa  dong nay
+    filename: function (req, file, cb){
+      cb(null, file.originalname); // khong duoc xoa  dong nay
     }
-})
+});
   
 var upload = multer({ storage: storage });
 
