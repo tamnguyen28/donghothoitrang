@@ -92,7 +92,8 @@
                                                             </td>
                                                             <td class="product-total">
                                                                 <span class="amount">
-                                                                    <%= giohangs[i].tongtien %>
+                                                                    <!-- <%= giohangs[i].tongtien %> -->
+                                                                    <%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(giohangs[i].tongtien).split('₫')[1] + " VND" %>
                                                                 </span>
                                                             </td>
                                                         </tr>
@@ -102,7 +103,8 @@
                                                     <tr class="cart-subtotal">
                                                         <th id="tonggiohang">Tổng giỏ hàng</th>
                                                         <td><span class="amount">
-                                                                <%= totalAmount %>
+                                                                <!-- <%= totalAmount %> -->
+                                                                <%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(totalAmount).split('₫')[1] + " VND" %>
                                                             </span></td>
                                                     </tr>
                                                     <tr class="shipping">
@@ -121,7 +123,8 @@
                                                         <input type="hidden" name="tonggiohang"
                                                             value="<%= totalAmount %>" />
                                                         <td><strong><span class="amount" id="amount">
-                                                                    <%= totalAmount  %>
+                                                                    <!-- <%= totalAmount  %> -->
+                                                                    <%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(totalAmount).split('₫')[1] + " VND" %>
                                                                 </span></strong>
                                                         </td>
                                                     </tr>
@@ -247,14 +250,14 @@
                 },
                 url: '/donhang/getFee',
                 success: function (data) {
-                    $('#inputphivanchuyen').val(data.feeOrder.fee);
-                   $('#labelFee').text(data.feeOrder.fee);
-
+                   $('#inputphivanchuyen').val(data.feeOrder.fee);
+                   $('#labelFee').text(new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(data.feeOrder.fee).split('₫')[0] + " VND");
+                    
                    let totalAmount = parseInt(`<%= totalAmount %>`);
 
-                   totalAmount += data.feeOrder.fee;
+                   totalAmount += data.feeOrder.fee
 
-                   $('#amount').text(totalAmount);
+                   $('#amount').text(new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(totalAmount).split('₫')[0] + " VND");
                 },
                 error: function (error) {
                     console.log(error);

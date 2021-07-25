@@ -64,6 +64,26 @@ class LichSuMuaHangModel{
         });
         
     }
+
+    checkDonHangDangGiao(iddh){
+        return new Promise(function(resolve, reject){
+            let query = `select * from hoadon WHERE hoadon.mahd = ?`;
+
+            conn.query(query, [iddh], function(error, result){
+                if(error){
+                    console.log(error);
+
+                    reject(error);
+                }else{
+                    if(result[0].trangthai  == 3 || result[0].trangthai  == 4){
+                        resolve(false);
+                    }else{
+                        resolve(true);
+                    }
+                }
+            })
+        })
+    }
 }
 
 

@@ -36,7 +36,9 @@
                                 <h4><a href="/chitietsp?id=<%= sp.masp %>"><%= sp.tensp %></a></h4>
                                 <div class="product-price">
                                     <ul>
-                                        <li><%= sp.giatien %></li>
+                                        <li>
+                                            <%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(sp.giatien).split('₫')[1] + " VND" %>
+                                        </li>
                                         <li class="old-price">70000</li>
                                     </ul>
                                 </div>

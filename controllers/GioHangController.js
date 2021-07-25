@@ -1,5 +1,6 @@
 const homeModel = require("../models/HomeModel");
 
+
 class GioHangController {
   index(req, res) {
     
@@ -28,10 +29,11 @@ class GioHangController {
                       product = temp;
                   }
               }
+             
               //neu ton tai thi cong len 
               if(flag === true){
-                  product.soluong += 1;
-                  product.tongtien = product.soluong * product.giatien;   
+                    product.soluong += 1;
+                    product.tongtien = product.soluong * product.giatien;  
               }else{  
                   req.session.giohang.push({
                       masp: result.masp,
@@ -44,6 +46,7 @@ class GioHangController {
                       
                     });
               }
+             
               // console.log( req.session.giohang.length);
               return res.render("client/giohang/giohang", {
                 title: "Giỏ hàng",
@@ -82,8 +85,9 @@ class GioHangController {
           }
           //neu ton tai thi cong len 
           if(flag === true){
-              product.soluong += 1;
-              product.tongtien = product.soluong * product.giatien;   
+            product.soluong += 1;
+            product.tongtien = product.soluong * product.giatien; 
+
           }else{  
               req.session.giohang.push({
                   masp: result.masp,
@@ -92,10 +96,10 @@ class GioHangController {
                   hinhanh: result.hinhanh,
                   giatien: result.giatien,
                   tenthuonghieu: result.tenth,
-                  tongtien: result.giatien,
-                  
+                  tongtien: result.giatien,   
                 });
           }
+        
           // console.log( req.session.giohang.length);
           return res.render("client/giohang/giohang", {
             title: "Giỏ hàng",
@@ -122,14 +126,17 @@ class GioHangController {
   xoagiohang(req, res) {
     homeModel.loadloaisp().then(resultloai =>{
       if(req.session.giohang){
-        let index = req.session.giohang.find(x=>x.masp == req.query.id);
-        req.session.giohang.splice(index, 1);
+        let sp = req.session.giohang.filter(x=>x.masp == req.query.id);
+        if(sp.length != 0){
+          let index = req.session.giohang.indexOf(sp[0]);
+          req.session.giohang.splice(index, 1);
+        }
       }
       res.render("client/giohang/giohang", {
         title: "Giỏ hàng",
+        giohangs: req.session.giohang,
         tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
         idkh:  req.cookies.user ? req.cookies.user.makh: 0 ,
-        giohangs: req.session.giohang,
         loai: resultloai,
       });
     }).catch(err =>{

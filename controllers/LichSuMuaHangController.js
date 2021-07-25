@@ -17,6 +17,8 @@ class LichSuMuaHangController{
             mess = 'Hủy đơn thành công'
         }else if(req.query.mess && req.query.mess == 0){
             mess = 'Đơn hàng đã được hủy.'
+        }else if(req.query.mess && req.query.mess == 2){
+            mess = 'Đơn hàng đang giao hoặc đã giao không được hủy.'
         }
 
         let list = [];
@@ -67,20 +69,29 @@ class LichSuMuaHangController{
     }
 
     huydonhang(req, res){
-        requestHuyDonHang(req.query.idghtk).then(function(result){
-            // console.log(result.data);
-            if(result.data.message != 'Shop đã hủy đơn trước đó.'){
-                lichsumuahangModel.updateStatusHuyDonHang(req.query.id).then(function(result){
-                    res.redirect("/lichsumuahang?mess=1");
+        lichsumuahangModel.checkDonHangDangGiao(req.query.id).then(function(result){
+            if(result == true){
+                requestHuyDonHang(req.query.idghtk).then(function(result){
+                    // console.log(result.data);
+                    if(result.data.message != 'Shop đã hủy đơn trước đó.'){
+                        lichsumuahangModel.updateStatusHuyDonHang(req.query.id).then(function(result){
+                            res.redirect("/lichsumuahang?mess=1");
+                        }).catch(function(error){
+        
+                        })
+                    }else{
+                        res.redirect("/lichsumuahang?mess=0");
+                    }
                 }).catch(function(error){
-
+                    console.log(error);
                 })
             }else{
-                res.redirect("/lichsumuahang?mess=0");
+                res.redirect("/lichsumuahang?mess=2");
             }
         }).catch(function(error){
-            console.log(error);
+
         })
+        
     }
 }
 
@@ -94,9 +105,9 @@ async function getTinhTrangDonHang(idGHTK){
 
 function groupSanPham(resultSP){
     // console.log(resultSP);
-    let results = []; // mang ket qua cuoi cung
-    let sp = []; // san pham chua trong mot don hang
-    let mahoadonduyetroi = 0; //danh danh hoa don da duyet roi
+    let results = [];
+    let sp = []; 
+    let mahoadonduyetroi = 0;
     let count = resultSP.length;
     for (let i = 0; i < count; i++) {
         if(resultSP[i].mahd != mahoadonduyetroi){
