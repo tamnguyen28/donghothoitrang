@@ -47,7 +47,7 @@
                                     <div class="card-body">
                                         <img src="https://s.giaohangtietkiem.vn/customer/img/logo-slogan.png" />
                                         <p class="card-text">Giao hàng vào: <%= statusOrder.order && statusOrder.order.deliver_date  ? statusOrder.order.deliver_date : 'Chưa có ngày giao hàng'%></p>
-                                        <p class="card-text">Phí vận chuyển: <%= chitiet[0].phivanchuyen %>đ</p>
+                                        <p class="card-text">Phí vận chuyển: <%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(chitiet[0].phivanchuyen).split('₫')[1] + " VND" %></p>
                                     </div>
                                 </div>
                     
@@ -95,9 +95,11 @@
                                                             </div>
                                                             
                                                         </td>
-                                                        <td><%= sp.giatien %></td>
+                                                        <td>
+                                                            <%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(sp.giatien).split('₫')[1] + " VND" %>
+                                                        </td>
                                                         <td><%= sp.soluong %></td>
-                                                        <td><%= sp.giatien *  sp.soluong %></td>
+                                                        <td><%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(sp.giatien * sp.soluong).split('₫')[1] + " VND" %></td>
                                                     </tr>
                                              <% }) %>
                                                                                          
@@ -106,15 +108,15 @@
                                         <div style="width: 100%; height: 20%;">
                                             <div style="display: flex; justify-content: flex-end; margin-top: 10px;">
                                                 <span style="margin-right: 70px;">Tạm tính</span>
-                                                <span><%= chitiet[0].tonghoadon %>đ</span>
+                                                <span><%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(chitiet[0].tonghoadon).split('₫')[1] + " VND" %></span>
                                             </div>
                                             <div style="display: flex; justify-content: flex-end; margin-top: 10px;">
                                                 <span style="margin-right: 70px;">Phí vận chuyển</span>
-                                                <span><%= chitiet[0].phivanchuyen %>đ</span>
+                                                <span><%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(chitiet[0].phivanchuyen).split('₫')[1] + " VND" %></span>
                                             </div>
                                             <div style="display: flex; justify-content: flex-end; margin-top: 10px;">
                                                 <span style="margin-right: 50px;">Tổng cộng</span>
-                                                <span style="font-size: 20px; color: red;"><%= chitiet[0].tonghoadon + chitiet[0].phivanchuyen %>đ</span>
+                                                <span style="font-size: 20px; color: red;"><%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(chitiet[0].tonghoadon + chitiet[0].phivanchuyen).split('₫')[1] + " VND" %></span>
                                             </div>
                                         </div>
                                     </div>

@@ -122,7 +122,7 @@
                                                                                 <div class="product-price">
                                                                                     <ul>
                                                                                         <li>
-                                                                                            <%= indexSP[i].giatien%>
+                                                                                            <%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(indexSP[i].giatien).split('₫')[1] + " VND" %>
                                                                                         </li>
                                                                                     </ul>
                                                                                 </div>
@@ -130,8 +130,7 @@
                                                                             <div class="product-link">
                                                                                 <div class="product-button">
                                                                                     <a href="#" title="Add to cart"><i
-                                                                                            class="fa fa-shopping-cart"></i>Add
-                                                                                        to cart</a>
+                                                                                            class="fa fa-shopping-cart"></i>Thêm giỏ hàng</a>
                                                                                 </div>
                                                                                 <div class="add-to-link">
                                                                                     <ul>

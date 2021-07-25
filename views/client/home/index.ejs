@@ -96,18 +96,20 @@
                                                 <h4><a href="/chitietsp?id=<%= sp.masp %>">
                                                         <%= sp.tensp %>
                                                     </a></h4>
-                                                <div class="product-price">
+                                                <div class="product-price" id="number">
                                                     <ul>
                                                         <li>
-                                                            <%= sp.giatien %>
+                                                            <!-- <%= sp.giatien %> -->
+                                                            <%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(sp.giatien).split('₫')[1] + " VND" %>                       
                                                         </li>
                                                     </ul>
+                                                    
                                                 </div>
                                             </div>
                                             <div class="product-link">
                                                 <div class="product-button">
                                                     <a href="/giohang?id=<%= sp.masp %>" title="Add to cart"><i
-                                                            class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                            class="fa fa-shopping-cart"></i>Thêm giỏ hàng</a>
                                                 </div>
                                                 <div class="add-to-link">
                                                     <ul>
@@ -159,7 +161,7 @@
                                                 <div class="product-price">
                                                     <ul>
                                                         <li>
-                                                            <%= sp.giatien %>
+                                                            <%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(sp.giatien).split('₫')[1] + " VND" %>
                                                         </li>
                                                         <li class="old-price">$32.00</li>
                                                     </ul>
@@ -168,8 +170,7 @@
                                             <div class="product-link">
                                                 <div class="product-button">
                                                     <a href="/giohang?id=<%= sp.masp %>" title="Add to cart"><i
-                                                            class="fa fa-shopping-cart"></i>Add
-                                                        to cart</a>
+                                                            class="fa fa-shopping-cart"></i>Thêm giỏ hàng</a>
                                                 </div>
                                                 <div class="add-to-link">
                                                     <ul>
@@ -222,7 +223,7 @@
                                                 <div class="product-price">
                                                     <ul>
                                                         <li>
-                                                            <%= sp.giatien %>
+                                                            <%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(sp.giatien).split('₫')[1] + " VND" %>
                                                         </li>
                                                         <li class="old-price">40.00</li>
                                                     </ul>
@@ -231,8 +232,7 @@
                                             <div class="product-link">
                                                 <div class="product-button">
                                                     <a href="/giohang?id=<%= sp.masp %>" title="Add to cart"><i
-                                                            class="fa fa-shopping-cart"></i>Add
-                                                        to cart</a>
+                                                            class="fa fa-shopping-cart"></i>Thêm giỏ hàng</a>
                                                 </div>
                                                 <div class="add-to-link">
                                                     <ul>
@@ -311,7 +311,11 @@
                                                     <h3> <a href="/chitietsp?id=<%= indexdrew[i].masp %>"><%= indexdrew[i].tensp%></a></h3>
                                                     <div class="price">
                                                         <ul>
-                                                            <li><span class="new-price"><%= indexdrew[i].giatien%></span></li>
+                                                            <li>
+                                                                <span class="new-price">
+                                                                    <%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(indexdrew[i].giatien).split('₫')[1] + " VND" %>
+                                                                </span>
+                                                            </li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -331,7 +335,11 @@
                                                     <h3> <a href="/chitietsp?id=<%= indexdrew[i+1].masp %>"><%= indexdrew[i+1].tensp%></a></h3>
                                                     <div class="price">
                                                         <ul>
-                                                            <li><span class="new-price"><%= indexdrew[i+1].giatien%></span></li>
+                                                            <li>
+                                                                <span class="new-price">
+                                                                    <%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(indexdrew[i+1].giatien).split('₫')[1] + " VND" %>
+                                                                </span>
+                                                            </li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -389,13 +397,13 @@
                                                 <h4><a href="/chitietsp?id=<%= indexwatch[i].masp %>"><%= indexwatch[i].tensp%></a></h4>
                                                 <div class="product-price">
                                                     <ul>
-                                                        <li><%= indexwatch[i].giatien%></li>
+                                                        <li><%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(indexwatch[i].giatien).split('₫')[1] + " VND" %></li>
                                                     </ul>
                                                 </div>
                                             </div>
                                             <div class="product-link">
                                                 <div class="product-button">
-                                                    <a href="/giohang?id=<%= indexwatch[i].masp %>" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                    <a href="/giohang?id=<%= indexwatch[i].masp %>" title="Add to cart"><i class="fa fa-shopping-cart"></i>Thêm giỏ hàng</a>
                                                 </div>
                                                 <div class="add-to-link">
                                                     <ul>
@@ -435,13 +443,13 @@
                                                 <h4><a href="/chitietsp?id=<%= indexwatch[i+1].masp %>"><%= indexwatch[i+1].tensp%></a></h4>
                                                 <div class="product-price">
                                                     <ul>
-                                                        <li><%= indexwatch[i+1].giatien%></li>
+                                                        <li><%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(indexwatch[i+1].giatien).split('₫')[1] + " VND" %></li>
                                                     </ul>
                                                 </div>
                                             </div>
                                             <div class="product-link">
                                                 <div class="product-button">
-                                                    <a href="/giohang?id=<%= indexwatch[i+1].masp %>" title="Add to cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                    <a href="/giohang?id=<%= indexwatch[i+1].masp %>" title="Add to cart"><i class="fa fa-shopping-cart"></i>Thêm giỏ hàng</a>
                                                 </div>
                                                 <div class="add-to-link">
                                                     <ul>
@@ -533,4 +541,5 @@
   attribution="setup_tool"
   page_id="101756555454202">
 </div>
+
 </html>
