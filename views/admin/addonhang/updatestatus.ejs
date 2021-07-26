@@ -31,7 +31,14 @@
                                         <td><%= donhang.diachinguoinhan %></td>
                                         <td><%= donhang.tonghoadon %></td>
                                         <td><%= donhang.ghichu %></td>
-                                        <td><%= donhang.phuongthucthanhtoan == 1 ? 'Đã thanh toán': 'Chưa thanh toán' %></td>
+                                        <td><% if(donhang.phuongthucthanhtoan == 1) {%>
+                                            <%= 'Thanh toán bằng ví MOMO' %>
+                                            <% }else if(donhang.phuongthucthanhtoan == 2) { %>
+                                                <%= 'Thanh toán bằng ví VNPAY' %>
+                                            <%} else {%>
+                                                <%= 'Thanh toán khi nhận hàng'%>
+                                            <% } %>
+                                        </td>
                                         <td id="<%= donhang.mahd %>">
                                             <% if(donhang.trangthai == 1) {%>
                                                 <%= 'Chờ lấy hàng' %>
