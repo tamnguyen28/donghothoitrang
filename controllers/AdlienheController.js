@@ -1,5 +1,4 @@
 const AdlienheModel = require('../models/AdlienheModel');
-const adlienheModel = require('../models/AdlienheModel');
 const conn = require('../models/config/connect');
 
 class AdlienheController{
