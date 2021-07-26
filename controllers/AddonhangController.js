@@ -42,7 +42,7 @@ class AddonhangController{
             res.json({mess: 'loi roi'});
         });
     }
-
+    // hiện ra trang cập nhật đơn hàng
     updateOrder(req, res){
         AddonhangModel.getOrderByOrderId(req.query.id).then(result =>{
         res.render('admin/addonhang/updatestatus',{

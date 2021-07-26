@@ -24,10 +24,10 @@
                                             <label>Mật khẩu cũ</label>
                                             <input type="password" class="form-control" name="mkcu"
                                                 placeholder="Mật khẩu cũ"><br>
-                                                <label>Mật khẩu mới</label>
+                                            <label>Mật khẩu mới</label>
                                             <input type="password" id="oldpass" class="form-control" name="mkmoi"
                                                 placeholder="Mật khẩu mới"><br>
-                                                <label>Xác nhận mật khẩu</label>
+                                            <label>Xác nhận mật khẩu</label>
                                             <input type="password" class="form-control" name="xacnhanmk"><br>
                                             <input type="submit" name="xacnhan" value="Xác nhận"
                                                 class="btn btn-primary"><br/>
@@ -59,8 +59,6 @@
                         required: true,
                         equalTo: '#oldpass'
                     }
-
-
                 },
                 messages:{
                     mkcu: {
@@ -71,7 +69,7 @@
                         minlength: 'Mật khẩu không được dưới 4 kí tự'
                     },
                     xacnhanmk: {
-                        required: ' Không được để trống',
+                        required: 'Không được để trống',
                         equalTo: 'Mật khẩu và Mật khẩu xác nhận không giống nhau'
                     }
                    

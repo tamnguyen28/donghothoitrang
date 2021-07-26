@@ -45,6 +45,7 @@ class AdcanhanController{
             res.redirect(`/admin/canhan?idnv=${nv.manv}&mess=0`);
         })
     }
+    //load ra trang doi mat khau
     doimatkhau(req, res){
         res.render('admin/adcanhan/doimatkhau',{
             tennv: req.cookies.admin ? req.cookies.admin.tennv : '',
