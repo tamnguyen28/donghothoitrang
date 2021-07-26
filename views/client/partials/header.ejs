@@ -72,7 +72,7 @@
                                                 </div>
                                                 <div class="cart-info">
                                                     <h5><a href="#"><%= sp.tensp%></a></h5>
-                                                    <p><%= sp.soluong %> x <%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(sp.giatien).split('₫')[1] + " VND" %></p>
+                                                    <p><%= sp.soluong %> x <%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(sp.giatien)%></p>
                                                 </div>
                                                 <div class="cart-icon">
                                                     <a href="#"><i class="fa fa-remove"></i></a>
@@ -82,7 +82,7 @@
                                         
                                     </div>
                                     <div class="cart-totals">
-                                        <h5>Tổng tiền: <span><% let totoal = 0; for(let i = 0; i < giohangs.length; i++){totoal += giohangs[i].tongtien;} %> <%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(totoal).split('₫')[1] + " VND" %></span></h5>
+                                        <h5>Tổng tiền: <span><% let totoal = 0; for(let i = 0; i < giohangs.length; i++){totoal += giohangs[i].tongtien;} %> <%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(totoal)%></span></h5>
                                     </div>
                                     <div class="cart-bottom">
                                         <a class="view-cart" href="/giohang">Giỏ hàng</a>
