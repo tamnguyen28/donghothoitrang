@@ -21,7 +21,6 @@
                             <div class="col-lg-12">
                                 <form action="#" method="post">
                                     <div class="table-content table-responsive">
-                                        <input type="date" id="start" name="trip-start"  style="float: right;">
                                         <table>
                                             <thead>
                                                 <tr>
@@ -44,7 +43,7 @@
                                                            <% }) %>  
                                                         </td>
                                                         <td>
-                                                            <%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(sp.tonghoadon).split('₫')[1] + " VND" %>
+                                                            <%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(sp.tonghoadon)%>
                                                         </td>
                                                         <td><a href="/lichsumuahang/chitietdonhang?id=<%= sp.mahd%>">Xem chi tiết </a><a href="/lichsumuahang/huydonhang?id=<%= sp.mahd%>&idghtk=<%= sp.id_ghtk%>">| Hủy đơn hàng</a></td>
                                                     </tr>
