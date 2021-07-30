@@ -122,7 +122,7 @@ class DonHangController {
                                 Số điện thoại người nhận: ${thongtin.sdtnguoinhan},
                                 Địa chỉ người nhận: ${thongtin.diachinguoinhan},
                                 Email người nhận: ${thongtin.emailnguoinhan},
-                                Tổng hóa đơn: ${thongtin.tonghoadon},
+                                Tổng hóa đơn: ${new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(thongtin.tonghoadon)},
                                 Ghi chú: ${thongtin.ghichu}`
                             let emailTo = thongtin.emailnguoinhan;
                             mail.sendmail(emailTo, 'SHOP FULLTIME', contentDonhang);  
@@ -229,7 +229,7 @@ class DonHangController {
                             Số điện thoại người nhận: ${thongtin.sdtnguoinhan},
                             Địa chỉ người nhận: ${thongtin.diachinguoinhan},
                             Email người nhận: ${thongtin.emailnguoinhan},
-                            Tổng hóa đơn: ${thongtin.tonghoadon},
+                            Tổng hóa đơn: ${new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(thongtin.tonghoadon)},
                             Ghi chú: ${thongtin.ghichu}`
                         let emailTo = thongtin.emailnguoinhan;
                         mail.sendmail(emailTo, 'SHOP FULLTIME', contentDonhang);  

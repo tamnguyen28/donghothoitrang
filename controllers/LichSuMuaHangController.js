@@ -14,9 +14,9 @@ class LichSuMuaHangController{
 
         let mess = ``;
         if(req.query.mess && req.query.mess == 1){
-            mess = 'Hủy đơn thành công'
+            mess = 'Hủy đơn hàng thành công'
         }else if(req.query.mess && req.query.mess == 0){
-            mess = 'Đơn hàng đã được hủy.'
+            mess = 'Đơn hàng đã được hủy trước đó'
         }else if(req.query.mess && req.query.mess == 2){
             mess = 'Đơn hàng đang giao hoặc đã giao không được hủy.'
         }

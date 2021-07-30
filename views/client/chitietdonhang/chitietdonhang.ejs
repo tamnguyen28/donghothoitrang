@@ -20,6 +20,8 @@
                                             <%= '- Đang giao' %>
                                         <% } else if(chitiet[0].trangthai == 4) { %>
                                             <%= '- Đã giao' %>
+                                        <% } else if(chitiet[0].trangthai == 5) { %>
+                                            <%= '- Đã hủy và hoàn tiền' %>
                                       <% } else {%>   
                                             <%= '-' + statusOrder.order.status_text %>
                                     <% } %>

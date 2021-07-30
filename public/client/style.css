@@ -240,7 +240,7 @@ body {
     padding: 50px 0;
 }
 .ptb-40 {
-    padding: 40px 0;
+    padding: 10px 0;
 }
 .ptb-60 {
     padding: 60px 0;
@@ -1314,7 +1314,7 @@ body {
 }
 .product-img a img {
     width: 100%;
-    margin-left: 27px;
+    margin-left: 0px;
 }
 
 .product-imgnamnu a img{
@@ -6727,4 +6727,13 @@ span.buttonText {
 .tilte-receiver{
     font-size: 15px;
     text-transform: uppercase;
+}
+/* .row{
+    margin-left: 0px;
+    margin-right: 0px;
+} */
+
+.clock-woman-contain{
+    display: flex;
+    flex-wrap: wrap;
 }
