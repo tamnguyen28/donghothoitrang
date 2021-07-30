@@ -13,7 +13,7 @@
                                 <div class="table-agile-info">
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
-                                            DANH SÁCH ĐƠN HÀNG ĐÃ ĐẶT
+                                            DANH SÁCH ĐƠN HÀNG ĐÃ HỦY
                                         </div>
                                         <div>
                                             <table class="table" ui-jq="footable">
@@ -44,15 +44,17 @@
                                                             <%= 'Đang giao' %>
                                                         <% }else if(dh.trangthai == 4) {%>
                                                             <%= 'Đã giao' %>
+                                                        <% }else if(dh.trangthai == 5) {%>
+                                                            <%= 'Đã hủy và hoàn tiền' %>
                                                         <%} else {%>
                                                             <%= 'Đã tiếp nhận'%>
                                                         <% } %>    
                                                     </td>
                                                     <td>
-                                                        <a href="/admin/donhang/detailOrder?id=<%= dh.mahd %>" class="btn btn-success ">Chi tiết đơn hàng</a>
-                                                        <a href="/admin/donhang/updateOrder?id=<%= dh.mahd %>" class="btn btn-primary <%= (role && role != 1) ? '' : 'hidden'%>">Cập nhật</a>
-                                                        <button type="button" onclick="cancelOrder(`<%= dh.mahd%>`)" class="btn btn-danger <%= (role && role != 1) ? '' : 'hidden'%>
-                                                                                                                                    <%= (dh.trangthai == 3 || dh.trangthai == 4) ? 'hidden' : '' %>">Hủy đơn hàng</button>
+                                                        <a href="/admin/donhang/detailOrderCancel?id=<%= dh.mahd %>" class="btn btn-success ">Chi tiết đơn hàng</a>
+                                                        <a href="/admin/donhang/updatestatuscancel?id=<%= dh.mahd %>" class="btn btn-primary <%= (role && role != 1) ? '' : 'hidden'%>
+                                                                                                                                                <%= dh.phuongthucthanhtoan == 0 ? 'hidden' : '' %>
+                                                                                                                                                <%= dh.trangthai == 5 ? 'hidden' : '' %>">Cập nhật</a>
                                                     </td>
                                                 </tr>
                                                 <% }); %>
@@ -70,37 +72,4 @@
         </section>
         <%- include('../partials/adminscript_bottom'); -%>
     </body>
-    <script>
-        $('body').load(function(){
-            let mess  = '<%= message %>';
-
-            if(mess && mess != ''){
-                alert(mess);
-            }
-        })
-
-        function cancelOrder(idBill){
-            
-            $.ajax({
-                method: 'GET',
-                url: '/admin/donhang/cancelOrder',
-                data:{
-                    id: idBill
-                },
-                success: function(data){
-                    if(data){
-                        alert(data.mess);
-                        window.location.reload();
-                    }
-                    
-                },
-                error: function(){
-
-                }
-            });
-        }
-        
-    
-        
-    </script>
 </html>
