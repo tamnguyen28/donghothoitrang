@@ -34,6 +34,7 @@ class AdnhanvienController{
         AdnhanvienModel.loadLoaiNV().then(function(result){
             res.render('admin/adnhanvien/createnv', {
                 loaiNvs: result,
+                role: req.cookies.admin.id_maloainv,
                 tennv: req.cookies.admin ? req.cookies.admin.tennv : '',
                 manv: req.cookies.admin ? req.cookies.admin.manv: 0,
                 idnv: req.cookies.admin.manv
@@ -71,6 +72,7 @@ class AdnhanvienController{
         AdnhanvienModel.getNhanvienById(idnhanvien).then(function(result){
                 res.render('admin/adnhanvien/updatenv',{ 
                     nhanvien: result[0],
+                    role: req.cookies.admin.id_maloainv,
                     tennv: req.cookies.admin ? req.cookies.admin.tennv : '',
                     manv: req.cookies.admin ? req.cookies.admin.manv: 0,
                     idnv: req.cookies.admin.manv

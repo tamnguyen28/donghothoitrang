@@ -72,8 +72,9 @@
                         <span>Quản lý đơn hàng</span>
                     </a>
                     <ul class="sub">
-						<li><a href="/admin/donhang">Đơn hàng</a></li>
-						<li><a href="/admin/donhang/doanhthu">Thống kê doanh thu</a></li>
+						<li><a href="/admin/donhang">Đơn hàng đã đặt</a></li>
+                        <li><a href="/admin/donhang/donhangdahuy">Đơn hàng đã hủy</a></li>
+						<li><a href="/admin/donhang/doanhthu" class="<%= role && role == 1 ? '' : 'hidden'%>">Thống kê doanh thu</a></li>
                     </ul>
                 </li>
 

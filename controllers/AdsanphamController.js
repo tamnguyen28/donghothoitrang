@@ -42,6 +42,7 @@ class AdsanphamController {
             AdsanphamModel.loadThuongHieu().then(function (resulttt) {
                 res.render('admin/adsanpham/create', { 
                     danhmucs: result, thuonghieus: resulttt,
+                    role: req.cookies.admin.id_maloainv,
                     tennv: req.cookies.admin ? req.cookies.admin.tennv : '',
                     manv: req.cookies.admin ? req.cookies.admin.manv: 0,
                     idnv: req.cookies.admin.manv
@@ -98,6 +99,7 @@ class AdsanphamController {
                        
                         res.render('admin/adsanpham/update', {
                             product: result[0], thuonghieus: resulttt, danhmucs: resultdm,
+                            role: req.cookies.admin.id_maloainv,
                             tennv: req.cookies.admin ? req.cookies.admin.tennv : '',
                             manv: req.cookies.admin ? req.cookies.admin.manv: 0,
                             idnv: req.cookies.admin.manv,

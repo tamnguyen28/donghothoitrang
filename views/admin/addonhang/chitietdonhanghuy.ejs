@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/adminhead'); -%>
+
+  <body>
+    <section id="container">
+      <%- include('../partials/adminheader'); -%>
+        <%- include('../partials/adminleft'); -%>
+          <!--main content start-->
+          <section id="main-content">
+            <section class="wrapper">
+              <div class="clearfix">
+                <div class="panel panel-default col-md-8">
+                  <div class="panel-heading">
+                    CHI TIẾT ĐƠN HÀNG
+                  </div>
+                  <div>
+                    <% chitiet.forEach(function(sp){%>
+                      <table class="table" ui-jq="footable">
+                        <tr>
+                          <th data-breakpoints="xs" class="col-xs-3">Mã đơn hàng</th>
+                          <td class="col-xs-9">
+                            <%= sp.mahd %>
+                          </td>
+                        </tr>
+                        <tr>
+                          <th data-breakpoints="xs" class="col-xs-3">Tên người nhận</th>
+                          <td class="col-xs-9">
+                            <%= sp.tennguoinhan %>
+                          </td>
+                        </tr>
+                        <tr>
+                          <th data-breakpoints="xs" class="col-xs-3">Số điện thoại</th>
+                          <td class="col-xs-9">
+                            <%= sp.sdtnguoinhan %>
+                          </td>
+                        </tr>
+                        <tr>
+                          <th data-breakpoints="xs" class="col-xs-3">Địa chỉ giao hàng</th>
+                          <td class="col-xs-9">
+                            <%= sp.diachinguoinhan %>
+                          </td>
+                        </tr>
+                        <tr>
+                          <th data-breakpoints="xs" class="col-xs-3">Email</th>
+                          <td class="col-xs-9">
+                            <%= sp.emailnguoinhan %></td>
+                        </tr>
+                        <tr>
+                          <th data-breakpoints="xs" class="col-xs-3">Ghi chú</th>
+                          <td class="col-xs-9">
+                            <%= sp.ghichu %>
+                          </td>
+                        </tr>
+                        <tr>
+                          <th data-breakpoints="xs" class="col-xs-3">Tổng hóa đơn</th>
+                          <td class="col-xs-9">
+                            <%= sp.tonghoadon %>
+                          </td>
+                        </tr>
+                        <tr>
+                          <th data-breakpoints="xs" class="col-xs-3">Phương thức thanh toán</th>
+                          <td class="col-xs-9">
+                            <% if(sp.phuongthucthanhtoan == 1) {%>
+                              <%= 'Thanh toán bằng ví MOMO' %>
+                          <% }else if(sp.phuongthucthanhtoan == 2) { %>
+                              <%= 'Thanh toán bằng ví VNPAY' %>
+                          <%} else {%>
+                              <%= 'Thanh toán khi nhận hàng'%>
+                          <% } %>
+                          </td>
+                        </tr>
+                        <tr>
+                          <th data-breakpoints="xs" class="col-xs-3">Ngày đặt</th>
+                          <td class="col-xs-9">
+                            <%= sp.tgtao %>
+                          </td>
+                        </tr>
+                        <tr>
+                          <th data-breakpoints="xs" class="col-xs-3">Trạng thái</th>
+                          <td class="col-xs-9">
+                            <% if(sp.trangthai == 1) {%>
+                              <%= 'Chờ lấy hàng' %>
+                          <% }else if(sp.trangthai == 2) { %>
+                              <%= 'Đơn hàng đã hủy' %>
+                          <% }else if(sp.trangthai == 3) {%>
+                              <%= 'Đang giao' %>
+                          <% }else if(sp.trangthai == 4) {%>
+                              <%= 'Đã giao' %>
+                          <% }else if(sp.trangthai == 5) {%>
+                              <%= 'Đã hủy và hoàn tiền' %>
+                          <%} else {%>
+                              <%= 'Đã tiếp nhận'%>
+                          <% } %>
+                          </td>
+                        </tr>
+                      </table>
+                    <% }) %>
+                    
+                  </div>
+                  <a class="btn btn-info" href="/admin/donhang/donhangdahuy">Quay lại?</a>
+                </div>
+                <div class="panel panel-default col-md-4">
+                  <div class="panel-heading">
+                    SẢN PHẨM TRONG ĐƠN HÀNG
+                  </div>
+                  <div>
+                    <% chitietsp.forEach(function(dh){ %>
+                      <table class="table" ui-jq="footable">
+                        <tr>
+                          <th data-breakpoints="xs" class="col-xs-3">Mã sản phẩm</th>
+                          <td class="col-xs-9">
+                            <%= dh.masp %>
+                          </td>
+                        </tr>
+                        <tr>
+                          <th data-breakpoints="xs" class="col-xs-3">Tên sản phẩm</th>
+                          <td class="col-xs-9">
+                            <%= dh.tensp %>
+                          </td>
+                        </tr>
+                        <tr>
+                          <th data-breakpoints="xs" class="col-xs-3">Giá</th>
+                          <td class="col-xs-9">
+                            <%= dh.giatien %>
+                          </td>
+                        </tr>
+                        <tr>
+                          <th data-breakpoints="xs" class="col-xs-3">Số lượng</th>
+                          <td class="col-xs-9">
+                            <%= dh.soluong %>
+                          </td>
+                        </tr>
+                        <tr>
+                          <th data-breakpoints="xs" class="col-xs-3">Thành tiền</th>
+                          <td class="col-xs-9">
+                            <%= dh.soluong * dh.giatien %>
+                          </td>
+                        </tr>
+                      </table>
+                    <% }) %>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <%- include('../partials/adminfooter'); -%>
+          </section>
+          <!--main content end-->
+    </section>
+    <%- include('../partials/adminscript_bottom'); -%>
+  </body>
+
+</html>
