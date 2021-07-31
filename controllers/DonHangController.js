@@ -20,7 +20,7 @@ var partnerCode = "MOMOVYVS20210701"
 var accessKey = "3nDJ9k3snnTneEaQ"
 var serectkey = "h2D40FcZmLcJmGp2mCH6dfMVQVB0dlm8"
 var orderInfo = "pay with MoMo"
-var returnUrl = "http://localhost:3000/message?statusCode=0"; //
+var returnUrl = "http://localhost:3000/donhang?payonline=1"; //
 var notifyurl = "https://callback.url/notify"
 var amount = "50000"
 var orderId = uuidv1()
@@ -73,6 +73,11 @@ let thongtin = {
 let arraySP = [];
 class DonHangController {
     index(req, res) {
+
+        if(!req.cookies.user){
+            return res.redirect('/dangnhap');
+        }
+        console.log("ABC");
         if (req.query.payonline && (req.query.message == 'Success' || req.query.vnp_ResponseCode == '00')) {
             req.session.giohang = [];
             thongtin.trangthai = 0;
@@ -112,7 +117,7 @@ class DonHangController {
                     // res.data.order.label: Id don hàng của giao hàng tiết kiệm
                     // console.log(res.data);
                     donhangModel.themthongtin(thongtin, responeGHTK.data.order.label).then(function (result) {
-                        
+                      
                         req.session.giohang = [];
                         let contentDonhang = `Bạn đã đặt hàng thành công, đơn hàng sẽ vận chuyển đến bạn trong thời gian sớm nhất! Cảm ơn bạn đã mua hàng!
                             Tên người nhận: ${thongtin.tennguoinhan},
@@ -124,15 +129,7 @@ class DonHangController {
                         let emailTo = thongtin.emailnguoinhan;
                         mail.sendmail(emailTo, 'SHOP FULLTIME', contentDonhang);  
                         
-                        res.render('client/donhang/donhang', {
-                            title: 'Đơn hàng',
-                            giohangs: [],
-                            totalAmount: 0,
-                            message: mess,
-                            tenkh: req.cookies.user ? req.cookies.user.tenkh : '',
-                            idkh: req.cookies.user ? req.cookies.user.makh : 0,
-                        });
-
+                        res.redirect(`/message?statusCode=0`);
                     }).catch(err => {
                         console.log(err);      
                     })
@@ -147,14 +144,21 @@ class DonHangController {
                 total += req.session.giohang[i].tongtien
             }
 
-            res.render('client/donhang/donhang', {
-                title: 'Đơn hàng',
-                giohangs: !req.session.giohang ? [] : req.session.giohang,
-                totalAmount: total,
-                message: '',
-                tenkh: req.cookies.user ? req.cookies.user.tenkh : '',
-                idkh: req.cookies.user ? req.cookies.user.makh : 0,
-            });
+            getFee(req.cookies.user.diachi).then(function(dataFee){
+                
+                res.render('client/donhang/donhang', {
+                    title: 'Đơn hàng',
+                    giohangs: !req.session.giohang ? [] : req.session.giohang,
+                    totalAmount: total,
+                    message: '',
+                    fee: dataFee.data.fee.fee,
+                    kh:req.cookies.user,
+                    tenkh: req.cookies.user ? req.cookies.user.tenkh : '',
+                    idkh: req.cookies.user ? req.cookies.user.makh : 0,
+                });
+            }).catch(function(error){
+                console.log(error);
+            })
         }
     }
 
@@ -247,7 +251,7 @@ class DonHangController {
         var tmnCode = 'DWRT5XO9';
         var secretKey = 'TCUVHDKLHACPURHHOUNPMFZWKTVTDGPF';
         var vnpUrl = 'http://sandbox.vnpayment.vn/paymentv2/vpcpay.html';
-        var returnUrl = 'http://localhost:3000/message?statusCode=0';
+        var returnUrl = 'http://localhost:3000/donhang?payonline=1';
 
         var date = new Date();
 

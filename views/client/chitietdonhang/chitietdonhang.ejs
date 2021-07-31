@@ -58,7 +58,15 @@
                                 <h4>Hình thức thanh toán</h4>
                                 <div class="card card-infor">
                                     <div class="card-body">
-                                        <p class="card-text"><%= (chitiet[0].phuongthucthanhtoan == 1 || chitiet[0].phuongthucthanhtoan == 2) ? 'Thanh toán online - Đã thanh toán': 'Thanh toán tiền mặt khi nhận hàng - Chưa thanh toán' %>
+                                        <p class="card-text"><% if(chitiet[0].phuongthucthanhtoan == 1 || chitiet[0].phuongthucthanhtoan == 2) { %> 
+                                                                    <% if(chitiet[0].phuongthucthanhtoan == 1 ) { %>
+                                                                            <%='Thanh toán online MoMo - Đã thanh toán'%> 
+                                                                    <% } else {%>
+                                                                        <%='Thanh toán online Vnpay - Đã thanh toán'%> 
+                                                                    <% }   %>
+                                                            <% } else {%>
+                                                                <%= 'Thanh toán tiền mặt khi nhận hàng - Chưa thanh toán' %>
+                                                            <% } %>
                                         </p>
                                     </div>
                                 </div>

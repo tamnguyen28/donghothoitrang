@@ -3,7 +3,7 @@ const homeModel = require("../models/HomeModel");
 
 class GioHangController {
   index(req, res) {
-    
+
     // neu chua danh nhap
     if (!req.cookies.user) { 
       res.redirect(`/dangnhap?isgotocart=1&id=${req.query.id}`);
@@ -46,6 +46,7 @@ class GioHangController {
               }
              
               // console.log( req.session.giohang.length);
+              console.log("ABC");
               return res.render("client/giohang/giohang", {
                 title: "Giỏ hàng",
                 tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
@@ -62,7 +63,14 @@ class GioHangController {
             });
           
         }
+        return res.render("client/giohang/giohang", {
+          title: "Giỏ hàng",
+          tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
+          idkh:  req.cookies.user ? req.cookies.user.makh: 0 ,
+          giohangs: req.session.giohang ? req.session.giohang: [],
+        });
     }else{
+      
       homeModel.getProductBy(req.query.id).then(function (result) {
       
           //kiem tra ton tai va lay doi tuong ton tai
@@ -108,7 +116,6 @@ class GioHangController {
           });
         });
     }
-    
   }
   xoagiohang(req, res) {
       if(req.session.giohang){

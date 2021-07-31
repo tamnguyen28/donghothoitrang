@@ -22,27 +22,27 @@
                                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
                                                 <div class="checkout-form-list">
                                                     <label>Họ và tên <span class="required">*</span></label>
-                                                    <input type="text" placeholder="" id="name" name="name">
+                                                    <input type="text" placeholder="" id="name" name="name" value="<%= kh.tenkh%>">
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                 <div class="checkout-form-list">
                                                     <label>Số điện thoại <span class="required">*</span></label>
-                                                    <input type="number" placeholder="0898xxxxxx" id="phone" name="phone">
+                                                    <input type="number" placeholder="0898xxxxxx" id="phone" name="phone" value="<%= kh.sodienthoai%>">
                                                     <span id="messphone" style="color: red;"></span>
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                 <div class="checkout-form-list">
                                                     <label>Địa chỉ <span class="required">*</span></label>
-                                                    <input type="text" id="address" name="address" onblur="getFee()">
+                                                    <input type="text" id="address" name="address" value="<%= kh.diachi%>" onblur="getFee()">
 
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                 <div class="checkout-form-list">
                                                     <label>Email <span class="required">*</span></label>
-                                                    <input type="email" id="email" name="email">
+                                                    <input type="email" id="email" value="<%= kh.email %>" name="email">
                                                     <span id="messemail" style="color: red;"></span>
                                                 </div>
 
@@ -112,8 +112,8 @@
                                                         <td>
                                                             <ul>
                                                                 <li>
-                                                                    <input type="hidden" id="inputphivanchuyen" name="phivanchuyen">
-                                                                    <label id="labelFee"></label>
+                                                                    <input type="hidden" id="inputphivanchuyen" name="phivanchuyen" value="<%= fee %>">
+                                                                    <label id="labelFee"><%=  new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(fee) %></label>
                                                                 </li>
                                                             </ul>
                                                         </td>
@@ -217,31 +217,41 @@
     <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/places.js@^1.17.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=weekly&key=AIzaSyBawL8VbstJDdU5397SUX7pEt9DslAwWgQ"></script>
     <script>
-        $script(
-            'https://maps.googleapis.com/maps/api/js?v=weekly&key=AIzaSyBawL8VbstJDdU5397SUX7pEt9DslAwWgQ',
-            () => {
-                const searchClient = algoliasearch(
-                    'latency',
-                    '6be0576ff61c053d5f9a3225e2a90f76'
-                );
-
-                const search = instantsearch({
-                    indexName: 'airports',
-                    searchClient,
-                });
-
-                search.addWidgets([
-                    instantsearch.widgets.places({
-                        container: '#address',
-                        placesReference: window.places,
-                    }),
-                ]);
-
-                search.start();
-            }
+                  
+        const searchClient = algoliasearch(
+            'latency',
+            '6be0576ff61c053d5f9a3225e2a90f76'
         );
 
+        const search = instantsearch({
+            indexName: 'airports',
+            searchClient,
+        });
+
+        search.addWidgets([
+            instantsearch.widgets.places({
+                container: '#address',
+                placesReference: window.places,
+            }),
+        ]);
+
+        search.start();
+        
+        $(document).ready(function(){
+            let feeOder =  parseInt($('#inputphivanchuyen').val());
+            let totalAmount = parseInt(`<%= totalAmount %>`);
+
+            totalAmount += feeOder;
+
+            $('#amount').text(new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(totalAmount));
+
+            $('#address').val(`<%= kh.diachi %>`);
+        })
+
+        
+        
         function getFee() {
             $.ajax({
                 method: 'GET',
