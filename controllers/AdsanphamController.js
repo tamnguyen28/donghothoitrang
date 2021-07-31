@@ -5,35 +5,44 @@ let oldFileName = null;
 let oldSp = null; 
 class AdsanphamController {
     //[GET] /admin
-    index(req, res, next) {
-            
+    index(req, res) {
+
         if(!req.cookies.admin){
             return res.redirect('/admin/login')
         }
+        let page = req.query.page;
+        let vitribatdaulay = (page - 1) * 10;
+        let listsp = [];
 
         let loadSP = [];
-        AdsanphamModel.loadSanPham().then(result => {
-            loadSP = result;
-            // console.log(req.cookies.admin.id_maloainv);
-            res.render('admin/adsanpham/sanpham', {
-                title: 'sanpham',
-                sanpham: loadSP,
-                role: req.cookies.admin.id_maloainv,
-                mess: req.query.mess && req.query.mess == 1 ? req.query.mess : '',
-                tennv: req.cookies.admin ? req.cookies.admin.tennv : '',
-                manv: req.cookies.admin ? req.cookies.admin.manv: 0,
-                idnv: req.cookies.admin.manv
-            })
-
-        }).catch(err => {
-            res.render('admin/home/index',{
-                title: 'sanpham',
-                role: req.cookies.admin.id_maloainv,
-                tennv: req.cookies.admin ? req.cookies.admin.tennv : '',
-                manv: req.cookies.admin ? req.cookies.admin.manv: 0,
-                idnv: req.cookies.admin.manv
+            AdsanphamModel.loadSanPham().then(resultPage => {
+                listsp = resultPage;
+                let soluongtrang = listsp.length / 10;
+                AdsanphamModel.loadAllSanPham(vitribatdaulay).then(function(result){
+                loadSP = result;
+                res.render('admin/adsanpham/sanpham', {
+                    title: 'sanpham',
+                    sanpham: loadSP,
+                    role: req.cookies.admin.id_maloainv,
+                    mess: req.query.mess && req.query.mess == 1 ? req.query.mess : '',
+                    tennv: req.cookies.admin ? req.cookies.admin.tennv : '',
+                    manv: req.cookies.admin ? req.cookies.admin.manv: 0,
+                    idnv: req.cookies.admin.manv,
+                    pageNumber: Math.ceil(soluongtrang)
+                });
+            }).catch((err)=>{
+                console.log(err);
             });
-        });
+    
+            }).catch(err => {
+                res.render('admin/home/index',{
+                    title: 'sanpham',
+                    role: req.cookies.admin.id_maloainv,
+                    tennv: req.cookies.admin ? req.cookies.admin.tennv : '',
+                    manv: req.cookies.admin ? req.cookies.admin.manv: 0,
+                    idnv: req.cookies.admin.manv
+                });
+            });
     }
     //[GET] /admin/sanpham/create
     create(req, res, next) {
@@ -76,7 +85,7 @@ class AdsanphamController {
         let createSP = [];
         AdsanphamModel.createSanPham(newSp).then(resultProduct => {
             AdsanphamModel.insertCollectImag(resultProduct,req.files).then(function(result){
-                res.redirect('/admin/sanpham');
+                res.redirect('/admin/sanpham?page=1');
             }).catch(function(error){
 
             })
@@ -141,7 +150,7 @@ class AdsanphamController {
         AdsanphamModel.updateSanPham(newSp).then(resultProduct => {
             AdsanphamModel.getImageProduct(masp).then(function(reusltImag){
                 AdsanphamModel.updateCollectImag(masp,req.files,reusltImag).then(function(result){
-                    res.redirect('/admin/sanpham');
+                    res.redirect('/admin/sanpham?page=1');
                 }).catch(function(error){
                     console.log(error);
                 })
