@@ -21,7 +21,7 @@ var partnerCode = "MOMOVYVS20210701"
 var accessKey = "3nDJ9k3snnTneEaQ"
 var serectkey = "h2D40FcZmLcJmGp2mCH6dfMVQVB0dlm8"
 var orderInfo = "pay with MoMo"
-var returnUrl = "https://donghothoitrang.herokuapp.com/donhang?payonline=1"; //
+var returnUrl = "http://localhost:3000/message?statusCode=0"; //
 var notifyurl = "https://callback.url/notify"
 var amount = "50000"
 var orderId = uuidv1()
@@ -233,8 +233,9 @@ class DonHangController {
                             Ghi chú: ${thongtin.ghichu}`
                         let emailTo = thongtin.emailnguoinhan;
                         mail.sendmail(emailTo, 'SHOP FULLTIME', contentDonhang);  
-                        
-                       res.redirect('/?mess=2')
+
+                        res.redirect(`/message?statusCode=0`);
+                    //    res.redirect('/?mess=2')
 
                     }).catch(err => {
                         console.log(err);      
@@ -255,7 +256,7 @@ class DonHangController {
         var tmnCode = 'DWRT5XO9';
         var secretKey = 'TCUVHDKLHACPURHHOUNPMFZWKTVTDGPF';
         var vnpUrl = 'http://sandbox.vnpayment.vn/paymentv2/vpcpay.html';
-        var returnUrl = 'https://donghothoitrang.herokuapp.com/donhang?payonline=1';
+        var returnUrl = 'http://localhost:3000/message?statusCode=0';
 
         var date = new Date();
 

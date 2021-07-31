@@ -6737,3 +6737,9 @@ span.buttonText {
     display: flex;
     flex-wrap: wrap;
 }
+.login-form-a > a{
+    color: hsl(251, 92%, 40%);
+    line-height: 24px;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
