@@ -1,5 +1,4 @@
 const canhanModel = require('../models/CaNhanModel');
-const homeModel = require('../models/HomeModel');
 const md5 = require("md5");
 class CaNhanController {
 
@@ -8,21 +7,16 @@ class CaNhanController {
         let message = req.query.mess ? req.query.mess: '' ; 
        
         canhanModel.getKhachHangById(makh).then(function(result){
-            homeModel.loadloaisp().then(resultloai =>{
-                // console.log(result);
-                res.cookie("user", result);
-                res.render('client/canhan/canhan', {
-                    title: 'Quản lý tài khoản',
-                    customer: result,
-                    tenkh: result.tenkh,
-                    idkh : makh,
-                    mess: message,
-                    giohangs: (req.session && req.session.giohang ? req.session.giohang: [] ),
-                    loai: resultloai,  
-                });
-            }).catch(err =>{
-                console.log(err);
-            })
+            // console.log(result);
+            res.cookie("user", result);
+            res.render('client/canhan/canhan', {
+                title: 'Quản lý tài khoản',
+                customer: result,
+                tenkh: result.tenkh,
+                idkh : makh,
+                mess: message,
+                giohangs: (req.session && req.session.giohang ? req.session.giohang: [] ),
+            });
         }).catch(function(error){
             res.render('client/canhan/canhan', {
                 title: 'Quản lý tài khoản',
@@ -55,19 +49,14 @@ class CaNhanController {
         let makh = req.query.idkh;
         let message = req.query.mess ? req.query.mess: '' ; 
         canhanModel.getKhachHangById(makh).then(function(result){
-            homeModel.loadloaisp().then(resultloai =>{
-                res.render('client/canhan/doimatkhau',{
-                    title: "Đổi mật khẩu",
-                    loai: resultloai,  
-                    tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
-                    idkh:  req.cookies.user ? req.cookies.user.makh: 0 ,
-                    giohangs: (req.session && req.session.giohang ? req.session.giohang: [] ),
-                    idkh: req.cookies.user.makh,
-                    mess: ''
-                });
-            }).catch(err => {
-                console.log(err);
-            })  
+            res.render('client/canhan/doimatkhau',{
+                title: "Đổi mật khẩu",
+                tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
+                idkh:  req.cookies.user ? req.cookies.user.makh: 0 ,
+                giohangs: (req.session && req.session.giohang ? req.session.giohang: [] ),
+                idkh: req.cookies.user.makh,
+                mess: ''
+            });
         }).catch(err =>{
             console.log(err);
         })
@@ -82,24 +71,17 @@ class CaNhanController {
             canhanModel.checkOldPassword(oldpass, idkhachhang).then(function(result){
                 if(result == true){
                     canhanModel.updateNewPass(newPass, idkhachhang).then(function(result){
-                        homeModel.loadloaisp().then(resultloai =>{
-                            res.render('client/canhan/doimatkhau',{
-                                title: "Đổi mật khẩu",
-                                loai: resultloai,
-                                tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
-                                idkh: req.cookies.user ? req.cookies.user.makh: 0 ,
-                                giohangs: (req.session && req.session.giohang ? req.session.giohang: [] ),
-                                idkh: req.cookies.user.makh,
-                                mess: 'Đổi mật khẩu thành công'
-                            });
-                        }).catch(err =>{
-                            console.log(err);
-                        })
-                        
+                        res.render('client/canhan/doimatkhau',{
+                            title: "Đổi mật khẩu",
+                            tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
+                            idkh: req.cookies.user ? req.cookies.user.makh: 0 ,
+                            giohangs: (req.session && req.session.giohang ? req.session.giohang: [] ),
+                            idkh: req.cookies.user.makh,
+                            mess: 'Đổi mật khẩu thành công'
+                        });
                     }).catch(function(error){
                         res.render('client/canhan/doimatkhau',{
                             title: "Đổi mật khẩu",
-                            loai: resultloai,
                             idkh: req.cookies.user.makh,
                             mess: 'Mật khẩu cũ không đúng'
                         });   
@@ -107,39 +89,29 @@ class CaNhanController {
                 }else{
                     res.render('client/canhan/doimatkhau',{
                         title: "Đổi mật khẩu",
-                        loai: resultloai,
                         idkh: req.cookies.user.makh,
                         mess: 'Mật khẩu cũ không đúng'
                     });   
                 }
             }).catch(function(){
-                homeModel.loadloaisp().then(resultloai =>{
-                    res.render('client/canhan/doimatkhau',{
-                        title: "Đổi mật khẩu",
-                        loai: resultloai,
-                        tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
-                        idkh: req.cookies.user ? req.cookies.user.makh: 0 ,
-                        giohangs: (req.session && req.session.giohang ? req.session.giohang: [] ),
-                        idkh: req.cookies.user.makh,
-                        mess: 'Mật khẩu cũ không đúng'
-                    });  
-                }).catch(err =>{
-                    console.log(err);
-                })
-                 
-            })
-        }else{
-            homeModel.loadloaisp().then(resultloai =>{
                 res.render('client/canhan/doimatkhau',{
                     title: "Đổi mật khẩu",
-                    loai: resultloai,
                     tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
                     idkh: req.cookies.user ? req.cookies.user.makh: 0 ,
                     giohangs: (req.session && req.session.giohang ? req.session.giohang: [] ),
                     idkh: req.cookies.user.makh,
-                    mess: 'Mật khẩu cũ không được trùng mật khẩu mới'
-                });
-            })  
+                    mess: 'Mật khẩu cũ không đúng'
+                });  
+            })
+        }else{
+            res.render('client/canhan/doimatkhau',{
+                title: "Đổi mật khẩu",
+                tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
+                idkh: req.cookies.user ? req.cookies.user.makh: 0 ,
+                giohangs: (req.session && req.session.giohang ? req.session.giohang: [] ),
+                idkh: req.cookies.user.makh,
+                mess: 'Mật khẩu cũ không được trùng mật khẩu mới'
+            });
         }
     }
 }

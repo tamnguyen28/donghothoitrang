@@ -1,6 +1,5 @@
 const donhangModel = require('../models/DonHangModel');
 const mail = require('../models/configmail/configmail');
-const homeModel = require('../models/HomeModel');
 const dateFormat = require('dateformat');
 const sha256 = require('sha256');
 const axios = require('axios');
@@ -74,97 +73,89 @@ let thongtin = {
 let arraySP = [];
 class DonHangController {
     index(req, res) {
-       
-        homeModel.loadloaisp().then(resultloai => {
-            if (req.query.payonline && (req.query.message == 'Success' || req.query.vnp_ResponseCode == '00')) {
-                req.session.giohang = [];
-                thongtin.trangthai = 0;
+        if (req.query.payonline && (req.query.message == 'Success' || req.query.vnp_ResponseCode == '00')) {
+            req.session.giohang = [];
+            thongtin.trangthai = 0;
 
-                let arrsp = [];
-                let countsp = arraySP.length;
+            let arrsp = [];
+            let countsp = arraySP.length;
 
-                for (let i = 0; i < countsp; i++) {
-                    arrsp.push({
-                        "name": arraySP[i].tensp,
-                        "weight": 0.2,
-                        "quantity": arraySP[i].soluong,
-                        "product_code": 1241
-                    })
-                }
-
-                let mess = ``
-
-                //VnPay
-                if (req.query.vnp_ResponseCode) {
-                    mess = `Thanh toán vnpay thành công`;
-                }
-                //MoMo
-                if (req.query.message) {
-                    mess = `Thanh toán MoMo thành công`
-                }
-
-                taoDongHangGHTK(arrsp
-                    , thongtin.tennguoinhan
-                    , thongtin.diachinguoinhan
-                    , thongtin.emailnguoinhan
-                    , thongtin.sdtnguoinhan
-                    , thongtin.tonghoadon
-                    , getNgayHienTai()
-                    , thongtin, req, res).then(function (responeGHTK) {
-                        // console.log(res.data); //res.data.order: order sau khi đăng hàng được giao hàng tiết kiệm trả về
-                        // res.data.order.label: Id don hàng của giao hàng tiết kiệm
-                        // console.log(res.data);
-                        donhangModel.themthongtin(thongtin, responeGHTK.data.order.label).then(function (result) {
-                            
-                            req.session.giohang = [];
-                            let contentDonhang = `Bạn đã đặt hàng thành công, đơn hàng sẽ vận chuyển đến bạn trong thời gian sớm nhất! Cảm ơn bạn đã mua hàng!
-                                Tên người nhận: ${thongtin.tennguoinhan},
-                                Số điện thoại người nhận: ${thongtin.sdtnguoinhan},
-                                Địa chỉ người nhận: ${thongtin.diachinguoinhan},
-                                Email người nhận: ${thongtin.emailnguoinhan},
-                                Tổng hóa đơn: ${new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(thongtin.tonghoadon)},
-                                Ghi chú: ${thongtin.ghichu}`
-                            let emailTo = thongtin.emailnguoinhan;
-                            mail.sendmail(emailTo, 'SHOP FULLTIME', contentDonhang);  
-                            
-                            res.render('client/donhang/donhang', {
-                                title: 'Đơn hàng',
-                                giohangs: [],
-                                totalAmount: 0,
-                                message: mess,
-                                tenkh: req.cookies.user ? req.cookies.user.tenkh : '',
-                                idkh: req.cookies.user ? req.cookies.user.makh : 0,
-                                loai: resultloai,
-                            });
-
-                        }).catch(err => {
-                            console.log(err);      
-                        })
-                    }).catch(function (error) {
-                        console.log(error);
-                    })
-                
-            }else{
-                let sl = req.session.giohang ? req.session.giohang.length : 0;
-                let total = 0;
-                for (let i = 0; i < sl; i++) {
-                    total += req.session.giohang[i].tongtien
-                }
-    
-                res.render('client/donhang/donhang', {
-                    title: 'Đơn hàng',
-                    giohangs: !req.session.giohang ? [] : req.session.giohang,
-                    totalAmount: total,
-                    message: '',
-                    tenkh: req.cookies.user ? req.cookies.user.tenkh : '',
-                    idkh: req.cookies.user ? req.cookies.user.makh : 0,
-                    loai: resultloai,
-                });
+            for (let i = 0; i < countsp; i++) {
+                arrsp.push({
+                    "name": arraySP[i].tensp,
+                    "weight": 0.2,
+                    "quantity": arraySP[i].soluong,
+                    "product_code": 1241
+                })
             }
-           
-        }).catch(err => {
-            console.log(err);
-        })
+
+            let mess = ``
+
+            //VnPay
+            if (req.query.vnp_ResponseCode) {
+                mess = `Thanh toán vnpay thành công`;
+            }
+            //MoMo
+            if (req.query.message) {
+                mess = `Thanh toán MoMo thành công`
+            }
+
+            taoDongHangGHTK(arrsp
+                , thongtin.tennguoinhan
+                , thongtin.diachinguoinhan
+                , thongtin.emailnguoinhan
+                , thongtin.sdtnguoinhan
+                , thongtin.tonghoadon
+                , getNgayHienTai()
+                , thongtin, req, res).then(function (responeGHTK) {
+                    // console.log(res.data); //res.data.order: order sau khi đăng hàng được giao hàng tiết kiệm trả về
+                    // res.data.order.label: Id don hàng của giao hàng tiết kiệm
+                    // console.log(res.data);
+                    donhangModel.themthongtin(thongtin, responeGHTK.data.order.label).then(function (result) {
+                        
+                        req.session.giohang = [];
+                        let contentDonhang = `Bạn đã đặt hàng thành công, đơn hàng sẽ vận chuyển đến bạn trong thời gian sớm nhất! Cảm ơn bạn đã mua hàng!
+                            Tên người nhận: ${thongtin.tennguoinhan},
+                            Số điện thoại người nhận: ${thongtin.sdtnguoinhan},
+                            Địa chỉ người nhận: ${thongtin.diachinguoinhan},
+                            Email người nhận: ${thongtin.emailnguoinhan},
+                            Tổng hóa đơn: ${new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(thongtin.tonghoadon)},
+                            Ghi chú: ${thongtin.ghichu}`
+                        let emailTo = thongtin.emailnguoinhan;
+                        mail.sendmail(emailTo, 'SHOP FULLTIME', contentDonhang);  
+                        
+                        res.render('client/donhang/donhang', {
+                            title: 'Đơn hàng',
+                            giohangs: [],
+                            totalAmount: 0,
+                            message: mess,
+                            tenkh: req.cookies.user ? req.cookies.user.tenkh : '',
+                            idkh: req.cookies.user ? req.cookies.user.makh : 0,
+                        });
+
+                    }).catch(err => {
+                        console.log(err);      
+                    })
+                }).catch(function (error) {
+                    console.log(error);
+                })
+            
+        }else{
+            let sl = req.session.giohang ? req.session.giohang.length : 0;
+            let total = 0;
+            for (let i = 0; i < sl; i++) {
+                total += req.session.giohang[i].tongtien
+            }
+
+            res.render('client/donhang/donhang', {
+                title: 'Đơn hàng',
+                giohangs: !req.session.giohang ? [] : req.session.giohang,
+                totalAmount: total,
+                message: '',
+                tenkh: req.cookies.user ? req.cookies.user.tenkh : '',
+                idkh: req.cookies.user ? req.cookies.user.makh : 0,
+            });
+        }
     }
 
     savethongtin(req, res) {

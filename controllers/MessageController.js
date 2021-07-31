@@ -1,5 +1,3 @@
-const homeModel =  require('../models/HomeModel');
-
 class MessageController{
     index(req, res){
         let emailUser = decodeURIComponent(req.query.emailUser);
@@ -11,20 +9,15 @@ class MessageController{
             message = 'Bạn đã đặt hàng thành công. Cảm ơn bạn!'
         }
 
-        homeModel.loadloaisp().then(resultloai =>{
-            res.render('client/message/message',{
-                title: 'Thông báo', 
-                message: '',
-                tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
-                idkh:  req.cookies.user ? req.cookies.user.makh: 0 ,
-                giohangs: (req.session && req.session.giohang ? req.session.giohang: [] ),
-                loai: resultloai,
-                message: message,
-                status: statusCode
-            });
-        }).catch(err =>{
-            console.log(err);
-        })
+        res.render('client/message/message',{
+            title: 'Thông báo', 
+            message: '',
+            tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
+            idkh:  req.cookies.user ? req.cookies.user.makh: 0 ,
+            giohangs: (req.session && req.session.giohang ? req.session.giohang: [] ),
+            message: message,
+            status: statusCode
+        });
     }
 }
 

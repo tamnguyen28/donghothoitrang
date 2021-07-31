@@ -1,6 +1,4 @@
 const donghonuModel = require("../models/DongHoNuModel");
-const thuonghieuModel = require("../models/ThuongHieuModel");
-const homeModel = require("../models/HomeModel");
 class DongHoNuController {
   
     index(req, res) {
@@ -12,29 +10,14 @@ class DongHoNuController {
             let soluongtrang = listnu.length / 8;
 
             donghonuModel.loadspnu(vitribatdaulay).then(function(resultPage){
-                thuonghieuModel.loadThuonghieu().then((resultTH) => {
-                    thuonghieuModel.loadRandom().then((resultRD) => {
-                        homeModel.loadloaisp().then(resultloai => {
-                            res.render('client/donghonu/donghonu', {
-                                title: "Đồng hồ nữ",
-                                indexnu: resultPage,
-                                indexTH: resultTH,
-                                indexRD: resultRD,
-                                isSearch: false,
-                                tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
-                                idkh:  req.cookies.user ? req.cookies.user.makh: 0 ,
-                                giohangs: (req.session && req.session.giohang ? req.session.giohang: [] ),
-                                loai : resultloai,
-                                pageNumber: Math.ceil(soluongtrang)
-                            });
-                        }).catch(err =>{
-                            console.log(err);
-                        })
-                    }).catch((err) => {
-                        console.log(err);
-                    });
-                }).catch((err) => {
-                    console.log(err);
+                res.render('client/donghonu/donghonu', {
+                    title: "Đồng hồ nữ",
+                    indexnu: resultPage,
+                    isSearch: false,
+                    tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
+                    idkh:  req.cookies.user ? req.cookies.user.makh: 0 ,
+                    giohangs: (req.session && req.session.giohang ? req.session.giohang: [] ),
+                    pageNumber: Math.ceil(soluongtrang)
                 });
             }).catch(err => {
                 console.log(err);

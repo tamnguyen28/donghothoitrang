@@ -1,20 +1,14 @@
 const dangkyModel = require('../models/DangKyModel');
 const mail = require('../models/configmail/configmail');
-const homeModel = require('../models/HomeModel');
 class DangKyController {
 
     dangky(req, res){
-        homeModel.loadloaisp().then(resultloai =>{
-            res.render('client/dangky/dangky', {
-                title: 'dang ky',
-                tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
-                idkh:  req.cookies.user ? req.cookies.user.makh: 0 ,
-                giohangs: (req.session && req.session.giohang ? req.session.giohang: [] ),
-                loai: resultloai,   
-            });
-        }).catch(err =>{
-            console.log(err);
-        })
+        res.render('client/dangky/dangky', {
+            title: 'dang ky',
+            tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
+            idkh:  req.cookies.user ? req.cookies.user.makh: 0 ,
+            giohangs: (req.session && req.session.giohang ? req.session.giohang: [] ), 
+        });
     }
 
     saveKhachhang(req, res){
