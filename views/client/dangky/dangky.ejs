@@ -55,8 +55,13 @@
                                         <br><br>
                                         <div class="">
                                             <p>Mật khẩu<span>*</span></p>
-                                            <input class="register-signup-infor" type="password" id="password"
+                                            <input class="register-signup-infor" type="password" id="newpass"
                                                 name="password" /><br><br>
+                                        </div>
+                                        <div class="">
+                                            <p>Nhập lại mật khẩu<span>*</span></p>
+                                            <input class="register-signup-infor" type="password" id="password"
+                                                name="xacnhanmk" /><br><br>
                                         </div>
                                         <div class="single-register" align="center">
                                             <input class="btn-login" type="submit" name="btn btn-primary"
@@ -147,6 +152,10 @@
                     required: true,
                     minlength: 4
                 },
+                xacnhanmk:{
+                    required: true,
+                    equalTo: '#newpass'
+                }
             },
             messages: {
                 username: {
@@ -168,6 +177,10 @@
                     required: 'Mật khẩu không được để trống',
                     minlength: 'Mật khẩu không được dưới 4 ký tự'
                 },
+                xacnhanmk: {
+                    required: 'Không được để trống',
+                    equalTo: 'Mật khẩu và Mật khẩu xác nhận không giống nhau'
+                }
             }
         });
     </script>

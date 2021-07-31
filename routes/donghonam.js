@@ -8,5 +8,6 @@ const { route } = require('./donghonu.js');
 router.use(express.static('public'))
 
 router.get('/', donghonamController.index);
+router.get('/locgia', donghonamController.locgia);
 
 module.exports = router;

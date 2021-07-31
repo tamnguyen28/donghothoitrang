@@ -20,6 +20,7 @@ class DongHoNuController {
                                 indexnu: resultPage,
                                 indexTH: resultTH,
                                 indexRD: resultRD,
+                                isSearch: false,
                                 tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
                                 idkh:  req.cookies.user ? req.cookies.user.makh: 0 ,
                                 giohangs: (req.session && req.session.giohang ? req.session.giohang: [] ),
@@ -42,6 +43,27 @@ class DongHoNuController {
             console.log(err);
             res.render('client/donghonu/donghonu');
         });
+    }
+    locgia(req, res){
+        let minPrice = req.query.minPrice;
+        let maxPrice = req.query.maxPrice;
+       
+        donghonuModel.locgia(minPrice, maxPrice, 2).then(function(result){
+            let listnu = result;
+            let soluongtrang  = listnu.length / 8;
+            
+            res.render('client/donghonu/donghonu', {
+                title: "Đồng hồ nữ",
+                isSearch: true,
+                indexnu: listnu,
+                tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
+                idkh:  req.cookies.user ? req.cookies.user.makh: 0 ,
+                giohangs: (req.session && req.session.giohang ? req.session.giohang: [] ),
+                pageNumber: Math.ceil(soluongtrang)
+            });
+        }).catch(function(error){
+            console.log(error);
+        })
     }
 }
 

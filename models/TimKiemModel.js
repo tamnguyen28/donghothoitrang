@@ -15,6 +15,7 @@ class TimKiemModel{
             })
         })
     }
+
 }
 
 module.exports = new TimKiemModel();
