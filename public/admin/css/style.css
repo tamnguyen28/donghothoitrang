@@ -2386,10 +2386,10 @@ ul.inbox-pagination li {
 input.ggg{
     width: 100%;
     padding: 15px 0px 15px 15px;
-    border: 1px solid #fff;
+    border: 1px solid #000;
     outline: none;
     font-size: 14px;
-    color: #fff;
+    color: #000;
     margin: 14px 0px;
 	background: none;
 }

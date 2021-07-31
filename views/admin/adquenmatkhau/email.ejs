@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/adminhead'); -%>
+<body>
+<div class="log-w3">
+<div class="w3layouts-main">
+    <h2>Nhập email của bạn</h2>
+        <form action="/admin/quenmatkhau/sendmail" method="POST" id="formquenmatkhau">
+            <label>Email*</label>
+            <input type="email" class="ggg" name="emailUser">
+            <span id="messemail" style="color: red; font-weight: bold;" ></span>
+                
+            
+            <input class="btn-login" style="font-size: 20px;" type="submit" name="btn btn-primary" value="Gửi" />
+            
+            <a class="ggg" href="/admin/login">Quay lại trang đăng nhập?</a>
+        
+        </form>
+</div>
+</div>
+<%- include('../partials/adminscript_bottom'); -%>
+</body>
+</html>

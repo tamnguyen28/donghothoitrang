@@ -27,8 +27,12 @@ const adcanhanRouter = require('./adcanhan');
 const adlienheRouter = require('./adlienhe');
 const adtimkiemRouter = require('./adtimkiem');
 const adthuonghieuRouter = require('./adthuonghieu');
+const adquenmatkhauRouter = require('./adquenmatkhau');
+const admessageRouter = require('./admessage');
 function route(app){
     
+    app.use('/admin/message', admessageRouter);
+    app.use('/admin/quenmatkhau', adquenmatkhauRouter);
     app.use('/admin/thuonghieu', adthuonghieuRouter);
     app.use('/admin/timkiem', adtimkiemRouter);
     app.use('/admin/lienhe', adlienheRouter);
