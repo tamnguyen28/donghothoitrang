@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include ('../partials/head'); -%>
+
+    <body>
+        <div class="app">
+            <%- include ('../partials/header'); -%>
+                <div class="user-login-area mb-70 mt-40">
+                    <div class="container" style="display: flex; justify-content: center;">
+                        <div class="card"
+                            style="width: 900px; height: fit-content; border: 2px solid red; border-radius: 20px; background-color: blanchedalmond;">
+                            <div class="card-body">
+                                <h3 class="text-center" style="margin-top: 15px; font-family: 'Times New Roman', Times, serif;"><%= message %></h3>
+                                <% if(status != 1){%>
+                                    <div style="display: flex; justify-content: center; margin-top: 4rem;">
+                                        <a href="/"><button class="btn btn-primary"
+                                            style="border-radius: 25px; height: 50px; width: 190px;">Tiếp tục mua hàng</button></a>
+                                    </div>
+                                    <div style="display: flex; justify-content: center; margin-top: 30px;">
+                                        <img class="card-img-top" src="client/img/logo/muahang.png" style="width: 250px; height: 220px; justify-content: center; margin-bottom: 20px;" alt="Card image cap">
+                                    </div>
+                               <% } %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <%- include ('../partials/footer'); -%>
+        </div>
+    </body>
+
+</html>

@@ -9,7 +9,6 @@ class HomeController {
           homeModel.loadSanPhamDrew().then((listSPDrew) => {
             homeModel.loadSanPhamWatch().then((listWatch) => {
               homeModel.loadSanPhamLatest().then((listLatest) => {
-                homeModel.loadloaisp().then(function(resultloai){
                   res.render("client/home/index", {
                     title: "Đồng hồ thời trang",
                     indexlatest: listLatest,
@@ -18,15 +17,11 @@ class HomeController {
                     indexfeature: listSPFeatured,
                     indexdealhot: listSPDealHot,
                     index: listSP,
-                    loai : resultloai,
                     tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
                     idkh:  req.cookies.user ? req.cookies.user.makh: 0 ,
                     mess: req.query.mess ? req.query.mess : '',
                     giohangs: (req.session && req.session.giohang ? req.session.giohang: [] ) 
                   });
-                }).catch((err) => {
-                  console.log(err);
-                });
               }).catch((err) => {
                 console.log(err); 
               });

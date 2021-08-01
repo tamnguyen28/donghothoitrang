@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    .login-form .single-login .error {
+        color: red;
+    }
+</style>
+<%- include ('../partials/head'); -%>
+
+    <body>
+        <div class="app">
+            <%- include ('../partials/header'); -%>
+                <div class="user-login-area mb-70">
+                    <div class="container">
+                        <form action="/quenmatkhau/sendmail" method="POST" id="formquenmatkhau">
+                            <fieldset>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="login-title text-center mb-30 mt-40">
+                                            <h2>Nhập email của bạn</h2>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 col-sm-12 col-xs-12">
+                                        <div class="login-form">
+                                            <div class="single-login">
+                                                <label>Email<span>*</span></label>
+                                                <input type="email" id="email" name="emailUser" />
+                                                <span id="messemail" style="color: red; font-weight: bold;" ></span>
+                                            </div>
+                                            <div class="single-login single-login-2">
+                                                <input class="btn-login" style="font-size: 20px;" type="submit" name="btn btn-primary" value="Gửi" />
+                                            </div>
+                                            <a href="/dangnhap">Quay lại trang đăng nhập?</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+                <%- include ('../partials/footer'); -%>
+        </div>
+    </body>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+    <script>
+        $("#formquenmatkhau").validate({
+            rules: {
+                emailUser: {
+                    required: true,
+                    emailUser: function (elmail) {
+                        var vnf_regexmail = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+                        var email = elmail.value;
+                        if (email !== '') {
+                            if (vnf_regexmail.test(email) == false) {
+                                $('#messemail').html('Email không hợp lệ');
+                            } else {
+                                $('#messemail').html('');
+                            }
+                        }
+                    }
+                },
+            },
+            messages: {
+                emailUser: {
+                    required: 'Vui lòng nhập email',
+                },
+            }
+        });
+    </script>
+
+</html>

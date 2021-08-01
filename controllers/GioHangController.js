@@ -3,7 +3,7 @@ const homeModel = require("../models/HomeModel");
 
 class GioHangController {
   index(req, res) {
-    
+
     // neu chua danh nhap
     if (!req.cookies.user) { 
       res.redirect(`/dangnhap?isgotocart=1&id=${req.query.id}`);
@@ -17,8 +17,6 @@ class GioHangController {
     if(!req.query.id){
         for (let i = 0; i <  req.session.giohang.length; i++) {
           homeModel.getProductBy(req.session.giohang[i].masp).then(function (result) {
-      
-            homeModel.loadloaisp().then(resultloai =>{
               //kiem tra ton tai va lay doi tuong ton tai
               let flag = false;
               let product = {};
@@ -48,31 +46,33 @@ class GioHangController {
               }
              
               // console.log( req.session.giohang.length);
+              console.log("ABC");
               return res.render("client/giohang/giohang", {
                 title: "Giỏ hàng",
                 tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
                 idkh:  req.cookies.user ? req.cookies.user.makh: 0 ,
                 giohangs: req.session.giohang ? req.session.giohang : [] ,
-                loai: resultloai,
               });
-            }).catch(err => {
-              console.log(err);
-            });
           }).catch(function (err) {
               return res.render("client/giohang/giohang", {
                 title: "Giỏ hàng",
                 tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
                 idkh:  req.cookies.user ? req.cookies.user.makh: 0 ,
                 giohangs: req.session.giohang ? req.session.giohang: [],
-                loai: resultloai,
               });
             });
           
         }
+        return res.render("client/giohang/giohang", {
+          title: "Giỏ hàng",
+          tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
+          idkh:  req.cookies.user ? req.cookies.user.makh: 0 ,
+          giohangs: req.session.giohang ? req.session.giohang: [],
+        });
     }else{
+      
       homeModel.getProductBy(req.query.id).then(function (result) {
       
-        homeModel.loadloaisp().then(resultloai =>{
           //kiem tra ton tai va lay doi tuong ton tai
           let flag = false;
           let product = {};
@@ -106,25 +106,18 @@ class GioHangController {
             tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
             idkh:  req.cookies.user ? req.cookies.user.makh: 0 ,
             giohangs: req.session.giohang ? req.session.giohang : [] ,
-            loai: resultloai,
           });
-        }).catch(err => {
-          console.log(err);
-        });
       }).catch(function (err) {
           return res.render("client/giohang/giohang", {
             title: "Giỏ hàng",
             tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
             idkh:  req.cookies.user ? req.cookies.user.makh: 0 ,
             giohangs: req.session.giohang ? req.session.giohang: [],
-            loai: resultloai,
           });
         });
     }
-    
   }
   xoagiohang(req, res) {
-    homeModel.loadloaisp().then(resultloai =>{
       if(req.session.giohang){
         let sp = req.session.giohang.filter(x=>x.masp == req.query.id);
         if(sp.length != 0){
@@ -137,11 +130,7 @@ class GioHangController {
         giohangs: req.session.giohang,
         tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
         idkh:  req.cookies.user ? req.cookies.user.makh: 0 ,
-        loai: resultloai,
       });
-    }).catch(err =>{
-      console.log(err);
-    })
   }
 
   tinhslvatongtien(req, res){

@@ -1,12 +1,44 @@
 const conn = require('./config/connect');
 
 class DongHoNuModel{
-    loadspnam(){
+    loadspnu(vitribatdau){
         return new Promise(function (resolve, reject) {
-            let sqlquerynu = 'SELECT * FROM sanpham limit 52, 12';
+            let sqlquerynu = `SELECT * FROM sanpham JOIN loaisanpham on sanpham.id_maloai = loaisanpham.maloai 
+                              where loaisanpham.maloai = 2 limit ${vitribatdau}, 8`;
             conn.query(sqlquerynu, function (err, result){
                 if(err){
                     reject(err);
+                }else{
+                    resolve(result);
+                }
+            })
+        })
+    }
+
+    loadAllSanPhamNu(){
+        return new Promise(function (resolve, reject) {
+            let sqlquerynu = `SELECT * FROM sanpham JOIN loaisanpham on sanpham.id_maloai = loaisanpham.maloai 
+                              where loaisanpham.maloai = 2`;
+            conn.query(sqlquerynu, function (err, result){
+                if(err){
+                    reject(err);
+                }else{
+                    resolve(result);
+                }
+            })
+        })
+    }
+    locgia(minPrice, maxPrice, isDongNu){
+        return new Promise(function(resolve, reject){
+            let queryPrice = `SELECT sanpham.* 
+                        FROM sanpham JOIN thuonghieu on sanpham.id_math = thuonghieu.math 
+                        WHERE sanpham.giatien BETWEEN ? and ? and id_maloai = ?`;
+
+            conn.query(queryPrice, [minPrice, maxPrice, isDongNu], function(error, result){
+                if(error){
+                    console.log(error);
+
+                    reject(false);
                 }else{
                     resolve(result);
                 }

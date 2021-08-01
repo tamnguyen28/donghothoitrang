@@ -53,7 +53,7 @@
                                                             </span>
                                                         </td>
                                                         <td class="product-quantity">
-                                                            <input id="<%= giohangs[i].masp%>" min="1" max="10" type="number" onChange="changeCount(this)" value="<%= giohangs[i].soluong%>"/>
+                                                            <input id="<%= giohangs[i].masp%>" min="1" max="5" type="number" onChange="changeCount(this)" value="<%= giohangs[i].soluong%>"/>
                                                         </td>
                                                         <td id="total<%= giohangs[i].masp %>" class="product-subtotal"><%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(giohangs[i].tongtien)%></td>
                                                         <td class="product-remove">
@@ -67,7 +67,7 @@
                                             </tr>
                                             </tbody>
                                         </table>
-                                    </div>
+                                        <span class="hidden" id="totalTemp"><% let totoal2 = 0; for(let i = 0; i < giohangs.length; i++){totoal2 += giohangs[i].tongtien;} %> <%= totoal2 %></span></div>
                                 </form>
                                 
                             </div>
@@ -75,7 +75,7 @@
                         
                         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                             <div class="wc-proceed-to-checkout">
-                                    <a href="/donhang">Thanh toán</a>
+                                <a onclick="validateTotalAmout()">Thanh toán</a>
                             </div>
                         </div>
                         </div>
@@ -86,8 +86,30 @@
         </div>
     </body>
 <script>
+    function validateTotalAmout(){
+        let totalAmount = parseInt($('#totalTemp').text());
+
+        if(totalAmount < 20000000){
+            window.location.replace('/donhang');
+            return true;
+        }
+
+        alert('Đơn hàng của bạn phải nhỏ hơn 20 triệu')
+        return false;
+    }
     function changeCount(input){
+
+
         let soluong = input.value;
+
+        if(soluong < 0){
+            soluong = 1;
+            input.value = 1;
+        }else if(soluong > 5){
+            soluong = 5;
+            input.value = 5;
+        }
+
         let currentPrice = parseInt($(`#price${input.id}`).html());
         
 
@@ -96,14 +118,14 @@
             url: '/giohang/tinhsoluongvatongtien',
             data:{
                 idsp: input.id,
-                sl: input.value,
+                sl: soluong,
             },
             success: function(data){
                 
                 // console.log(new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(data.total).split('₫'));
                 $(`#total${input.id}`).html(new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(data.total));
                 $(`#totalAmout`).html(new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(data.totalAmount))
-                
+                $('#totalTemp').text(data.totalAmount);
             }, 
             error: function(){
 

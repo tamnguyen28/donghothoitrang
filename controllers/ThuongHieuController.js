@@ -1,5 +1,4 @@
 const thuonghieuModel = require('../models/ThuongHieuModel');
-const homeModel = require('../models/HomeModel');
 
 let listThtemp = []
 let listRDtemp = []
@@ -10,23 +9,17 @@ class ThuongHieuController {
             listThtemp = listTH;
                 thuonghieuModel.loadRandom().then((listRD)=>{
                     listRDtemp = listRD;
-                    homeModel.loadloaisp().then(resultloai =>{
-                        res.render('client/thuonghieu/thuonghieu', {
-                            title: 'Thương Hiệu',
-                            indexRD: listRD,
-                            indexTH: listTH,
-                            indexSP: [],
-                            motatt:'',
-                            hinhanh: '',
-                            tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
-                            idkh:  req.cookies.user ? req.cookies.user.makh: 0 ,
-                            giohangs: (req.session && req.session.giohang ? req.session.giohang: [] ),
-                            loai: resultloai,
-                        });
-                    }).catch(err =>{
-                        console.log(err);
-                    })
-                    
+                    res.render('client/thuonghieu/thuonghieu', {
+                        title: 'Thương Hiệu',
+                        indexRD: listRD,
+                        indexTH: listTH,
+                        indexSP: [],
+                        motatt:'',
+                        hinhanh: '',
+                        tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
+                        idkh:  req.cookies.user ? req.cookies.user.makh: 0 ,
+                        giohangs: (req.session && req.session.giohang ? req.session.giohang: [] ),
+                    });          
                 }).catch(err => {
                     console.log(err);
                 })
@@ -41,21 +34,15 @@ class ThuongHieuController {
 
         thuonghieuModel.loadProductByTranmarkId(idTranmark).then(function(result){
             thuonghieuModel.getTransmarkById(idTranmark).then(function(result1){
-                homeModel.loadloaisp().then(resultloai =>{
-                    res.render('client/thuonghieu/thuonghieu', {
-                        indexSP: result , title: 'Thương Hiệu', 
-                        indexTH: listThtemp, indexRD: listRDtemp, 
-                        motatt: result1[0].chitiet,
-                        hinhanh: result1[0].hinhanh,
-                        tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
-                        idkh:  req.cookies.user ? req.cookies.user.makh: 0 ,
-                        giohangs: (req.session && req.session.giohang ? req.session.giohang: [] ),
-                        loai: resultloai,
-                    });
-                }).catch(err =>{
-                    console.log(err);
-                })
-                    
+                res.render('client/thuonghieu/thuonghieu', {
+                    indexSP: result , title: 'Thương Hiệu', 
+                    indexTH: listThtemp, indexRD: listRDtemp, 
+                    motatt: result1[0].chitiet,
+                    hinhanh: result1[0].hinhanh,
+                    tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
+                    idkh:  req.cookies.user ? req.cookies.user.makh: 0 ,
+                    giohangs: (req.session && req.session.giohang ? req.session.giohang: [] ),
+                });     
             }).catch(function(error){
                 console.log(error);
             })   

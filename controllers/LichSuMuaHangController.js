@@ -1,5 +1,4 @@
 const lichsumuahangModel = require('../models/LichSuMuaHangModel');
-const homeModel = require('../models/HomeModel');
 const axios = require('axios');
 
 let headers =  {
@@ -14,9 +13,9 @@ class LichSuMuaHangController{
 
         let mess = ``;
         if(req.query.mess && req.query.mess == 1){
-            mess = 'Hủy đơn thành công'
+            mess = 'Hủy đơn hàng thành công'
         }else if(req.query.mess && req.query.mess == 0){
-            mess = 'Đơn hàng đã được hủy.'
+            mess = 'Đơn hàng đã được hủy trước đó'
         }else if(req.query.mess && req.query.mess == 2){
             mess = 'Đơn hàng đang giao hoặc đã giao không được hủy.'
         }
@@ -25,7 +24,6 @@ class LichSuMuaHangController{
         lichsumuahangModel.loadDonhang(req.cookies.user.makh).then(result =>{
             list = result;
             // console.log(list);
-            homeModel.loadloaisp().then(resultloai =>{
                 // console.log(groupSanPham(list))
                 res.render('client/lichsumuahang/lichsumuahang', {
                     donhang : groupSanPham(list),
@@ -33,12 +31,8 @@ class LichSuMuaHangController{
                     idkh: req.cookies.user ? req.cookies.user.makh: 0,
                     tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
                     giohangs: (req.session && req.session.giohang ? req.session.giohang: [] ),
-                    loai: resultloai,
                     message: mess
                 })
-            }).catch(err =>{
-                console.log(err);
-            })
         }).catch(err => {
             console.log(err);
         })
@@ -47,7 +41,6 @@ class LichSuMuaHangController{
         lichsumuahangModel.getChiTietDonHang(req.query.id, req.cookies.user.makh).then(result =>{
             // console.log(result);
              getTinhTrangDonHang(result[0].id_ghtk).then(function(resultStatus){
-                homeModel.loadloaisp().then(resultloai =>{
                     res.render('client/chitietdonhang/chitietdonhang',{
                         title: "Chi tiết đơn hàng",
                         statusOrder: resultStatus.data,
@@ -55,11 +48,7 @@ class LichSuMuaHangController{
                         idkh: req.cookies.user ? req.cookies.user.makh: 0,
                         tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
                         giohangs: (req.session && req.session.giohang ? req.session.giohang: [] ),
-                        loai: resultloai,
                     });
-                }).catch(err =>{
-                    console.log(err);
-                }) 
              }).catch(function(err){
 
              });

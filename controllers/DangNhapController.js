@@ -1,6 +1,5 @@
 const dangnhapModel = require("../models/DangNhapModel");
 const dangkyModel = require("../models/DangKyModel");
-const homeModel = require('../models/HomeModel');
 const e = require("express");
 
 let isgotocart = 0;
@@ -11,17 +10,12 @@ class DangNhapController {
     isgotocart = req.query.isgotocart;
     isgotoLog = req.query.isgotoLog;
     idsp = req.query.id;
-    homeModel.loadloaisp().then(resultloai =>{
-        res.render("client/dangnhap/dangnhap", { 
-            title: "Đăng nhập", 
-            message: "",
-            idkh:0,
-            tenkh: '',
-            giohangs: (req.session && req.session.giohang ? req.session.giohang: [] ),
-            loai: resultloai,  
-        });
-    }).catch(err =>{
-        console.log();
+    res.render("client/dangnhap/dangnhap", { 
+        title: "Đăng nhập", 
+        message: "",
+        idkh:0,
+        tenkh: '',
+        giohangs: (req.session && req.session.giohang ? req.session.giohang: [] ), 
     });
   }
 
@@ -40,18 +34,13 @@ class DangNhapController {
         res.redirect(`/`);
       }).catch(function (err) {
         console.log(err);
-        homeModel.loadloaisp().then(resultloai =>{
-            res.render("client/dangnhap/dangnhap", {
-                title: "Đăng nhập",
-                message: "Sai tên đăng nhập hoặc mật khẩu. Đăng nhập thất bại",
-                idkh:0,
-                tenkh: '',
-                giohangs: (req.session && req.session.giohang ? req.session.giohang: [] ),
-                loai: resultloai, 
-              });
-        }).catch(err =>{
-            console.log(err);
-        })
+        res.render("client/dangnhap/dangnhap", {
+            title: "Đăng nhập",
+            message: "Sai tên đăng nhập hoặc mật khẩu. Đăng nhập thất bại",
+            idkh:0,
+            tenkh: '',
+            giohangs: (req.session && req.session.giohang ? req.session.giohang: [] ),
+            });
       });
   }
     logout(req, res) {
@@ -151,5 +140,8 @@ class DangNhapController {
             console.log(error);
         });
     }
+
+
+    
 }
 module.exports = new DangNhapController();

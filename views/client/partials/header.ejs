@@ -7,18 +7,9 @@
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                     <div class="language-area">
                         <ul>
-                            <li><img src="client/img/product/35phu1.jpg" style="width: 18px; height: 12px;" alt="flag" /><a href="#">Danh mục<i class="fa fa-angle-down"></i></a>
-                                <div class="header-sub">
-                                    <% loai.forEach(function(loai){ %> 
-                                        <ul>
-                                            <li><a href="/<%= loai.duongdan %>"><img src="client/img/product/2.jpg" style="width: 18px; height: 12px;" alt="flag" /><%= loai.tenloai %></a></li>
-                                        </ul>
-                                    <% }) %>
-                                    
-                                </div>
-                            </li>
-
-                            <li><a href="/lichsumuahang">Lịch sử mua hàng</a></li>
+                            <% if(tenkh && tenkh != ''){%>
+                                <li><a href="/lichsumuahang">Lịch sử mua hàng</a></li>
+                            <% } %>
                         </ul>
                     </div>
                 </div>
@@ -27,11 +18,13 @@
                         <ul>
                             <% if(tenkh && tenkh != ''){%>
                                 <li><a href="/canhan?idkh=<%= idkh ? idkh : 0 %>"><%= tenkh %></a></li>
+                                <li><a href="/dangnhap/logout">Đăng xuất</a></li>
                             <%} else{ %>
                                 <li><a href="/dangnhap">Đăng nhập</a></li>
+                                <li><a href="/dangky">Đăng ký</a></li>
                            <% } %>
-                            <li><a href="/dangky">Đăng ký</a></li>
-                            <li><a href="/dangnhap/logout">Đăng xuất</a></li>
+                            
+                           
                         </ul>
                     </div>
                 </div>
@@ -99,19 +92,19 @@
     <!-- header-mid-area-end -->
     <!-- main-menu-area-start -->
     <div class="main-menu-area hidden-sm hidden-xs sticky-header-1" id="header-sticky">
-        <div class="container">
+        <div class="container" style="display: flex; justify-content: center;">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="menu-area">
                         <nav>
                             <ul>
-                                <li class="active"><a href="/">HOME<i class="fa fa-angle-down"></i></a></li>
-                                <li><a href="/thuonghieu">THƯƠNG HIỆU<i class="fa fa-angle-down"></i></a></li>
-                                <li><a href="/donghonam">ĐỒNG HỒ NAM<i class="fa fa-angle-down"></i></a></li>
-                                <li><a href="/donghonu">ĐỒNG HỒ NỮ<i class="fa fa-angle-down"></i></a></li>
+                                <li class="active"><a href="/">HOME</a></li>
+                                <li><a href="/thuonghieu">THƯƠNG HIỆU</a></li>
+                                <li><a href="/donghonam?page=1">ĐỒNG HỒ NAM</a></li>
+                                <li><a href="/donghonu?page=1">ĐỒNG HỒ NỮ</a></li>
                                 <li><a href="/tintuc">TIN TỨC</a></li>
                                 <li><a href="/lienhe">LIÊN HỆ</a></li>
-                                <li><a href="/khuyenmai">KHUYẾN MÃI<i class="fa fa-angle-down"></i></a></li>
+                                <li><a href="/khuyenmai">KHUYẾN MÃI</a></li>
                             </ul>
                         </nav>
                 </div>

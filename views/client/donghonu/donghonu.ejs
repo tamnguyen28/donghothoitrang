@@ -41,11 +41,22 @@
                                                                 </ul>
                                                             </div>
                                                         </div>
+                                                        <div style="display: flex; justify-content: flex-end;">
+                                                            <form action="/donghonu/locgia" style="display: flex; padding-left: 15px;" method="GET">
+                                                                <span>Giá thấp nhất: </span> <input value="0" type="number"  name="minPrice" min="0" class="form-control"
+                                                                    style="width: 200px;" />
+                                                                <span>Giá cao nhất: </span> <input value="0" type="number" name="maxPrice" min="0" class="form-control"
+                                                                    style="width: 200px;" />
+
+                                                                <button class="btn btn-primary" type="submit">Lọc</button>
+                                                            </form>
+                                                        
+                                                        </div>
                                                     </div>
                                                     <!-- tab-area-start -->
                                                     <div class="tab-content">
                                                         <div class="tab-pane active" id="th">
-                                                            <div class="row">
+                                                            <div class="row clock-woman-contain">
                                                                 <% indexnu.forEach(function(sp){ %>
                                                                 <div class="col-lg-3 col-md-4 col-sm-6">
                                                                     <!-- single-product-start -->
@@ -53,7 +64,7 @@
                                                                         <div class="product-imgnamnu">
                                                                             <a href="/chitietsp?id=<%= sp.masp %>">
                                                                                 <img src="client/img/product/<%= sp.hinhanh %>" alt="book"
-                                                                                    class="primary"/>
+                                                                                    class="primary" style="width:140px; height:180px"/>
                                                                             </a>
                                                                             <div class="quick-view">
                                                                                 <a class="action-view" href="#"
@@ -94,14 +105,6 @@
                                                                                 <a href="/giohang?id=<%= sp.masp %>" title="Add to cart"><i
                                                                                         class="fa fa-shopping-cart"></i>Thêm giỏ hàng</a>
                                                                             </div>
-                                                                            <div class="add-to-link">
-                                                                                <ul>
-                                                                                    <li><a href="product-details.html"
-                                                                                            title="Details"><i
-                                                                                                class="fa fa-external-link"></i></a>
-                                                                                    </li>
-                                                                                </ul>
-                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                     <!-- single-product-end -->
@@ -111,6 +114,17 @@
                                                         </div>
                                                     </div>
                                                     <!-- tab-area-end -->
+                                                    <% if(isSearch == false) {%>
+                                                        <div style="display: flex; justify-content: center;">
+                                                            <nav aria-label="Page navigation example">
+                                                                <ul class="pagination">
+                                                                <% for(let i=1; i<= pageNumber; i++) {%>
+                                                                        <li class="page-item"><a class="page-link" href="/donghonu?page=<%= i %>"><%= i%></a></li>
+                                                                <% } %>
+                                                                </ul>
+                                                            </nav>
+                                                        </div>
+                                                    <% }%>
                                                 </div>
                                             </div>
                                         </div>
