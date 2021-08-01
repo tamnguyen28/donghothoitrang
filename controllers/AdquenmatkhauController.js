@@ -20,7 +20,7 @@ class AdquenmatkhauController{
         let email = req.body.emailUser;
         emailUser = email;
         uuidSave = uuid();
-        let link = `${req.protocol}://${req.hostname}:3000/admin/quenmatkhau/matkhaumoi?token=${uuidSave}`;
+        let link = `${req.protocol}://${req.hostname}/admin/quenmatkhau/matkhaumoi?token=${uuidSave}`;
 
         let contentRegister = `Kính chào quý khách
         FULLTIME đã nhận được yêu cầu thay đổi mật khẩu của quý khách.
