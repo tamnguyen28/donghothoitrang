@@ -77,7 +77,7 @@ class DonHangController {
         if(!req.cookies.user){
             return res.redirect('/dangnhap');
         }
-        console.log("ABC");
+        
         if (req.query.payonline && (req.query.message == 'Success' || req.query.vnp_ResponseCode == '00')) {
             req.session.giohang = [];
             thongtin.trangthai = 0;
