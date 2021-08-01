@@ -9,12 +9,16 @@ class AdmessageController{
         }else{
             message = 'Bạn đã đặt hàng thành công. Cảm ơn bạn!'
         }
+        // let manv =  req.cookies.admin ? req.cookies.admin.manv: 0;
+
+    
 
         res.render('admin/admessage/message',{
             title: 'Thông báo', 
             message: '',
             tennv: req.cookies.admin ? req.cookies.admin.tennv : '',
             manv: req.cookies.admin ? req.cookies.admin.manv: 0,
+            idnv: req.cookies.admin ? req.cookies.admin.manv : 0 ,
             message: message,
             status: statusCode
         });

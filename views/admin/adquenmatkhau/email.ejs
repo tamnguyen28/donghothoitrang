@@ -13,11 +13,37 @@
             
             <input class="btn-login" style="font-size: 20px;" type="submit" name="btn btn-primary" value="Gửi" />
             
-            <a class="ggg" href="/admin/login">Quay lại trang đăng nhập?</a>
+            <a class="ggg" style="color: chocolate;" href="/admin/login">Quay lại trang đăng nhập?</a>
         
         </form>
 </div>
 </div>
 <%- include('../partials/adminscript_bottom'); -%>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+    <script>
+        $("#formquenmatkhau").validate({
+            rules: {
+                emailUser: {
+                    required: true,
+                    emailUser: function (elmail) {
+                        var vnf_regexmail = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+                        var email = elmail.value;
+                        if (email !== '') {
+                            if (vnf_regexmail.test(email) == false) {
+                                $('#messemail').html('Email không hợp lệ');
+                            } else {
+                                $('#messemail').html('');
+                            }
+                        }
+                    }
+                },
+            },
+            messages: {
+                emailUser: {
+                    required: 'Vui lòng nhập email',
+                },
+            }
+        });
+    </script>
 </html>

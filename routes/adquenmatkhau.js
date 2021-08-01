@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const body = require('body-parser');
 
-const adquenmatkhauController = require('../controllers/AdquenmatkhauController');
+const adquenmatkhauController = require('../controllers/AdquenmatkhauController.js');
 
 router.use(body.urlencoded({ extended: false }));
 // parse application/json

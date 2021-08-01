@@ -10,6 +10,7 @@ class AdquenmatkhauController{
     index(req, res){
         res.render('admin/adquenmatkhau/email', {
             title: 'Quên mật khẩu',
+            role:'',
             tennv: req.cookies.admin ? req.cookies.admin.tennv : '',
             manv: req.cookies.admin ? req.cookies.admin.manv: 0
     })
@@ -19,7 +20,7 @@ class AdquenmatkhauController{
         let email = req.body.emailUser;
         emailUser = email;
         uuidSave = uuid();
-        let link = `${req.protocol}://${req.hostname}:3000/quenmatkhau/matkhaumoi?token=${uuidSave}`;
+        let link = `${req.protocol}://${req.hostname}:3000/admin/quenmatkhau/matkhaumoi?token=${uuidSave}`;
 
         let contentRegister = `Kính chào quý khách
         FULLTIME đã nhận được yêu cầu thay đổi mật khẩu của quý khách.
@@ -45,6 +46,7 @@ class AdquenmatkhauController{
             if(uuid === uuidSave){
                 res.render('admin/adquenmatkhau/matkhaumoi', {
                     title: 'Đặt lại mật khẩu',
+                    role:'',
                     tennv: req.cookies.admin ? req.cookies.admin.tennv : '',
                     manv: req.cookies.admin ? req.cookies.admin.manv: 0,
                 });
@@ -55,7 +57,7 @@ class AdquenmatkhauController{
 
     updateMatKhau(req, res){
         let pass = req.body.password; 
-        
+      
         AdquenmatkhauModel.updateMatKhau(md5(pass), emailUser).then(function(result){
             if(result == true){
                 uuidSave = '';

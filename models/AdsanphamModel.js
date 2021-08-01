@@ -133,7 +133,8 @@ class AdsanphamModel {
         return new Promise(function (resolve, reject) {
             let queryXoa = `SELECT * from sanpham JOIN chitiethoadon on sanpham.masp = chitiethoadon.masp
             JOIN hoadon on hoadon.mahd = chitiethoadon.mahd 
-            where sanpham.masp = ? and hoadon.trangthai = 0`;
+            where sanpham.masp = ? and (hoadon.trangthai = 0 or hoadon.trangthai = 1 
+                or hoadon.trangthai = 3 or hoadon.trangthai = 4 or hoadon.trangthai = 5)`;
             conn.query(queryXoa, [idsanpham], function (error, result) {
                 if (error) {
                     reject(error);

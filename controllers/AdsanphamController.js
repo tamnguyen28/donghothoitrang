@@ -168,12 +168,12 @@ class AdsanphamController {
         AdsanphamModel.getOrderOfProduct(idsanpham).then(function(result){
             if(result.length == 0){
                 AdsanphamModel.deleteSanPham(idsanpham).then(function(resultDeleteProduct){
-                    res.redirect('/admin/sanpham');
+                    res.redirect('/admin/sanpham?page=1');
                 }).catch(function(error){
-                    res.redirect('/admin/sanpham');
+                    res.redirect('/admin/sanpham?page=1');
                 })
             }else{
-                res.redirect('/admin/sanpham?mess=1');
+                res.redirect('/admin/sanpham?page=1&mess=1');
             }
         }).catch(function(error){
            

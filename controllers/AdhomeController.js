@@ -5,7 +5,7 @@ class AdhomeController {
         if(!req.cookies.admin){
             return res.redirect("/admin/login");
         }
-        
+        // console.log(req.cookies.admin.tennv);
         res.render('admin/home/index',{
             title: 'admin',
             roleAdmin: req.cookies.admin.id_maloainv,

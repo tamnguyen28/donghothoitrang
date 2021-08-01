@@ -9,6 +9,8 @@ class AdcanhanController{
         let message = req.query.mess ? req.query.mess: '' ; 
         AdcanhanModel.getCanhanById(manv).then(function(result){
             // console.log(result);
+            res.cookie('admin',result)
+
             res.render('admin/adcanhan/canhan', {
                 title: 'Quản lý tài khoản',
                 nhanvien: result,
@@ -16,7 +18,6 @@ class AdcanhanController{
                 idnv : manv,
                 mess: message,
                 role: req.cookies.admin.id_maloainv,
-                tennv: req.cookies.admin ? req.cookies.admin.tennv : '',
                 manv: req.cookies.admin ? req.cookies.admin.manv: 0
             });
         }).catch(function(error){
@@ -68,6 +69,7 @@ class AdcanhanController{
                 if(result == true){
                     AdcanhanModel.updateNewPass(newPass, idnhanvien).then(function(result){
                         res.render('admin/adcanhan/doimatkhau',{
+                            role: req.cookies.admin.id_maloainv,
                             tennv: req.cookies.admin ? req.cookies.admin.tennv : '',
                             manv: req.cookies.admin ? req.cookies.admin.manv: 0,
                             idnv: req.cookies.admin.manv,
@@ -75,6 +77,7 @@ class AdcanhanController{
                         });
                     }).catch(function(error){
                         res.render('admin/adcanhan/doimatkhau',{
+                            role: req.cookies.admin.id_maloainv,
                             tennv: req.cookies.admin ? req.cookies.admin.tennv : '',
                             manv: req.cookies.admin ? req.cookies.admin.manv: 0,
                             idnv: req.cookies.admin.manv,
@@ -83,6 +86,7 @@ class AdcanhanController{
                     });
                 }else{
                     res.render('admin/adcanhan/doimatkhau',{
+                        role: req.cookies.admin.id_maloainv,
                         tennv: req.cookies.admin ? req.cookies.admin.tennv : '',
                         manv: req.cookies.admin ? req.cookies.admin.manv: 0,
                         idnv: req.cookies.admin.manv,
@@ -91,6 +95,7 @@ class AdcanhanController{
                 }
             }).catch(function(){
                 res.render('admin/adcanhan/doimatkhau',{
+                    role: req.cookies.admin.id_maloainv,
                     tennv: req.cookies.admin ? req.cookies.admin.tennv : '',
                     manv: req.cookies.admin ? req.cookies.admin.manv: 0,
                     idnv: req.cookies.admin.manv,
@@ -99,6 +104,7 @@ class AdcanhanController{
             })
         }else{
             res.render('admin/adcanhan/doimatkhau',{
+                role: req.cookies.admin.id_maloainv,
                 tennv: req.cookies.admin ? req.cookies.admin.tennv : '',
                 manv: req.cookies.admin ? req.cookies.admin.manv: 0,
                 idnv: req.cookies.admin.manv,
