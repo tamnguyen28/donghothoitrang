@@ -5,7 +5,8 @@ class AddonhangModel {
         return new Promise(function (resolve, reject) {
             let sqlquery = `SELECT *,
                             DATE_FORMAT(hoadon.tgtao, '%d/%m/%Y') as 'tgtao'
-                            FROM hoadon where isDelete = 0 and hoadon.trangthai != 2 ORDER BY mahd DESC`;
+                            FROM hoadon where isDelete = 0 and (hoadon.trangthai = 0  or hoadon.trangthai = 1 
+                                or hoadon.trangthai = 3 or hoadon.trangthai = 4) ORDER BY mahd DESC`;
             conn.query(sqlquery, function (err, result) {
                 if (err) {
                     reject(err);
@@ -104,7 +105,7 @@ class AddonhangModel {
         return new Promise(function (resolve, reject) {
             let sqlquery = `SELECT *,
                             DATE_FORMAT(hoadon.tgtao, '%d/%m/%Y') as 'tgtao'
-                            FROM hoadon where isDelete = 0 and hoadon.trangthai = 2 or hoadon.trangthai = 5 ORDER BY mahd DESC`;
+                            FROM hoadon where isDelete = 0 and (hoadon.trangthai = 2 or hoadon.trangthai = 5) ORDER BY mahd DESC`;
             conn.query(sqlquery, function (err, result) {
                 if (err) {
                     reject(err);
