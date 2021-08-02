@@ -36,7 +36,7 @@
                                             <label>Trạng thái</label> <br />
                                             <input name="trangthai" type="radio" value="1" checked="checked" >
                                             Còn Hàng
-                                            <input name="trangthai" type="radio" value="0"> Sắp Hết Hàng <br />
+                                            <input name="trangthai" type="radio" value="0"> Hết Hàng <br />
                                             <br />
 
                                             <label><img src="">Hình ảnh</label>
@@ -72,7 +72,7 @@
                                             <input type="submit" name="themsanpham" value="Thêm sản phẩm"
                                                  class="btn btn-primary"><br />
                                             <br />
-                                            <a class="btn btn-info" href="admin/sanpham">Quay lại?</a>
+                                            <a class="btn btn-info" href="/admin/sanpham?page=1">Quay lại?</a>
                                         </form>
                                     </div>
                                 </div>
@@ -137,6 +137,12 @@
             const count = files.length;
         $('input[name=themsanpham]').click(function () {
             let count = files.length;
+
+            if(count < 4){
+                alert('Hình ảnh còn thiếu');
+                return false;  
+            }
+
             for (let i = 0; i < count; i++) {
                 if (!files[i].type.includes('image')) {
                     alert('Hình ảnh không hợp lệ');

@@ -87,6 +87,8 @@
                               <%= 'Đang giao' %>
                           <% }else if(sp.trangthai == 4) {%>
                               <%= 'Đã giao' %>
+                          <% }else if(sp.trangthai == 5) {%>
+                              <%= 'Đã hủy và hoàn tiền' %>
                           <%} else {%>
                               <%= 'Đã tiếp nhận'%>
                           <% } %>
@@ -96,7 +98,7 @@
                     <% }) %>
                     
                   </div>
-                  <a class="btn btn-info" href="admin/donhang">Quay lại?</a>
+                  <a class="btn btn-info" href="/admin/donhang/donhangdahuy">Quay lại?</a>
                 </div>
                 <div class="panel panel-default col-md-6">
                   <div class="panel-heading">

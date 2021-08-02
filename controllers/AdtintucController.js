@@ -34,6 +34,7 @@ class AdtintucController{
     //[GET] /admin/tintuc/createblog
     createblog(req, res){
         res.render('admin/adtintuc/createblog',{
+            role: req.cookies.admin.id_maloainv,
             tennv: req.cookies.admin ? req.cookies.admin.tennv : '',
             manv: req.cookies.admin ? req.cookies.admin.manv: 0,
             idnv: req.cookies.admin.manv
@@ -68,6 +69,7 @@ class AdtintucController{
             oldFileName = result[0].hinhanh
             res.render('admin/adtintuc/updateblog', { 
                 blog: result[0],
+                role: req.cookies.admin.id_maloainv,
                 tennv: req.cookies.admin ? req.cookies.admin.tennv : '',
                 manv: req.cookies.admin ? req.cookies.admin.manv: 0,
                 idnv: req.cookies.admin.manv

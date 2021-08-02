@@ -5,7 +5,7 @@ class AddonhangModel {
         return new Promise(function (resolve, reject) {
             let sqlquery = `SELECT *,
                             DATE_FORMAT(hoadon.tgtao, '%d/%m/%Y') as 'tgtao'
-                            FROM hoadon where isDelete = 0 ORDER BY mahd DESC`;
+                            FROM hoadon where isDelete = 0 and hoadon.trangthai != 2 ORDER BY mahd DESC`;
             conn.query(sqlquery, function (err, result) {
                 if (err) {
                     reject(err);
@@ -84,6 +84,54 @@ class AddonhangModel {
             })
         })
     }
+
+    //Hủy đơn hàng
+    updateCancelOrder(idmd){
+        return new Promise(function(resolve, reject){
+            let update = `update hoadon set hoadon.trangthai = 2 where hoadon.mahd = ?`;
+
+            conn.query(update, [idmd], function(error, result){
+                if(error){
+                    reject(false);
+                }else{
+                    resolve(true);
+                }
+            })
+        })
+    }
+    //danh sach don hang da bi huy
+    loadDonHangHuy() {
+        return new Promise(function (resolve, reject) {
+            let sqlquery = `SELECT *,
+                            DATE_FORMAT(hoadon.tgtao, '%d/%m/%Y') as 'tgtao'
+                            FROM hoadon where isDelete = 0 and hoadon.trangthai = 2 or hoadon.trangthai = 5 ORDER BY mahd DESC`;
+            conn.query(sqlquery, function (err, result) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(result);
+                }
+            })
+        })
+    }
+    //cap nhat don hang huy
+    updateStatusModelCancel(status, idDh){
+        return new Promise(function(resolve, reject){
+              let queryUpdateDH =`update hoadon 
+                              set hoadon.trangthai = ? 
+                              where hoadon.mahd = ?`;
+          
+              conn.query(queryUpdateDH, [status, idDh],function(error, result){
+                  if(error){
+                      // console.log(error);
+                      reject(error);
+                  }else{
+                      // console.log(result);
+                      resolve(result);
+                  }
+              })
+          })    
+      }
 }
 
 module.exports = new AddonhangModel();

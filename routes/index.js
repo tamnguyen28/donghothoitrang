@@ -15,6 +15,7 @@ const canhanRouter = require('./canhan');
 const lichsumuahangRouter = require('./lichsumuahang');
 const giaohangRouter = require('./giaohang');
 const quenmatkhauRouter = require('./quenmatkhau');
+const messageRouter = require('./message');
 
 const adhomeRouter = require('./adhome');
 const adsanphamRouter = require('./adsanpham');
@@ -28,9 +29,12 @@ const adcanhanRouter = require('./adcanhan');
 const adlienheRouter = require('./adlienhe');
 const adtimkiemRouter = require('./adtimkiem');
 const adthuonghieuRouter = require('./adthuonghieu');
-const messageRouter = require('./message');
+const adquenmatkhauRouter = require('./adquenmatkhau');
+const admessageRouter = require('./admessage');
 function route(app){
     
+    app.use('/admin/message', admessageRouter);
+    app.use('/admin/quenmatkhau', adquenmatkhauRouter);
     app.use('/admin/thuonghieu', adthuonghieuRouter);
     app.use('/admin/timkiem', adtimkiemRouter);
     app.use('/admin/lienhe', adlienheRouter);

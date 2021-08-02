@@ -31,6 +31,7 @@ class AdloaisanphamController{
     //[GET] /admin/loaisanpham/createLSP
     createLSP(req, res){
         res.render('admin/adloaisanpham/createLSP',{
+            role: req.cookies.admin.id_maloainv,
             tennv: req.cookies.admin ? req.cookies.admin.tennv : '',
             manv: req.cookies.admin ? req.cookies.admin.manv: 0,
             idnv: req.cookies.admin.manv
@@ -62,6 +63,7 @@ class AdloaisanphamController{
         AdloaisanphamModel.getLoaispById(idloaiSP).then(function(result){
             res.render('admin/adloaisanpham/updateLSP',{
                 LoaiSP: result[0],
+                role: req.cookies.admin.id_maloainv,
                 tennv: req.cookies.admin ? req.cookies.admin.tennv : '',
                 manv: req.cookies.admin ? req.cookies.admin.manv: 0,
                 idnv: req.cookies.admin.manv

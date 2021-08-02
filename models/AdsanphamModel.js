@@ -5,8 +5,23 @@ class AdsanphamModel {
         return new Promise(function (resolve, reject) {
             let sqlquery = `SELECT sanpham.*, thuonghieu.tenth FROM sanpham 
             JOIN thuonghieu on sanpham.id_math = thuonghieu.math
-            Where sanpham.isDelete = 0 ORDER BY masp DESC`;
+            Where sanpham.isDelete = 0 ORDER BY masp ASC`;
             conn.query(sqlquery, function (err, result) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(result);
+                }
+            })
+        })
+    }
+    loadAllSanPham(vitribatdau) {
+        return new Promise(function (resolve, reject) {
+            let sqlquery = `SELECT sanpham.*, thuonghieu.tenth FROM sanpham 
+            JOIN thuonghieu on sanpham.id_math = thuonghieu.math
+            Where sanpham.isDelete = 0 ORDER BY masp ASC limit ${vitribatdau},10`;
+            conn.query(sqlquery, function (err, result) {
+                // console.log(result);
                 if (err) {
                     reject(err);
                 } else {
@@ -118,7 +133,8 @@ class AdsanphamModel {
         return new Promise(function (resolve, reject) {
             let queryXoa = `SELECT * from sanpham JOIN chitiethoadon on sanpham.masp = chitiethoadon.masp
             JOIN hoadon on hoadon.mahd = chitiethoadon.mahd 
-            where sanpham.masp = ? and hoadon.trangthai = 0`;
+            where sanpham.masp = ? and (hoadon.trangthai = 0 or hoadon.trangthai = 1 
+                or hoadon.trangthai = 3 or hoadon.trangthai = 4 or hoadon.trangthai = 5)`;
             conn.query(queryXoa, [idsanpham], function (error, result) {
                 if (error) {
                     reject(error);

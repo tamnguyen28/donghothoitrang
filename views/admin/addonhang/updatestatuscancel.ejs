@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../partials/adminhead'); -%>
+
+    <body>
+        <section id="container">
+            <%- include('../partials/adminheader'); -%>
+                <%- include('../partials/adminleft'); -%>
+                    <!--main content start-->
+                    <section id="main-content">
+                        <section class="wrapper">
+                            <div class="col-md-12">
+                                <h4>Danh sách đơn hàng</h4><br>
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <!-- <th>Thứ tự</th> -->
+                                        <th>Mã đơn hàng</th>
+                                        <th>Tên người nhận</th>
+                                        <th>Số điện thoại</th>
+                                        <th>Địa chỉ</th>
+                                        <th>Tổng hóa đơn</th>
+                                        <th>Ghi chú</th>
+                                        <th>Phương thức thanh toán</th>
+                                        <th>Trạng thái</th>
+                                        <th>Ngày đặt</th>
+                                    </tr>
+                                    <tr>
+                                        <td><%= donhang.mahd %></td>
+                                        <td><%= donhang.tennguoinhan %></td>
+                                        <td><%= donhang.sdtnguoinhan %></td>
+                                        <td><%= donhang.diachinguoinhan %></td>
+                                        <td><%= donhang.tonghoadon %></td>
+                                        <td><%= donhang.ghichu %></td>
+                                        <td><% if(donhang.phuongthucthanhtoan == 1) {%>
+                                            <%= 'Thanh toán bằng ví MOMO' %>
+                                            <% }else if(donhang.phuongthucthanhtoan == 2) { %>
+                                                <%= 'Thanh toán bằng ví VNPAY' %>
+                                            <%} else {%>
+                                                <%= 'Thanh toán khi nhận hàng'%>
+                                            <% } %>
+                                        </td>
+                                        <td id="<%= donhang.mahd %>">
+                                            <% if(donhang.trangthai == 1) {%>
+                                                <%= 'Chờ lấy hàng' %>
+                                            <% }else if(donhang.trangthai == 2) { %>
+                                                <%= 'Đơn hàng đã hủy' %>
+                                            <% }else if(donhang.trangthai == 3) {%>
+                                                <%= 'Đang giao' %>
+                                            <% }else if(donhang.trangthai == 4) {%>
+                                                <%= 'Đã giao' %>
+                                            <% }else if(donhang.trangthai == 5) {%>
+                                                <%= 'Đã hủy và hoàn tiền' %>
+                                             <%} else {%>
+                                                <%= 'Đã tiếp nhận'%>
+                                            <% } %>      
+                                        </td>
+                                        <td><%= donhang.tgtao %></td>
+                                    </tr>
+                                </table>
+                                <br/>
+                                <h4>Cập nhật tình trạng đơn hàng</h4><br>
+                                <select id="<%= donhang.mahd %>" class="form-control" name="xuly" onchange="changeStatus(this) ">
+                                    <option value="-1">--Chọn tình trạng--</option>
+                                    <option value="5">Đã hủy và hoàn tiền</option>
+                                </select><br>
+                                <input type="button" onclick="updateStatusBill()" value="Cập nhật đơn hàng" name="capnhatdonhang" class="btn btn-success"><br/>
+                                <br/>
+                                <a class="btn btn-info" href="admin/donhang/donhangdahuy">Quay lại?</a>
+                            </div>
+                        </section>
+
+                        <%- include('../partials/adminfooter'); -%>
+                            <!--main content end-->
+                    </section>
+        </section>
+        <%- include('../partials/adminscript_bottom'); -%>
+    </body>
+    <script>
+            let status = 0;
+            let idDH = 0;
+        function changeStatus(elselect){
+            status = elselect.value;
+            idDH = elselect.id;
+        }
+
+        function updateStatusBill(){
+            if(status != -1){
+                $.ajax({
+                    method: 'GET',
+                    url:'/admin/donhang/updateStatusCancelOrder',
+                    data: {
+                        statusdh: status,
+                        id: idDH
+                    },
+                    success: function(data){
+                        if(data && data.statusCode == 1){
+                            if(status == 5){
+                                $(`#${idDH}`).html('Đã hủy và hoàn tiền');
+                            
+                            }
+                        }
+                    },
+                    error: function(error){
+
+                    }
+                })
+        
+            }
+           
+        }
+        
+    </script>
+</html>

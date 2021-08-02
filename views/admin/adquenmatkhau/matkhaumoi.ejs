@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    .error {
+        color: red;
+        font-style: italic;
+    }
+</style>
+<%- include('../partials/adminhead'); -%>
+<body>
+<div class="log-w3">
+<div class="w3layouts-main">
+    <h2 style="color:darkblue">Đặt lại mật khẩu</h2>
+        <form method="POST" action="/admin/quenmatkhau/updatematkhau" id="formChangePass">
+            <label style="color:fuchsia">Mật khẩu mới</label>
+            <input class="ggg" type="password" name="password" id="newPass"/>
+            <label style="color:fuchsia">Nhập lại mật khẩu</label>
+            <input class="ggg" type="password" id="oldpass" name="confirm" />
+            <input class="btn-login" type="submit" name="btn btn-primary" value="Đặt lại mật khẩu" />
+            <br/>
+            <a class="ggg" style="color: chocolate;" href="/admin/login">Quay lại trang đăng nhập?</a>
+        
+        </form>
+</div>
+</div>
+<%- include('../partials/adminscript_bottom'); -%>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+    <script>
+            $("#formChangePass").validate({
+                rules: {
+                    password:{
+                        required: true,
+                        minlength: 4
+                    },
+                    confirm:{
+                        required: true,
+                        equalTo: '#newPass'
+                    }
+                },
+                messages:{
+                    password:{
+                        required: 'Mật khẩu mới không được để trống',
+                        minlength: 'Mật khẩu không được dưới 4 ký tự'
+                    },
+                    confirm: {
+                        required: ' Không được để trống',
+                        equalTo: 'Mật khẩu và Mật khẩu xác nhận không giống nhau'
+                    }
+                }
+            });
+    </script>
+</html>

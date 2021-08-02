@@ -76,6 +76,16 @@
                     </div>
                   </div>
                 </div>
+                <!-- tab-are-end-->
+                <div style="display: flex; justify-content: center;">
+                  <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                      <% for(let i=1; i<= pageNumber; i++) {%>
+                        <li class="page-item"><a class="page-link" href="/admin/sanpham?page=<%= i%>"><%= i%></a></li>
+                      <% } %>
+                    </ul>
+                  </nav>
+                </div>
               </div>
             </section>
             <%- include('../partials/adminfooter'); -%>
