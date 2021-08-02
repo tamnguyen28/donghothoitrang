@@ -1,5 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+<style>
+    .error {
+        color: red;
+        font-style: italic;
+    }
+</style>
 <%- include('../partials/adminhead'); -%>
 <body>
 <div class="log-w3">
@@ -10,7 +16,8 @@
             <input class="ggg" type="password" name="password" id="newPass"/>
             <label style="color:fuchsia">Nhập lại mật khẩu</label>
             <input class="ggg" type="password" id="oldpass" name="confirm" />
-            
+            <input class="btn-login" type="submit" name="btn btn-primary" value="Đặt lại mật khẩu" />
+            <br/>
             <a class="ggg" style="color: chocolate;" href="/admin/login">Quay lại trang đăng nhập?</a>
         
         </form>

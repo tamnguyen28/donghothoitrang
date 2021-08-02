@@ -1,5 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+<style>
+    .error {
+        color: red;
+        font-style: italic;
+    }
+</style>
 <%- include('../partials/adminhead'); -%>
 <body>
 <div class="log-w3">
@@ -8,8 +14,9 @@
         <form action="/admin/quenmatkhau/sendmail" method="POST" id="formquenmatkhau">
             <label>Email*</label>
             <input type="email" class="ggg" name="emailUser">
-            <span id="messemail" style="color: red; font-weight: bold;" ></span>
-                
+            <br/>
+            <span id="messemail" style="color: red; font-style: italic;" ></span>
+            <br/>
             
             <input class="btn-login" style="font-size: 20px;" type="submit" name="btn btn-primary" value="Gửi" />
             
