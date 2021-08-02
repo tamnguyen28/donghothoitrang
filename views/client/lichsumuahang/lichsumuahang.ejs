@@ -43,7 +43,7 @@
                                                            <% }) %>  
                                                         </td>
                                                         <td>
-                                                            <%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(sp.tonghoadon)%>
+                                                            <%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(sp.tonghoadon + sp.phivanchuyen)%>
                                                         </td>
                                                         <td><a href="/lichsumuahang/chitietdonhang?id=<%= sp.mahd%>">Xem chi tiết </a><a href="/lichsumuahang/huydonhang?id=<%= sp.mahd%>&idghtk=<%= sp.id_ghtk%>">| Hủy đơn hàng</a></td>
                                                     </tr>
