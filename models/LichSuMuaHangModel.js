@@ -4,7 +4,7 @@ class LichSuMuaHangModel{
     loadDonhang(idCustomer){
         // console.log(idCustomer);
         return new Promise (function(resolve, reject){
-            let queryDonhang = `SELECT hoadon.mahd, sanpham.tensp, hoadon.tonghoadon, hoadon.id_ghtk, DATE_FORMAT(hoadon.tgtao, '%d/%m/%Y') as 'tgtao'  
+            let queryDonhang = `SELECT hoadon.mahd, sanpham.tensp, hoadon.tonghoadon, hoadon.id_ghtk, DATE_FORMAT(hoadon.tgtao, '%d/%m/%Y') as 'tgtao', hoadon.phivanchuyen  
                                 FROM hoadon JOIN khachhang on khachhang.makh = hoadon.id_makh
                                 JOIN chitiethoadon on chitiethoadon.mahd = hoadon.mahd 
                                 JOIN sanpham on sanpham.masp = chitiethoadon.masp WHERE khachhang.makh = ?`;
