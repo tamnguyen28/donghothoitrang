@@ -3,8 +3,11 @@ const mail = require('../models/configmail/configmail');
 class DangKyController {
 
     dangky(req, res){
+        let mess = req.query.mess;
+
         res.render('client/dangky/dangky', {
             title: 'dang ky',
+            mess: mess ? mess : 0,
             tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
             idkh:  req.cookies.user ? req.cookies.user.makh: 0 ,
             giohangs: (req.session && req.session.giohang ? req.session.giohang: [] ), 
@@ -29,7 +32,7 @@ class DangKyController {
             Số điện thoại: ${khachhang.sodienthoai},
             Tên đăng nhập: ${khachhang.taikhoan}`;
             mail.sendmail(emailTo, 'Đăng ký tài khoản thành công', contentRegister);
-            res.redirect('/?mess=1');
+            res.redirect('/dangky?mess=1');
             
         }).catch(function(err){
             console.log(err);
