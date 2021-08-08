@@ -11,8 +11,6 @@ class AdmessageController{
         }
         // let manv =  req.cookies.admin ? req.cookies.admin.manv: 0;
 
-    
-
         res.render('admin/admessage/message',{
             title: 'Thông báo', 
             message: '',

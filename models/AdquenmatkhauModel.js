@@ -5,8 +5,6 @@ class AdquenmatkhauModel {
         return new Promise(function (resolve, reject) {
             let emailQuery = `Select * from nhanvien where nhanvien.email = ?`;
             conn.query(emailQuery, [email], function (error, result) {
-                // console.log(error);
-                // console.log(result);
                 if (result.length != 0) {
                     let update = `UPDATE nhanvien
                     SET nhanvien.matkhau = ?
@@ -24,9 +22,25 @@ class AdquenmatkhauModel {
                     reject(false);
                 }       
             })
-
-
         });
+    }
+    checkMailExist(email){
+        return new Promise(function(resolve, reject){
+            let query = `SELECT * FROM nhanvien WHERE nhanvien.email = ?`;
+
+            conn.query(query, [email], function(error, result){
+                if(error){
+                    console.log(error);
+                }else{
+                    if(result == 0){
+                        resolve(false);
+                    }else{
+                        resolve(true);
+                    }
+                }
+
+            })
+        })
     }
 }
 
