@@ -80,11 +80,31 @@
                 <div style="display: flex; justify-content: center;">
                   <nav aria-label="Page navigation example">
                     <ul class="pagination">
-                      <% for(let i=1; i<= pageNumber; i++) {%>
-                        <li class="page-item"><a class="page-link" href="/admin/sanpham?page=<%= i%>"><%= i%></a></li>
-                      <% } %>
+                      <% for(let i=1; i<=pageNumber; i++) {%>
+                        <li class="page-item"><a class="page-link" href="/admin/sanpham?page=<%= i%>">
+                            <%= i%>
+                          </a></li>
+                        <% } %>
                     </ul>
                   </nav>
+                </div>
+                <div class="modal fade" tabindex="-1" role="dialog" id="modalNotify">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Thông báo</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <p>Không thể xóa! Sản phẩm có trong đơn hàng</p>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" id="btnOk" class="btn btn-primary">Ok</button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </section>
@@ -95,9 +115,14 @@
     <%- include('../partials/adminscript_bottom'); -%>
   </body>
   <script>
-    let mess = '<%= mess %>';
+    let mess = `<%= mess %>`;
+
     if (mess && mess == 1) {
-      alert('Không thể xóa! Sản phẩm có trong đơn hàng');
+      $('#modalNotify').modal('show');
+
+      $('#btnOk').click(function () {
+        $('#modalNotify').modal('hide');
+      })
     }
   </script>
   <script>

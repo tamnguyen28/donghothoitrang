@@ -20,46 +20,70 @@
                                                 <h2>QUẢN LÝ TÀI KHOẢN</h2>
                                             </div>
                                         </div>
-                                        <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 col-sm-12 col-xs-12">
+                                        <div
+                                            class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 col-sm-12 col-xs-12">
                                             <div class="billing-fields">
                                                 <div class="row">
                                                     <div class="col-xs-12">
                                                         <div class="single-register">
                                                             <p>Tên nhân viên<span>*</span></p>
-                                                            <input class="register-signup-infor" type="text" id="name" name="name" 
-                                                            style="width: 800px;height: 40px;" value="<%= nhanvien ? nhanvien.tennv : '' %>"/>
+                                                            <input class="register-signup-infor" type="text" id="name"
+                                                                name="name" style="width: 800px;height: 40px;"
+                                                                value="<%= nhanvien ? nhanvien.tennv : '' %>" />
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <br/>
+                                                <br />
                                                 <div class="row">
                                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                         <div class="single-register">
                                                             <p>Địa chỉ email<span>*</span></p>
-                                                            <input class="register-emailaddress-phone" type="email" id="email" name="email" 
-                                                            style="width: 400px;height: 40px;" value="<%= nhanvien ? nhanvien.email : '' %>"/>
+                                                            <input class="register-emailaddress-phone" type="email"
+                                                                id="email" name="email"
+                                                                style="width: 400px;height: 40px;"
+                                                                value="<%= nhanvien ? nhanvien.email : '' %>" />
                                                         </div>
                                                     </div>
-                                                    
+
                                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                         <div class="single-register">
                                                             <p>Số điện thoại<span>*</span></p>
-                                                            <input class="register-emailaddress-phone" type="number" id="phone" name="phone" 
-                                                            style="width: 370px;height: 40px;" value="<%= nhanvien ? nhanvien.sodienthoai : '' %>"/>
-                                                        </div><br/>
+                                                            <input class="register-emailaddress-phone" type="number"
+                                                                id="phone" name="phone"
+                                                                style="width: 370px;height: 40px;"
+                                                                value="<%= nhanvien ? nhanvien.sodienthoai : '' %>" />
+                                                        </div><br />
                                                     </div>
                                                 </div>
-                                                <br/>
+                                                <br />
                                                 <div class="single-register" align="center">
-                                                    <input class="btn btn-primary" class="btn-login" type="submit" name="btn btn-primary"
-                                                        value="Cập nhật">
+                                                    <input class="btn btn-primary" class="btn-login" type="submit"
+                                                        name="btn btn-primary" value="Cập nhật">
                                                 </div>
                                                 <a class="btn btn-info" href="admin">Quay lại?</a>
                                             </div>
                                         </div>
                                     </div>
                                 </form>
-
+                                <div class="modal fade" tabindex="-1" role="dialog" id="modalNotify">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Thông báo</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Cập nhật thông tin thành công!</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" id="btnOk" class="btn btn-primary">Ok</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </section>
                         <%- include('../partials/adminfooter'); -%>
@@ -69,9 +93,16 @@
         <%- include('../partials/adminscript_bottom'); -%>
     </body>
     <script>
-        let mess = '<%= mess %>';
-        if(mess && mess == 1){
-            alert('Cập nhật thông tin thành công!');
+        let mess = `<%= mess %>`;
+
+        if (mess && mess == 1) {
+            $('#modalNotify').modal('show');
+
+            $('#btnOk').click(function () {
+                $('#modalNotify').modal('hide');
+            })
         }
+
     </script>
+
 </html>

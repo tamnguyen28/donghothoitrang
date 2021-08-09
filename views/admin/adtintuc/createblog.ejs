@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-    <style>
-        .error{
-            color: #f20;
-            font-style: italic;
-        }
-    </style>
+<style>
+    .error {
+        color: #f20;
+        font-style: italic;
+    }
+</style>
 <%- include('../partials/adminhead'); -%>
+
     <body>
         <section id="container">
             <%- include('../partials/adminheader'); -%>
@@ -20,26 +21,48 @@
                                         <div class="panel-heading">
                                             THÊM TIN TỨC
                                         </div>
-                                        <form method="POST" action="/admin/tintuc/createtintuc" enctype="multipart/form-data" id="formAddProduct">
+                                        <form method="POST" action="/admin/tintuc/createtintuc"
+                                            enctype="multipart/form-data" id="formAddProduct">
                                             <label>Tên tiêu đề</label>
-                                            <input type="text" class="form-control" name="tieude" placeholder="Tên tiêu đề"><br>
-                                            
+                                            <input type="text" class="form-control" name="tieude"
+                                                placeholder="Tên tiêu đề"><br>
+
                                             <label>Nội dung</label><br />
                                             <textarea id="mota" name="noidung" rows="4" cols="140"></textarea><br />
 
                                             <label>Hình ảnh</label>
-                                            <input accept="image/*" id="imgtintuc" type="file" class="form-control" name="hinhanh" placeholder="Hình ảnh"><br>
-                                            <img id="blah" src="#" alt="your image" width="100" height="100" /><br/>
+                                            <input accept="image/*" id="imgtintuc" type="file" class="form-control"
+                                                name="hinhanh" placeholder="Hình ảnh"><br>
+                                            <img id="blah" src="#" alt="your image" width="100" height="100" /><br />
                                             <label>Trạng thái</label> <br />
                                             <input name="trangthai" type="radio" value="1" checked="checked"> Bật
                                             <input name="trangthai" type="radio" value="0"> Tắt <br />
 
                                             <br />
                                             <input type="submit" name="themtintuc" value="Thêm tin tức"
-                                                class="btn btn-primary"><br/>
-                                            <br/>
+                                                class="btn btn-primary"><br />
+                                            <br />
                                             <a class="btn btn-info" href="admin/tintuc">Quay lại?</a>
                                         </form>
+                                    </div>
+                                </div>
+                                <div class="modal fade" tabindex="-1" role="dialog" id="modalNotify">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Thông báo</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p id="mess"></p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" id="btnOk" class="btn btn-primary">Ok</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -62,37 +85,42 @@
         }
 
         $("#formAddProduct").validate({
-                rules: {
-                    tieude: {
-                        required: true,                    
-                    },
-                    noidung: {
-                        required: true,                    
-                    },
-                    hinhanh: {
-                        required: true,                    
-                    }
+            rules: {
+                tieude: {
+                    required: true,
                 },
-                messages:{
-                    tieude: {
-                        required: 'Tên tiêu đề không được để trống'
-                    },
-                    noidung: {
-                        required: 'Nội dung tiêu đề không được để trống'
-                    },
-                    hinhanh: {
-                        required: 'Hình ảnh không được để trống'
-                    },
+                noidung: {
+                    required: true,
+                },
+                hinhanh: {
+                    required: true,
                 }
-            });
-           
+            },
+            messages: {
+                tieude: {
+                    required: 'Tên tiêu đề không được để trống'
+                },
+                noidung: {
+                    required: 'Nội dung tiêu đề không được để trống'
+                },
+                hinhanh: {
+                    required: 'Hình ảnh không được để trống'
+                },
+            }
+        });
+        $('#btnOk').click(function () {
+            $('#modalNotify').modal('hide');
+        })
+
         $('input[name=themtintuc]').click(function () {
 
             if (!file.type.includes('image')) {
-                alert('Hình ảnh không hợp lệ');
+                $('#mess').text('Hình ảnh không hợp lệ');
+
+                $('#modalNotify').modal('show');
                 return false;
             }
-           
+
             return true;
         })
     </script>
