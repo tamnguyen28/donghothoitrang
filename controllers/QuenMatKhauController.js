@@ -7,36 +7,54 @@ const QuenMatKhauModel = require('../models/QuenMatKhauModel');
 let emailUser = '';
 let uuidSave = ''; 
 class QuenMatKhauController{
-    index(req, res){
+    index(req, res){   
+        let mess = req.query.mess;     
         res.render('client/quenmatkhau/email', {
             title: 'Quên mật khẩu',
             idkh:0,
+            mess: mess ? mess : -1,
             tenkh: '',
             giohangs: (req.session && req.session.giohang ? req.session.giohang: [] ),
         });
     }
 
     sendMail(req, res) {
+       
         let email = req.body.emailUser;
         emailUser = email;
         uuidSave = uuid();
-        let link = `${req.protocol}://${req.hostname}/quenmatkhau/matkhaumoi?token=${uuidSave}`;
 
-        let contentRegister = `Kính chào quý khách
-        FULLTIME đã nhận được yêu cầu thay đổi mật khẩu của quý khách.
-        Xin hãy click vào link bên dưới để đổi mật khẩu.
-        ${link}
-        Mọi thắc mắc và góp ý vui lòng liên hệ với bộ phận chăm sóc khách hàng
+        QuenMatKhauModel.checkMailExist(emailUser).then(function(result){
+            if(result == true){
+                setTimeout(function(){
+                    uuidSave = '';
+                },120000);
+        
+                let link = `${req.protocol}://${req.hostname}/quenmatkhau/matkhaumoi?token=${uuidSave}`;
+        
+                let contentRegister = `Kính chào quý khách
+                FULLTIME đã nhận được yêu cầu thay đổi mật khẩu của quý khách.
+                Xin hãy click vào link bên dưới để đổi mật khẩu.
+                ${link}
+                Mọi thắc mắc và góp ý vui lòng liên hệ với bộ phận chăm sóc khách hàng
+        
+                - Hotline: 1900 6017
+        
+                - Giờ làm việc: 8:00 - 22:00 (Tất cả các ngày bao gồm cả Lễ Tết)
+        
+                - Email hỗ trợ: hoidap@fulltime.com`
+        
+                mail.sendmail(email, 'Yêu cầu thay đổi mật khẩu', contentRegister);
+        
+                res.redirect(`/message?statusCode=1&emailUser=${encodeURIComponent(email)}`);
+            }else{
+                res.redirect('/quenmatkhau/email?mess=0');
+            }
+        }).catch(function(error){
 
-        - Hotline: 1900 6017
+        })
 
-        - Giờ làm việc: 8:00 - 22:00 (Tất cả các ngày bao gồm cả Lễ Tết)
-
-        - Email hỗ trợ: hoidap@fulltime.com`
-
-        mail.sendmail(email, 'Yêu cầu thay đổi mật khẩu', contentRegister);
-
-        res.redirect(`/message?statusCode=1&emailUser=${encodeURIComponent(email)}`);
+       
     }
 
     matkhau(req, res){

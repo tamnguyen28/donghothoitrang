@@ -57,7 +57,6 @@ class CaNhanModel {
   updateNewPass(newPass, idEmployee) {
     return new Promise(function (resolve, reject) {
       let query = `update khachhang set khachhang.matkhau = ? where khachhang.makh = ?`
-      // console.log("ABC");
       conn.query(query, [newPass, idEmployee], function (error, result) {
         if (error) {
           // console.log(error);

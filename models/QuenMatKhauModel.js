@@ -23,9 +23,26 @@ class QuenMatKhauModel {
                     reject(false);
                 }       
             })
-
-
         });
+    }
+
+    checkMailExist(email){
+        return new Promise(function(resolve, reject){
+            let query = `SELECT * FROM khachhang WHERE khachhang.email = ?`;
+
+            conn.query(query, [email], function(error, result){
+                if(error){
+                    console.log(error);
+                }else{
+                    if(result == 0){
+                        resolve(false);
+                    }else{
+                        resolve(true);
+                    }
+                }
+
+            })
+        })
     }
 }
 

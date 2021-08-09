@@ -38,13 +38,43 @@
                         </form>
                     </div>
                 </div>
+                <div class="modal fade" tabindex="-1" role="dialog" id="modalNotify">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Thông báo</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Email không tồn tại trong hệ thống</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" id="btnOk" class="btn btn-primary">Ok</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <%- include ('../partials/footer'); -%>
         </div>
     </body>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
     <script>
+        $(document).ready(function(){
+            let mess = `<%= mess %>`;
+
+            if(mess && mess == 0){
+                $('#modalNotify').modal('show');
+
+                $('#btnOk').click(function(){
+                    $('#modalNotify').modal('hide');
+                })
+            }
+        });
+
         $("#formquenmatkhau").validate({
-            rules: {
+            rules: {    
                 emailUser: {
                     required: true,
                     emailUser: function (elmail) {
