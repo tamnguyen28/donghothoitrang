@@ -47,17 +47,15 @@
     </body>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
     <script>
-        
-            let mess = `<%= mess %>`;
+        let mess = `<%= mess %>`;
 
-            if (mess && mess == 0) {
-                $('#modalNotify').modal('show');
+        if (mess && mess == 0) {
+            $('#modalNotify').modal('show');
 
-                $('#btnOk').click(function () {
-                    $('#modalNotify').modal('hide');
-                })
-            }
-       
+            $('#btnOk').click(function () {
+                $('#modalNotify').modal('hide');
+            })
+        }
 
         $("#formquenmatkhau").validate({
             rules: {
