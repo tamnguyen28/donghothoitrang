@@ -47,15 +47,26 @@ class CaNhanController {
     //Đổi mật khẩu
     doimatkhau(req, res){
         let makh = req.query.idkh;
-        let message = req.query.mess ? req.query.mess: '' ; 
+        let mess = ``;
+
+        if(req.query.mess && req.query.mess == 2){
+            let user = req.cookies.user;
+            res.cookie("user", user, { maxAge: 0 });
+            mess = 'Đổi mật khẩu thành công'
+        }else if(req.query.mess && req.query.mess == 3){
+            mess = 'Mật khẩu cũ không đúng'
+        }else if(req.query.mess && req.query.mess == 4){
+            mess = 'Mật khẩu cũ không được trùng mật khẩu mới'
+        }
+
         canhanModel.getKhachHangById(makh).then(function(result){
             res.render('client/canhan/doimatkhau',{
                 title: "Đổi mật khẩu",
+                mess: mess,
                 tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
                 idkh:  req.cookies.user ? req.cookies.user.makh: 0 ,
                 giohangs: (req.session && req.session.giohang ? req.session.giohang: [] ),
                 idkh: req.cookies.user.makh,
-                mess: ''
             });
         }).catch(err =>{
             console.log(err);
@@ -66,52 +77,24 @@ class CaNhanController {
         let oldpass = md5(req.body.mkcu);
         let newPass = md5(req.body.mkmoi);
         let idkhachhang = req.cookies.user.makh;
-
+        
         if(oldpass != newPass){
             canhanModel.checkOldPassword(oldpass, idkhachhang).then(function(result){
+                console.log(result);
                 if(result == true){
                     canhanModel.updateNewPass(newPass, idkhachhang).then(function(result){
-                        res.render('client/canhan/doimatkhau',{
-                            title: "Đổi mật khẩu",
-                            tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
-                            idkh: req.cookies.user ? req.cookies.user.makh: 0 ,
-                            giohangs: (req.session && req.session.giohang ? req.session.giohang: [] ),
-                            idkh: req.cookies.user.makh,
-                            mess: 'Đổi mật khẩu thành công'
-                        });
-                    }).catch(function(error){
-                        res.render('client/canhan/doimatkhau',{
-                            title: "Đổi mật khẩu",
-                            idkh: req.cookies.user.makh,
-                            mess: 'Mật khẩu cũ không đúng'
-                        });   
+                        res.redirect('/canhan/doimatkhau?mess=2');
+                    }).catch(function(error){  
+                        res.redirect('/canhan/doimatkhau?mess=3');
                     });
-                }else{
-                    res.render('client/canhan/doimatkhau',{
-                        title: "Đổi mật khẩu",
-                        idkh: req.cookies.user.makh,
-                        mess: 'Mật khẩu cũ không đúng'
-                    });   
+                }else{ 
+                    res.redirect('/canhan/doimatkhau?mess=3');
                 }
             }).catch(function(){
-                res.render('client/canhan/doimatkhau',{
-                    title: "Đổi mật khẩu",
-                    tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
-                    idkh: req.cookies.user ? req.cookies.user.makh: 0 ,
-                    giohangs: (req.session && req.session.giohang ? req.session.giohang: [] ),
-                    idkh: req.cookies.user.makh,
-                    mess: 'Mật khẩu cũ không đúng'
-                });  
+                res.redirect('/canhan/doimatkhau?mess=3');
             })
         }else{
-            res.render('client/canhan/doimatkhau',{
-                title: "Đổi mật khẩu",
-                tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
-                idkh: req.cookies.user ? req.cookies.user.makh: 0 ,
-                giohangs: (req.session && req.session.giohang ? req.session.giohang: [] ),
-                idkh: req.cookies.user.makh,
-                mess: 'Mật khẩu cũ không được trùng mật khẩu mới'
-            });
+            res.redirect('/canhan/doimatkhau?mess=4');
         }
     }
 }

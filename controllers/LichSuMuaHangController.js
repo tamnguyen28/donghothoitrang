@@ -31,7 +31,7 @@ class LichSuMuaHangController{
                     idkh: req.cookies.user ? req.cookies.user.makh: 0,
                     tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
                     giohangs: (req.session && req.session.giohang ? req.session.giohang: [] ),
-                    message: mess
+                    mess: mess
                 })
         }).catch(err => {
             console.log(err);
