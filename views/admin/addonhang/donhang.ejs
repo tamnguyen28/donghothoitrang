@@ -25,42 +25,71 @@
                                                     <th>Quản lý</th>
                                                 </tr>
                                                 <% donhang.forEach(function(dh){ %>
-                                                <tr>
-                                                    <td id="customerId"><%= dh.mahd %></td>
-                                                    <td><%= dh.tennguoinhan %></td>
-                                                    <td><% if(dh.phuongthucthanhtoan == 1) {%>
-                                                            <%= 'Thanh toán bằng ví MOMO' %>
-                                                        <% }else if(dh.phuongthucthanhtoan == 2) { %>
-                                                            <%= 'Thanh toán bằng ví VNPAY' %>
-                                                        <%} else {%>
-                                                            <%= 'Thanh toán khi nhận hàng'%>
-                                                        <% } %>
-                                                    </td>
-                                                    <td><% if(dh.trangthai == 1) {%>
-                                                            <%= 'Chờ lấy hàng' %>
-                                                        <% }else if(dh.trangthai == 2) { %>
-                                                            <%= 'Đơn hàng đã hủy' %>
-                                                        <% }else if(dh.trangthai == 3) {%>
-                                                            <%= 'Đang giao' %>
-                                                        <% }else if(dh.trangthai == 4) {%>
-                                                            <%= 'Đã giao' %>
-                                                        <%} else {%>
-                                                            <%= 'Đã tiếp nhận'%>
-                                                        <% } %>    
-                                                    </td>
-                                                    <td>
-                                                        <a href="/admin/donhang/detailOrder?id=<%= dh.mahd %>" class="btn btn-success ">Chi tiết đơn hàng</a>
-                                                        <a href="/admin/donhang/updateOrder?id=<%= dh.mahd %>" class="btn btn-primary <%= (role && role != 1) ? '' : 'hidden'%>">Cập nhật</a>
-                                                        <button type="button" onclick="cancelOrder(`<%= dh.mahd%>`)" class="btn btn-danger <%= (role && role != 1) ? '' : 'hidden'%>
-                                                                                                                                    <%= (dh.trangthai == 3 || dh.trangthai == 4) ? 'hidden' : '' %>">Hủy đơn hàng</button>
-                                                    </td>
-                                                </tr>
-                                                <% }); %>
-
+                                                    <tr>
+                                                        <td id="customerId">
+                                                            <%= dh.mahd %>
+                                                        </td>
+                                                        <td>
+                                                            <%= dh.tennguoinhan %>
+                                                        </td>
+                                                        <td>
+                                                            <% if(dh.phuongthucthanhtoan==1) {%>
+                                                                <%= 'Thanh toán bằng ví MOMO' %>
+                                                                    <% }else if(dh.phuongthucthanhtoan==2) { %>
+                                                                        <%= 'Thanh toán bằng ví VNPAY' %>
+                                                                            <%} else {%>
+                                                                                <%= 'Thanh toán khi nhận hàng' %>
+                                                                                    <% } %>
+                                                        </td>
+                                                        <td>
+                                                            <% if(dh.trangthai==1) {%>
+                                                                <%= 'Chờ lấy hàng' %>
+                                                                    <% }else if(dh.trangthai==2) { %>
+                                                                        <%= 'Đơn hàng đã hủy' %>
+                                                                            <% }else if(dh.trangthai==3) {%>
+                                                                                <%= 'Đang giao' %>
+                                                                                    <% }else if(dh.trangthai==4) {%>
+                                                                                        <%= 'Đã giao' %>
+                                                                                            <%} else {%>
+                                                                                                <%= 'Đã tiếp nhận' %>
+                                                                                                    <% } %>
+                                                        </td>
+                                                        <td>
+                                                            <a href="/admin/donhang/detailOrder?id=<%= dh.mahd %>"
+                                                                class="btn btn-success ">Chi tiết đơn hàng</a>
+                                                            <a href="/admin/donhang/updateOrder?id=<%= dh.mahd %>"
+                                                                class="btn btn-primary <%= (role && role != 1) ? '' : 'hidden'%>">Cập nhật</a>
+                                                            <button type="button"
+                                                                onclick="showDialogCancel(`<%= dh.mahd%>`)"
+                                                                class="btn btn-danger <%= (role && role != 1) ? '' : 'hidden'%>
+                                                                                        <%= (dh.trangthai == 3 || dh.trangthai == 4) ? 'hidden' : '' %>">Hủy đơn hàng
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                    <% }); %>
                                             </table>
                                         </div>
                                     </div>
-                                 </div>    
+                                </div>
+                                <div class="modal fade" tabindex="-1" role="dialog" id="modalNotify">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Thông báo</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Hủy đơn hàng thành công</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" id="btnOk" class="btn btn-primary">Ok</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </section>
 
@@ -71,36 +100,35 @@
         <%- include('../partials/adminscript_bottom'); -%>
     </body>
     <script>
-        $('body').load(function(){
-            let mess  = '<%= message %>';
 
-            if(mess && mess != ''){
-                alert(mess);
-            }
-        })
+        function showDialogCancel(idBill) {
+            $('#modalNotify').modal('show');
 
-        function cancelOrder(idBill){
-            
+            $('#btnOk').click(function () {
+                cancelOrder(idBill);
+                $('#modalNotify').modal('hide');
+
+            });
+        }
+
+        function cancelOrder(idBill) {
+
             $.ajax({
                 method: 'GET',
                 url: '/admin/donhang/cancelOrder',
-                data:{
+                data: {
                     id: idBill
                 },
-                success: function(data){
-                    if(data){
-                        alert(data.mess);
+                success: function (data) {
+                    if (data) {
                         window.location.reload();
                     }
-                    
                 },
-                error: function(){
+                error: function () {
 
                 }
             });
         }
-        
-    
-        
     </script>
+
 </html>

@@ -8,7 +8,7 @@ class AddonhangController{
         if(!req.cookies.admin){
             return res.redirect('/admin/login')
         }
-
+        
         let mess = ``;
         if(req.query.mess && req.query.mess == 1){
             mess = 'Hủy đơn hàng thành công'
@@ -21,13 +21,13 @@ class AddonhangController{
         loadDH = result;
         res.render('admin/addonhang/donhang',{
             title: 'donhang',
-            mess: req.query.mess == 1 ? req.query.mess : '',
+            mess: req.query.mess && req.query.mess == 1 ? req.query.mess : '',
             role: req.cookies.admin.id_maloainv,
             donhang: loadDH,
             tennv: req.cookies.admin ? req.cookies.admin.tennv : '',
             manv: req.cookies.admin ? req.cookies.admin.manv: 0,
             idnv: req.cookies.admin.manv,
-            message: mess
+           
         })
 
         }).catch(err =>{

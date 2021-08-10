@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-    <style>
-        .error{
-            color: #f20;
-            font-style: italic;
-        }
-    </style>
+<style>
+    .error {
+        color: #f20;
+        font-style: italic;
+    }
+</style>
 <%- include('../partials/adminhead'); -%>
+
     <body>
         <section id="container">
             <%- include('../partials/adminheader'); -%>
@@ -20,29 +21,53 @@
                                         <div class="panel-heading">
                                             CẬP NHẬT THƯƠNG HIỆU
                                         </div>
-                                        <form method="POST" action="/admin/thuonghieu/updatetrademark" enctype="multipart/form-data" id="formUpdateProduct">
+                                        <form method="POST" action="/admin/thuonghieu/updatetrademark"
+                                            enctype="multipart/form-data" id="formUpdateProduct">
                                             <label>Mã thương hiệu</label>
-                                            <input type="text" class="form-control" name="math" value="<%= trademark.math %>" readonly /><br>
+                                            <input type="text" class="form-control" name="math"
+                                                value="<%= trademark.math %>" readonly /><br>
 
                                             <label>Tên thương hiệu</label>
-                                            <input type="text" class="form-control" name="tenth" value="<%= trademark.tenth %>"
-                                            placeholder="Tên thương hiệu"><br>
-                                            
+                                            <input type="text" class="form-control" name="tenth"
+                                                value="<%= trademark.tenth %>" placeholder="Tên thương hiệu"><br>
+
                                             <label>Chi tiết</label><br />
-                                            <textarea id="mota" name="chitiet" rows="4" cols="140"> <%= trademark.chitiet %> </textarea><br />
+                                            <textarea id="mota" name="chitiet" rows="4"
+                                                cols="140"> <%= trademark.chitiet %> </textarea><br />
 
                                             <label><img src="">Hình ảnh</label>
-                                            <input accept="image/*" value= "client/img/thuonghieu/<%= trademark.hinhanh%>" type="file" class="form-control" 
-                                            name="hinhanh" onchange="readFileImage(this)">
+                                            <input accept="image/*"
+                                                value="client/img/thuonghieu/<%= trademark.hinhanh%>" type="file"
+                                                class="form-control" name="hinhanh" onchange="readFileImage(this)">
                                             <br>
-                                            <img src="client/img/thuonghieu/<%= trademark.hinhanh%>" width="100" height="100" id="imgthuonghieu"/>
+                                            <img src="client/img/thuonghieu/<%= trademark.hinhanh%>" width="100"
+                                                height="100" id="imgthuonghieu" />
 
-                                            <br/>
+                                            <br />
                                             <input type="submit" name="capnhatthuonghieu" value="Cập nhật thương hiệu"
-                                                class="btn btn-primary"><br/>
-                                            <br/>
+                                                class="btn btn-primary"><br />
+                                            <br />
                                             <a class="btn btn-info" href="admin/thuonghieu">Quay lại?</a>
                                         </form>
+                                    </div>
+                                </div>
+                                <div class="modal fade" tabindex="-1" role="dialog" id="modalNotify">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Thông báo</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p id="mess"></p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" id="btnOk" class="btn btn-primary">Ok</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -56,20 +81,20 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
     <script>
         let files = [];
-        let isImag = '<%= trademark.hinhanh%>'; 
+        let isImag = '<%= trademark.hinhanh%>';
 
-        if(!isImag){
+        if (!isImag) {
             $('#imgthuonghieu').hide();
         }
 
-        function readFileImage(input){
+        function readFileImage(input) {
             files = input.files;
 
             // Neu co upload file va co file dau tien 
-            if(input.files && input.files[0]){
+            if (input.files && input.files[0]) {
                 var reader = new FileReader();
 
-                reader.onload = function(e){
+                reader.onload = function (e) {
                     $('#imgthuonghieu').show().attr('src', e.target.result);
                 }
 
@@ -78,33 +103,40 @@
         }
 
         $("#formUpdateProduct").validate({
-                rules: {
-                    tenth: {
-                        required: true,                    
-                    },
-                    chitiet: {
-                        required: true,                    
-                    }
+            rules: {
+                tenth: {
+                    required: true,
                 },
-                messages:{
-                    tenth: {
-                        required: 'Tên thương hiệu không được để trống'
-                    },
-                    chitiet: {
-                        required: 'Chi tiết thương hiệu không được để trống'
-                    }
+                chitiet: {
+                    required: true,
                 }
-            });
-            const count = files.length;
+            },
+            messages: {
+                tenth: {
+                    required: 'Tên thương hiệu không được để trống'
+                },
+                chitiet: {
+                    required: 'Chi tiết thương hiệu không được để trống'
+                }
+            }
+        });
+
+        $('#btnOk').click(function () {
+            $('#modalNotify').modal('hide');
+        })
+        const count = files.length;
         $('input[name=capnhatthuonghieu]').click(function () {
             let count = files.length;
             for (let i = 0; i < count; i++) {
                 if (!files[i].type.includes('image')) {
-                    alert('Hình ảnh không hợp lệ');
+                    $('#mess').text('Hình ảnh không hợp lệ');
+
+                    $('#modalNotify').modal('show');
                     return false;
                 }
             }
             return true;
         })
     </script>
+
 </html>
