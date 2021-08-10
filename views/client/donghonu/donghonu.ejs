@@ -43,9 +43,9 @@
                                                         </div>
                                                         <div style="display: flex; justify-content: flex-end;">
                                                             <form action="/donghonu/locgia" style="display: flex; padding-left: 15px;" method="GET">
-                                                                <span>Giá thấp nhất: </span> <input value="0" type="number"  name="minPrice" min="0" class="form-control"
+                                                                <span>Giá thấp nhất: </span> <input value="<%= min %>" type="number"  name="minPrice" min="0" class="form-control"
                                                                     style="width: 200px;" />
-                                                                <span>Giá cao nhất: </span> <input value="0" type="number" name="maxPrice" min="0" class="form-control"
+                                                                <span>Giá cao nhất: </span> <input value="<%= max %>" type="number" name="maxPrice" min="0" class="form-control"
                                                                     style="width: 200px;" />
 
                                                                 <button class="btn btn-primary" type="submit">Lọc</button>
@@ -114,17 +114,22 @@
                                                         </div>
                                                     </div>
                                                     <!-- tab-area-end -->
-                                                    <% if(isSearch == false) {%>
                                                         <div style="display: flex; justify-content: center;">
                                                             <nav aria-label="Page navigation example">
                                                                 <ul class="pagination">
                                                                 <% for(let i=1; i<= pageNumber; i++) {%>
+                                                                    <% if (isSearch == true) {%>
+                                                                        <li class="page-item">
+                                                                            <a class="page-link" 
+                                                                               href="/donghonu/locgia?page=<%= i %>&minPrice=<%= min %>&maxPrice=<%= max %>"><%= i %></a>
+                                                                        </li>
+                                                                    <% } else {%>
                                                                         <li class="page-item"><a class="page-link" href="/donghonu?page=<%= i %>"><%= i%></a></li>
+                                                                    <% } %>
                                                                 <% } %>
                                                                 </ul>
                                                             </nav>
                                                         </div>
-                                                    <% }%>
                                                 </div>
                                             </div>
                                         </div>

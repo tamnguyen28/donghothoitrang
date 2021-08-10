@@ -18,18 +18,33 @@ class DongHoNamController {
                     tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
                     idkh:  req.cookies.user ? req.cookies.user.makh: 0 ,
                     giohangs: (req.session && req.session.giohang ? req.session.giohang: [] ),
-                    pageNumber: Math.ceil(soluongtrang)
+                    pageNumber: Math.ceil(soluongtrang),
+                    min: 0,
+                    max: 0,
                 });
             }).catch(function(error){
                 console.log(error);
             })
         }).catch((err) => {
             console.log(err);
-            res.render('client/donghonam/donghonam');
+            res.render('client/donghonam/donghonam', {
+                title: "Đồng hồ nam",
+                isSearch: false,
+                indexnam:[],
+                tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
+                idkh:  req.cookies.user ? req.cookies.user.makh: 0 ,
+                giohangs: (req.session && req.session.giohang ? req.session.giohang: [] ),
+                pageNumber: 0,
+                min: 0,
+                max: 0,
+            });
         });
     }
 
     locgia(req, res){
+        let page = req.query.page ? req.query.page : 1;
+        let vitribatdaulay = (page - 1) * 8;
+        
         let minPrice = req.query.minPrice;
         let maxPrice = req.query.maxPrice;
        
@@ -37,15 +52,21 @@ class DongHoNamController {
             let listnam = result;
             let soluongtrang  = listnam.length / 8;
             
-            res.render('client/donghonam/donghonam', {
-                title: "Đồng hồ nam",
-                isSearch: true,
-                indexnam: listnam,
-                tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
-                idkh:  req.cookies.user ? req.cookies.user.makh: 0 ,
-                giohangs: (req.session && req.session.giohang ? req.session.giohang: [] ),
-                pageNumber: Math.ceil(soluongtrang)
-            });
+            donghonamModel.locgiaLimit(minPrice, maxPrice, 1, vitribatdaulay).then(function(resultProductPaging){
+                res.render('client/donghonam/donghonam', {
+                    title: "Đồng hồ nam",
+                    isSearch: true,
+                    indexnam: resultProductPaging,
+                    tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
+                    idkh:  req.cookies.user ? req.cookies.user.makh: 0 ,
+                    giohangs: (req.session && req.session.giohang ? req.session.giohang: [] ),
+                    pageNumber: Math.ceil(soluongtrang),
+                    min: minPrice,
+                    max: maxPrice,
+                });
+            }).catch(function(error){
+                console.log(error);
+            })
         }).catch(function(error){
             console.log(error);
         })

@@ -51,10 +51,8 @@ class QuenMatKhauController{
                 res.redirect('/quenmatkhau/email?mess=0');
             }
         }).catch(function(error){
-
+            console.log(error);
         })
-
-       
     }
 
     matkhau(req, res){

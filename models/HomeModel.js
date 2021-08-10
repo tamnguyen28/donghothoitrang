@@ -3,7 +3,7 @@ const conn = require('./config/connect');
 class HomeModel {
     loadSanPham(){
         return new Promise(function (resolve, reject) {
-            let sqlquery = 'SELECT * FROM sanpham limit 0,6';
+            let sqlquery = 'SELECT * FROM sanpham where isDelete = 0 limit 0,6 ';
             conn.query(sqlquery, function (err, result) {
                 if(err) {
                     reject(err);
@@ -16,7 +16,7 @@ class HomeModel {
 
     loadSanPhamDealhot(){
         return new Promise(function (resolve, reject) {
-            let sqlquerydeal = 'SELECT * FROM sanpham limit 6,6';
+            let sqlquerydeal = 'SELECT * FROM sanpham where isDelete = 0 limit 6,6';
             conn.query(sqlquerydeal, function (err, result) {
                 if(err) {
                     reject(err);
@@ -29,7 +29,7 @@ class HomeModel {
     }
     loadSanPhamFeatured(){
         return new Promise(function (resolve, reject) {
-            let sqlqueryfeature = 'SELECT * FROM sanpham limit 12,6';
+            let sqlqueryfeature = 'SELECT * FROM sanpham where isDelete = 0 limit 12,6';
             conn.query(sqlqueryfeature, function (err, result) {
                 if(err) {
                     reject(err);
@@ -42,7 +42,7 @@ class HomeModel {
     }
     loadSanPhamDrew(){
         return new Promise(function (resolve, reject) {
-            let sqlquerydrew = 'SELECT * FROM sanpham limit 18,6';
+            let sqlquerydrew = 'SELECT * FROM sanpham where isDelete = 0 limit 18,6';
             conn.query(sqlquerydrew, function (err, result) {
                 if(err) {
                     reject(err);
@@ -55,7 +55,7 @@ class HomeModel {
     }
     loadSanPhamWatch(){
         return new Promise(function (resolve, reject) {
-            let sqlquerywatch = 'SELECT * FROM sanpham limit 24,12';
+            let sqlquerywatch = 'SELECT * FROM sanpham where isDelete = 0 limit 24,12';
             conn.query(sqlquerywatch, function (err, result) {
                 if(err) {
                     reject(err);
@@ -68,7 +68,7 @@ class HomeModel {
     }
     loadSanPhamLatest(){
         return new Promise(function (resolve, reject) {
-            let sqlquerylatest = 'SELECT * FROM sanpham limit 36,4';
+            let sqlquerylatest = 'SELECT * FROM sanpham where isDelete = 0 limit 36,4';
             conn.query(sqlquerylatest, function (err, result) {
                 if(err) {
                     reject(err);
