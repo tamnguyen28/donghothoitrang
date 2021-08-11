@@ -100,7 +100,7 @@ class DangNhapController {
     loginFacebook(req, res){
         let khachhangfb = {
             id:req.user.id,
-            tenkhachang: req.user.displayName,
+            tenkh: req.user.displayName,
             diachi: "",
             email: "", 
             sodienthoai: "",
