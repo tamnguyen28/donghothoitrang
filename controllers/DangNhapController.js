@@ -5,14 +5,17 @@ const e = require("express");
 let isgotocart = 0;
 let idsp = 0;
 let isgotoLog = 0;
+
 class DangNhapController {
   dangnhap(req, res) {
     isgotocart = req.query.isgotocart;
     isgotoLog = req.query.isgotoLog;
     idsp = req.query.id;
+    let mess = req.query.mess;
+    
     res.render("client/dangnhap/dangnhap", { 
         title: "Đăng nhập", 
-        message: "",
+        mess: mess ? mess : -1,
         idkh:0,
         tenkh: '',
         giohangs: (req.session && req.session.giohang ? req.session.giohang: [] ), 
@@ -34,14 +37,8 @@ class DangNhapController {
         res.redirect(`/`);
       }).catch(function (err) {
         console.log(err);
-        res.render("client/dangnhap/dangnhap", {
-            title: "Đăng nhập",
-            message: "Sai tên đăng nhập hoặc mật khẩu. Đăng nhập thất bại",
-            idkh:0,
-            tenkh: '',
-            giohangs: (req.session && req.session.giohang ? req.session.giohang: [] ),
-            });
-      });
+        res.redirect('/dangnhap?mess=0');
+      })
   }
     logout(req, res) {
         if(req.session.giohang){
@@ -139,9 +136,6 @@ class DangNhapController {
         }).catch(function (error){
             console.log(error);
         });
-    }
-
-
-    
+    }   
 }
 module.exports = new DangNhapController();
