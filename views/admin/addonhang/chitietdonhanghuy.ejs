@@ -12,7 +12,7 @@
               <div class="clearfix">
                 <div class="panel panel-default col-md-6">
                   <div class="panel-heading">
-                    CHI TIẾT ĐƠN HÀNG
+                    CHI TIẾT ĐƠN HÀNG ĐÃ HỦY
                   </div>
                   <div>
                     <% chitiet.forEach(function(sp){%>
@@ -55,7 +55,7 @@
                         <tr>
                           <th data-breakpoints="xs" class="col-xs-3">Tổng hóa đơn</th>
                           <td class="col-xs-9">
-                            <%= sp.tonghoadon %>
+                            <%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(sp.tonghoadon) %>
                           </td>
                         </tr>
                         <tr>
@@ -122,7 +122,7 @@
                         <tr>
                           <th data-breakpoints="xs" class="col-xs-3">Giá</th>
                           <td class="col-xs-9">
-                            <%= dh.giatien %>
+                            <%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(dh.giatien) %>
                           </td>
                         </tr>
                         <tr>
@@ -134,7 +134,7 @@
                         <tr>
                           <th data-breakpoints="xs" class="col-xs-3">Thành tiền</th>
                           <td class="col-xs-9">
-                            <%= dh.soluong * dh.giatien %>
+                            <%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(dh.soluong * dh.giatien) %>
                           </td>
                         </tr>
                       </table>

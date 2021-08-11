@@ -49,7 +49,7 @@
                                 <%= sp.tensp %>
                               </td>
                               <td>
-                                <%= sp.giatien %>
+                                <%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(sp.giatien) %>
                               </td>
                               <td>
                                 <%= sp.id_maloai==1 ? 'Đồng hồ nam' : 'Đồng hồ nữ' %>
@@ -98,7 +98,7 @@
                         </button>
                       </div>
                       <div class="modal-body">
-                        <p>Không thể xóa! Sản phẩm có trong đơn hàng</p>
+                        <p>Không thể xóa! Sản phẩm có trong đơn hàng đã đặt</p>
                       </div>
                       <div class="modal-footer">
                         <button type="button" id="btnOk" class="btn btn-primary">Ok</button>
