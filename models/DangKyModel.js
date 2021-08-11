@@ -13,7 +13,7 @@ class DangKyModel {
       conn.query(
         querykhachhang,
         [
-          khachhang.tenkhachang,
+          khachhang.tenkh,
           khachhang.diachi,
           khachhang.email,
           khachhang.sodienthoai,

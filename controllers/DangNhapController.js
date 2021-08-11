@@ -51,7 +51,7 @@ class DangNhapController {
     loginGoogle(req, res) {
         let khachhang = {
             id:req.user.id,
-            tenkhachang: req.user.displayName,
+            tenkh: req.user.displayName,
             diachi: "",
             email: req.user.emails[0].value,
             sodienthoai: "",
@@ -62,7 +62,6 @@ class DangNhapController {
         dangkyModel.checkKhachHangTonTai(khachhang).then(function (resultLength) {
             if(resultLength == 0){//chưa tồn tại
                 dangkyModel.dangky(khachhang).then(function (result) {
-                    console.log(req.user.id);
                     dangkyModel.getAccountByID(khachhang.id).then(function(resultCustomer){
                         res.cookie("user",resultCustomer);
                         // console.log(isgotocart);
