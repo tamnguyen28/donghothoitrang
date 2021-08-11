@@ -111,7 +111,7 @@ class DangNhapController {
         dangkyModel.checkKhachHangTonTai(khachhangfb).then(function(resultLength){
             if(resultLength == 0){
                 dangkyModel.dangky(khachhangfb).then(function (resultfb){
-                    res.cookie('user', {makh: resultfb});
+                    res.cookie('user', resultfb);
                     if(isgotocart == 1){
                         res.redirect(`/giohang?id=${idsp}`)
                     }else{
