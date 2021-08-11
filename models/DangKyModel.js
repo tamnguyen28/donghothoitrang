@@ -27,7 +27,8 @@ class DangKyModel {
           } else {
             if (result.insertId) {
               //insertId là cái id mới add vào(khóa chính tự tăng theo makh)
-              resolve(result.insertId);
+              khachhang.id = result.insertId
+              resolve(khachhang);
             } else {
               reject(false);
             }
