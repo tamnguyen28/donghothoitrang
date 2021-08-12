@@ -5,7 +5,7 @@ class DangKyModel {
   dangky(khachhang) {
     return new Promise(function (resolve, reject) {
       let querykhachhang =
-        "INSERT INTO khachhang VALUES (NULL,?,?,?,?,?,?,?,1,current_timestamp())";
+        "INSERT INTO khachhang VALUES (NULL,?,?,?,?,?,?,?,current_timestamp())";
       let passkh =
         khachhang.matkhau && khachhang.matkhau != ""
           ? md5(khachhang.matkhau)
@@ -13,7 +13,7 @@ class DangKyModel {
       conn.query(
         querykhachhang,
         [
-          khachhang.tenkhachang,
+          khachhang.tenkh,
           khachhang.diachi,
           khachhang.email,
           khachhang.sodienthoai,
@@ -27,7 +27,8 @@ class DangKyModel {
           } else {
             if (result.insertId) {
               //insertId là cái id mới add vào(khóa chính tự tăng theo makh)
-              resolve(result.insertId);
+              khachhang.id = result.insertId
+              resolve(khachhang);
             } else {
               reject(false);
             }

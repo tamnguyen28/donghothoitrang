@@ -51,7 +51,7 @@ class DangNhapController {
     loginGoogle(req, res) {
         let khachhang = {
             id:req.user.id,
-            tenkhachang: req.user.displayName,
+            tenkh: req.user.displayName,
             diachi: "",
             email: req.user.emails[0].value,
             sodienthoai: "",
@@ -62,18 +62,15 @@ class DangNhapController {
         dangkyModel.checkKhachHangTonTai(khachhang).then(function (resultLength) {
             if(resultLength == 0){//chưa tồn tại
                 dangkyModel.dangky(khachhang).then(function (result) {
-                    console.log(req.user.id);
-                    dangkyModel.getAccountByID(khachhang.id).then(function(resultCustomer){
-                        res.cookie("user",resultCustomer);
-                        // console.log(isgotocart);
-                        if(isgotocart == 1){
-                            res.redirect(`/giohang?id=${idsp}`)
-                        }else{
-                            res.redirect("/");
-                        }   
-                    }).catch(function(error){
-                        console.log(error);
-                    });
+                    
+                    res.cookie("user",result);
+                    // console.log(isgotocart);
+                    if(isgotocart == 1){
+                        res.redirect(`/giohang?id=${idsp}`)
+                    }else{
+                        res.redirect("/");
+                    }   
+                  
                 }).catch(function (error) {
                     console.log(error);
                     res.redirect("/");
@@ -100,7 +97,7 @@ class DangNhapController {
     loginFacebook(req, res){
         let khachhangfb = {
             id:req.user.id,
-            tenkhachang: req.user.displayName,
+            tenkh: req.user.displayName,
             diachi: "",
             email: "", 
             sodienthoai: "",
@@ -111,7 +108,7 @@ class DangNhapController {
         dangkyModel.checkKhachHangTonTai(khachhangfb).then(function(resultLength){
             if(resultLength == 0){
                 dangkyModel.dangky(khachhangfb).then(function (resultfb){
-                    res.cookie('user', {makh: resultfb});
+                    res.cookie('user', resultfb);
                     if(isgotocart == 1){
                         res.redirect(`/giohang?id=${idsp}`)
                     }else{
