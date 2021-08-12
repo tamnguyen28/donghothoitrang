@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-    <style>
-        .error{
-            color: #f20;
-            font-style: italic;
-        }
-    </style>
+<style>
+    .error {
+        color: #f20;
+        font-style: italic;
+    }
+</style>
 <%- include('../partials/adminhead'); -%>
 
     <body>
@@ -36,7 +36,7 @@
                                             <% if(product.trangthai){ %>
                                                 <input name="trangthai" type="radio" value="1" checked="checked">
                                                 Còn Hàng
-                                                <input name="trangthai" type="radio" value="0"> Sắp Hết Hàng <br />
+                                                <input name="trangthai" type="radio" value="0"> Hết Hàng <br />
                                                 <br />
                                                 <% } else { %>
                                                     <input name="trangthai" type="radio" value="1">
@@ -45,19 +45,21 @@
                                                     Hết Hàng <br />
                                                     <br />
                                                     <% } %>
-
                                                         <label><img src="">Hình ảnh</label>
-                                                        <input accept="image/*" value="client/img/product/<%= product.hinhanh%>"
-                                                            type="file" class="form-control" name="hinhanh" multiple id="imgSanPham"
+                                                        <input accept="image/*"
+                                                            value="client/img/product/<%= product.hinhanh%>" type="file"
+                                                            class="form-control" name="hinhanh" multiple id="imgSanPham"
                                                             onchange="readFileImage(this)">
                                                         <br>
                                                         <div class="imgproduct-container">
-                                                            <img src="client/img/product/<%= product.hinhanh%>" width="100" class="imgproduct"
-                                                                height="100" id="imgSanPham" />
-                                                            <% for(let i = 0; i < bohinhanh.length; i++) { %>                                                        
-                                                                <img src="client/img/product/<%= bohinhanh[i].tenha%>" width="100" class="imgproduct"
-                                                                    height="100" id="imgSanPham" />
-                                                         <% } %>
+                                                            <img src="client/img/product/<%= product.hinhanh%>"
+                                                                width="100" class="imgproduct" height="100"
+                                                                id="imgSanPham" />
+                                                            <% for(let i=0; i < bohinhanh.length; i++) { %>
+                                                                <img src="client/img/product/<%= bohinhanh[i].tenha%>"
+                                                                    width="100" class="imgproduct" height="100"
+                                                                    id="imgSanPham" />
+                                                                <% } %>
                                                         </div>
                                                         <br />
                                                         <label>Thương hiệu</label>
@@ -88,7 +90,8 @@
                                                         <input type="submit" name="capnhatsanpham"
                                                             value="Cập nhật sản phẩm" class="btn btn-primary"><br />
                                                         <br />
-                                                        <a class="btn btn-info" href="/admin/sanpham?page=1">Quay lại?</a>
+                                                        <a class="btn btn-info" href="/admin/sanpham?page=1">Quay
+                                                            lại?</a>
                                         </form>
                                     </div>
                                 </div>
@@ -128,9 +131,9 @@
             files = input.files;
             const imgs = document.getElementsByClassName('imgproduct');
             let i = 0;
-            
+
             for (let index = 0; index < 4; index++) {
-                imgs[i++].src = URL.createObjectURL(files[index]);           
+                imgs[i++].src = URL.createObjectURL(files[index]);
             }
         }
 
@@ -143,9 +146,9 @@
                     required: true,
                 },
                 id_math: {
-                    required:true,
+                    required: true,
                 }
-        
+
             },
             messages: {
                 tensp: {
@@ -160,7 +163,7 @@
             }
         });
 
-        $('#btnOk').click(function(){
+        $('#btnOk').click(function () {
             $('#modalNotify').modal('hide');
         })
 
@@ -168,11 +171,11 @@
         $('input[name=capnhatsanpham]').click(function () {
             let count = files.length;
 
-            if(count < 4){
+            if (count < 4) {
                 $('#mess').text('Hình ảnh còn thiếu');
 
-               $('#modalNotify').modal('show');
-                return false;  
+                $('#modalNotify').modal('show');
+                return false;
             }
 
             for (let i = 0; i < count; i++) {
