@@ -16,7 +16,7 @@ class DangKyController {
 
     saveKhachhang(req, res){
         let khachhang = {
-            tenkhachang: req.body.name, 
+            tenkh: req.body.name, 
             diachi: req.body.address,
             email: req.body.email,
             sodienthoai: req.body.phone,
@@ -26,7 +26,7 @@ class DangKyController {
         dangkyModel.dangky(khachhang).then(function(result){
             let emailTo = khachhang.email;
             let contentRegister = `Thông tin bạn vừa đăng ký thành công:
-            Họ tên: ${khachhang.tenkhachang},
+            Họ tên: ${khachhang.tenkh},
             Địa chỉ: ${khachhang.diachi},
             Email: ${khachhang.email},
             Số điện thoại: ${khachhang.sodienthoai},
