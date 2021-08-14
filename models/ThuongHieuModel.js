@@ -16,7 +16,7 @@ class ThuongHieuModel{
     }
     loadRandom(){
         return new Promise (function (resolve, reject){
-            let sqlrandom = 'SELECT * FROM sanpham where isDelete = 0 limit 19, 3';
+            let sqlrandom = 'SELECT * FROM sanpham where isDelete = 0 and trangthai = 1 limit 19, 3';
             conn.query(sqlrandom, function (err, result){
                 if(err){
                     reject(err);
