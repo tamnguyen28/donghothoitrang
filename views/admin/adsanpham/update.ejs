@@ -171,13 +171,6 @@
         $('input[name=capnhatsanpham]').click(function () {
             let count = files.length;
 
-            if (count < 4) {
-                $('#mess').text('Hình ảnh còn thiếu');
-
-                $('#modalNotify').modal('show');
-                return false;
-            }
-
             for (let i = 0; i < count; i++) {
                 if (!files[i].type.includes('image')) {
                     $('#mess').text('Hình ảnh không hợp lệ');
