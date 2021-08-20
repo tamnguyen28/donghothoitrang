@@ -31,7 +31,7 @@
                                             <input type="password" class="form-control" name="matkhau">
                                             <br>
                                             <label>Số điện thoại</label>
-                                            <input type="text" class="form-control" name="sodienthoai">
+                                            <input type="number" class="form-control" name="sodienthoai">
                                             <br>
                                             <label>Trạng thái</label> <br />
                                             <input name="trangthai" type="radio" value="1" checked="checked">
@@ -69,13 +69,14 @@
             $("#formAddProduct").validate({
                 rules: {
                     tennv: {
-                        required: true,                    
+                        required: true                    
                     },
                     email: {
-                        required: true,                    
+                        required: true                  
                     },
                     matkhau:{
-                        required: true
+                        required: true,
+                        minlength: 4
                     },
                     sodienthoai:{
                         required: true
@@ -86,19 +87,20 @@
                 },
                 messages:{
                     tennv: {
-                        required: 'Tên sản phẩm không được để trống'
+                        required: 'Tên nhân viên không được để trống'
                     },
                     email: {
-                        required: 'Giá sản phẩm không được để trống'
+                        required: 'Email không được để trống'
                     },
                     matkhau:{
-                        required: 'Thương hiệu không được để trống'
+                        required: 'Mật khẩu không được để trống',
+                        minlength: 'Mật khẩu không được dưới 4 ký tự'
                     },
                     sodienthoai:{
-                        required: 'Hình ảnh không được để trống'
+                        required: 'Số điện thoại không được để trống'
                     },
                     id_maloainv:{
-                        required: 'Chọn loại không được để trống'
+                        required: 'Chọn loại quản lý không được để trống'
                     }
                 }
             });
