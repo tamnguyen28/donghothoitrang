@@ -59,6 +59,7 @@ class DangKyModel {
 
         conn.query(queryCustomer, [idCustomer],function(error, result){
             if(error){
+              console.log(error);
                 reject(error)
             }else{
                 if(result)

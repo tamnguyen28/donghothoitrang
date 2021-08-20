@@ -62,15 +62,19 @@ class DangNhapController {
         dangkyModel.checkKhachHangTonTai(khachhang).then(function (resultLength) {
             if(resultLength == 0){//chưa tồn tại
                 dangkyModel.dangky(khachhang).then(function (result) {
-                    
-                    res.cookie("user",result);
-                    // console.log(isgotocart);
-                    if(isgotocart == 1){
-                        res.redirect(`/giohang?id=${idsp}`)
-                    }else{
-                        res.redirect("/");
-                    }   
-                  
+
+                    dangkyModel.getAccountByID(khachhang.taikhoan).then(function(resultCustomer){
+                        console.log(resultCustomer);
+                        res.cookie("user",resultCustomer);
+                        // console.log(isgotocart);
+                        if(isgotocart == 1){
+                            res.redirect(`/giohang?id=${idsp}`)
+                        }else{
+                            res.redirect("/");
+                        }   
+                    }).catch(function(error){
+                        console.log(error);
+                    });
                 }).catch(function (error) {
                     console.log(error);
                     res.redirect("/");
