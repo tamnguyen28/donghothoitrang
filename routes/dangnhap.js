@@ -27,7 +27,7 @@ passport.deserializeUser(function (user, done) {
 passport.use(new GoogleStrategy({
     clientID: '969464741521-e5205v7a4tvnoqccono6a931htunjpkq.apps.googleusercontent.com',
     clientSecret: 'UImwVcTBe8jEmOIfxDyUwo0E',
-    callbackURL: "http://localhost:3000/dangnhap/google/callback"
+    callbackURL: "https://donghothoitrang.herokuapp.com/dangnhap/google/callback"
   },
   function(accessToken, refreshToken, profile, cb) {
     return cb(null, profile);
