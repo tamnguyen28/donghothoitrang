@@ -62,8 +62,9 @@ class DangNhapController {
         dangkyModel.checkKhachHangTonTai(khachhang).then(function (resultLength) {
             if(resultLength == 0){//chưa tồn tại
                 dangkyModel.dangky(khachhang).then(function (result) {
-                    console.log(req.user.id);
-                    dangkyModel.getAccountByID(khachhang.id).then(function(resultCustomer){
+
+                    dangkyModel.getAccountByID(khachhang.taikhoan).then(function(resultCustomer){
+                        console.log(resultCustomer);
                         res.cookie("user",resultCustomer);
                         // console.log(isgotocart);
                         if(isgotocart == 1){

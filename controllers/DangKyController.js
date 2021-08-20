@@ -6,7 +6,7 @@ class DangKyController {
         let mess = req.query.mess;
 
         res.render('client/dangky/dangky', {
-            title: 'dang ky',
+            title: 'Đăng ký',
             mess: mess ? mess : 0,
             tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
             idkh:  req.cookies.user ? req.cookies.user.makh: 0 ,
