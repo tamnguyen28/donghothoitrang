@@ -62,7 +62,6 @@ class DangNhapController {
         dangkyModel.checkKhachHangTonTai(khachhang).then(function (resultLength) {
             if(resultLength == 0){//chưa tồn tại
                 dangkyModel.dangky(khachhang).then(function (result) {
-
                     dangkyModel.getAccountByID(khachhang.taikhoan).then(function(resultCustomer){
                         res.cookie("user",resultCustomer);
                         if(isgotocart == 1){
@@ -108,13 +107,17 @@ class DangNhapController {
         }
         dangkyModel.checkKhachHangTonTai(khachhangfb).then(function(resultLength){
             if(resultLength == 0){
-                dangkyModel.dangky(khachhangfb.taikhoan).then(function (resultfb){
-                    res.cookie('user', resultfb);
-                    if(isgotocart == 1){
-                        res.redirect(`/giohang?id=${idsp}`)
-                    }else{
-                        res.redirect("/");
-                    } 
+                dangkyModel.dangky(khachhangfb).then(function (resultfb){
+                    dangkyModel.getAccountByID(khachhangfb.taikhoan).then(function(resultCustomer){
+                        res.cookie('user', resultCustomer);
+                        if(isgotocart == 1){
+                            res.redirect(`/giohang?id=${idsp}`)
+                        }else{
+                            res.redirect("/");
+                        }
+                    }).catch(function(error){
+                        console.log(error);
+                    })
                 }).catch(function (error){
                     console.log(error);
                     res.redirect('/');
