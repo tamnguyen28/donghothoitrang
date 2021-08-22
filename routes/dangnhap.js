@@ -37,7 +37,7 @@ passport.use(new GoogleStrategy({
 passport.use(new FacebookStrategy({
   clientID: '333424968148234',
   clientSecret: 'ce1cc52be92b9c205c6326ebdd680e1a' ,
-  callbackURL: "https://donghothoitrang.herokuapp.com/dangnhap/facebook/callback",
+  callbackURL: "http://localhost:3000/dangnhap/facebook/callback",
   profileFields : ['id','displayName','name','gender','email']
   },
   function(accessToken, refreshToken, profile, done) {
