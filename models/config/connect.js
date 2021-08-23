@@ -1,9 +1,9 @@
 var mysql      = require('mysql');
 var connection = mysql.createConnection({
-  host     : 'bl5tnlcup4qdubbob2gq-mysql.services.clever-cloud.com',
-  user     : 'umpzzmqwvxascwxl',
-  password : '5YWyhqk7U3KyrNIuwwhH',
-  database : 'bl5tnlcup4qdubbob2gq',
-  port : 3306
+  host     : 'mysql-46526-0.cloudclusters.net',
+  user     : 'admin',
+  password : 'M9kpjqFA',
+  database : 'donghothoitrang',
+  port : 19832
 });
 module.exports = connection;
