@@ -9,9 +9,9 @@
                 <div class="row" class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt-40">
                     <div class="col-lg-12">
                         <div class="login-title text-center mb-30 mt-40">
-                            <h3>Chi tiết đơn hàng - Mã đơn hàng: <%= chitiet[0].id_ghtk %> 
-                                <%
-                                    if(statusOrder.order && statusOrder.order.status_text) {
+                            <h3>CHI TIẾT ĐƠN HÀNG <%= chitiet[0].id_ghtk %> 
+                                <% 
+                                    <!-- if(statusOrder && statusOrder.order && statusOrder.order.status_text) { -->
                                         if(chitiet[0].trangthai == 2) { %>
                                             <%= '- Đã hủy đơn' %>
                                         <% } else if(chitiet[0].trangthai == 1) { %>
@@ -23,9 +23,8 @@
                                         <% } else if(chitiet[0].trangthai == 5) { %>
                                             <%= '- Đã hủy và hoàn tiền' %>
                                       <% } else {%>   
-                                            <%= '-' + statusOrder.order.status_text %>
-                                    <% } %>
-                               <%  } %>
+                                            <%= '- Đã tiếp nhận' %>
+                                     <% } %>
                             </h3>
                         </div>
                     </div>
@@ -48,7 +47,7 @@
                                 <div class="card card-infor">
                                     <div class="card-body">
                                         <img src="https://s.giaohangtietkiem.vn/customer/img/logo-slogan.png" />
-                                        <p class="card-text">Giao hàng vào: <%= statusOrder.order && statusOrder.order.deliver_date  ? statusOrder.order.deliver_date : 'Chưa có ngày giao hàng'%></p>
+                                        <p class="card-text">Giao hàng vào: <%= statusOrder && statusOrder.order && statusOrder.order.deliver_date  ? statusOrder.order.deliver_date : 'Chưa có ngày giao hàng'%></p>
                                         <p class="card-text">Phí vận chuyển: <%= new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(chitiet[0].phivanchuyen)%></p>
                                     </div>
                                 </div>
