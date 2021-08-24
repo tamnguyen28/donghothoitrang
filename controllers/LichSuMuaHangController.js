@@ -43,14 +43,21 @@ class LichSuMuaHangController{
              getTinhTrangDonHang(result[0].id_ghtk).then(function(resultStatus){
                     res.render('client/chitietdonhang/chitietdonhang',{
                         title: "Chi tiết đơn hàng",
-                        statusOrder: resultStatus.data,
+                        statusOrder: resultStatus.data ? resultStatus.data : null,
                         chitiet: result,
                         idkh: req.cookies.user ? req.cookies.user.makh: 0,
                         tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
                         giohangs: (req.session && req.session.giohang ? req.session.giohang: [] ),
                     });
              }).catch(function(err){
-
+                res.render('client/chitietdonhang/chitietdonhang',{
+                    title: "Chi tiết đơn hàng",
+                    statusOrder: null,
+                    chitiet: result,
+                    idkh: req.cookies.user ? req.cookies.user.makh: 0,
+                    tenkh: req.cookies.user ?  req.cookies.user.tenkh : '',
+                    giohangs: (req.session && req.session.giohang ? req.session.giohang: [] ),
+                });
              });
         }).catch(err => {
             console.log(err);
@@ -72,7 +79,11 @@ class LichSuMuaHangController{
                         res.redirect("/lichsumuahang?mess=0");
                     }
                 }).catch(function(error){
-                    console.log(error);
+                    lichsumuahangModel.updateStatusHuyDonHang(req.query.id).then(function(result){
+                        res.redirect("/lichsumuahang?mess=1");
+                    }).catch(function(error){
+    
+                    })
                 })
             }else{
                 res.redirect("/lichsumuahang?mess=2");

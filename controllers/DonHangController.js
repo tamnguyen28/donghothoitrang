@@ -134,7 +134,23 @@ class DonHangController {
                         console.log(err);      
                     })
                 }).catch(function (error) {
-                    console.log(error);
+                    donhangModel.themthongtin(thongtin, '').then(function (result) {
+                      
+                        req.session.giohang = [];
+                        let contentDonhang = `Bạn đã đặt hàng thành công, đơn hàng sẽ vận chuyển đến bạn trong thời gian sớm nhất! Cảm ơn bạn đã mua hàng!
+                            Tên người nhận: ${thongtin.tennguoinhan},
+                            Số điện thoại người nhận: ${thongtin.sdtnguoinhan},
+                            Địa chỉ người nhận: ${thongtin.diachinguoinhan},
+                            Email người nhận: ${thongtin.emailnguoinhan},
+                            Tổng hóa đơn: ${new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(thongtin.tonghoadon)},
+                            Ghi chú: ${thongtin.ghichu}`
+                        let emailTo = thongtin.emailnguoinhan;
+                        mail.sendmail(emailTo, 'SHOP FULLTIME', contentDonhang);  
+                        
+                        res.redirect(`/message?statusCode=0`);
+                    }).catch(err => {
+                        console.log(err);      
+                    })
                 })
             
         }else{
@@ -236,7 +252,23 @@ class DonHangController {
                         console.log(err);      
                     })
                 }).catch(function(error){
-
+                    donhangModel.themthongtin(thongtin, '').then(function (result) {
+                      
+                        req.session.giohang = [];
+                        let contentDonhang = `Bạn đã đặt hàng thành công, đơn hàng sẽ vận chuyển đến bạn trong thời gian sớm nhất! Cảm ơn bạn đã mua hàng!
+                            Tên người nhận: ${thongtin.tennguoinhan},
+                            Số điện thoại người nhận: ${thongtin.sdtnguoinhan},
+                            Địa chỉ người nhận: ${thongtin.diachinguoinhan},
+                            Email người nhận: ${thongtin.emailnguoinhan},
+                            Tổng hóa đơn: ${new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(thongtin.tonghoadon)},
+                            Ghi chú: ${thongtin.ghichu}`
+                        let emailTo = thongtin.emailnguoinhan;
+                        mail.sendmail(emailTo, 'SHOP FULLTIME', contentDonhang);  
+                        
+                        res.redirect(`/message?statusCode=0`);
+                    }).catch(err => {
+                        console.log(err);      
+                    })
                 });
       
         }
